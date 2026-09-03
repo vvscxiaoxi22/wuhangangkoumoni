@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.1.0",
+  "machineType": "YC",
+  "sceneProfileId": "YC-SCENE-DEV",
+  "pointMapVersion": "YC-POINTMAP-PENDING",
+  "protocolVersion": "1.1.0",
+  "defaultDisplayProfileId": "DESKTOP-16X9-V1",
+  "operationalSceneName": "test",
+  "supportedDisplayProfileIds": [
+    "DESKTOP-16X9-V1",
+    "SIMULATOR-PORTRAIT-9X16-V1"
+  ],
+  "supportedControlModes": [
+    "Local",
+    "Remote"
+  ],
+  "realtimeFrameIntervalMs": 20
+}

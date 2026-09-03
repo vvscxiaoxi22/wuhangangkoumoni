@@ -1,0 +1,18 @@
+{
+  "stationId": "QC-01",
+  "displayName": "岸桥实训工位01",
+  "machineType": "QC",
+  "consoleProfileId": "QC-CONSOLE-V1",
+  "gatewayEndpoint": "ws://127.0.0.1:39001/gateway",
+  "trainingNodeEndpoint": "http://192.168.50.10:39101",
+  "plcProfileId": "QC-PLC-01",
+  "pointMapVersion": "QC-IO-1.0",
+  "sceneProfileId": "QC-SCENE-A",
+  "deploymentMode": "SimulatorCabin",
+  "gatewayTransport": "S7",
+  "inputProfileId": "QC-CONSOLE-S7-V1",
+  "displayProfileId": "QC-CABIN-MULTI-DISPLAY-V1",
+  "allowSimulationFallback": false,
+  "supportedControlModes": ["Local", "Remote"],
+  "supportedTaskTypes": ["FreePractice", "Standalone", "Collaborative", "Exam", "Fault"]
+}

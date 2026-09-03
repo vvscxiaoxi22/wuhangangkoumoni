@@ -1,0 +1,438 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <Style src="StudentShell.uss" />
+  <ui:VisualElement name="student-shell" class="student-shell">
+    <ui:VisualElement class="ambient ambient--one" />
+    <ui:VisualElement class="ambient ambient--two" />
+
+    <ui:VisualElement name="login-page" class="page login-page">
+      <ui:VisualElement name="login-wallpaper" class="login-wallpaper" />
+      <ui:VisualElement class="login-wallpaper__veil" />
+      <ui:VisualElement class="login-card">
+        <ui:VisualElement class="login-card__topline">
+          <ui:Label text="PORTTRAINING" class="login-card__system-name" />
+          <ui:Label text="STUDENT ACCESS  /  01" class="login-card__index" />
+        </ui:VisualElement>
+        <ui:VisualElement class="login-card__brand">
+          <ui:VisualElement class="login-card__mark"><ui:Label text="PT" class="login-card__mark-text" /></ui:VisualElement>
+          <ui:VisualElement>
+            <ui:Label text="港口实训" class="login-card__name" />
+            <ui:Label text="学生作业平台" class="login-card__name login-card__name--accent" />
+          </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="login-card__rule" />
+        <ui:TextField name="student-id" label="学号" class="field login-card__field" />
+        <ui:TextField name="password" label="密码" is-password-field="true" class="field login-card__field" />
+        <ui:Label name="login-error" text="" class="form-error" />
+        <ui:Button name="login-button" text="登录" class="primary-button login-card__button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+
+    <ui:VisualElement name="workbench-page" class="page workbench-page page--hidden">
+      <ui:VisualElement class="app-topbar">
+        <ui:VisualElement class="app-brand">
+          <ui:VisualElement class="app-brand__mark"><ui:Label text="PT" class="app-brand__mark-text" /></ui:VisualElement>
+          <ui:VisualElement>
+            <ui:Label text="PORTTRAINING" class="app-brand__name" />
+            <ui:Label name="workbench-station" text="--" class="app-brand__station" />
+          </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="topbar-status">
+          <ui:Label name="gateway-pill" text="Gateway --" class="status-pill" />
+          <ui:Label name="plc-pill" text="PLC --" class="status-pill" />
+          <ui:VisualElement class="student-summary">
+            <ui:Label name="student-name" text="--" class="student-summary__name" />
+            <ui:Label name="student-role" text="--" class="student-summary__role" />
+          </ui:VisualElement>
+          <ui:Button name="logout-button" text="退出" class="ghost-button" />
+        </ui:VisualElement>
+      </ui:VisualElement>
+
+      <ui:VisualElement class="app-body">
+        <ui:VisualElement class="side-nav">
+          <ui:Button name="nav-workbench" text="工作台" class="nav-button nav-button--active" />
+          <ui:Button name="nav-tasks" text="任务中心" class="nav-button" />
+          <ui:Button name="nav-assessment" text="考核中心" enabled="false" tooltip="一期暂未开放" class="nav-button nav-button--disabled" />
+          <ui:Button name="nav-records" text="训练档案" class="nav-button" />
+          <ui:VisualElement class="side-nav__spacer" />
+          <ui:Button name="nav-device" text="设备与 S7 设置" class="nav-button nav-button--quiet" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="content-host">
+        <ui:VisualElement name="home-view" class="workspace-column module-view">
+        <ui:ScrollView class="workspace" vertical-scroller-visibility="Hidden">
+          <ui:VisualElement class="workspace-heading">
+            <ui:VisualElement>
+              <ui:Label text="学生工作台" class="workspace-title" />
+              <ui:Label name="workspace-greeting" text="欢迎进入港口实训平台" class="workspace-subtitle" />
+            </ui:VisualElement>
+            <ui:Label name="clock-label" text="--:--" class="clock-label" />
+          </ui:VisualElement>
+
+          <ui:VisualElement class="overview-grid">
+            <ui:VisualElement class="overview-card">
+              <ui:Label text="任务完成率" class="overview-card__label" />
+              <ui:Label name="portrait-completion" text="--" class="overview-card__value" />
+              <ui:Label name="portrait-completion-meta" text="完成任务后生成" class="overview-card__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="overview-card">
+              <ui:Label text="累计练习时长" class="overview-card__label" />
+              <ui:Label name="portrait-duration" text="--" class="overview-card__value overview-card__value--metric" />
+              <ui:Label name="portrait-duration-meta" text="暂无训练记录" class="overview-card__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="overview-card">
+              <ui:Label text="平均成绩" class="overview-card__label" />
+              <ui:Label name="portrait-score" text="--" class="overview-card__value" />
+              <ui:Label name="portrait-score-meta" text="完成评分后生成" class="overview-card__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="overview-card overview-card--last">
+              <ui:Label text="安全操作率" class="overview-card__label" />
+              <ui:Label name="portrait-safety" text="--" class="overview-card__value" />
+              <ui:Label name="portrait-safety-meta" text="暂无安全评估数据" class="overview-card__meta" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <ui:VisualElement class="workbench-grid">
+            <ui:VisualElement class="feature-card feature-card--task">
+              <ui:VisualElement class="card-kicker-row">
+                <ui:Label text="当前工单" class="card-kicker" />
+                <ui:Label name="task-status" text="待加载" class="work-order-status" />
+              </ui:VisualElement>
+              <ui:Label name="task-title" text="正在读取本工位工单" class="card-title" />
+              <ui:Label name="task-detail" text="工单由教师端、TOS适配器或本地节点统一生成。" class="card-description" />
+              <ui:VisualElement class="task-route">
+                <ui:Label name="task-source" text="本机工位" class="route-value" />
+                <ui:Label text="→" class="route-arrow" />
+                <ui:Label name="task-target" text="虚拟作业场景" class="route-value" />
+              </ui:VisualElement>
+              <ui:VisualElement class="card-actions">
+                <ui:Button name="free-training-button" text="自由练习" class="secondary-button" />
+                <ui:Button name="enter-operation-button" text="进入驾驶室" class="primary-button primary-button--compact" />
+              </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="feature-card feature-card--coordination">
+              <ui:Label text="作业协同" class="card-kicker" />
+              <ui:Label name="collaboration-title" text="正在读取协同关系" class="card-title card-title--small" />
+              <ui:Label name="collaboration-detail" text="等待本工位工单信息。" class="card-description" />
+              <ui:VisualElement class="collaboration-flow">
+                <ui:Label name="collaboration-qc" text="岸桥 · --" class="collaboration-node" />
+                <ui:Label text="→" class="collaboration-arrow" />
+                <ui:Label name="collaboration-agv" text="AGV · --" class="collaboration-node" />
+                <ui:Label text="→" class="collaboration-arrow" />
+                <ui:Label name="collaboration-yc" text="场桥 · --" class="collaboration-node" />
+              </ui:VisualElement>
+              <ui:Label text="联合任务由各岗位分别进入对应驾驶场景，平台同步交接状态。" class="collaboration-note" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <ui:VisualElement class="quick-grid">
+            <ui:VisualElement class="quick-card">
+              <ui:Label text="下一工单" class="quick-card__kicker" />
+              <ui:Label name="queue-title" text="正在读取任务队列" class="quick-card__title" />
+              <ui:Label name="queue-detail" text="等待本地任务数据。" class="quick-card__text" />
+            </ui:VisualElement>
+            <ui:VisualElement class="quick-card">
+              <ui:Label text="最近训练" class="quick-card__kicker" />
+              <ui:Label text="暂无本机训练记录" class="quick-card__title" />
+              <ui:Label text="完成训练后将在这里显示用时、得分和主要扣分项。" class="quick-card__text" />
+            </ui:VisualElement>
+            <ui:VisualElement class="quick-card quick-card--last">
+              <ui:Label text="能力档案" class="quick-card__kicker" />
+              <ui:Label text="等待生成能力画像" class="quick-card__title" />
+              <ui:Label text="平台将汇总安全操作、作业效率和精准对位表现。" class="quick-card__text" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+        </ui:ScrollView>
+        <ui:VisualElement class="device-status-bar">
+          <ui:VisualElement class="device-status-bar__summary">
+            <ui:Label text="设备就绪" class="device-status-bar__kicker" />
+            <ui:Label name="health-title" text="正在检查设备" class="device-status-bar__title" />
+            <ui:Label name="health-detail" text="等待内置 Gateway 返回最新状态。" class="device-status-bar__detail" />
+          </ui:VisualElement>
+          <ui:VisualElement class="health-list device-status-bar__items">
+            <ui:Label name="health-plc" text="PLC 通信 · 等待" class="health-item" />
+            <ui:Label name="health-estop" text="急停状态 · 等待" class="health-item" />
+            <ui:Label name="health-handle" text="手柄回中 · 等待" class="health-item" />
+            <ui:Label name="health-pointmap" text="点表版本 · --" class="health-item" />
+          </ui:VisualElement>
+        </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="task-center-view" class="module-view task-center-view page--hidden">
+          <ui:VisualElement class="module-view__header">
+            <ui:VisualElement>
+              <ui:Label text="任务中心" class="module-view__title" />
+              <ui:Label text="正式作业、联合作业、排故实训和自由练习统一管理" class="module-view__subtitle" />
+            </ui:VisualElement>
+            <ui:Label name="task-center-count" text="0 个可执行工单" class="module-view__badge" />
+          </ui:VisualElement>
+
+          <ui:VisualElement class="task-toolbar">
+            <ui:Button name="task-filter-all" text="全部" class="task-filter task-filter--active" />
+            <ui:Button name="task-filter-formal" text="正式作业" class="task-filter" />
+            <ui:Button name="task-filter-collaborative" text="联合工单" class="task-filter" />
+            <ui:Button name="task-filter-fault" text="排故实训" class="task-filter" />
+            <ui:Button name="task-filter-practice" text="自由训练" class="task-filter" />
+            <ui:Button name="task-filter-assessment" text="考核任务" enabled="false" tooltip="一期暂未开放" class="task-filter task-filter--disabled" />
+            <ui:VisualElement class="task-toolbar__spacer" />
+            <ui:Button name="task-refresh-button" text="刷新任务" class="secondary-button task-refresh-button" />
+          </ui:VisualElement>
+
+          <ui:VisualElement class="task-center-body">
+            <ui:VisualElement class="task-list-panel">
+              <ui:VisualElement class="panel-heading-row">
+                <ui:Label text="工单队列" class="panel-heading" />
+                <ui:Label text="按下发时间排序" class="panel-caption" />
+              </ui:VisualElement>
+              <ui:ScrollView class="task-list-scroll" vertical-scroller-visibility="Hidden">
+                <ui:VisualElement name="task-list" class="task-list" />
+              </ui:ScrollView>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="task-detail-panel">
+              <ui:VisualElement class="task-detail-panel__topline">
+                <ui:Label text="工单详情" class="card-kicker" />
+                <ui:Label name="task-detail-status" text="未选择" class="work-order-status" />
+              </ui:VisualElement>
+              <ui:Label name="task-detail-title" text="从左侧选择一条工单" class="task-detail-panel__title" />
+              <ui:Label name="task-detail-number" text="--" class="task-detail-panel__number" />
+              <ui:VisualElement class="task-detail-grid">
+                <ui:VisualElement class="task-detail-cell"><ui:Label text="作业路线" class="task-detail-cell__label" /><ui:Label name="task-detail-route" text="--" class="task-detail-cell__value" /></ui:VisualElement>
+                <ui:VisualElement class="task-detail-cell"><ui:Label text="集装箱" class="task-detail-cell__label" /><ui:Label name="task-detail-container" text="--" class="task-detail-cell__value" /></ui:VisualElement>
+                <ui:VisualElement class="task-detail-cell"><ui:Label text="任务来源" class="task-detail-cell__label" /><ui:Label name="task-detail-source" text="--" class="task-detail-cell__value" /></ui:VisualElement>
+                <ui:VisualElement class="task-detail-cell"><ui:Label text="作业方式" class="task-detail-cell__label" /><ui:Label name="task-detail-mode" text="--" class="task-detail-cell__value" /></ui:VisualElement>
+                <ui:VisualElement class="task-detail-cell"><ui:Label text="车辆 / 车道" class="task-detail-cell__label" /><ui:Label name="task-detail-vehicle" text="--" class="task-detail-cell__value" /></ui:VisualElement>
+                <ui:VisualElement class="task-detail-cell"><ui:Label text="计划时间" class="task-detail-cell__label" /><ui:Label name="task-detail-time" text="--" class="task-detail-cell__value" /></ui:VisualElement>
+              </ui:VisualElement>
+              <ui:VisualElement class="task-detail-actions">
+                <ui:Button name="task-center-free-training" text="自由练习" class="secondary-button" />
+                <ui:Button name="task-select-button" text="进入任务" class="primary-button primary-button--compact" />
+              </ui:VisualElement>
+            </ui:VisualElement>
+          </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="assessment-center-view" class="module-view assessment-center-view page--hidden">
+          <ui:VisualElement class="module-view__header assessment-header">
+            <ui:VisualElement>
+              <ui:Label text="考核中心" class="module-view__title" />
+              <ui:Label text="正式考核独立计时、自动评分，开始后锁定岗位、工位与操控方式" class="module-view__subtitle" />
+            </ui:VisualElement>
+            <ui:VisualElement class="assessment-header__actions">
+              <ui:Label name="assessment-center-count" text="0 项待考" class="module-view__badge" />
+              <ui:Button name="assessment-refresh-button" text="刷新" class="secondary-button assessment-refresh-button" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <ui:VisualElement class="assessment-metrics">
+            <ui:VisualElement class="assessment-metric">
+              <ui:Label text="待完成考核" class="assessment-metric__label" />
+              <ui:Label name="assessment-pending-count" text="0" class="assessment-metric__value" />
+              <ui:Label text="教师端已下发" class="assessment-metric__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="assessment-metric">
+              <ui:Label text="进行中" class="assessment-metric__label" />
+              <ui:Label name="assessment-running-count" text="0" class="assessment-metric__value" />
+              <ui:Label text="可继续当前考核" class="assessment-metric__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="assessment-metric">
+              <ui:Label text="已完成" class="assessment-metric__label" />
+              <ui:Label name="assessment-completed-count" text="0" class="assessment-metric__value" />
+              <ui:Label name="assessment-pass-meta" text="暂无考核记录" class="assessment-metric__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="assessment-metric assessment-metric--last">
+              <ui:Label text="最近成绩" class="assessment-metric__label" />
+              <ui:Label name="assessment-latest-score" text="--" class="assessment-metric__value" />
+              <ui:Label name="assessment-latest-meta" text="完成考核后生成" class="assessment-metric__meta" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <ui:VisualElement class="assessment-body">
+            <ui:VisualElement class="assessment-list-panel">
+              <ui:VisualElement class="panel-heading-row">
+                <ui:VisualElement>
+                  <ui:Label text="考核项目" class="panel-heading" />
+                  <ui:Label text="仅展示当前岗位可执行的正式考核" class="panel-caption assessment-panel-caption" />
+                </ui:VisualElement>
+                <ui:Label text="选择项目查看规则" class="panel-caption" />
+              </ui:VisualElement>
+              <ui:ScrollView class="assessment-list-scroll" vertical-scroller-visibility="Hidden">
+                <ui:VisualElement name="assessment-list" class="assessment-list" />
+              </ui:ScrollView>
+            </ui:VisualElement>
+
+            <ui:ScrollView class="assessment-detail-scroll" vertical-scroller-visibility="Hidden">
+              <ui:VisualElement class="assessment-detail-panel">
+                <ui:VisualElement class="assessment-detail__topline">
+                  <ui:Label text="考核说明" class="card-kicker" />
+                  <ui:Label name="assessment-detail-status" text="未选择" class="assessment-status" />
+                </ui:VisualElement>
+                <ui:Label name="assessment-detail-title" text="从左侧选择一项考核" class="assessment-detail__title" />
+                <ui:Label name="assessment-detail-number" text="--" class="assessment-detail__number" />
+
+                <ui:VisualElement class="assessment-detail-grid">
+                  <ui:VisualElement class="assessment-detail-cell"><ui:Label text="考核岗位" class="assessment-detail-cell__label" /><ui:Label name="assessment-detail-role" text="--" class="assessment-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="assessment-detail-cell"><ui:Label text="操控方式" class="assessment-detail-cell__label" /><ui:Label name="assessment-detail-control" text="--" class="assessment-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="assessment-detail-cell"><ui:Label text="考试时限" class="assessment-detail-cell__label" /><ui:Label name="assessment-detail-duration" text="--" class="assessment-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="assessment-detail-cell"><ui:Label text="合格线" class="assessment-detail-cell__label" /><ui:Label name="assessment-detail-pass" text="--" class="assessment-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="assessment-detail-cell"><ui:Label text="考核次数" class="assessment-detail-cell__label" /><ui:Label name="assessment-detail-attempt" text="--" class="assessment-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="assessment-detail-cell"><ui:Label text="截止时间" class="assessment-detail-cell__label" /><ui:Label name="assessment-detail-due" text="--" class="assessment-detail-cell__value" /></ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="assessment-route-card">
+                  <ui:Label text="作业目标" class="assessment-section-label" />
+                  <ui:Label name="assessment-detail-route" text="--" class="assessment-route-card__route" />
+                  <ui:Label name="assessment-detail-container" text="--" class="assessment-route-card__meta" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="assessment-score-card">
+                  <ui:VisualElement class="assessment-section-heading">
+                    <ui:Label text="评分结构" class="assessment-section-label" />
+                    <ui:Label text="总分 100" class="assessment-section-total" />
+                  </ui:VisualElement>
+                  <ui:VisualElement class="assessment-score-row">
+                    <ui:Label text="安全规范" class="assessment-score-row__label" />
+                    <ui:VisualElement class="assessment-score-track"><ui:VisualElement name="assessment-safety-bar" class="assessment-score-fill assessment-score-fill--safety" /></ui:VisualElement>
+                    <ui:Label name="assessment-safety-weight" text="40 分" class="assessment-score-row__value" />
+                  </ui:VisualElement>
+                  <ui:VisualElement class="assessment-score-row">
+                    <ui:Label text="作业质量" class="assessment-score-row__label" />
+                    <ui:VisualElement class="assessment-score-track"><ui:VisualElement name="assessment-quality-bar" class="assessment-score-fill assessment-score-fill--quality" /></ui:VisualElement>
+                    <ui:Label name="assessment-quality-weight" text="35 分" class="assessment-score-row__value" />
+                  </ui:VisualElement>
+                  <ui:VisualElement class="assessment-score-row">
+                    <ui:Label text="作业效率" class="assessment-score-row__label" />
+                    <ui:VisualElement class="assessment-score-track"><ui:VisualElement name="assessment-efficiency-bar" class="assessment-score-fill assessment-score-fill--efficiency" /></ui:VisualElement>
+                    <ui:Label name="assessment-efficiency-weight" text="25 分" class="assessment-score-row__value" />
+                  </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="assessment-rule-card">
+                  <ui:Label text="考核规则" class="assessment-section-label" />
+                  <ui:Label text="• 点击开始后立即计时，岗位、工位及操控方式全程锁定" class="assessment-rule" />
+                  <ui:Label text="• 急停、碰撞或严重违章将记录扣分，必要时自动终止" class="assessment-rule" />
+                  <ui:Label text="• 考核过程中不显示操作提示，提交后统一生成成绩报告" class="assessment-rule" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="assessment-readiness">
+                  <ui:VisualElement>
+                    <ui:Label text="考前设备检查" class="assessment-readiness__label" />
+                    <ui:Label name="assessment-readiness-detail" text="等待选择考核项目" class="assessment-readiness__detail" />
+                  </ui:VisualElement>
+                  <ui:Label name="assessment-readiness-state" text="等待" class="assessment-readiness__state" />
+                </ui:VisualElement>
+                <ui:Button name="assessment-start-button" text="请选择考核项目" class="primary-button assessment-start-button" />
+              </ui:VisualElement>
+            </ui:ScrollView>
+          </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="training-records-view" class="module-view training-records-view page--hidden">
+          <ui:VisualElement class="module-view__header records-header">
+            <ui:VisualElement>
+              <ui:Label text="训练档案" class="module-view__title" />
+              <ui:Label text="汇总训练履历、能力成长和关键问题，帮助定位下一步训练重点" class="module-view__subtitle" />
+            </ui:VisualElement>
+            <ui:VisualElement class="records-header__actions">
+              <ui:Label name="records-count-badge" text="0 条训练记录" class="module-view__badge" />
+              <ui:Button name="records-refresh-button" text="刷新" class="secondary-button records-refresh-button" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <ui:VisualElement class="records-metrics">
+            <ui:VisualElement class="records-metric">
+              <ui:Label text="累计训练" class="records-metric__label" />
+              <ui:Label name="records-duration" text="--" class="records-metric__value" />
+              <ui:Label name="records-duration-meta" text="暂无训练记录" class="records-metric__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="records-metric">
+              <ui:Label text="完成任务" class="records-metric__label" />
+              <ui:Label name="records-completion" text="--" class="records-metric__value" />
+              <ui:Label name="records-completion-meta" text="完成任务后生成" class="records-metric__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="records-metric">
+              <ui:Label text="平均评价" class="records-metric__label" />
+              <ui:Label name="records-average" text="--" class="records-metric__value" />
+              <ui:Label name="records-average-meta" text="暂无有效评分" class="records-metric__meta" />
+            </ui:VisualElement>
+            <ui:VisualElement class="records-metric records-metric--last">
+              <ui:Label text="安全操作率" class="records-metric__label" />
+              <ui:Label name="records-safety" text="--" class="records-metric__value" />
+              <ui:Label name="records-safety-meta" text="暂无安全评估" class="records-metric__meta" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <ui:VisualElement class="records-toolbar">
+            <ui:Button name="records-filter-all" text="全部" class="records-filter records-filter--active" />
+            <ui:Button name="records-filter-formal" text="正式作业" class="records-filter" />
+            <ui:Button name="records-filter-collaborative" text="联合作业" class="records-filter" />
+            <ui:Button name="records-filter-fault" text="排故实训" class="records-filter" />
+            <ui:Button name="records-filter-practice" text="自由练习" class="records-filter" />
+            <ui:VisualElement class="records-toolbar__spacer" />
+            <ui:Label text="记录按完成时间倒序排列" class="records-toolbar__hint" />
+          </ui:VisualElement>
+
+          <ui:VisualElement class="records-body">
+            <ui:VisualElement class="records-list-panel">
+              <ui:VisualElement class="panel-heading-row">
+                <ui:Label text="训练履历" class="panel-heading" />
+                <ui:Label name="records-visible-count" text="0 条" class="panel-caption" />
+              </ui:VisualElement>
+              <ui:ScrollView class="records-list-scroll" vertical-scroller-visibility="Hidden">
+                <ui:VisualElement name="records-list" class="records-list" />
+              </ui:ScrollView>
+            </ui:VisualElement>
+
+            <ui:ScrollView class="records-detail-scroll" vertical-scroller-visibility="Hidden">
+              <ui:VisualElement class="records-detail-panel">
+                <ui:VisualElement class="records-detail__topline">
+                  <ui:Label text="单次训练复盘" class="card-kicker" />
+                  <ui:Label name="records-detail-status" text="未选择" class="records-detail-status" />
+                </ui:VisualElement>
+                <ui:Label name="records-detail-title" text="从左侧选择一条训练记录" class="records-detail__title" />
+                <ui:Label name="records-detail-number" text="--" class="records-detail__number" />
+
+                <ui:VisualElement class="records-detail-grid">
+                  <ui:VisualElement class="records-detail-cell"><ui:Label text="岗位 / 方式" class="records-detail-cell__label" /><ui:Label name="records-detail-role" text="--" class="records-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="records-detail-cell"><ui:Label text="训练用时" class="records-detail-cell__label" /><ui:Label name="records-detail-duration" text="--" class="records-detail-cell__value" /></ui:VisualElement>
+                  <ui:VisualElement class="records-detail-cell"><ui:Label text="完成时间" class="records-detail-cell__label" /><ui:Label name="records-detail-time" text="--" class="records-detail-cell__value" /></ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="records-route-card">
+                  <ui:Label text="作业任务" class="records-section-label" />
+                  <ui:Label name="records-detail-route" text="--" class="records-route-card__route" />
+                  <ui:Label name="records-detail-container" text="--" class="records-route-card__meta" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="records-profile-card">
+                  <ui:VisualElement class="records-section-heading">
+                    <ui:Label text="能力表现" class="records-section-label" />
+                    <ui:Label name="records-detail-score" text="综合评价 --" class="records-section-total" />
+                  </ui:VisualElement>
+                  <ui:VisualElement class="records-profile-row"><ui:Label text="安全规范" class="records-profile-row__label" /><ui:VisualElement class="records-profile-track"><ui:VisualElement name="records-safety-bar" class="records-profile-fill" /></ui:VisualElement><ui:Label name="records-safety-value" text="--" class="records-profile-row__value" /></ui:VisualElement>
+                  <ui:VisualElement class="records-profile-row"><ui:Label text="操作精准" class="records-profile-row__label" /><ui:VisualElement class="records-profile-track"><ui:VisualElement name="records-positioning-bar" class="records-profile-fill records-profile-fill--positioning" /></ui:VisualElement><ui:Label name="records-positioning-value" text="--" class="records-profile-row__value" /></ui:VisualElement>
+                  <ui:VisualElement class="records-profile-row"><ui:Label text="作业效率" class="records-profile-row__label" /><ui:VisualElement class="records-profile-track"><ui:VisualElement name="records-efficiency-bar" class="records-profile-fill records-profile-fill--efficiency" /></ui:VisualElement><ui:Label name="records-efficiency-value" text="--" class="records-profile-row__value" /></ui:VisualElement>
+                  <ui:VisualElement class="records-profile-row"><ui:Label text="流程规范" class="records-profile-row__label" /><ui:VisualElement class="records-profile-track"><ui:VisualElement name="records-process-bar" class="records-profile-fill records-profile-fill--process" /></ui:VisualElement><ui:Label name="records-process-value" text="--" class="records-profile-row__value" /></ui:VisualElement>
+                  <ui:VisualElement class="records-profile-row"><ui:Label text="协同能力" class="records-profile-row__label" /><ui:VisualElement class="records-profile-track"><ui:VisualElement name="records-collaboration-bar" class="records-profile-fill records-profile-fill--collaboration" /></ui:VisualElement><ui:Label name="records-collaboration-value" text="--" class="records-profile-row__value" /></ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="records-review-card">
+                  <ui:Label text="问题复盘" class="records-section-label" />
+                  <ui:Label name="records-issues" text="完成训练后，系统将在这里汇总关键事件和主要问题。" class="records-review-text" />
+                </ui:VisualElement>
+                <ui:VisualElement class="records-review-card records-review-card--suggestion">
+                  <ui:Label text="改进建议" class="records-section-label" />
+                  <ui:Label name="records-suggestion" text="暂无改进建议" class="records-review-text" />
+                </ui:VisualElement>
+              </ui:VisualElement>
+            </ui:ScrollView>
+          </ui:VisualElement>
+        </ui:VisualElement>
+
+      </ui:VisualElement>
+    </ui:VisualElement>
+    </ui:VisualElement>
+
+    <ui:Label name="toast" text="" class="toast toast--hidden" />
+  </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,18 @@
+{
+  "stationId": "YC-01",
+  "displayName": "场桥实训工位01",
+  "machineType": "YC",
+  "consoleProfileId": "YC-CONSOLE-V1",
+  "gatewayEndpoint": "ws://127.0.0.1:39001/gateway",
+  "trainingNodeEndpoint": "http://192.168.50.11:39101",
+  "plcProfileId": "YC-PLC-01",
+  "pointMapVersion": "YC-IO-1.0",
+  "sceneProfileId": "YC-SCENE-A",
+  "deploymentMode": "SimulatorCabin",
+  "gatewayTransport": "S7",
+  "inputProfileId": "YC-CONSOLE-S7-V1",
+  "displayProfileId": "YC-CABIN-MULTI-DISPLAY-V1",
+  "allowSimulationFallback": false,
+  "supportedControlModes": ["Local", "Remote"],
+  "supportedTaskTypes": ["FreePractice", "Standalone", "Collaborative", "Exam", "Fault"]
+}

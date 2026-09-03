@@ -1,0 +1,18 @@
+{
+  "stationId": "QC-DEV-01",
+  "displayName": "岸桥开发工位",
+  "machineType": "QC",
+  "consoleProfileId": "QC-CONSOLE-DEV",
+  "gatewayEndpoint": "ws://127.0.0.1:39001/gateway",
+  "trainingNodeEndpoint": "http://127.0.0.1:39101",
+  "plcProfileId": "QC-PLC-DEV",
+  "pointMapVersion": "QC-IO-0.1",
+  "sceneProfileId": "QC-SCENE-DEV",
+  "deploymentMode": "DesktopSimulation",
+  "gatewayTransport": "Simulated",
+  "inputProfileId": "QC-DESKTOP-KEYBOARD-V1",
+  "displayProfileId": "DESKTOP-16X9-V1",
+  "allowSimulationFallback": true,
+  "supportedControlModes": ["Local", "Remote"],
+  "supportedTaskTypes": ["FreePractice", "Standalone", "Collaborative", "Exam", "Fault"]
+}

@@ -1,0 +1,63 @@
+# Root-local scratch and generated logs
+/Temp/
+/tmp/
+/*.log
+
+# Unity generated content (all Unity projects)
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+sysinfo.txt
+
+# IDE and OS state
+.vs/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.orig
+*.orig.meta
+*.rej
+*.rej.meta
+
+# Web generated content and local configuration
+node_modules/
+.next/
+.vinext/
+out/
+dist/
+coverage/
+.vercel/
+.wrangler/
+.site-package/
+.pnp
+.pnp.*
+.yarn/cache/
+.yarn/install-state.gz
+.env
+.env.*
+*.pem
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local collaboration process state
+PortTraining/Docs/Claude交接/.claude-task.lock

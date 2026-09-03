@@ -1,0 +1,18 @@
+{
+  "name": "PortTraining.UI",
+  "rootNamespace": "PortTraining",
+  "references": [
+    "PortTraining.Core",
+    "PortTraining.Control"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
+

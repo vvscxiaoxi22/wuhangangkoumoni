@@ -1,0 +1,20 @@
+{
+  "name": "PortTraining.Editor",
+  "rootNamespace": "PortTraining",
+  "references": [
+    "PortTraining.Core",
+    "PortTraining.Control",
+    "PortTraining.Equipment.QC",
+    "PortTraining.Equipment.YC",
+    "PortTraining.UI"
+  ],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

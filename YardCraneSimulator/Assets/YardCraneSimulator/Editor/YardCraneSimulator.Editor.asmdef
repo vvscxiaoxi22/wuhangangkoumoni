@@ -1,0 +1,19 @@
+{
+  "name": "YardCraneSimulator.Editor",
+  "rootNamespace": "PortTraining.YardCraneSimulator.Editor",
+  "references": [
+    "YardCraneSimulator.Runtime",
+    "YardCraneSimulator.ObiRopeTest"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

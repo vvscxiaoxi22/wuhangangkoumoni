@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24d0805a109ba74dbadcb0d6aff0e3a, type: 3}
+  m_Name: YC-EightRopeMAX-Greybox-v1
+  m_EditorClassIdentifier: 
+  identity:
+    schemaVersion: 1.0.0
+    profileId: YC-PHYSICS-QD-EIGHT-ROPE-GREYBOX-1.0.0
+    topologyProfileId: QingdaoPort-NewEightRopeMAX-Greybox-v1
+    equipmentModel: QingdaoPort-NewEightRopeMAX-Greybox
+    calibrationStatus: Greybox
+    calibrationSource: 2026-08-31 v12-v14 verified greybox baseline; not real-device
+      acceptance data.
+  motion:
+    gantrySpeedMetersPerSecond: 1.5
+    gantryAccelerationMetersPerSecondSquared: 0.45
+    gantryBrakingMetersPerSecondSquared: 0.65
+    gantryTravelFromHomeMeters: 8
+    gantryLimitSafetyMarginMeters: 0.1
+    wheelClampTransitionSeconds: 0.4
+    anchorTransitionSeconds: 0.6
+    spreaderSizeTransitionSeconds: 2.5
+    spreaderRotationMaxAngleDegrees: 3
+    spreaderRotationRateDegreesPerSecond: 1.5
+    spreaderRotationReturnToZeroRateDegreesPerSecond: 1
+    hoistSpeedMetersPerSecond: 0.65
+    unloadedHoistAccelerationMetersPerSecondSquared: 0.7
+    hoistBrakingMetersPerSecondSquared: 0.95
+    trolleySpeedMetersPerSecond: 1.8
+    trolleyAccelerationMetersPerSecondSquared: 0.9
+    trolleyBrakingMetersPerSecondSquared: 1.2
+    fullyLoadedTrolleyAccelerationFactor: 0.68
+    fullyLoadedTrolleyBrakingFactor: 0.78
+    fullyLoadedHoistSpeedFactor: 0.65
+    fullyLoadedHoistAccelerationFactor: 0.45
+    trolleyTravelFromHomeMeters: 4.5
+    trolleyLimitSafetyMarginMeters: 0.03
+    loadedTrolleyStopStabilizationSeconds: 1
+    loadedTrolleyStopLinearDampingPerSecond: 0
+    loadedTrolleyStopAngularDampingPerSecond: 0.55
+    motionObservationSpeedThresholdMetersPerSecond: 0.01
+    resetSafeSpeedThresholdMetersPerSecond: 0.05
+  load:
+    simulationProxyMassKg: 2
+    spreaderRealMassKg: 12500
+    minimumContainerGrossMassKg: 2200
+    maximumContainerGrossMassKg: 40500
+    containerLockedLocalPosition: {x: 0, y: -1.45, z: 0}
+    loadTransferPreTensionDurationSeconds: 0.25
+  geometryAndSafety:
+    minimumSuspendedDropMeters: 2.8
+    maximumSuspendedDropMeters: 8.5
+    containerHeightMeters: 2.4
+    containerColliderSizeMeters: {x: 4.8, y: 2.4, z: 2.4}
+    headblockColliderSizeMeters: {x: 4, y: 0.5, z: 2.2}
+    spreaderThicknessMeters: 0.5
+    containerHorizontalLockToleranceMeters: 0.2
+    containerVerticalLockToleranceMeters: 0.18
+    containerYawLockToleranceDegrees: 3
+    containerLandingToleranceMeters: 0.15
+    maximumLockingSpeedMetersPerSecond: 0.05
+    containerLandingStableHoldSeconds: 0.25
+    loadedTrolleyMinimumClearanceMeters: 0.35
+  ropePhysics:
+    obiSolverSubsteps: 10
+    obiDistanceIterations: 2
+    unloadedHeadblockLinearDamping: 0.04
+    unloadedHeadblockAngularDamping: 0.8
+    loadedHeadblockAngularDamping: 0.55
+    headblockSolverIterations: 32
+    headblockSolverVelocityIterations: 16
+    loadedSuspensionNaturalFrequencyRadiansPerSecond: 2.35
+    loadedSuspensionDampingRatio: 0.38
+    maximumLoadedSuspensionAccelerationMetersPerSecondSquared: 1.8
+    loadedHoistNaturalFrequencyRadiansPerSecond: 9
+    loadedHoistDampingRatio: 0.55
+    lightLoadedStaticRopeDeflectionMeters: 0.006
+    fullyLoadedStaticRopeDeflectionMeters: 0.018
+    maximumLoadedHoistDeflectionMeters: 0.04
+    loopConstraintToleranceMeters: 0.00025
+    startupPreTensionDurationSeconds: 0.4
+    positionConstraintIterations: 32
+    velocityConstraintIterations: 8
+    interlockPositionIterations: 4
+    interlockVelocityIterations: 2
+    interlockPositionRelaxation: 0.18
+    interlockVelocityRelaxation: 0.45
+    maximumAngularCorrectionDegrees: 1.5
+  acceptance:
+    loadedHoistSettleDeflectionToleranceMeters: 0.0015
+    loadedHoistSettleVelocityToleranceMetersPerSecond: 0.003
+    loadedHoistSettleHoldSeconds: 0.3
+    loadedHoistSettleTimeoutSeconds: 5
+    maximumPermittedLoopExtensionMeters: 0.008
+    prototypeMaximumSwayMeters: 0.35
+    prototypeMaximumResidualTwistDegrees: 1.5
+  regression:
+    loadedStageTimeoutSeconds: 15
+    loadedTotalTimeoutSeconds: 75
+    loadedStableHoldSeconds: 0.35
+    loadedLiftClearanceMeters: 1.2
+    loadedOutboundTravelMeters: 1.2
+  loopBindings:
+  - id: L01_X_FL
+    drum: A
+    antiSwayAxis: X
+    exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop01_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop01_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop01_X_FL
+  - id: L02_X_FR
+    drum: A
+    antiSwayAxis: X
+    exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop02_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop02_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop02_X_FR
+  - id: L03_X_RL
+    drum: A
+    antiSwayAxis: X
+    exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop03_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop03_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop03_X_RL
+  - id: L04_X_RR
+    drum: A
+    antiSwayAxis: X
+    exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop04_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop04_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop04_X_RR
+  - id: L05_Z_FL
+    drum: B
+    antiSwayAxis: Z
+    exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop05_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop05_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop05_Z_FL
+  - id: L06_Z_FR
+    drum: B
+    antiSwayAxis: Z
+    exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop06_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop06_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop06_Z_FR
+  - id: L07_Z_RL
+    drum: B
+    antiSwayAxis: Z
+    exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop07_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop07_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop07_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop07_Z_RL
+  - id: L08_Z_RR
+    drum: B
+    antiSwayAxis: Z
+    exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop08_Exit
+    deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop08_DeadEnd
+    sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop08_Sheave
+    slotPath: 40_RopeRig/EightRopeLoops/Loop08_Z_RR
