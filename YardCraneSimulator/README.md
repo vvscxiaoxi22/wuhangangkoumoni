@@ -5,7 +5,7 @@
 ## 当前状态
 
 - Unity：`6000.0.42f1`
-- 工程阶段：八绳MAX灰盒物理、30吨载荷完整动作回归、v15配置解耦、v16场景内部作业状态机、v17单机输入链、v18大车物理驱动/夹轮器互锁/鸣笛以及v23吊具物理旋转投影已形成；v23已通过逻辑Harness、Unity程序集编译和Play初始化绑定，非零角度/回零烟测、30吨组合回归、实体Xbox、Windows Player、正式模型、实时IPC、设备驱动和平台工单闭环尚未完成
+- 工程阶段：八绳MAX灰盒物理、30吨载荷完整动作回归、v15配置解耦、v16场景内部作业状态机、v17单机输入链、v18大车物理驱动/夹轮器互锁/鸣笛以及v24吊具物理旋转投影与自动Play门禁已形成；v24已通过逻辑Harness、Unity程序集编译、+3°模型旋转/松手停止/自动回零烟测和30吨无回归完整链，实体Xbox、Windows Player、正式模型、实时IPC、设备驱动和平台工单闭环尚未完成
 - 目标设备：40.5 吨场桥
 - 运行方式：既可直接启动为单机全流程模拟器，也可后续由`PortTraining`托管启动为独立全屏Windows EXE
 - PLC 接入：通过独立 `PortGatewayService`，本工程不直接连接 S7 PLC
@@ -53,10 +53,10 @@ Unity编辑器直接运行时使用明确标记的本地开发参数。直接启
 - 大车已接入真实物理驱动（加减速、两端限位与减速区）与夹轮器互锁（合闸时物理钳零、移动中禁止合闸），详见[场桥YC-P0-02开发计划](../PortTraining/LM-Wiki/02-知识层-编译层/场桥YC-P0-02开发计划-大车鸣笛与夹轮器.md)。
 - 大车/小车锚定（独立于夹轮器的抗风销机构）、整机控制电源/急停/故障复位链已接入统一命令与联锁，详见`Docs/讨论记录/2026-09-02.md`第2、3条；均为`代码实现完成`，Unity编译与Play验证仍待补齐。
 - 吊具泵开/关与20/40尺状态机（尺寸切换需泵已启动、大车小车起升三轴静止且未挂箱）已接入统一命令与联锁，详见`Docs/讨论记录/2026-09-02.md`第5条；`Unity编译通过`（v21，同一程序集），泵开关的请求-接受闭环已有Play证据，尺寸切换的三种拒绝互锁与HUD渲染仍待补证。
-- 吊具左右旋转（维持型方向输入，±3°，需泵已启动）与回零已接入统一命令、联锁和HUD。v23把逻辑角度投影到`35_Spreader`真实模型槽、灰盒吊具、碰撞体、传感器与`ContainerAttachment`，锁定箱体会同步跟随；八绳滑轮、上架刚体和绳索解算仍保持独立。逻辑Harness、三个Unity程序集编译及Play初始化绑定通过；非零角度和自动回零烟测、挂30吨箱组合回归仍待执行，详见`../PortTraining/Docs/讨论记录/2026-09-03.md`第2条。
-- Editor Play就绪后可执行菜单`Tools/Yard Crane/Tests/Run Spreader Rotation Play Smoke Test`，通过标志为`YC_SPREADER_ROTATION_PLAY_SMOKE_PASS`。
+- 吊具左右旋转（维持型方向输入，±3°，需泵已启动）与回零已接入统一命令、联锁和HUD。v24把逻辑角度投影到`35_Spreader`真实模型槽、灰盒吊具、碰撞体、传感器与`ContainerAttachment`，锁定箱体会同步跟随；八绳滑轮、上架刚体和绳索解算仍保持独立。逻辑Harness、Unity程序集编译、+3°逻辑/物理同步、松手停止、自动回零以及后续30吨完整链均已通过；负向限位、回零中手动打断、泵关闭拒绝和带载旋转仍待专项Play，详见`../PortTraining/Docs/讨论记录/2026-09-03.md`第4条。
+- Editor可执行菜单`Tools/Yard Crane/Tests/Run Spreader Rotation Play Smoke Test`验证单项旋转，也可在Edit模式执行`Tools/Yard Crane/Tests/Run Full Play Verification`自动完成“旋转/回零→复位→30吨完整链”；通过标志分别为`YC_SPREADER_ROTATION_PLAY_SMOKE_PASS`与`YC_FULL_PLAY_VERIFICATION_PASS`。
 - Unity菜单`Tools/PortTraining/Yard Crane/Build Windows Development`生成`Builds/Development/YardCraneSimulator.exe`。
-- 当前状态为`部分实现`：Editor Play中键盘驱动大车/夹轮器/鸣笛/吊具泵已有人工证据；控制电源/急停/故障复位、大车/小车锚定和吊具20/40尺仍缺完整分项验收；吊具旋转已完成v23模型投影并通过逻辑Harness、Unity编译和Play初始化绑定，但实际±3°运动、自动回零、30吨带载回归、Windows Player、实体Xbox、拔出及窗口失焦仍需验收。
+- 当前状态为`部分实现`：Editor Play中键盘驱动大车/夹轮器/鸣笛/吊具泵已有人工证据；控制电源/急停/故障复位、大车/小车锚定和吊具20/40尺仍缺完整分项验收；吊具旋转已完成v24模型投影，+3°、松手停止、自动回零与30吨完整回归已自动验收，但负向限位、回零中手动打断、泵关闭拒绝、带载旋转、Windows Player、实体Xbox、拔出及窗口失焦仍需验收。
 
 ## 目录
 

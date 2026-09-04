@@ -22,7 +22,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
     [DisallowMultipleComponent]
     public sealed class YardCraneEightRopeMaxPrototypeRig : MonoBehaviour, IYardCraneOperationActuator
     {
-        private const string ImplementationVersion = "2026-09-03-eight-rope-max-v23-spreader-physical-rotation";
+        private const string ImplementationVersion = "2026-09-03-eight-rope-max-v24-play-verification";
         private const float ContainerContactEnvelopeMarginMeters = 0.03f;
 
         private float GantrySpeedMetersPerSecond => activeProfile.motion.gantrySpeedMetersPerSecond;
@@ -836,6 +836,10 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 headblockHomeRotation = headblockPhysics.rotation;
                 initialSuspendedDrop = CalculateSuspendedDrop();
                 commandedSuspendedDrop = initialSuspendedDrop;
+                // When the optional startup demo is disabled there is no demo phase to
+                // complete. Mark it complete immediately so developer regressions and
+                // manual verification are not permanently rejected by a stale flag.
+                demoCompleted = !runAutomatedDemo;
                 InitializeOperationController();
                 runtimeStatus = "Waiting for 16 Obi visual rope legs";
             }
@@ -3347,7 +3351,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
 
             demoStartedAt = Time.fixedTime;
-            demoCompleted = false;
+            demoCompleted = !runAutomatedDemo;
             demoClampApplyRequested = false;
             demoClampReleaseRequested = false;
             demoClampInhibitObserved = false;

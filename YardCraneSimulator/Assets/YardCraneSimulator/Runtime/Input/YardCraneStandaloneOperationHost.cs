@@ -58,7 +58,7 @@ namespace PortTraining.YardCraneSimulator.Controls
         public bool IsControlPowerOn => controlPowerOn;
         public bool IsEmergencyStopReleased => emergencyStopReleased;
         public bool IsAwaitingFaultReset =>
-            configured && controller.Phase == YardCraneOperationPhase.SafeHold;
+            configured && controller != null && controller.Phase == YardCraneOperationPhase.SafeHold;
 
         public void Configure(
             YardCraneOperationController operationController,
