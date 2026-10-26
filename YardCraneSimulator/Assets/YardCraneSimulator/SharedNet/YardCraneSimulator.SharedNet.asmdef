@@ -1,0 +1,14 @@
+{
+  "name": "YardCraneSimulator.SharedNet",
+  "rootNamespace": "PortTraining.YardCraneSimulator.SharedNet",
+  "references": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
+}

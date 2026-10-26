@@ -1,0 +1,624 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:calendar="OMG.UI.DatePickerUITK" editor-extension-mode="False">
+    <Style src="project://database/Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss?fileID=7433441132597879392&amp;guid=0a5b8a11d52c4ed3a535adef9907eab7&amp;type=3#TeacherSideShellStyles" />
+    <ui:VisualElement name="teacher-side-shell" class="teacher-shell" style="display: flex;">
+        <ui:VisualElement picking-mode="Ignore" class="teacher-home-background" style="background-image: url(&quot;project://database/Assets/YardCraneSimulator/Art/UI/StudentHome/DesignPackage_v1/Background/student-home-background-v1.png?fileID=2800000&amp;guid=ffb6e6b80393a704fada72b1fff8f9d6&amp;type=3#student-home-background-v1&quot;);" />
+        <ui:VisualElement picking-mode="Ignore" class="teacher-home-tone" />
+        <ui:VisualElement picking-mode="Ignore" class="teacher-home-vignette teacher-home-vignette-left" />
+        <ui:VisualElement picking-mode="Ignore" class="teacher-home-vignette teacher-home-vignette-bottom" />
+        <ui:VisualElement class="teacher-topbar">
+            <ui:VisualElement picking-mode="Ignore" class="teacher-badge-glow teacher-badge-glow-outer" style="-unity-background-scale-mode: stretch-to-fill; background-position-x: center 0; top: -5px; left: -8px;" />
+            <ui:VisualElement picking-mode="Ignore" class="teacher-badge-glow teacher-badge-glow-inner" style="top: 2px; left: -7px;" />
+            <ui:Label text="教师端" class="teacher-badge" style="-unity-text-align: middle-center;" />
+            <ui:VisualElement class="teacher-navigation-glass">
+                <ui:VisualElement class="teacher-breadcrumb">
+                    <ui:Label name="teacher-identity" text="管理员 admin · 本机管理" class="teacher-crumb-identity" />
+                    <ui:Label text="·" class="teacher-crumb-dot" />
+                    <ui:Label text="场桥教学" class="teacher-crumb-role" />
+                    <ui:Label text="·" class="teacher-crumb-dot" />
+                    <ui:Label name="teacher-current-section" text="教学管理" class="teacher-crumb-current" />
+                </ui:VisualElement>
+                <ui:Label name="teacher-console-label" text="YARD CRANE / TEACHER CONSOLE" class="teacher-top-label" />
+            </ui:VisualElement>
+            <ui:VisualElement class="teacher-top-actions">
+                <ui:Button name="teacher-logout-button" text="←" tooltip="返回登录" class="teacher-icon-button teacher-back-button" />
+                <ui:Button name="teacher-quit-button" text="×" tooltip="退出系统" class="teacher-icon-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="teacher-home-page" picking-mode="Ignore" enabled="true" class="teacher-page" style="display: flex;">
+            <ui:VisualElement class="teacher-title-block">
+                <ui:Label text="YARD CRANE / TEACHING CONSOLE" class="teacher-overline" />
+                <ui:Label text="教师工作台" class="teacher-heading" />
+                <ui:Label name="teacher-greeting" text="管理员，选择要进入的教学模块" class="teacher-subheading" />
+            </ui:VisualElement>
+            <ui:VisualElement class="teacher-management-grid">
+                <ui:Button name="teacher-task-management-button" class="teacher-core-card">
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-glow teacher-card-glow-outer" />
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-glow teacher-card-glow-inner" />
+                    <ui:Label text="01" picking-mode="Ignore" class="teacher-card-index" />
+                    <ui:Label text="TASK MANAGEMENT" picking-mode="Ignore" class="teacher-card-eyebrow" />
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-art teacher-task-art">
+                        <ui:VisualElement class="teacher-task-sheet">
+                            <ui:VisualElement class="teacher-task-clip" />
+                            <ui:VisualElement class="teacher-task-row">
+                                <ui:VisualElement class="teacher-task-check" />
+                                <ui:VisualElement class="teacher-task-line" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-task-row">
+                                <ui:VisualElement class="teacher-task-check" />
+                                <ui:VisualElement class="teacher-task-line teacher-task-line-short" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-task-row">
+                                <ui:VisualElement class="teacher-task-check" />
+                                <ui:VisualElement class="teacher-task-line" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-rule" />
+                    <ui:Label text="任务管理" picking-mode="Ignore" class="teacher-card-title" />
+                    <ui:Label text="创建、组织与发布场桥训练任务" picking-mode="Ignore" class="teacher-card-description" />
+                    <ui:Label text="界面可用 · 服务待接入" picking-mode="Ignore" class="teacher-card-availability" style="display: none;" />
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-arrow-glow" />
+                    <ui:Label text="→" picking-mode="Ignore" class="teacher-card-arrow" style="-unity-text-align: middle-center; bottom: 9px; right: 16px;" />
+                </ui:Button>
+                <ui:Button name="teacher-assessment-statistics-button" class="teacher-core-card">
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-glow teacher-card-glow-outer" />
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-glow teacher-card-glow-inner" />
+                    <ui:Label text="02" picking-mode="Ignore" class="teacher-card-index" />
+                    <ui:Label text="ASSESSMENT ANALYTICS" picking-mode="Ignore" class="teacher-card-eyebrow" />
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-art teacher-chart-art">
+                        <ui:VisualElement class="teacher-chart-axis teacher-chart-axis-y" />
+                        <ui:VisualElement class="teacher-chart-axis teacher-chart-axis-x" />
+                        <ui:VisualElement class="teacher-chart-bar teacher-chart-bar-one" />
+                        <ui:VisualElement class="teacher-chart-bar teacher-chart-bar-two" />
+                        <ui:VisualElement class="teacher-chart-bar teacher-chart-bar-three" />
+                        <ui:VisualElement class="teacher-chart-trend teacher-chart-trend-one" />
+                        <ui:VisualElement class="teacher-chart-trend teacher-chart-trend-two" />
+                        <ui:VisualElement class="teacher-chart-dot teacher-chart-dot-one" />
+                        <ui:VisualElement class="teacher-chart-dot teacher-chart-dot-two" />
+                        <ui:VisualElement class="teacher-chart-dot teacher-chart-dot-three" />
+                    </ui:VisualElement>
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-rule" />
+                    <ui:Label text="考核统计" picking-mode="Ignore" class="teacher-card-title" />
+                    <ui:Label text="查看学生考核成绩、用时与扣分明细" picking-mode="Ignore" class="teacher-card-description" />
+                    <ui:Label text="读取本机成绩文件" picking-mode="Ignore" class="teacher-card-availability" style="display: none;" />
+                    <ui:VisualElement picking-mode="Ignore" class="teacher-card-arrow-glow" />
+                    <ui:Label text="→" picking-mode="Ignore" class="teacher-card-arrow" style="bottom: 9px; right: 17px; -unity-text-align: middle-center;" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:Label name="teacher-module-status" text="本机管理员模式 · 本机任务管理与成绩统计" class="teacher-module-status" style="display: none;" />
+            <ui:VisualElement picking-mode="Ignore" class="teacher-footer-strip">
+                <ui:VisualElement class="teacher-footer-rule" />
+                <ui:Label text="PLAN  ·  TEACH  ·  REVIEW" class="teacher-footer-caption" />
+            </ui:VisualElement>
+            <ui:VisualElement picking-mode="Ignore" class="teacher-footer-right">
+                <ui:Label text="LOCAL ADMINISTRATOR&#10;TRUTHFUL SERVICE BOUNDARY" class="teacher-footer-right-copy" />
+                <ui:VisualElement class="teacher-footer-right-rule" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="teacher-fault-publish-page" picking-mode="Ignore" class="teacher-page teacher-fault-publish-page teacher-page-hidden" style="display: none;">
+            <ui:VisualElement class="teacher-fault-workspace">
+                <ui:VisualElement class="teacher-fault-page-heading">
+                    <ui:Button name="teacher-fault-publish-back-button" text="←" tooltip="返回教师工作台" class="teacher-fault-page-back" />
+                    <ui:VisualElement class="teacher-fault-heading-copy">
+                        <ui:Label text="FAULT PUBLISHING / ASSIGNMENT" class="teacher-fault-overline" />
+                        <ui:Label text="故障发布" class="teacher-fault-heading" />
+                        <ui:Label text="从当前机型目录跨类别多选故障，一次生成一条故障排除任务" class="teacher-fault-subheading" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-fault-summary">
+                        <ui:VisualElement class="teacher-fault-summary-item">
+                            <ui:Label name="teacher-fault-summary-category-value" text="08" class="teacher-fault-summary-value" />
+                            <ui:Label text="已分类类别" class="teacher-fault-summary-label" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-fault-summary-divider" />
+                        <ui:VisualElement class="teacher-fault-summary-item">
+                            <ui:Label name="teacher-fault-summary-total-value" text="100" class="teacher-fault-summary-value" />
+                            <ui:Label text="故障总数" class="teacher-fault-summary-label" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-fault-summary-divider" />
+                        <ui:VisualElement class="teacher-fault-summary-item">
+                            <ui:Label name="teacher-fault-summary-unclassified-value" text="33" class="teacher-fault-summary-value teacher-fault-summary-warning" />
+                            <ui:Label text="待归类条目" class="teacher-fault-summary-label" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-fault-source-toolbar">
+                    <ui:Label text="当前构建设备" class="teacher-fault-toolbar-label" />
+                    <ui:VisualElement class="teacher-fault-source-state">
+                        <ui:VisualElement class="teacher-fault-source-dot" />
+                        <ui:Label name="teacher-fault-source-state-label" text="由 Build Profile 自动选择故障目录" />
+                    </ui:VisualElement>
+                    <ui:Label text="机型由 Mode_Anqiao / Mode_Changqiao 决定" class="teacher-fault-preview-badge" style="display: none;" />
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-fault-content">
+                    <ui:VisualElement class="teacher-fault-category-panel teacher-fault-panel-surface">
+                        <ui:Label text="故障类别" class="teacher-fault-panel-title" />
+                        <ui:Label text="FAULT CATEGORIES" class="teacher-fault-panel-overline" />
+                        <ui:ScrollView name="teacher-fault-category-scroll" mode="Vertical" class="teacher-fault-category-scroll">
+                            <ui:VisualElement name="teacher-fault-category-list">
+                                <ui:Button class="teacher-fault-category-button selected">
+                                    <ui:Label text="电源故障" />
+                                    <ui:Label text="12" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="俯仰小车机构故障" />
+                                    <ui:Label text="14" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="起升、大车机构故障" />
+                                    <ui:Label text="17" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="夹轮器故障" />
+                                    <ui:Label text="03" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="左右倾故障" />
+                                    <ui:Label text="06" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="平面回转故障" />
+                                    <ui:Label text="04" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="吊具泵故障" />
+                                    <ui:Label text="06" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                                <ui:Button class="teacher-fault-category-button">
+                                    <ui:Label text="前后倾故障" />
+                                    <ui:Label text="05" class="teacher-fault-category-count" style="-unity-text-align: middle-center;" />
+                                </ui:Button>
+                            </ui:VisualElement>
+                        </ui:ScrollView>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-fault-list-panel teacher-fault-panel-surface">
+                        <ui:VisualElement class="teacher-fault-list-heading">
+                            <ui:VisualElement>
+                                <ui:Label name="teacher-fault-list-title" text="电源故障" class="teacher-fault-panel-title" />
+                                <ui:Label name="teacher-fault-list-overline" text="FAULT LIST / 12 ITEMS" class="teacher-fault-panel-overline" />
+                            </ui:VisualElement>
+                            <ui:Label name="teacher-fault-selected-count" text="已选择 0 项" class="teacher-fault-selected-count" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-fault-list-header">
+                            <ui:Label text="序号" class="teacher-fault-col-index" />
+                            <ui:Label text="故障现象" class="teacher-fault-col-phenomenon" />
+                            <ui:Label text="线号 / 标号" class="teacher-fault-col-line" />
+                            <ui:Label text="故障点" class="teacher-fault-col-point" />
+                        </ui:VisualElement>
+                        <ui:ScrollView name="teacher-fault-list-scroll" mode="Vertical" class="teacher-fault-list-scroll">
+                            <ui:Button class="teacher-fault-list-row">
+                                <ui:Label text="01" class="teacher-fault-col-index teacher-fault-row-index" />
+                                <ui:Label text="主电路无供电" class="teacher-fault-col-phenomenon teacher-fault-row-primary" />
+                                <ui:Label text="010-1" class="teacher-fault-col-line teacher-fault-row-code" />
+                                <ui:Label text="KM04:2--KM01:21" class="teacher-fault-col-point teacher-fault-row-code" />
+                            </ui:Button>
+                            <ui:Button class="teacher-fault-list-row">
+                                <ui:Label text="02" class="teacher-fault-col-index teacher-fault-row-index" />
+                                <ui:Label text="整机无供电（TC1变压器缺相）" class="teacher-fault-col-phenomenon teacher-fault-row-primary" />
+                                <ui:Label text="1L11" class="teacher-fault-col-line teacher-fault-row-code" />
+                                <ui:Label text="QF04:2--TC1:1" class="teacher-fault-col-point teacher-fault-row-code" />
+                            </ui:Button>
+                            <ui:Button class="teacher-fault-list-row">
+                                <ui:Label text="03" class="teacher-fault-col-index teacher-fault-row-index" />
+                                <ui:Label text="各抱闸机构缺相（注意观察各FR热继电器）" class="teacher-fault-col-phenomenon teacher-fault-row-primary" />
+                                <ui:Label text="4L01" class="teacher-fault-col-line teacher-fault-row-code" />
+                                <ui:Label text="QF50:02--X0:05" class="teacher-fault-col-point teacher-fault-row-code" />
+                            </ui:Button>
+                            <ui:Button class="teacher-fault-list-row">
+                                <ui:Label text="04" class="teacher-fault-col-index teacher-fault-row-index" />
+                                <ui:Label text="俯仰、小车、起升、大车控制线路无供电" class="teacher-fault-col-phenomenon teacher-fault-row-primary" />
+                                <ui:Label text="1" class="teacher-fault-col-line teacher-fault-row-code" />
+                                <ui:Label text="KMO3:2--X0:09" class="teacher-fault-col-point teacher-fault-row-code" />
+                            </ui:Button>
+                            <ui:Button class="teacher-fault-list-row">
+                                <ui:Label text="05" class="teacher-fault-col-index teacher-fault-row-index" />
+                                <ui:Label text="联动台无直流供电" class="teacher-fault-col-phenomenon teacher-fault-row-primary" />
+                                <ui:Label text="8" class="teacher-fault-col-line teacher-fault-row-code" />
+                                <ui:Label text="QF61:02--XO:13" class="teacher-fault-col-point teacher-fault-row-code" />
+                            </ui:Button>
+                        </ui:ScrollView>
+                        <ui:Label text="列表支持纵向滚动 · 点击题目可多选或取消选择" class="teacher-fault-list-caption" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-fault-config-panel teacher-fault-panel-surface">
+                        <ui:Label text="发布配置" class="teacher-fault-panel-title" />
+                        <ui:Label text="PUBLISH CONFIGURATION" class="teacher-fault-panel-overline" />
+                        <ui:Label text="已选故障" class="teacher-fault-config-label" />
+                        <ui:VisualElement class="teacher-fault-selected-card" style="height: 125px;">
+                            <ui:Label name="teacher-fault-selected-category" text="故障目录" class="teacher-fault-selected-category" />
+                            <ui:Label name="teacher-fault-selected-title" text="请选择故障题目" class="teacher-fault-selected-title" />
+                            <ui:Label name="teacher-fault-selected-meta" text="可跨类别多选" class="teacher-fault-selected-meta" style="height: 32px;" />
+                        </ui:VisualElement>
+                        <ui:Label text="建议时长" class="teacher-fault-config-label" />
+                        <ui:VisualElement class="teacher-fault-choice-row">
+                            <ui:Button text="15 min" class="teacher-fault-choice teacher-fault-duration-choice selected" />
+                            <ui:Button text="30 min" class="teacher-fault-choice teacher-fault-duration-choice" />
+                            <ui:Button text="45 min" class="teacher-fault-choice teacher-fault-duration-choice" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-fault-boundary">
+                            <ui:VisualElement class="teacher-fault-boundary-dot" />
+                            <ui:Label text="默认发布给全体学生，并从任务考核进入；添加后在任务列表勾选发布" />
+                        </ui:VisualElement>
+                        <ui:Button name="teacher-fault-publish-button" text="添加所选故障到任务列表" class="teacher-fault-publish-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-fault-page-footer">
+                    <ui:Label name="teacher-fault-publish-page-status" text="可跨类别多选故障；一次添加生成一条故障排除任务" class="teacher-fault-page-status" />
+                    <ui:Label text="CATALOG / LOCAL DATA" class="teacher-fault-page-version" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="teacher-assessment-page" picking-mode="Ignore" class="teacher-page teacher-assessment-page teacher-page-hidden">
+            <ui:VisualElement class="teacher-assessment-workspace">
+                <ui:VisualElement class="teacher-assessment-page-heading">
+                    <ui:Button name="teacher-assessment-back-button" text="←" tooltip="返回教师工作台" class="teacher-assessment-page-back" />
+                    <ui:VisualElement class="teacher-assessment-heading-copy">
+                        <ui:Label text="ASSESSMENT ANALYTICS / LOCAL SCORE FILES" class="teacher-assessment-overline" />
+                        <ui:Label text="考核统计" class="teacher-assessment-heading" />
+                        <ui:Label text="浏览学生考核记录、完成用时与成绩状态" class="teacher-assessment-subheading" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-assessment-summary">
+                        <ui:VisualElement class="teacher-assessment-summary-item">
+                            <ui:Label text="00" class="teacher-assessment-summary-value" />
+                            <ui:Label text="记录数" class="teacher-assessment-summary-label" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-summary-divider" />
+                        <ui:VisualElement class="teacher-assessment-summary-item">
+                            <ui:Label text="—" class="teacher-assessment-summary-value" />
+                            <ui:Label text="合格率" class="teacher-assessment-summary-label" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-summary-divider" />
+                        <ui:VisualElement class="teacher-assessment-summary-item">
+                            <ui:Label text="00" class="teacher-assessment-summary-value teacher-assessment-summary-accent" />
+                            <ui:Label text="优秀记录" class="teacher-assessment-summary-label" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-assessment-toolbar">
+                    <ui:VisualElement class="teacher-assessment-date-group">
+                        <ui:Label text="统计日期" class="teacher-assessment-toolbar-label" />
+                        <ui:TextField name="teacher-assessment-date-field" tooltip="输入 yyyy-MM-dd 或 yyyyMMdd；留空查询所有日期" class="teacher-assessment-date-field" />
+                        <ui:Button name="teacher-assessment-date-button" text="▦" tooltip="查询统计日期" class="teacher-assessment-calendar-button" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-assessment-filter-group">
+                        <ui:Button name="teacher-assessment-filter-all" text="全部记录  00" class="teacher-assessment-filter selected" />
+                        <ui:Button name="teacher-assessment-filter-excellent" text="优秀  00" class="teacher-assessment-filter" />
+                        <ui:Button name="teacher-assessment-filter-review" text="待复核  00" class="teacher-assessment-filter" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-assessment-search-group">
+                        <ui:Label text="快速筛选" class="teacher-assessment-toolbar-label teacher-assessment-search-label" />
+                        <ui:TextField name="teacher-assessment-search-field" tooltip="输入姓名、学号或训练项目" class="teacher-assessment-search-field" />
+                        <ui:Button name="teacher-assessment-search-button" text="筛选" class="teacher-assessment-search-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-assessment-table">
+                    <ui:VisualElement class="teacher-assessment-table-header">
+                        <ui:Label text="姓名" class="teacher-assessment-col-name" />
+                        <ui:Label text="专业" class="teacher-assessment-col-major" />
+                        <ui:Label text="班级" class="teacher-assessment-col-class" />
+                        <ui:Label text="学号" class="teacher-assessment-col-student" />
+                        <ui:Label text="考核项目" class="teacher-assessment-col-project" />
+                        <ui:Label text="用时" class="teacher-assessment-col-duration" />
+                        <ui:Label text="成绩" class="teacher-assessment-col-score" />
+                        <ui:Label text="详情" class="teacher-assessment-col-detail" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="teacher-assessment-list-scroll" mode="Vertical" class="teacher-assessment-list-scroll">
+                        <ui:VisualElement class="teacher-assessment-list-row teacher-assessment-grade-excellent">
+                            <ui:Label text="—" class="teacher-assessment-col-name teacher-assessment-primary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-major teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-class teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-student teacher-assessment-mono-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-project teacher-assessment-project-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-duration teacher-assessment-duration-copy" />
+                            <ui:VisualElement class="teacher-assessment-col-score teacher-assessment-score-cell">
+                                <ui:Label text="—" class="teacher-assessment-score-value" />
+                                <ui:Label text="—" class="teacher-assessment-score-chip teacher-assessment-score-excellent" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-assessment-col-detail teacher-assessment-detail-cell">
+                                <ui:Button text="查看" class="teacher-assessment-detail-button" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-list-row teacher-assessment-grade-excellent">
+                            <ui:Label text="—" class="teacher-assessment-col-name teacher-assessment-primary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-major teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-class teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-student teacher-assessment-mono-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-project teacher-assessment-project-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-duration teacher-assessment-duration-copy" />
+                            <ui:VisualElement class="teacher-assessment-col-score teacher-assessment-score-cell">
+                                <ui:Label text="—" class="teacher-assessment-score-value" />
+                                <ui:Label text="—" class="teacher-assessment-score-chip teacher-assessment-score-excellent" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-assessment-col-detail teacher-assessment-detail-cell">
+                                <ui:Button text="查看" class="teacher-assessment-detail-button" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-list-row teacher-assessment-grade-passed">
+                            <ui:Label text="—" class="teacher-assessment-col-name teacher-assessment-primary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-major teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-class teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-student teacher-assessment-mono-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-project teacher-assessment-project-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-duration teacher-assessment-duration-copy" />
+                            <ui:VisualElement class="teacher-assessment-col-score teacher-assessment-score-cell">
+                                <ui:Label text="—" class="teacher-assessment-score-value" />
+                                <ui:Label text="—" class="teacher-assessment-score-chip teacher-assessment-score-passed" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-assessment-col-detail teacher-assessment-detail-cell">
+                                <ui:Button text="查看" class="teacher-assessment-detail-button" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-list-row teacher-assessment-grade-review teacher-assessment-list-row-last">
+                            <ui:Label text="—" class="teacher-assessment-col-name teacher-assessment-primary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-major teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-class teacher-assessment-secondary-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-student teacher-assessment-mono-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-project teacher-assessment-project-copy" />
+                            <ui:Label text="—" class="teacher-assessment-col-duration teacher-assessment-duration-copy" />
+                            <ui:VisualElement class="teacher-assessment-col-score teacher-assessment-score-cell">
+                                <ui:Label text="—" class="teacher-assessment-score-value" />
+                                <ui:Label text="—" class="teacher-assessment-score-chip teacher-assessment-score-review" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-assessment-col-detail teacher-assessment-detail-cell">
+                                <ui:Button text="查看" class="teacher-assessment-detail-button" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:ScrollView>
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-assessment-page-footer">
+                    <ui:VisualElement class="teacher-assessment-service-state">
+                        <ui:VisualElement class="teacher-assessment-service-dot" />
+                        <ui:Label name="teacher-assessment-page-status" text="正在读取本机成绩文件。" class="teacher-assessment-page-status" />
+                    </ui:VisualElement>
+                    <ui:Label text="向下滚动查看全部记录" class="teacher-assessment-pagination" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="teacher-assessment-detail-overlay" class="teacher-assessment-detail-overlay teacher-page-hidden">
+            <ui:VisualElement picking-mode="Ignore" class="teacher-assessment-detail-scrim" />
+            <ui:VisualElement class="teacher-assessment-detail-modal">
+                <ui:VisualElement class="teacher-assessment-detail-header">
+                    <ui:VisualElement>
+                        <ui:Label text="ASSESSMENT RECORD / LOCAL SCORE FILES" class="teacher-assessment-detail-overline" />
+                        <ui:Label text="考核详情" class="teacher-assessment-detail-title" />
+                    </ui:VisualElement>
+                    <ui:Label name="teacher-assessment-detail-record" text="RECORD / —" class="teacher-assessment-detail-record" />
+                    <ui:Button name="teacher-assessment-detail-close" text="×" tooltip="关闭考核详情" class="teacher-assessment-detail-close" />
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-assessment-detail-body">
+                    <ui:VisualElement class="teacher-assessment-detail-identity-row">
+                        <ui:VisualElement class="teacher-assessment-detail-info-card">
+                            <ui:Label text="学生姓名" class="teacher-assessment-detail-info-label" />
+                            <ui:Label name="teacher-assessment-detail-name" text="—" class="teacher-assessment-detail-info-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-info-card">
+                            <ui:Label text="学号" class="teacher-assessment-detail-info-label" />
+                            <ui:Label name="teacher-assessment-detail-student" text="—" class="teacher-assessment-detail-info-value teacher-assessment-detail-mono" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-info-card">
+                            <ui:Label text="班级" class="teacher-assessment-detail-info-label" />
+                            <ui:Label name="teacher-assessment-detail-class" text="—" class="teacher-assessment-detail-info-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-info-card">
+                            <ui:Label text="专业" class="teacher-assessment-detail-info-label" />
+                            <ui:Label name="teacher-assessment-detail-major" text="—" class="teacher-assessment-detail-info-value" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-assessment-detail-summary-row">
+                        <ui:VisualElement class="teacher-assessment-detail-summary-card teacher-assessment-detail-project-card">
+                            <ui:Label text="考核项目" class="teacher-assessment-detail-summary-label" />
+                            <ui:Label name="teacher-assessment-detail-project" text="—" class="teacher-assessment-detail-project-value" />
+                            <ui:Label name="teacher-assessment-detail-summary" text="—" class="teacher-assessment-detail-summary-copy" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-summary-card teacher-assessment-detail-duration-card">
+                            <ui:Label text="完成用时" class="teacher-assessment-detail-summary-label" />
+                            <ui:Label name="teacher-assessment-detail-duration" text="—" class="teacher-assessment-detail-duration-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-summary-card teacher-assessment-detail-score-card">
+                            <ui:Label text="成绩" class="teacher-assessment-detail-summary-label" />
+                            <ui:Label name="teacher-assessment-detail-score" text="—" class="teacher-assessment-detail-score-number teacher-assessment-detail-score-excellent" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-summary-card teacher-assessment-detail-verdict-card">
+                            <ui:Label text="成绩状态" class="teacher-assessment-detail-summary-label" />
+                            <ui:Label name="teacher-assessment-detail-status" text="—" class="teacher-assessment-detail-verdict teacher-assessment-detail-verdict-excellent" />
+                            <ui:Label text="LOCAL SCORE FILES" class="teacher-assessment-detail-preview-tag" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-assessment-detail-deduction-panel">
+                        <ui:VisualElement class="teacher-assessment-detail-deduction-heading">
+                            <ui:VisualElement>
+                                <ui:Label text="扣分明细" class="teacher-assessment-detail-deduction-title" />
+                                <ui:Label text="DEDUCTION BREAKDOWN" class="teacher-assessment-detail-deduction-overline" />
+                            </ui:VisualElement>
+                            <ui:Label text="扣分明细来自成绩文件" class="teacher-assessment-detail-deduction-caption" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-assessment-detail-rule-header">
+                            <ui:Label text="扣分项" class="teacher-assessment-detail-col-item" />
+                            <ui:Label text="扣分" class="teacher-assessment-detail-col-value" />
+                            <ui:Label text="触发次数" class="teacher-assessment-detail-col-count" />
+                            <ui:Label text="说明" class="teacher-assessment-detail-col-note" />
+                        </ui:VisualElement>
+                        <ui:ScrollView name="teacher-assessment-deduction-scroll" mode="Vertical" class="teacher-assessment-deduction-scroll">
+                            <ui:VisualElement class="teacher-assessment-detail-rule-row">
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-item teacher-assessment-detail-col-item" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-value teacher-assessment-detail-col-value" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-count teacher-assessment-detail-col-count" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-note teacher-assessment-detail-col-note" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-assessment-detail-rule-row">
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-item teacher-assessment-detail-col-item" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-value teacher-assessment-detail-col-value" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-count teacher-assessment-detail-col-count" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-note teacher-assessment-detail-col-note" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-assessment-detail-rule-row teacher-assessment-detail-rule-row-last">
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-item teacher-assessment-detail-col-item" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-value teacher-assessment-detail-col-value" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-count teacher-assessment-detail-col-count" />
+                                <ui:Label text="—" class="teacher-assessment-detail-rule-note teacher-assessment-detail-col-note" />
+                            </ui:VisualElement>
+                        </ui:ScrollView>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-assessment-detail-boundary">
+                        <ui:VisualElement class="teacher-assessment-detail-boundary-dot" />
+                        <ui:Label text="显示成绩文件记录的分数与扣分项；未提供的次数和说明显示为 —。" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="teacher-task-page" picking-mode="Ignore" class="teacher-page teacher-task-page teacher-page-hidden" style="display: none;">
+            <ui:VisualElement class="teacher-task-workspace">
+                <ui:VisualElement class="teacher-task-page-heading">
+                    <ui:Button name="teacher-task-back-button" text="←" tooltip="返回教师工作台" class="teacher-task-page-back" />
+                    <ui:VisualElement class="teacher-task-heading-copy">
+                        <ui:Label text="TASK MANAGEMENT / LOCAL PREVIEW" class="teacher-task-overline" />
+                        <ui:Label text="任务管理" class="teacher-task-heading" />
+                        <ui:Label text="组织场桥训练项目、考核目标与执行方式" class="teacher-task-subheading" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-task-summary">
+                        <ui:VisualElement class="teacher-task-summary-item">
+                            <ui:Label text="05" class="teacher-task-summary-value" />
+                            <ui:Label text="任务总数" class="teacher-task-summary-label" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-task-summary-divider" />
+                        <ui:VisualElement class="teacher-task-summary-item">
+                            <ui:Label text="03" class="teacher-task-summary-value" />
+                            <ui:Label text="已加入" class="teacher-task-summary-label" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-task-summary-divider" />
+                        <ui:VisualElement class="teacher-task-summary-item">
+                            <ui:Label text="02" class="teacher-task-summary-value" />
+                            <ui:Label text="未加入" class="teacher-task-summary-label" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-task-toolbar">
+                    <ui:VisualElement class="teacher-task-filter-group">
+                        <ui:Button name="teacher-task-filter-all" text="全部任务" class="teacher-task-filter selected" />
+                        <ui:Button name="teacher-task-filter-practice" text="未加入" class="teacher-task-filter" />
+                        <ui:Button name="teacher-task-filter-assessment" text="已加入" class="teacher-task-filter" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-task-service-state" style="display: none;">
+                        <ui:VisualElement class="teacher-task-service-dot" />
+                        <ui:Label text="本机预览数据" />
+                    </ui:VisualElement>
+                    <ui:Button name="teacher-task-create-button" text="＋  新建任务" class="teacher-task-create-button" />
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-task-table">
+                    <ui:VisualElement class="teacher-task-table-header">
+                        <ui:Label text="本次考核" class="teacher-task-col-status" />
+                        <ui:Label text="任务类型" class="teacher-task-col-type" />
+                        <ui:Label text="操作模式" class="teacher-task-col-mode" />
+                        <ui:Label text="训练项目" class="teacher-task-col-project" />
+                        <ui:Label text="训练目标" class="teacher-task-col-goal" />
+                        <ui:Label text="时长" class="teacher-task-col-duration" />
+                        <ui:Label text="操作" class="teacher-task-col-actions" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="teacher-task-list-scroll" mode="Vertical" class="teacher-task-list-scroll" />
+                </ui:VisualElement>
+                <ui:VisualElement class="teacher-task-page-footer">
+                    <ui:Label name="teacher-task-page-status" text="每次新建一条任务；勾选行首选择框即加入此次考核内容。" class="teacher-task-page-status" />
+                    <ui:Label text="01  /  01" class="teacher-task-pagination" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="teacher-fault-task-detail-overlay" class="teacher-fault-task-detail-overlay teacher-page-hidden">
+                <ui:VisualElement picking-mode="Ignore" class="teacher-fault-task-detail-scrim" />
+                <ui:VisualElement class="teacher-fault-task-detail-modal">
+                    <ui:VisualElement class="teacher-fault-task-detail-header">
+                        <ui:Label text="FAULT TASK / SELECTED ITEMS" class="teacher-fault-task-detail-overline" />
+                        <ui:Label name="teacher-fault-task-detail-title" text="故障排除任务明细" class="teacher-fault-task-detail-title" />
+                        <ui:Label name="teacher-fault-task-detail-count" text="共 0 条故障" class="teacher-fault-task-detail-count" />
+                        <ui:Button name="teacher-fault-task-detail-close" text="×" tooltip="关闭故障列表" class="teacher-fault-task-detail-close" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-fault-task-detail-table">
+                        <ui:VisualElement class="teacher-fault-task-detail-table-header">
+                            <ui:Label text="编号" class="teacher-fault-task-detail-col-index" />
+                            <ui:Label text="故障类别" class="teacher-fault-task-detail-col-category" />
+                            <ui:Label text="故障现象" class="teacher-fault-task-detail-col-phenomenon" />
+                            <ui:Label text="线号 / 标号" class="teacher-fault-task-detail-col-line" />
+                            <ui:Label text="故障点" class="teacher-fault-task-detail-col-point" />
+                        </ui:VisualElement>
+                        <ui:ScrollView name="teacher-fault-task-detail-list" mode="Vertical" class="teacher-fault-task-detail-list" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="teacher-task-editor-drawer" class="teacher-task-editor-overlay teacher-page-hidden">
+                <ui:VisualElement picking-mode="Ignore" class="teacher-task-editor-scrim" />
+                <ui:VisualElement class="teacher-task-editor-modal">
+                    <ui:VisualElement class="teacher-task-editor-header">
+                        <ui:VisualElement>
+                            <ui:Label text="CREATE ONE TASK / LOCAL DATA" class="teacher-task-editor-overline" />
+                            <ui:Label name="teacher-task-editor-title" text="选择试卷项目" class="teacher-task-editor-title" />
+                        </ui:VisualElement>
+                        <ui:Label text="每次选择一个项目，添加后在任务列表勾选发布" class="teacher-task-editor-description" />
+                        <ui:Button name="teacher-task-editor-cancel" text="×" tooltip="关闭项目选择" class="teacher-task-editor-close" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="teacher-task-editor-body">
+                        <ui:VisualElement class="teacher-task-category-panel teacher-task-editor-panel-surface">
+                            <ui:Label text="任务类别" class="teacher-task-editor-section-label" />
+                            <ui:Label text="TRAINING CATEGORY" class="teacher-task-editor-section-overline" />
+                            <ui:Button text="单项操作" class="teacher-task-category-button selected" />
+                            <ui:Button text="联动操作" class="teacher-task-category-button" />
+                            <ui:Button text="作业操作" class="teacher-task-category-button" />
+                            <ui:Button text="能力提升" class="teacher-task-category-button" />
+                            <ui:Button text="自由训练" class="teacher-task-category-button" />
+                            <ui:Button text="故障排除" class="teacher-task-category-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-task-project-panel teacher-task-editor-panel-surface">
+                            <ui:Label text="训练项目" class="teacher-task-editor-section-label" />
+                            <ui:Label name="teacher-task-editor-category-caption" text="单项操作 · 单选训练项目" class="teacher-task-editor-section-overline" />
+                            <ui:Label name="teacher-task-editor-selection-count" text="未选择" class="teacher-task-editor-selection-count" />
+                            <ui:Button text="大车移动" class="teacher-task-project-button" />
+                            <ui:Button text="小车移动" class="teacher-task-project-button" />
+                            <ui:Button text="起升与下降" class="teacher-task-project-button" />
+                            <ui:Button text="吊具旋转与回零" class="teacher-task-project-button" />
+                            <ui:VisualElement class="teacher-task-project-note">
+                                <ui:VisualElement class="teacher-task-project-note-dot" />
+                                <ui:Label text="项目来自当前场桥训练能力清单" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="teacher-task-config-panel teacher-task-editor-panel-surface">
+                            <ui:Label text="任务参数" class="teacher-task-editor-section-label" />
+                            <ui:Label text="TASK CONFIGURATION" class="teacher-task-editor-section-overline" />
+                            <ui:Label text="任务目标（与学习训练一致）" class="teacher-task-config-label" />
+                            <ui:DropdownField name="teacher-task-editor-target" class="teacher-task-config-input teacher-task-target-dropdown" />
+                            <ui:Label text="可选择该项目的全部预设目标，创建和编辑任务均保存当前所选目标。" class="teacher-task-config-note" />
+                            <ui:Label text="训练时长" class="teacher-task-config-label" />
+                            <ui:VisualElement class="teacher-task-choice-row">
+                                <ui:Button text="5 min" class="teacher-task-duration-choice teacher-task-choice" />
+                                <ui:Button text="10 min" class="teacher-task-duration-choice teacher-task-choice" />
+                                <ui:Button text="15 min" class="teacher-task-duration-choice teacher-task-choice selected" />
+                                <ui:Button text="20 min" class="teacher-task-duration-choice teacher-task-choice" />
+                            </ui:VisualElement>
+                            <ui:Label text="操作模式" class="teacher-task-config-label" />
+                            <ui:VisualElement class="teacher-task-choice-row">
+                                <ui:Button text="本地操作" class="teacher-task-operation-choice teacher-task-choice selected" />
+                                <ui:Button text="远程操作" class="teacher-task-operation-choice teacher-task-choice" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="teacher-task-editor-boundary">
+                                <ui:VisualElement class="teacher-task-editor-boundary-dot" />
+                                <ui:Label text="当前项目添加到本机任务列表；勾选行首发布框后写入当前试卷" />
+                            </ui:VisualElement>
+                            <ui:Label name="teacher-task-editor-status" text="请选择一个项目" class="teacher-task-editor-status" />
+                            <ui:Button name="teacher-task-editor-save" text="添加项目到任务列表" class="teacher-task-editor-create" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="teacher-assessment-calendar-overlay" focusable="true" class="teacher-assessment-calendar-overlay teacher-page-hidden">
+            <ui:Button name="teacher-assessment-calendar-scrim" tooltip="关闭日期选择" class="teacher-assessment-calendar-scrim" />
+            <ui:VisualElement class="teacher-assessment-calendar-card">
+                <ui:VisualElement class="teacher-assessment-calendar-heading">
+                    <ui:Label text="选择统计日期" class="teacher-assessment-calendar-title" />
+                    <ui:Button name="teacher-assessment-calendar-close" text="×" tooltip="关闭日历" class="teacher-assessment-calendar-close" />
+                </ui:VisualElement>
+                <calendar:DatePicker name="teacher-assessment-calendar-picker" min-year="1900" max-year="2100" class="teacher-assessment-calendar-picker" />
+                <ui:Label text="点击日期查询当天记录，可切换月份与年份" class="teacher-assessment-calendar-hint" />
+                <ui:VisualElement class="teacher-assessment-calendar-actions">
+                    <ui:Button name="teacher-assessment-calendar-all" text="全部日期" class="teacher-assessment-calendar-action" />
+                    <ui:Button name="teacher-assessment-calendar-today" text="今天" class="teacher-assessment-calendar-action" />
+                    <ui:Button name="teacher-assessment-calendar-cancel" text="取消" class="teacher-assessment-calendar-action" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

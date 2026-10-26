@@ -47,13 +47,12 @@ namespace PortTraining.YardCraneSimulator.Operations
         SpreaderLock = 0,
         SpreaderUnlock = 1,
         SpreaderSizeChange = 2,
-        GuidePlateChange = 3,
-        SpreaderPumpChange = 4,
-        Reset = 5,
-        WheelClampChange = 6,
-        TrolleyAnchorChange = 7,
-        GantryAnchorChange = 8,
-        SpreaderRotationReturnToZero = 9
+        SpreaderPumpChange = 3,
+        Reset = 4,
+        WheelClampChange = 5,
+        TrolleyAnchorChange = 6,
+        GantryAnchorChange = 7,
+        SpreaderRotationReturnToZero = 8
     }
 
     public enum YardCraneActionAckStatus
@@ -301,6 +300,7 @@ namespace PortTraining.YardCraneSimulator.Operations
         public const int CoordinatorHeartbeatTimeoutMs = 5000;
 
         private readonly IYardCraneOperationActuator actuator;
+        private readonly Dictionary<YardCraneOperationActionType, IYardCraneMechanism> mechanisms = new();
         private readonly Dictionary<Guid, ProcessedAction> processedActions = new();
         private YardCraneOperationContext context;
         private Guid activeStreamId;
@@ -320,6 +320,26 @@ namespace PortTraining.YardCraneSimulator.Operations
         public YardCraneOperationController(IYardCraneOperationActuator actuator)
         {
             this.actuator = actuator ?? throw new ArgumentNullException(nameof(actuator));
+            RegisterMechanism(new SpreaderLockMechanism(this.actuator));
+            RegisterMechanism(new SpreaderUnlockMechanism(this.actuator));
+            RegisterMechanism(new ResetMechanism(this.actuator));
+            RegisterMechanism(new WheelClampMechanism(this.actuator));
+            RegisterMechanism(new TrolleyAnchorMechanism(this.actuator));
+            RegisterMechanism(new GantryAnchorMechanism(this.actuator));
+            RegisterMechanism(new SpreaderPumpMechanism(this.actuator));
+            RegisterMechanism(new SpreaderSizeMechanism(this.actuator));
+            RegisterMechanism(new SpreaderRotationReturnToZeroMechanism(this.actuator));
+        }
+
+        /// <summary>
+        /// Adds (or, for a future actuator-swap scenario, replaces) the handler for one action
+        /// type. Kept separate from the constructor list so a future caller - e.g. a test that
+        /// wants to substitute one mechanism - can register a stand-in without touching this
+        /// constructor's fixed list.
+        /// </summary>
+        private void RegisterMechanism(IYardCraneMechanism mechanism)
+        {
+            mechanisms[mechanism.ActionType] = mechanism;
         }
 
         public YardCraneOperationPhase Phase { get; private set; } = YardCraneOperationPhase.WaitingForRun;
@@ -587,91 +607,16 @@ namespace PortTraining.YardCraneSimulator.Operations
             var motionCommandsCentered = Math.Abs(lastGantryCommand) <= 0.0001f &&
                                          Math.Abs(lastTrolleyCommand) <= 0.0001f &&
                                          Math.Abs(lastHoistCommand) <= 0.0001f;
-            switch (action.ActionType)
+            if (mechanisms.TryGetValue(action.ActionType, out var mechanism))
             {
-                case YardCraneOperationActionType.SpreaderLock:
-                    accepted = motionCommandsCentered && actuator.TryQueueContainerLock(out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.LockInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.LockPending;
-                    break;
-                case YardCraneOperationActionType.SpreaderUnlock:
-                    accepted = motionCommandsCentered && actuator.TryQueueContainerUnlock(out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.UnlockInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.UnlockPending;
-                    break;
-                case YardCraneOperationActionType.Reset:
-                    accepted = motionCommandsCentered && actuator.TryReset(out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.ResetInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.PreTensioning;
-                    break;
-                case YardCraneOperationActionType.WheelClampChange:
-                    accepted = motionCommandsCentered &&
-                               actuator.TryQueueWheelClamp(action.TargetState == "Clamped", out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.WheelClampInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.WheelClampTransition;
-                    break;
-                case YardCraneOperationActionType.TrolleyAnchorChange:
-                    accepted = motionCommandsCentered &&
-                               actuator.TryQueueTrolleyAnchor(action.TargetState == "Anchored", out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.AnchorInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.AnchorTransition;
-                    break;
-                case YardCraneOperationActionType.GantryAnchorChange:
-                    accepted = motionCommandsCentered &&
-                               actuator.TryQueueGantryAnchor(action.TargetState == "Anchored", out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.AnchorInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.AnchorTransition;
-                    break;
-                case YardCraneOperationActionType.SpreaderPumpChange:
-                    accepted = motionCommandsCentered &&
-                               actuator.TryQueueSpreaderPump(action.TargetState == "On", out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.SpreaderPumpInterlockRejected;
-                    }
-                    acceptedPhase = Phase;
-                    break;
-                case YardCraneOperationActionType.SpreaderSizeChange:
-                    accepted = motionCommandsCentered &&
-                               actuator.TryQueueSpreaderSize(action.TargetState, out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.SpreaderSizeInterlockRejected;
-                    }
-                    acceptedPhase = YardCraneOperationPhase.SpreaderSizeTransition;
-                    break;
-                case YardCraneOperationActionType.SpreaderRotationReturnToZero:
-                    accepted = motionCommandsCentered &&
-                               actuator.TryQueueSpreaderRotationReturnToZero(out rejectionCode);
-                    if (!motionCommandsCentered)
-                    {
-                        rejectionCode = YardCraneOperationErrorCodes.SpreaderRotationInterlockRejected;
-                    }
-                    acceptedPhase = Phase;
-                    break;
-                default:
-                    accepted = false;
-                    rejectionCode = YardCraneOperationErrorCodes.ContractValidationFailed;
-                    acceptedPhase = Phase;
-                    break;
+                accepted = mechanism.TryHandle(
+                    action.TargetState, motionCommandsCentered, Phase, out rejectionCode, out acceptedPhase);
+            }
+            else
+            {
+                accepted = false;
+                rejectionCode = YardCraneOperationErrorCodes.ContractValidationFailed;
+                acceptedPhase = Phase;
             }
 
             if (!accepted)
@@ -946,8 +891,7 @@ namespace PortTraining.YardCraneSimulator.Operations
                 YardCraneOperationActionType.SpreaderLock when action.TargetState == "Locked" => YardCraneOperationErrorCodes.None,
                 YardCraneOperationActionType.SpreaderUnlock when action.TargetState == "Unlocked" => YardCraneOperationErrorCodes.None,
                 YardCraneOperationActionType.Reset when action.TargetState.Length == 0 => YardCraneOperationErrorCodes.None,
-                YardCraneOperationActionType.SpreaderSizeChange when action.TargetState is "FT20" or "FT40" or "Twin20" => YardCraneOperationErrorCodes.None,
-                YardCraneOperationActionType.GuidePlateChange when action.TargetState.Length > 0 => YardCraneOperationErrorCodes.None,
+                YardCraneOperationActionType.SpreaderSizeChange when action.TargetState is "FT20" or "FT40" => YardCraneOperationErrorCodes.None,
                 YardCraneOperationActionType.SpreaderPumpChange when action.TargetState is "On" or "Off" => YardCraneOperationErrorCodes.None,
                 YardCraneOperationActionType.WheelClampChange when action.TargetState is "Released" or "Clamped" => YardCraneOperationErrorCodes.None,
                 YardCraneOperationActionType.TrolleyAnchorChange when action.TargetState is "Released" or "Anchored" => YardCraneOperationErrorCodes.None,

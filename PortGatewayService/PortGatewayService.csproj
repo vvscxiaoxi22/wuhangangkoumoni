@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>PortTraining.PortGatewayService</RootNamespace>
+    <AssemblyName>PortGatewayService</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Tools/* holds separate, self-contained projects (their own .csproj); exclude
+         their sources from this project's default globbing or the two Main methods
+         collide (CS0017). -->
+    <Compile Remove="Tools/**/*.cs" />
+    <None Remove="Tools/**" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- First and only external dependency in this project (everything else stays
+         zero-dependency by choice - see decision record 2.17). S7 is a real industrial
+         protocol (COTP + S7 PDU framing); hand-rolling it without real hardware to
+         verify against would be genuinely risky, unlike the repo-owned JSON/framing
+         code built elsewhere in this project. Confirms S7-1200/1500 support directly
+         in its README. -->
+    <PackageReference Include="S7netplus" Version="0.20.0" />
+  </ItemGroup>
+</Project>

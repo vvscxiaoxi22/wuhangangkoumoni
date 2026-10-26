@@ -1,0 +1,56 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="StudentShellUpperStyles.uss" />
+    <ui:VisualElement name="student-shell" class="shell">
+        <ui:VisualElement class="ambient ambient-one" />
+        <ui:VisualElement class="ambient ambient-two" />
+        <ui:VisualElement class="port-grid" />
+        <ui:VisualElement class="crane-mark crane-leg-left" />
+        <ui:VisualElement class="crane-mark crane-leg-right" />
+        <ui:VisualElement class="crane-mark crane-beam" />
+        <ui:VisualElement class="crane-mark crane-trolley" />
+        <ui:VisualElement class="crane-mark crane-rope" />
+        <ui:VisualElement class="crane-mark crane-spreader" />
+        <ui:VisualElement name="login-page" class="page login-page">
+            <ui:Image name="login-background" class="login-background" style="top: -1px; bottom: 2px; right: 0; left: 0; background-image: url(&apos;PortTrainingOceanBackdrop_v1.png&apos;);" />
+            <ui:VisualElement class="login-blue-overlay" style="justify-content: center; align-items: flex-start; align-self: flex-start; top: -10px;" />
+            <ui:VisualElement class="prototype-login-brand">
+                <ui:Image name="login-brand-logo" tooltip="山港科技 · SHANDONG PORT GROUP TECHNOLOGY GROUP" picking-mode="Ignore" class="brand-logo" style="background-image: url(&apos;logo.png&apos;);" />
+            </ui:VisualElement>
+            <ui:VisualElement class="brand-block">
+                <ui:Label text="YARD CRANE SIMULATOR" class="brand-code" />
+                <ui:Label text="港口实训，&#10;从这里开始。" class="hero-title" />
+                <ui:Label name="system-title" text="场桥集装箱起重机仿真系统" class="hero-caption" />
+            </ui:VisualElement>
+            <ui:VisualElement class="login-card glass-card">
+                <ui:Label name="login-title" text="场桥学生登录" class="login-title" />
+                <ui:Label name="login-note" text="填写学号和姓名，开始港口实训。" class="login-note" />
+                <ui:VisualElement class="role-switch">
+                    <ui:Button name="role-student" text="学生端" class="role-button selected" />
+                    <ui:Button name="role-teacher" text="教师端" class="role-button" />
+                </ui:VisualElement>
+                <ui:VisualElement class="field-group">
+                    <ui:Label name="account-label" text="学号" class="field-label" />
+                    <ui:TextField name="student-number" max-length="32" class="shell-input" />
+                </ui:VisualElement>
+                <ui:VisualElement name="student-name-group" class="field-group">
+                    <ui:Label text="姓名" class="field-label" />
+                    <ui:TextField name="display-name" max-length="24" class="shell-input" />
+                </ui:VisualElement>
+                <ui:VisualElement name="teacher-password-group" class="field-group hidden-field">
+                    <ui:Label text="密码" class="field-label" />
+                    <ui:TextField name="teacher-password" is-password-field="true" max-length="64" class="shell-input" />
+                </ui:VisualElement>
+                <ui:Label name="login-error" class="form-error" />
+                <ui:Button name="login-button" text="进入训练工作台  →" class="primary-button" />
+                <ui:VisualElement class="offline-row">
+                    <ui:VisualElement class="status-dot good-dot" />
+                    <ui:Label name="login-mode-note" text="本机学生登录 · 无需网络" />
+                </ui:VisualElement>
+                <ui:Label name="login-context" text="WELCOME ABOARD" class="section-code" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" class="prototype-login-footer">
+                <ui:Label text="PORT TRAINING SYSTEM" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

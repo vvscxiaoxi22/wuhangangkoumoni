@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:VisualElement name="student-shell-lower" class="shell-lower">
+        <ui:VisualElement class="lower-editorial">
+            <ui:Label text="QINGDAO AUTOMATED TERMINAL" class="lower-kicker" />
+            <ui:Label text="智慧港口，&#10;让训练先于抵达。" class="lower-headline" />
+            <ui:Label text="AUTONOMOUS YARD · DIGITAL TWIN · OPERATOR TRAINING" class="lower-caption" />
+            <ui:VisualElement class="lower-rule" />
+            <ui:Label text="PORT STUDY  /  01" class="lower-index" />
+        </ui:VisualElement>
+        <ui:Image name="lower-poster" class="lower-poster" />
+    </ui:VisualElement>
+</ui:UXML>

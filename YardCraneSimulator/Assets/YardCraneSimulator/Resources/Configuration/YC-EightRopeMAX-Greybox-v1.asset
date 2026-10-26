@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: YC-EightRopeMAX-Greybox-v1
   m_EditorClassIdentifier: 
   identity:
-    schemaVersion: 1.0.0
-    profileId: YC-PHYSICS-QD-EIGHT-ROPE-GREYBOX-1.0.0
-    topologyProfileId: QingdaoPort-NewEightRopeMAX-Greybox-v1
-    equipmentModel: QingdaoPort-NewEightRopeMAX-Greybox
+    schemaVersion: 1.1.0
+    profileId: YC-PHYSICS-QD-EIGHT-STRAIGHT-ROPE-GREYBOX-1.1.0
+    topologyProfileId: QingdaoPort-EightStraightRope-Greybox-v2
+    equipmentModel: QingdaoPort-EightStraightRope-Greybox
     calibrationStatus: Greybox
-    calibrationSource: 2026-08-31 v12-v14 verified greybox baseline; not real-device
-      acceptance data.
+    calibrationSource: '2026-09-14 real-model visual topology review: eight independent
+      straight ropes; Play recalibration pending.'
   motion:
     gantrySpeedMetersPerSecond: 1.5
     gantryAccelerationMetersPerSecondSquared: 0.45
     gantryBrakingMetersPerSecondSquared: 0.65
-    gantryTravelFromHomeMeters: 8
+    gantryTravelFromHomeMeters: 212.5
     gantryLimitSafetyMarginMeters: 0.1
     wheelClampTransitionSeconds: 0.4
     anchorTransitionSeconds: 0.6
@@ -42,7 +42,7 @@ MonoBehaviour:
     fullyLoadedTrolleyBrakingFactor: 0.78
     fullyLoadedHoistSpeedFactor: 0.65
     fullyLoadedHoistAccelerationFactor: 0.45
-    trolleyTravelFromHomeMeters: 4.5
+    trolleyTravelFromHomeMeters: 14
     trolleyLimitSafetyMarginMeters: 0.03
     loadedTrolleyStopStabilizationSeconds: 1
     loadedTrolleyStopLinearDampingPerSecond: 0
@@ -53,12 +53,12 @@ MonoBehaviour:
     simulationProxyMassKg: 2
     spreaderRealMassKg: 12500
     minimumContainerGrossMassKg: 2200
-    maximumContainerGrossMassKg: 40500
+    maximumContainerGrossMassKg: 41000
     containerLockedLocalPosition: {x: 0, y: -1.45, z: 0}
     loadTransferPreTensionDurationSeconds: 0.25
   geometryAndSafety:
-    minimumSuspendedDropMeters: 2.8
-    maximumSuspendedDropMeters: 8.5
+    minimumSuspendedDropMeters: 3
+    maximumSuspendedDropMeters: 24
     containerHeightMeters: 2.4
     containerColliderSizeMeters: {x: 4.8, y: 2.4, z: 2.4}
     headblockColliderSizeMeters: {x: 4, y: 0.5, z: 2.2}
@@ -78,14 +78,14 @@ MonoBehaviour:
     loadedHeadblockAngularDamping: 0.55
     headblockSolverIterations: 32
     headblockSolverVelocityIterations: 16
-    loadedSuspensionNaturalFrequencyRadiansPerSecond: 2.35
-    loadedSuspensionDampingRatio: 0.38
-    maximumLoadedSuspensionAccelerationMetersPerSecondSquared: 1.8
-    loadedHoistNaturalFrequencyRadiansPerSecond: 9
+    loadedSuspensionNaturalFrequencyRadiansPerSecond: 2
+    loadedSuspensionDampingRatio: 0.9
+    maximumLoadedSuspensionAccelerationMetersPerSecondSquared: 2.5
+    loadedHoistNaturalFrequencyRadiansPerSecond: 4.69
     loadedHoistDampingRatio: 0.55
-    lightLoadedStaticRopeDeflectionMeters: 0.006
-    fullyLoadedStaticRopeDeflectionMeters: 0.018
-    maximumLoadedHoistDeflectionMeters: 0.04
+    lightLoadedStaticRopeDeflectionMeters: 0.022
+    fullyLoadedStaticRopeDeflectionMeters: 0.066
+    maximumLoadedHoistDeflectionMeters: 0.147
     loopConstraintToleranceMeters: 0.00025
     startupPreTensionDurationSeconds: 0.4
     positionConstraintIterations: 32
@@ -103,6 +103,15 @@ MonoBehaviour:
     maximumPermittedLoopExtensionMeters: 0.008
     prototypeMaximumSwayMeters: 0.35
     prototypeMaximumResidualTwistDegrees: 1.5
+  training:
+    loadedGantrySpeedFactor: 0.7
+    loadedTrolleySpeedFactor: 0.7
+    trainingSwayThresholdMeters: 0.3
+    unsafeUnlockPenaltyPoints: 40
+    overspeedPenaltyPoints: 10
+    excessiveSwayPenaltyPoints: 15
+    hardImpactSpeedThresholdMetersPerSecond: 2
+    hardImpactPenaltyPoints: 20
   regression:
     loadedStageTimeoutSeconds: 15
     loadedTotalTimeoutSeconds: 75
@@ -113,6 +122,7 @@ MonoBehaviour:
   - id: L01_X_FL
     drum: A
     antiSwayAxis: X
+    topAnchorPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit
     exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop01_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop01_Sheave
@@ -120,6 +130,7 @@ MonoBehaviour:
   - id: L02_X_FR
     drum: A
     antiSwayAxis: X
+    topAnchorPath: 20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd
     exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop02_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop02_Sheave
@@ -127,6 +138,7 @@ MonoBehaviour:
   - id: L03_X_RL
     drum: A
     antiSwayAxis: X
+    topAnchorPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit
     exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop03_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop03_Sheave
@@ -134,6 +146,7 @@ MonoBehaviour:
   - id: L04_X_RR
     drum: A
     antiSwayAxis: X
+    topAnchorPath: 20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd
     exitPath: 20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop04_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop04_Sheave
@@ -141,6 +154,7 @@ MonoBehaviour:
   - id: L05_Z_FL
     drum: B
     antiSwayAxis: Z
+    topAnchorPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit
     exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop05_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop05_Sheave
@@ -148,6 +162,7 @@ MonoBehaviour:
   - id: L06_Z_FR
     drum: B
     antiSwayAxis: Z
+    topAnchorPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit
     exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop06_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop06_Sheave
@@ -155,6 +170,7 @@ MonoBehaviour:
   - id: L07_Z_RL
     drum: B
     antiSwayAxis: Z
+    topAnchorPath: 20_TrolleyMotion/RopeDeadEnds/Loop07_DeadEnd
     exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop07_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop07_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop07_Sheave
@@ -162,6 +178,7 @@ MonoBehaviour:
   - id: L08_Z_RR
     drum: B
     antiSwayAxis: Z
+    topAnchorPath: 20_TrolleyMotion/RopeDeadEnds/Loop08_DeadEnd
     exitPath: 20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop08_Exit
     deadEndPath: 20_TrolleyMotion/RopeDeadEnds/Loop08_DeadEnd
     sheavePath: 30_SpreaderPhysics/RopeSheaves/Loop08_Sheave

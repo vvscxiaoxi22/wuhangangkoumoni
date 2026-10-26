@@ -1,0 +1,1232 @@
+{
+    "name": "YardCraneControls",
+    "maps": [
+        {
+            "name": "键盘",
+            "id": "aaaaaaaa-bbbb-cccc-dddd-000000000001",
+            "actions": [
+                {
+                    "name": "大车",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000101",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "小车",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000102",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "起升",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000103",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具旋转",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000104",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "鸣笛",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000105",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "锁箱",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000106",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "解锁",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000107",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "暂停",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000108",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "夹轮器切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000109",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "控制电源",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000110",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "急停",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000111",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "故障复位",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000112",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "小车锚定切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000113",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "大车锚定切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000114",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具泵切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000115",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具20尺",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000116",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具40尺",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000117",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具回零",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000118",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1DAxis",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001001",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001002",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001003",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001010",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001011",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001012",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001013",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001014",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001020",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "起升",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001021",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "起升",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001022",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "起升",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001023",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "起升",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001024",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "起升",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001030",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具旋转",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001031",
+                    "path": "<Keyboard>/leftBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具旋转",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001032",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具旋转",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001040",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "鸣笛",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001041",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "锁箱",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001042",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "解锁",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001043",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "暂停",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001044",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "夹轮器切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001045",
+                    "path": "<Keyboard>/f8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "控制电源",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001046",
+                    "path": "<Keyboard>/f9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "急停",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001047",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "故障复位",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001048",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车锚定切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001049",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车锚定切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001050",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具泵切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001051",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具20尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001052",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具40尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000001053",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具回零",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox手柄",
+            "id": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+            "actions": [
+                {
+                    "name": "大车",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000201",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "小车",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000202",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "起升",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000203",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具旋转",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000204",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "鸣笛",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000205",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "锁箱",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000206",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "解锁",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000207",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "暂停",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000208",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "夹轮器切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000209",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "控制电源",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000210",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "急停",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000211",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "故障复位",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000212",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "小车锚定切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000213",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "大车锚定切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000214",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具泵切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000215",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具20尺",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000216",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具40尺",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000217",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具回零",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000218",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002001",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002002",
+                    "path": "<Gamepad>/rightStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002003",
+                    "path": "<Gamepad>/leftStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "起升",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002004",
+                    "path": "<Gamepad>/rightStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具旋转",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002005",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "鸣笛",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002006",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "锁箱",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002007",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "解锁",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002008",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "暂停",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002009",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "夹轮器切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002010",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "控制电源",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002011",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "急停",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002012",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "故障复位",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002013",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车锚定切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002014",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车锚定切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002015",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具泵切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002016",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具20尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002017",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具40尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000002018",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具回零",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PLC",
+            "id": "aaaaaaaa-bbbb-cccc-dddd-000000000003",
+            "actions": [
+                {
+                    "name": "大车",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000301",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "小车",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000302",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "起升",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000303",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具旋转",
+                    "type": "Value",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000304",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "鸣笛",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000305",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "锁箱",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000306",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "解锁",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000307",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "暂停",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000308",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "夹轮器切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000309",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "控制电源",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000310",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "急停",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000311",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "故障复位",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000312",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "小车锚定切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000313",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "大车锚定切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000314",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具泵切换",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000315",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具20尺",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000316",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具40尺",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000317",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "吊具回零",
+                    "type": "Button",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000000318",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004001",
+                    "path": "<YardCraneDevice>/Gantry",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004002",
+                    "path": "<YardCraneDevice>/Trolley",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004003",
+                    "path": "<YardCraneDevice>/ContainerLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "锁箱",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004004",
+                    "path": "<YardCraneDevice>/ContainerUnlock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "解锁",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004005",
+                    "path": "<YardCraneDevice>/Pause",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "暂停",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004006",
+                    "path": "<YardCraneDevice>/WheelClampToggle",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "夹轮器切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004007",
+                    "path": "<YardCraneDevice>/ControlPowerToggle",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "控制电源",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004008",
+                    "path": "<YardCraneDevice>/EmergencyStopEngaged",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "急停",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004009",
+                    "path": "<YardCraneDevice>/FaultReset",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "故障复位",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004010",
+                    "path": "<YardCraneDevice>/TrolleyAnchorToggle",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车锚定切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004011",
+                    "path": "<YardCraneDevice>/GantryAnchorToggle",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车锚定切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004012",
+                    "path": "<YardCraneDevice>/SpreaderPumpToggle",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具泵切换",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004013",
+                    "path": "<YardCraneDevice>/SpreaderSizeFt20",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具20尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004014",
+                    "path": "<YardCraneDevice>/SpreaderSizeFt40",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具40尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-000000004015",
+                    "path": "<YardCraneDevice>/SpreaderReturnToZero",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具回零",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "键盘",
+            "bindingGroup": "键盘",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox手柄",
+            "bindingGroup": "Xbox手柄",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

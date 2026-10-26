@@ -279,11 +279,11 @@ internal static class Program
     {
         var router = new YardCraneInputRouter();
         var keyboardMoving = new YardCraneInputSnapshot(
-            "KEYBOARD", true, 0f, 1f, 0f, false, false, false, false);
+            "KEYBOARD", true, 0f, 1f, 0f, false);
         var keyboardCentered = new YardCraneInputSnapshot(
-            "KEYBOARD", true, 0f, 0f, 0f, false, false, false, false);
+            "KEYBOARD", true, 0f, 0f, 0f, false);
         var gamepadMoving = new YardCraneInputSnapshot(
-            "XBOX_GAMEPAD", true, -0.5f, 0f, 0f, false, false, false, false);
+            "XBOX_GAMEPAD", true, -0.5f, 0f, 0f, false);
 
         var first = router.Route(new[] { keyboardMoving, gamepadMoving }, 1);
         Require(first.Command.SourceId == "KEYBOARD", $"initial-source:{first.Command.SourceId}");
@@ -294,7 +294,7 @@ internal static class Program
         var disconnected = router.Route(new[]
         {
             keyboardCentered,
-            new YardCraneInputSnapshot("XBOX_GAMEPAD", false, 0f, 0f, 0f, false, false, false, false)
+            new YardCraneInputSnapshot("XBOX_GAMEPAD", false, 0f, 0f, 0f, false)
         }, 4);
         Require(disconnected.ActiveSourceLost, "active-disconnect-not-detected");
         Require(disconnected.Command.HandlesCentered, "active-disconnect-not-zero");
@@ -304,14 +304,19 @@ internal static class Program
         // The three new discrete cabin-safety intents must survive routing unchanged, and
         // must be able to establish input authority like the existing lock/unlock/pause keys.
         var cabinSafetyIntents = new YardCraneInputSnapshot(
-            "KEYBOARD", true, 0f, 0f, 0f, false, false, false, false,
-            false, true, true, true);
+            "KEYBOARD", true, 0f, 0f, 0f, false, 0f,
+            new[]
+            {
+                YardCraneOperatorIntent.ControlPowerToggle,
+                YardCraneOperatorIntent.EmergencyStopToggle,
+                YardCraneOperatorIntent.FaultReset
+            });
         var cabinSafetyRoute = router.Route(new[] { cabinSafetyIntents }, 5);
         Require(cabinSafetyRoute.Command.SourceId == "KEYBOARD",
             $"cabin-safety-intent-source:{cabinSafetyRoute.Command.SourceId}");
-        Require(cabinSafetyRoute.Command.ControlPowerTogglePressed &&
-                cabinSafetyRoute.Command.EmergencyStopTogglePressed &&
-                cabinSafetyRoute.Command.FaultResetPressed,
+        Require(cabinSafetyRoute.Command.Has(YardCraneOperatorIntent.ControlPowerToggle) &&
+                cabinSafetyRoute.Command.Has(YardCraneOperatorIntent.EmergencyStopToggle) &&
+                cabinSafetyRoute.Command.Has(YardCraneOperatorIntent.FaultReset),
             "cabin-safety-intents-lost-in-routing");
     }
 
@@ -327,7 +332,7 @@ internal static class Program
     {
         var router = new YardCraneInputRouter();
         var keyboardMoving = new YardCraneInputSnapshot(
-            "KEYBOARD", true, 0f, 1f, 0f, false, false, false, false);
+            "KEYBOARD", true, 0f, 1f, 0f, false);
         var established = router.Route(new[] { keyboardMoving }, 1);
         Require(established.Command.SourceId == "KEYBOARD",
             $"safety-preempt-setup:{established.Command.SourceId}");
@@ -336,14 +341,15 @@ internal static class Program
         // motion axis this same frame. Before the fix, HandlesCentered alone would hand
         // authority to Xbox and silently drop the keyboard's e-stop intent.
         var keyboardEstopCentered = new YardCraneInputSnapshot(
-            "KEYBOARD", true, 0f, 0f, 0f, false, false, false, false,
-            false, false, true, false);
+            "KEYBOARD", true, 0f, 0f, 0f, false, 0f,
+            new[] { YardCraneOperatorIntent.EmergencyStopToggle });
         var gamepadMoving = new YardCraneInputSnapshot(
-            "XBOX_GAMEPAD", true, -0.6f, 0f, 0f, false, false, false, false);
+            "XBOX_GAMEPAD", true, -0.6f, 0f, 0f, false);
         var preempted = router.Route(new[] { keyboardEstopCentered, gamepadMoving }, 2);
         Require(preempted.Command.SourceId == "KEYBOARD",
             $"safety-intent-preempted-source:{preempted.Command.SourceId}");
-        Require(preempted.Command.EmergencyStopTogglePressed, "safety-intent-preempted-estop-lost");
+        Require(preempted.Command.Has(YardCraneOperatorIntent.EmergencyStopToggle),
+            "safety-intent-preempted-estop-lost");
         Require(preempted.Command.GantryAxis == 0f && preempted.Command.TrolleyAxis == 0f &&
                 preempted.Command.HoistAxis == 0f,
             "safety-intent-preempted-xbox-motion-leaked");
@@ -351,7 +357,7 @@ internal static class Program
         // Next frame: keyboard is fully idle (centered and no discrete intent at all). Only
         // now may authority move to the still-moving Xbox source.
         var keyboardIdle = new YardCraneInputSnapshot(
-            "KEYBOARD", true, 0f, 0f, 0f, false, false, false, false);
+            "KEYBOARD", true, 0f, 0f, 0f, false);
         var released = router.Route(new[] { keyboardIdle, gamepadMoving }, 3);
         Require(released.Command.SourceId == "XBOX_GAMEPAD",
             $"safety-intent-idle-switch:{released.Command.SourceId}");

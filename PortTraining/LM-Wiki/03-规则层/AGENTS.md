@@ -15,8 +15,8 @@
 - PortTrainingNodeService是明确部署的Authority/Edge后台运行单元，不得重新嵌入为各客户端各自维护的数据服务。
 - 同一工位只允许一个活动训练运行。
 - 自由练习必须先生成独立LocalPractice工单快照和运行上下文。
-- PLC只能由PortGatewayService持有S7连接。
-- Gateway必须以原子`session.prepare`检查设备、锁定操控方式并授予租约，同时监控学生端和场景双心跳。
+- 场桥S7只能由`YardCraneS7Integration`独立场景中的唯一game4automation `S7Interface`持有；其他Unity场景不得另建连接，接口与点位必须场景序列化且默认禁用至现场参数及安全链确认。
+- 场桥直连链必须自行补齐控制权、PLC/Unity心跳、陈旧数据、断连、急停和安全归零门禁；历史Gateway的`session.prepare`、租约与双心跳能力不得被误报为新直连链已经具备。
 - 运行终态、结果、安全回执和outbox必须通过NodeService finalization单事务提交。
 - 正式数据不得使用演示值、静态假成绩或可重复累计的非幂等接口。
 - 本地数据写入必须考虑断电、重试、重复消息和多实例并发。

@@ -1,0 +1,117 @@
+{
+  "manifestVersion": "0.1.0",
+  "pointMapVersion": "YC-IO-0.1.0-DRAFT",
+  "machineType": "YC",
+  "plc": {
+    "model": "PLACEHOLDER-CONFIRM-WITH-VENDOR",
+    "firmwareBaseline": "PLACEHOLDER-CONFIRM-WITH-VENDOR",
+    "rack": 0,
+    "slot": 1,
+    "dbVersion": "PLACEHOLDER"
+  },
+  "readableRegions": [
+    {
+      "regionId": "safety-and-mode-inputs",
+      "dbNumber": 10,
+      "startByte": 0,
+      "lengthBytes": 2,
+      "points": [
+        {
+          "semanticField": "emergencyStopReleased",
+          "offsetBytes": 0,
+          "bitIndex": 0,
+          "dataType": "Bool"
+        },
+        {
+          "semanticField": "controlPowerOn",
+          "offsetBytes": 0,
+          "bitIndex": 1,
+          "dataType": "Bool"
+        },
+        {
+          "semanticField": "handlesCentered",
+          "offsetBytes": 0,
+          "bitIndex": 2,
+          "dataType": "Bool"
+        },
+        {
+          "semanticField": "hornPressed",
+          "offsetBytes": 0,
+          "bitIndex": 3,
+          "dataType": "Bool"
+        },
+        {
+          "semanticField": "controlModeIsRemote",
+          "offsetBytes": 1,
+          "bitIndex": 0,
+          "dataType": "Bool"
+        }
+      ]
+    },
+    {
+      "regionId": "handle-analog-inputs",
+      "dbNumber": 10,
+      "startByte": 4,
+      "lengthBytes": 12,
+      "points": [
+        {
+          "semanticField": "gantryCommand",
+          "offsetBytes": 0,
+          "dataType": "Real",
+          "scale": 1.0,
+          "deadband": 0.02,
+          "unit": "normalized -1..1"
+        },
+        {
+          "semanticField": "trolleyCommand",
+          "offsetBytes": 4,
+          "dataType": "Real",
+          "scale": 1.0,
+          "deadband": 0.02,
+          "unit": "normalized -1..1"
+        },
+        {
+          "semanticField": "hoistCommand",
+          "offsetBytes": 8,
+          "dataType": "Real",
+          "scale": 1.0,
+          "deadband": 0.02,
+          "unit": "normalized -1..1"
+        }
+      ]
+    }
+  ],
+  "writableWhitelistRegions": [
+    {
+      "regionId": "status-indicator-outputs",
+      "dbNumber": 20,
+      "startByte": 0,
+      "lengthBytes": 1,
+      "points": [
+        {
+          "semanticField": "spreaderLockedIndicator",
+          "offsetBytes": 0,
+          "bitIndex": 0,
+          "dataType": "Bool"
+        },
+        {
+          "semanticField": "wheelClampEngagedIndicator",
+          "offsetBytes": 0,
+          "bitIndex": 1,
+          "dataType": "Bool"
+        }
+      ]
+    }
+  ],
+  "safeDefaults": {
+    "gantryCommand": 0.0,
+    "trolleyCommand": 0.0,
+    "hoistCommand": 0.0,
+    "spreaderLockedIndicator": false,
+    "wheelClampEngagedIndicator": false
+  },
+  "configSha256": "sha256:PLACEHOLDER",
+  "signatureAlgorithm": "ECDSA-P256-SHA256",
+  "keyId": "PLACEHOLDER",
+  "signature": "PLACEHOLDER"
+}

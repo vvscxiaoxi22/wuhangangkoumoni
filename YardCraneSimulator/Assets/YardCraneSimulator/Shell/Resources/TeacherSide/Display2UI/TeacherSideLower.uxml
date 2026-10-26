@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="TeacherSideLowerStyles.uss" />
+    <ui:VisualElement name="teacher-side-lower" class="teacher-lower-shell">
+        <ui:VisualElement picking-mode="Ignore" class="teacher-lower-background" />
+        <ui:VisualElement picking-mode="Ignore" class="teacher-lower-tone" />
+        <ui:VisualElement picking-mode="Ignore" class="teacher-lower-glow" />
+        <ui:VisualElement picking-mode="Ignore" class="teacher-lower-brand">
+            <ui:VisualElement class="teacher-lower-logo" />
+            <ui:Label text="YARD CRANE / TEACHING CONSOLE" class="teacher-lower-code" />
+        </ui:VisualElement>
+        <ui:VisualElement picking-mode="Ignore" class="teacher-lower-copy">
+            <ui:Label text="以教学组织训练，" class="teacher-lower-title" />
+            <ui:Label text="用数据连接成长。" class="teacher-lower-title teacher-lower-accent" />
+            <ui:Label text="场桥集装箱起重机仿真系统 · 教师端" class="teacher-lower-subtitle" />
+            <ui:VisualElement class="teacher-lower-rule" />
+            <ui:Label text="PLAN  ·  TEACH  ·  REVIEW  ·  IMPROVE" class="teacher-lower-caption" />
+        </ui:VisualElement>
+        <ui:VisualElement picking-mode="Ignore" class="teacher-lower-right-note">
+            <ui:Label text="专业教学&#10;规范训练&#10;真实反馈" class="teacher-lower-right-cn" />
+            <ui:VisualElement class="teacher-lower-right-rule" />
+            <ui:Label text="SMART PORT&#10;BETTER TOMORROW" class="teacher-lower-right-en" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

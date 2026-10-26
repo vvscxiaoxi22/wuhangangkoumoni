@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using PortTraining.YardCraneSimulator.Presentation;
 using UnityEngine;
 
 namespace PortTraining.YardCraneSimulator.Configuration
@@ -64,7 +65,26 @@ namespace PortTraining.YardCraneSimulator.Configuration
                 return false;
             }
 
+            if (!string.Equals(
+                    config.defaultDisplayProfileId,
+                    YardCraneDisplayProfile.NativeDualDisplayProfileId,
+                    StringComparison.Ordinal) ||
+                !config.SupportsDisplayProfile(config.defaultDisplayProfileId))
+            {
+                error = $"Yard-crane scene configuration must default to supported display profile " +
+                        $"'{YardCraneDisplayProfile.NativeDualDisplayProfileId}'.";
+                return false;
+            }
+
             return true;
+        }
+
+        public bool SupportsDisplayProfile(string profileId)
+        {
+            if (string.IsNullOrWhiteSpace(profileId) || supportedDisplayProfileIds == null) return false;
+            foreach (var supported in supportedDisplayProfileIds)
+                if (string.Equals(supported, profileId, StringComparison.Ordinal)) return true;
+            return false;
         }
     }
 }

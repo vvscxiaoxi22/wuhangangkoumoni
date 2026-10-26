@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <OutputPath>../../Temp/HudPresentationHarness/bin/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../OperationStateMachineHarness/OperationStateMachineHarness.csproj" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Presentation/YardCraneHudState.cs" Link="YardCraneHudState.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Presentation/YardCraneHudText.cs" Link="YardCraneHudText.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneLocalTrainingSession.cs" Link="YardCraneLocalTrainingSession.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneLocalTrainingTargetValidator.cs" Link="YardCraneLocalTrainingTargetValidator.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneTrainingProgressTracker.cs" Link="YardCraneTrainingProgressTracker.cs" />
+  </ItemGroup>
+</Project>

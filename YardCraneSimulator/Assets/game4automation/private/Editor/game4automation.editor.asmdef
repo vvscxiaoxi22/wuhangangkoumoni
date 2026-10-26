@@ -1,0 +1,21 @@
+{
+    "name": "game4automation.editor",
+    "rootNamespace": "",
+    "references": [
+        "game4automation.base",
+        "NaughtyAttributes.Core",
+        "NaughtyAttributes.Editor",
+        "game4automation.ik"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

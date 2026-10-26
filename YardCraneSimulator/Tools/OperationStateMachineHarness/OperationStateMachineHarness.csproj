@@ -7,7 +7,9 @@
     <OutputPath>../../Temp/OperationStateMachineHarness/bin/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Presentation/YardCraneDisplayProfile.cs" Link="YardCraneDisplayProfile.cs" />
     <Compile Include="../../Assets/YardCraneSimulator/Runtime/Operations/YardCraneOperationController.cs" Link="YardCraneOperationController.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Operations/YardCraneOperationMechanisms.cs" Link="YardCraneOperationMechanisms.cs" />
     <Compile Include="../../Assets/YardCraneSimulator/Runtime/Input/YardCraneOperatorCommand.cs" Link="YardCraneOperatorCommand.cs" />
     <Compile Include="../../Assets/YardCraneSimulator/Runtime/Input/YardCraneInputRouter.cs" Link="YardCraneInputRouter.cs" />
     <Compile Include="../../Assets/YardCraneSimulator/Runtime/Crane/YardCraneGantryDriveModel.cs" Link="YardCraneGantryDriveModel.cs" />

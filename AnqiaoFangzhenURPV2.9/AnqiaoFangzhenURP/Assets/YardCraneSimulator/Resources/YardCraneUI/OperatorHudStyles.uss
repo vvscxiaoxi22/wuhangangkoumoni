@@ -1,0 +1,583 @@
+/* 场桥驾驶 HUD v15 — 保留场桥数据与交互，统一到岸桥 1920x1080 生效几何。 */
+:root {
+    --hud-ink: rgb(244, 250, 255);
+    --hud-ink-soft: rgba(216, 236, 250, 0.82);
+    --hud-ink-muted: rgba(177, 211, 234, 0.66);
+    --hud-glass: rgba(4, 29, 68, 0.91);
+    --hud-glass-soft: rgba(8, 43, 87, 0.87);
+    --hud-border: rgba(176, 232, 255, 0.58);
+    --hud-border-strong: rgba(89, 224, 255, 0.94);
+    --hud-divider: rgba(145, 213, 242, 0.22);
+    --hud-cyan: rgb(78, 224, 255);
+    --hud-cyan-bright: rgb(132, 239, 255);
+    --hud-radius: 22px;
+}
+
+.hud {
+    position: absolute;
+    left: 1px;
+    right: 0;
+    top: -1px;
+    bottom: 0;
+    color: var(--hud-ink);
+    font-size: 18px;
+    overflow: hidden;
+}
+.hud.dual-stacked { bottom: auto; height: 1080px; }
+Label { margin: 0; padding: 0; -unity-font-style: normal; }
+.hud Button { background-image: none; }
+
+.glass {
+    background-color: var(--hud-glass);
+    border-width: 1px;
+    border-left-color: rgba(112, 218, 248, 0.64);
+    border-right-color: rgba(112, 218, 248, 0.64);
+    border-bottom-color: rgba(90, 207, 241, 0.62);
+    border-top-color: var(--hud-border);
+    border-radius: var(--hud-radius);
+}
+.glass-highlight {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    top: 0;
+    height: 2px;
+    border-radius: 1px;
+    background-color: rgba(211, 248, 255, 0.68);
+}
+.capsule-edge {
+    display: none;
+    position: absolute;
+    top: 19px;
+    width: 4px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: rgba(76, 225, 255, 0.86);
+}
+.capsule-edge-left { left: -2px; }
+.capsule-edge-right { right: -2px; }
+
+/* 左上：用时。 */
+.timer-box {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 310px;
+    height: 78px;
+    padding: 0 28px;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(5, 35, 78, 0);
+    border-width: 0;
+}
+.timer-box .glass-highlight { display: none; }
+.timer-icon { display: none; }
+.timer-caption { width: 44px; color: var(--hud-ink); font-size: 17px; }
+.timer-value { flex-grow: 1; color: var(--hud-ink); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-left; letter-spacing: 1px; }
+
+/* 顶部中央：当前项目与五状态灯。 */
+.task-capsule {
+    position: absolute;
+    left: 612px;
+    top: 0;
+    width: 680px;
+    height: 54px;
+    padding: 0 52px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    scale: 0.75 0.75;
+    background-color: rgba(0, 10, 24, 0.60);
+}
+.task-crane-icon, .task-title-divider { display: none; }
+.task-capsule-text { width: 100%; color: var(--hud-ink); font-size: 26px; -unity-font-style: bold; -unity-text-align: middle-center; white-space: normal; }
+.lamp-strip {
+    position: absolute;
+    left: 626px;
+    top: 35px;
+    width: 652px;
+    height: 98px;
+    padding: 0 12px;
+    flex-direction: row;
+    scale: 0.60 0.60;
+    background-color: var(--hud-glass-soft);
+}
+.lamp-strip .capsule-edge { top: 27px; height: 44px; }
+.lamp-cell {
+    width: 20%;
+    height: 72px;
+    margin-top: 13px;
+    align-items: center;
+    justify-content: center;
+    border-right-width: 1px;
+    border-right-color: var(--hud-divider);
+}
+.last-lamp-cell { border-right-width: 0; }
+.lamp-caption { position: relative; top: -5px; height: 25px; color: rgba(235, 247, 255, 0.93); font-size: 20px; -unity-text-align: middle-center; }
+.lamp-dot {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin-top: 4px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.62);
+    border-radius: 14px;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+.lamp-halo {
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    width: 38px;
+    height: 38px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0);
+    border-radius: 19px;
+}
+.lamp-glint { position: absolute; left: 5px; top: 4px; width: 8px; height: 6px; border-radius: 4px; background-color: rgba(255, 255, 255, 0.60); }
+.lamp-touchdown { background-color: rgb(112, 126, 145); }
+.lamp-touchdown.lamp-on { background-color: rgb(255, 177, 40); border-color: rgb(255, 218, 155); }
+.lamp-touchdown.lamp-on .lamp-halo { border-color: rgba(255, 169, 31, 0.46); background-color: rgba(255, 169, 31, 0.10); }
+.lamp-anchor { background-color: rgb(110, 125, 145); }
+.lamp-anchor.lamp-on { background-color: rgb(240, 46, 63); border-color: rgb(255, 169, 178); }
+.lamp-anchor.lamp-on .lamp-halo { border-color: rgba(240, 46, 63, 0.42); background-color: rgba(240, 46, 63, 0.08); }
+.lamp-unlock { background-color: rgb(110, 125, 145); }
+.lamp-unlock.lamp-on { background-color: rgb(49, 214, 91); border-color: rgb(175, 249, 195); }
+.lamp-unlock.lamp-on .lamp-halo { border-color: rgba(49, 214, 91, 0.42); background-color: rgba(49, 214, 91, 0.08); }
+.lamp-single { background-color: rgb(115, 132, 151); }
+.lamp-single.lamp-on { background-color: rgb(243, 247, 251); border-color: rgb(255, 255, 255); }
+.lamp-single.lamp-on .lamp-halo { border-color: rgba(255, 255, 255, 0.56); background-color: rgba(255, 255, 255, 0.12); }
+.lamp-double { background-color: rgb(44, 86, 148); }
+.lamp-double.lamp-on { background-color: rgb(23, 63, 127); border-color: rgb(132, 179, 239); }
+.lamp-double.lamp-on .lamp-halo { border-color: rgba(58, 126, 216, 0.38); background-color: rgba(23, 63, 127, 0.08); }
+
+/* 仅在需要时出现的安全/断流提示，独立于任务标题。 */
+.alert-strip {
+    display: none;
+    position: absolute;
+    left: 750px;
+    top: 218px;
+    width: 420px;
+    min-height: 36px;
+    padding: 8px 18px;
+    border-width: 1px;
+    border-color: rgba(255, 207, 118, 0.72);
+    border-radius: 18px;
+    background-color: rgba(61, 43, 17, 0.92);
+    color: rgb(255, 226, 172);
+    font-size: 15px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+.alert-strip.danger { border-color: rgba(255, 130, 149, 0.78); background-color: rgba(67, 20, 34, 0.94); color: rgb(255, 184, 194); }
+.alert-strip.caution { border-color: rgba(255, 207, 118, 0.72); background-color: rgba(61, 43, 17, 0.92); color: rgb(255, 226, 172); }
+
+/* 左侧六项遥测。 */
+.left-column { position: absolute; left: -29px; top: 341px; width: 344px; scale: 0.75 0.75; }
+.left-telemetry { width: 344px; height: 358px; padding: 18px 22px; background-color: var(--hud-glass-soft); }
+.telemetry-row {
+    height: 53px;
+    flex-direction: row;
+    align-items: center;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--hud-divider);
+}
+.telemetry-row-last { border-bottom-width: 0; }
+.info-dot { width: 17px; height: 17px; flex-shrink: 0; margin-right: 15px; border-radius: 9px; background-color: var(--hud-cyan); border-width: 2px; border-color: rgba(209, 249, 255, 0.88); }
+.telemetry-label { width: 114px; color: var(--hud-ink-soft); font-size: 18px; }
+.telemetry-value { width: 110px; color: var(--hud-ink); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-right; }
+.telemetry-unit { flex-grow: 1; margin-left: 7px; color: var(--hud-ink-soft); font-size: 16px; }
+.guide-toggle {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0 0 2px 0;
+    border-width: 1px;
+    border-color: rgba(154, 224, 249, 0.42);
+    border-radius: 15px;
+    background-color: rgba(15, 59, 105, 0.88);
+    color: var(--hud-cyan-bright);
+    font-size: 17px;
+    -unity-text-align: middle-center;
+}
+.guide-toggle:hover { background-color: rgba(35, 112, 173, 0.96); border-color: rgba(151, 239, 255, 0.90); }
+.guide-card { display: none; width: 342px; min-height: 590px; padding: 22px; }
+.guide-title { height: 34px; color: var(--hud-ink); font-size: 21px; -unity-font-style: bold; }
+.guide-lines { flex-grow: 1; }
+.guide-row { height: 29px; flex-direction: row; align-items: center; justify-content: space-between; color: var(--hud-ink-soft); font-size: 15px; }
+.keycap { min-width: 86px; color: var(--hud-ink); font-size: 14px; -unity-text-align: middle-right; }
+.guide-note { margin-top: 10px; color: rgba(191, 222, 239, 0.62); font-size: 12px; }
+
+/* 右侧：任务、姿态、锁销。 */
+.right-panel { position: absolute; left: 1608px; width: 342px; padding: 18px 24px; scale: 0.75 0.75; background-color: var(--hud-glass-soft); }
+.right-task-panel { top: 324px; height: 208px; }
+.right-pose-panel { top: 489px; height: 198px; }
+.right-lock-panel { top: 662px; height: 74px; padding: 0 22px; }
+.right-task-panel .info-icon { display: none; }
+.info-row {
+    height: 56px;
+    flex-direction: row;
+    align-items: center;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--hud-divider);
+}
+.info-row-last { border-bottom-width: 0; }
+.info-icon { width: 30px; height: 30px; margin-right: 12px; }
+.info-label { width: 118px; color: var(--hud-ink-soft); font-size: 17px; }
+.info-value { flex-grow: 1; color: var(--hud-ink); font-size: 18px; -unity-font-style: bold; -unity-text-align: middle-right; }
+.pose-label { width: 194px; color: var(--hud-ink-soft); font-size: 17px; }
+.pose-value { width: 54px; color: var(--hud-ink); font-size: 18px; -unity-font-style: bold; -unity-text-align: middle-right; }
+.pose-unit { width: 12px; color: var(--hud-ink); font-size: 18px; }
+.lock-row { height: 100%; flex-direction: row; align-items: center; }
+.lock-icon { width: 29px; height: 29px; }
+.lock-row-label { width: 72px; color: var(--hud-ink); font-size: 18px; -unity-font-style: bold; }
+.lock-pin-item { height: 40px; padding: 0 12px; flex-direction: row; align-items: center; border-radius: 20px; }
+.lock-pin-item-last { margin-left: 3px; }
+.lock-pin-lamp { width: 20px; height: 20px; margin: 0; border-radius: 10px; background-color: rgb(90, 117, 145); }
+.lock-pin-glint { left: 3px; top: 3px; width: 6px; height: 5px; }
+.lock-pin-halo { left: -5px; top: -5px; width: 26px; height: 26px; border-radius: 13px; }
+.lock-pin-on-dot.lamp-on { background-color: var(--hud-cyan); border-color: rgb(193, 248, 255); }
+.lock-pin-on-dot.lamp-on .lamp-halo { border-color: rgba(41, 183, 236, 0.42); background-color: rgba(41, 183, 236, 0.08); }
+.lock-pin-off-dot.lamp-on { background-color: rgb(107, 139, 169); border-color: rgb(216, 232, 246); }
+.lock-pin-off-dot.lamp-on .lamp-halo { border-color: rgba(86, 126, 166, 0.30); background-color: rgba(86, 126, 166, 0.06); }
+.lock-pin-label { margin-left: 7px; color: rgba(200, 226, 241, 0.64); font-size: 16px; }
+.lock-pin-label.active { color: var(--hud-ink); -unity-font-style: bold; }
+
+/* 返回与退出。 */
+.nav-buttons { position: absolute; right: 0; top: 0; width: 190px; height: 78px; flex-direction: row; overflow: visible; }
+.nav-button {
+    width: 76px;
+    height: 76px;
+    margin: 0 0 0 13px;
+    padding: 0 0 5px 0;
+    border-width: 0;
+    border-color: rgba(163, 230, 255, 0.70);
+    border-radius: 38px;
+    background-color: rgba(5, 41, 84, 0);
+    color: rgb(245, 252, 255);
+    font-size: 43px;
+    -unity-text-align: middle-center;
+}
+.nav-back-button { font-size: 37px; }
+.nav-button:hover { background-color: rgba(30, 111, 176, 0.96); border-color: rgba(135, 238, 255, 0.96); color: rgb(255, 255, 255); }
+.nav-button:active { background-color: rgba(21, 108, 163, 0.96); }
+.nav-button:disabled { opacity: 0.58; background-color: rgba(8, 37, 73, 0.78); }
+.navigation-note {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 83px;
+    width: 460px;
+    height: 25px;
+    padding: 5px 10px;
+    border-width: 1px;
+    border-color: rgba(149, 215, 243, 0.20);
+    border-radius: 12px;
+    background-color: rgba(4, 27, 61, 0.76);
+    color: var(--hud-ink-muted);
+    font-size: 10px;
+    -unity-text-align: middle-right;
+    white-space: nowrap;
+}
+
+/* 训练收口结果：只在生命周期进入收口/完成/失败后显示。 */
+.result-card { display: none; position: absolute; left: 650px; top: 399px; width: 620px; min-height: 278px; padding: 34px; align-items: center; justify-content: center; }
+.result-code { color: rgba(118, 224, 247, 0.72); font-size: 13px; letter-spacing: 4px; }
+.result-title { margin-top: 16px; color: var(--hud-ink); font-size: 36px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.result-detail { margin-top: 18px; color: var(--hud-ink-soft); font-size: 18px; -unity-text-align: middle-center; white-space: normal; }
+.result-divider { width: 120px; height: 1px; margin-top: 26px; margin-bottom: 18px; background-color: rgba(105, 214, 244, 0.24); }
+.result-trust { color: rgba(199, 226, 241, 0.62); font-size: 13px; -unity-text-align: middle-center; }
+
+/* 独立训练提示层。坐标以1920×1080上屏为基准；在1920×2160双屏模式中仍只占上半屏。 */
+.prompt-layer {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.prompt-scrim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(2, 16, 38, 0.28);
+}
+.prompt-panel {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    color: rgb(239, 249, 255);
+    background-color: rgba(5, 31, 70, 0.96);
+    border-width: 1px;
+    border-left-color: rgba(99, 213, 247, 0.72);
+    border-right-color: rgba(99, 213, 247, 0.72);
+    border-bottom-color: rgba(82, 196, 234, 0.68);
+    border-top-color: rgba(184, 238, 255, 0.80);
+    border-radius: 24px;
+    padding: 18px 28px 24px 28px;
+}
+.prompt-edge-light {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    top: 0;
+    height: 2px;
+    border-radius: 1px;
+    background-color: rgba(206, 247, 255, 0.78);
+}
+.prompt-edge-danger { background-color: rgba(255, 112, 133, 0.90); }
+.prompt-header { height: 54px; flex-direction: row; align-items: center; }
+.prompt-header-compact { padding-left: 2px; }
+.prompt-header-icon { width: 38px; height: 38px; margin-right: 14px; }
+.prompt-title { flex-grow: 1; color: rgb(245, 251, 255); font-size: 25px; -unity-font-style: bold; }
+.prompt-close {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    padding: 0 0 5px 0;
+    border-width: 0;
+    border-radius: 21px;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(226, 243, 255);
+    font-size: 34px;
+    -unity-text-align: middle-center;
+}
+.prompt-close:hover { background-color: rgba(119, 212, 245, 0.18); }
+.prompt-close.task-confirm-action {
+    width: 88px;
+    height: 40px;
+    padding: 0 14px 1px 14px;
+    border-width: 1px;
+    border-color: rgba(174, 240, 255, 0.82);
+    border-radius: 20px;
+    background-color: rgba(43, 151, 241, 0.94);
+    color: rgb(249, 253, 255);
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+.prompt-close.task-confirm-action:hover { background-color: rgb(59, 175, 249); }
+.prompt-divider { height: 1px; margin: 13px 0; background-color: rgba(155, 215, 241, 0.20); }
+.prompt-section-title { color: rgb(235, 248, 255); font-size: 18px; -unity-font-style: bold; }
+.prompt-message {
+    flex-grow: 1;
+    padding: 26px 24px 14px 24px;
+    color: rgb(235, 246, 255);
+    font-size: 22px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+.prompt-actions { height: 68px; flex-direction: row; align-items: center; justify-content: space-between; }
+.prompt-action {
+    height: 58px;
+    margin: 0;
+    border-width: 1px;
+    border-radius: 15px;
+    color: rgb(241, 250, 255);
+    font-size: 19px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+.prompt-action-primary {
+    background-color: rgb(42, 148, 241);
+    border-color: rgba(164, 239, 255, 0.88);
+}
+.prompt-action-primary:hover { background-color: rgb(46, 169, 255); }
+.prompt-action-secondary {
+    background-color: rgba(28, 68, 105, 0.86);
+    border-color: rgba(137, 196, 226, 0.46);
+}
+.prompt-action-secondary:hover { background-color: rgba(43, 91, 132, 0.94); }
+.prompt-action:disabled { opacity: 0.46; }
+
+/* 七类提示均以1920×1080上屏中心为锚点。 */
+.prompt-task { width: 766px; height: 368px; }
+.task-prompt-content { flex-grow: 1; flex-direction: row; padding-top: 8px; }
+.task-map-area { width: 476px; padding: 6px 12px 0 4px; }
+.task-map-head { height: 40px; flex-direction: row; align-items: center; }
+.task-bay-title { width: 168px; color: rgb(232, 247, 255); font-size: 15px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.task-bay-title-right { margin-left: 8px; }
+.task-route-chip {
+    width: 110px;
+    height: 30px;
+    padding: 4px 10px;
+    border-radius: 15px;
+    background-color: rgb(64, 219, 235);
+    color: rgb(8, 52, 86);
+    font-size: 13px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+.task-grid-row { flex-grow: 1; flex-direction: row; justify-content: center; align-items: center; }
+.bay-grid {
+    width: 180px;
+    height: 188px;
+    padding: 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    background-color: rgba(4, 26, 55, 0.54);
+    border-width: 1px;
+    border-color: rgba(112, 207, 241, 0.30);
+    border-radius: 12px;
+}
+.bay-cell {
+    width: 10px;
+    height: 10px;
+    margin: 2px;
+    border-width: 1px;
+    border-color: rgb(230, 211, 45);
+    background-color: rgba(230, 211, 45, 0.08);
+}
+.bay-cell.target-cell {
+    border-color: rgb(82, 235, 255);
+    background-color: rgb(40, 201, 240);
+}
+.task-route-line { width: 74px; height: 150px; align-items: center; justify-content: center; }
+.task-route-dot { width: 9px; height: 9px; border-radius: 5px; background-color: rgb(78, 226, 246); }
+.task-route-stem { width: 2px; height: 108px; background-color: rgba(78, 226, 246, 0.62); }
+.task-brief-card {
+    flex-grow: 1;
+    margin-left: 10px;
+    padding: 18px;
+    border-width: 1px;
+    border-color: rgba(121, 207, 242, 0.44);
+    border-radius: 16px;
+    background-color: rgba(30, 72, 111, 0.60);
+}
+.task-instruction { min-height: 58px; margin-top: 8px; color: rgb(206, 229, 244); font-size: 16px; white-space: normal; }
+.task-meta-label { color: rgb(137, 205, 235); font-size: 13px; }
+.task-meta-spacer { margin-top: 10px; }
+.task-meta-value { margin-top: 3px; color: rgb(240, 250, 255); font-size: 19px; -unity-font-style: bold; }
+
+/* 倒计时：居中显示，只显示单调计时值。 */
+.prompt-countdown { width: 339px; height: 362px; padding: 18px 28px 20px 28px; }
+.countdown-ring {
+    width: 238px;
+    height: 238px;
+    margin-top: 12px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    border-width: 16px;
+    border-left-color: rgba(90, 155, 202, 0.36);
+    border-bottom-color: rgba(90, 155, 202, 0.36);
+    border-right-color: rgb(74, 220, 247);
+    border-top-color: rgb(74, 220, 247);
+    border-radius: 119px;
+    background-color: rgba(2, 25, 55, 0.58);
+}
+.countdown-ring-progress { position: absolute; top: -16px; width: 52px; height: 16px; border-radius: 8px; background-color: rgb(91, 238, 248); }
+.countdown-ring.countdown-urgent { border-right-color: rgb(255, 111, 126); border-top-color: rgb(255, 111, 126); }
+.countdown-ring.countdown-urgent .countdown-ring-progress { background-color: rgb(255, 111, 126); }
+.countdown-value { color: rgb(249, 253, 255); font-size: 76px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.countdown-unit { margin-top: -5px; color: rgb(213, 235, 248); font-size: 18px; }
+
+/* 信息确认。 */
+.prompt-confirmation { width: 599px; height: 314px; }
+.prompt-confirmation .prompt-action { width: 252px; }
+
+/* 错误提示：红色只用于危险语义。 */
+.prompt-error {
+    width: 740px;
+    height: 277px;
+    background-color: rgba(43, 23, 54, 0.94);
+    border-color: rgba(255, 116, 137, 0.86);
+}
+.prompt-error-message { padding-top: 18px; padding-bottom: 10px; }
+.prompt-header-icon-danger { color: rgb(255, 91, 116); }
+.prompt-danger-action {
+    width: 250px;
+    align-self: center;
+    background-color: rgb(243, 55, 79);
+    border-color: rgb(255, 130, 148);
+}
+.prompt-danger-action:hover { background-color: rgb(255, 72, 96); }
+
+/* 完成提示。 */
+.prompt-completion { width: 741px; height: 293px; }
+.completion-metrics { height: 106px; margin-top: 8px; margin-bottom: 12px; flex-direction: row; }
+.completion-metric {
+    width: 50%;
+    padding: 14px 30px;
+    justify-content: center;
+    border-width: 1px;
+    border-color: rgba(111, 202, 239, 0.40);
+    border-radius: 14px;
+    background-color: rgba(13, 57, 96, 0.68);
+}
+.completion-metric-score { margin-left: 14px; }
+.completion-caption { color: rgb(158, 207, 233); font-size: 14px; }
+.completion-value { margin-top: 6px; color: rgb(243, 251, 255); font-size: 28px; -unity-font-style: bold; }
+.prompt-completion .prompt-action { width: 320px; }
+
+/* 考核详情：大表格仍限制在上屏1080像素内。 */
+.prompt-assessment { width: 1042px; height: 356px; padding-bottom: 18px; }
+.assessment-summary { height: 74px; margin: 3px 0 10px 0; flex-direction: row; }
+.assessment-summary-item {
+    width: 208px;
+    margin-right: 12px;
+    padding: 12px 18px;
+    border-width: 1px;
+    border-color: rgba(108, 199, 237, 0.36);
+    border-radius: 13px;
+    background-color: rgba(18, 61, 101, 0.64);
+}
+.assessment-project-item { width: 458px; }
+.assessment-caption { color: rgb(147, 201, 228); font-size: 13px; }
+.assessment-value { margin-top: 3px; color: rgb(240, 250, 255); font-size: 17px; -unity-font-style: bold; }
+.assessment-table-header, .assessment-row { min-height: 38px; flex-direction: row; align-items: center; }
+.assessment-table-header { background-color: rgba(22, 86, 132, 0.74); border-width: 1px; border-color: rgba(98, 199, 236, 0.42); }
+.assessment-row { border-left-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-color: rgba(98, 173, 209, 0.30); background-color: rgba(7, 37, 71, 0.48); }
+.assessment-cell { height: 100%; padding: 8px 14px; color: rgb(219, 238, 249); font-size: 14px; white-space: normal; }
+.assessment-item-cell { width: 310px; border-right-width: 1px; border-right-color: rgba(101, 183, 218, 0.28); }
+.assessment-points-cell { width: 120px; border-right-width: 1px; border-right-color: rgba(101, 183, 218, 0.28); -unity-text-align: middle-center; }
+.assessment-note-cell { flex-grow: 1; }
+.assessment-table-body { height: 132px; }
+.assessment-empty { height: 76px; color: rgb(162, 201, 223); font-size: 15px; -unity-text-align: middle-center; }
+
+/* 成绩提交：身份是否可编辑由调用方显式决定。 */
+.prompt-submission { width: 725px; height: 355px; padding-bottom: 14px; }
+.submission-fields { flex-grow: 1; margin-top: 4px; }
+.submission-field { height: 44px; margin: 2px 0; color: rgb(225, 242, 252); font-size: 15px; }
+.submission-field .unity-base-field__label { width: 94px; color: rgb(191, 223, 240); -unity-font-style: bold; }
+.submission-field .unity-base-text-field__input {
+    height: 38px;
+    padding: 7px 14px;
+    border-width: 1px;
+    border-color: rgba(113, 193, 229, 0.40);
+    border-radius: 9px;
+    background-color: rgba(17, 56, 93, 0.72);
+    color: rgb(239, 249, 255);
+}
+.submission-submit { width: 100%; height: 54px; }
+.submission-note { height: 22px; margin-top: 4px; color: rgba(171, 210, 231, 0.72); font-size: 11px; -unity-text-align: middle-center; }
+
+.good { color: rgb(91, 232, 173); }
+.caution { color: rgb(255, 194, 86); }
+.danger { color: rgb(255, 113, 132); }
+.data-stale .telemetry-value, .data-stale .pose-value { color: rgba(196, 222, 238, 0.48); }
+
+/* Narrow portrait fallback. The simulator's delivery layout remains 1920 x 2160 dual-stack. */
+.hud.portrait .timer-box { left: 24px; top: 24px; }
+.hud.portrait .task-capsule { left: 330px; top: 24px; width: 560px; }
+.hud.portrait .lamp-strip { left: 330px; top: 110px; width: 560px; }
+.hud.portrait .nav-buttons { right: 24px; top: 24px; }
+.hud.portrait .left-column { left: 24px; top: 224px; }
+.hud.portrait .right-panel { left: auto; right: 24px; }
+.hud.portrait .right-task-panel { top: 224px; }
+.hud.portrait .right-pose-panel { top: 445px; }
+.hud.portrait .right-lock-panel { top: 646px; }
+.hud.portrait .alert-strip { left: 330px; top: 220px; }

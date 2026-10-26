@@ -1,0 +1,18 @@
+{
+  "name": "com.porttraining.studententryui",
+  "version": "0.1.0",
+  "displayName": "PortTraining Student Entry UI",
+  "description": "Standalone StudentEntry login/home UI Toolkit shell for the yard crane trainer, extracted so it can be reviewed and modified independently of the rest of the simulator. Ships only the UI code and assets (Shell + Model, UXML/USS, art, editor preview inspector) - no crane physics, operation state machine, or platform integration code.",
+  "unity": "6000.0",
+  "dependencies": {
+    "com.unity.inputsystem": "1.13.1",
+    "com.unity.modules.uielements": "1.0.0"
+  },
+  "samples": [
+    {
+      "displayName": "StudentEntry Demo Scene",
+      "description": "The exact StudentEntry scene from the main project (one GameObject with YardCraneStudentShell attached, plus an EventSystem) - open it and enter Play, or select the object and use the Inspector's editor-time preview buttons, to see all four pages without any of the rest of the simulator project.",
+      "path": "Samples~/StudentEntry"
+    }
+  ]
+}

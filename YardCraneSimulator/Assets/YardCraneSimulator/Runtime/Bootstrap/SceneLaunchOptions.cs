@@ -160,7 +160,7 @@ namespace PortTraining.YardCraneSimulator.Bootstrap
                 CoordinatorPipe = "pt.operation.editor",
                 GatewayPipe = "pt.gateway.editor",
                 GatewayLeaseId = Guid.Empty,
-                DisplayProfile = "DESKTOP-16X9-V1",
+                DisplayProfile = Presentation.YardCraneDisplayProfile.NativeDualDisplayProfileId,
                 SceneProfile = sceneProfile,
                 ProtocolVersion = SupportedProtocolVersion,
                 SessionToken = string.Empty,
@@ -178,7 +178,7 @@ namespace PortTraining.YardCraneSimulator.Bootstrap
                 : "YC-STANDALONE-01";
             var displayProfile = values.TryGetValue("--display-profile", out var display) && !string.IsNullOrWhiteSpace(display)
                 ? display
-                : "DESKTOP-16X9-V1";
+                : Presentation.YardCraneDisplayProfile.NativeDualDisplayProfileId;
             var sceneProfile = values.TryGetValue("--scene-profile", out var scene) && !string.IsNullOrWhiteSpace(scene)
                 ? scene
                 : defaultSceneProfile;

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '港口实训平台 · 教师控制台',
-  description: '港口岸桥与场桥实训平台教师端原型。',
+  title: '港口实训平台 · 岸桥与场桥交互原型',
+  description: '岸桥与场桥统一的学生端、教师端及全屏驾驶交互原型。',
 };
 
 export default function RootLayout({

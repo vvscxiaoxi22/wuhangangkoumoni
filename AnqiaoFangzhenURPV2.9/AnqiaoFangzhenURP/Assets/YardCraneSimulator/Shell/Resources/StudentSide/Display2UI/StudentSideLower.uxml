@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="StudentSideLowerStyles.uss" />
+    <ui:VisualElement name="student-side-lower" enabled="true" class="side-lower">
+        <ui:VisualElement name="side-lower-poster" class="side-lower-poster" />
+        <ui:VisualElement name="side-lower-scrim" class="side-lower-scrim" style="background-image: url(&apos;StudentSidePoster_v1.png&apos;); -unity-background-scale-mode: stretch-to-fill;" />
+    </ui:VisualElement>
+</ui:UXML>

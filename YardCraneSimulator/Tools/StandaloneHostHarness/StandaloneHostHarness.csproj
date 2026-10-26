@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <OutputPath>../../Temp/StandaloneHostHarness/bin/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../OperationStateMachineHarness/OperationStateMachineHarness.csproj" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Input/YardCraneStandaloneOperationHost.cs" Link="YardCraneStandaloneOperationHost.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneLocalTrainingSession.cs" Link="YardCraneLocalTrainingSession.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Input/YardCraneS7InputSource.cs" Link="YardCraneS7InputSource.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Input/YardCraneDevice.cs" Link="YardCraneDevice.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/SharedNet/YardCraneMiniWebSocket.cs" Link="YardCraneMiniWebSocket.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/SharedNet/YardCraneS7LinkProtocol.cs" Link="YardCraneS7LinkProtocol.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Real compiled Unity assemblies (from Unity's own Bee build cache), not hand stubs - so
+         YardCraneDevice.cs (InputSystem.QueueStateEvent, InputDevice, AxisControl/ButtonControl,
+         [InputControl]/[InputControlLayout]) is checked against the actual API surface. The
+         .dag folder name is a Unity build-cache hash and can change after a Unity rebuild; if
+         this reference stops resolving, re-find it with:
+         find Library/Bee/artifacts -iname "Unity.InputSystem.dll" (and CoreModule similarly
+         under Library/Bee/artifacts/WinPlayerBuildProgram/ManagedStripped/). -->
+    <Reference Include="Unity.InputSystem">
+      <HintPath>../../Library/Bee/artifacts/1900b0aE.dag/post-processed/Unity.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>../../Library/Bee/artifacts/WinPlayerBuildProgram/ManagedStripped/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -3,7 +3,8 @@
   "rootNamespace": "PortTraining.YardCraneSimulator.Experiments.ObiRope",
   "references": [
     "Obi",
-    "YardCraneSimulator.Runtime"
+    "YardCraneSimulator.Runtime",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

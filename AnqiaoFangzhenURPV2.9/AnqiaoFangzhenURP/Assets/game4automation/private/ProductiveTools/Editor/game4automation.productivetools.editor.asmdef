@@ -1,0 +1,17 @@
+{
+    "name": "game4automation.productivetools.editor",
+    "references": [
+        "game4automation.tools.naughtyattributes",
+        "game4automation.base"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

@@ -1,0 +1,1277 @@
+{
+  "schemaVersion": 1,
+  "quayCrane": {
+    "craneType": "岸桥",
+    "sourceWorkbook": "故障点(3).xlsx",
+    "sourceSheet": "Sheet1",
+    "categories": [
+      {
+        "name": "电源故障",
+        "faults": [
+          {
+            "number": 1,
+            "sourceRow": 3,
+            "lineTag": "",
+            "faultPoint": "KM01:A2-KA01:5",
+            "phenomenon": "主电路无供电"
+          },
+          {
+            "number": 2,
+            "sourceRow": 4,
+            "lineTag": "",
+            "faultPoint": "KM05:A2-KA02:5",
+            "phenomenon": "电机控制回路无供电"
+          }
+        ]
+      },
+      {
+        "name": "起升机构",
+        "faults": [
+          {
+            "number": 3,
+            "sourceRow": 5,
+            "lineTag": "",
+            "faultPoint": "PLC:Q4.2--KA11:14",
+            "phenomenon": "起升机构无动作"
+          },
+          {
+            "number": 4,
+            "sourceRow": 6,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.1--KA21:14",
+            "phenomenon": "起升机构抱闸无动作"
+          },
+          {
+            "number": 5,
+            "sourceRow": 7,
+            "lineTag": "",
+            "faultPoint": "SQ11:1--KA211:1",
+            "phenomenon": "无起升上升限位"
+          },
+          {
+            "number": 6,
+            "sourceRow": 8,
+            "lineTag": "",
+            "faultPoint": "SQ14:3--KA214:1",
+            "phenomenon": "无起升制动器限位"
+          }
+        ]
+      },
+      {
+        "name": "大车机构",
+        "faults": [
+          {
+            "number": 7,
+            "sourceRow": 9,
+            "lineTag": "",
+            "faultPoint": "PLC:Q4.3--KA12:14",
+            "phenomenon": "大车机构无动作"
+          },
+          {
+            "number": 8,
+            "sourceRow": 10,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.2--KA22:14",
+            "phenomenon": "大车机构抱闸无动作"
+          },
+          {
+            "number": 9,
+            "sourceRow": 11,
+            "lineTag": "",
+            "faultPoint": "SQ21:1--KA221:1",
+            "phenomenon": "无大车左停限位"
+          },
+          {
+            "number": 10,
+            "sourceRow": 12,
+            "lineTag": "",
+            "faultPoint": "SQ22:1--KA222:1",
+            "phenomenon": "无大车右停限位"
+          },
+          {
+            "number": 11,
+            "sourceRow": 13,
+            "lineTag": "",
+            "faultPoint": "SQ23:3--KA223:1",
+            "phenomenon": "无大车制动器限位"
+          }
+        ]
+      },
+      {
+        "name": "小车机构",
+        "faults": [
+          {
+            "number": 12,
+            "sourceRow": 14,
+            "lineTag": "",
+            "faultPoint": "PLC:Q4.4--KA13:14",
+            "phenomenon": "小车机构无动作"
+          },
+          {
+            "number": 13,
+            "sourceRow": 15,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.3--KA23:14",
+            "phenomenon": "小车机构抱闸无动作"
+          },
+          {
+            "number": 14,
+            "sourceRow": 16,
+            "lineTag": "",
+            "faultPoint": "SQ41:1--KA241:1",
+            "phenomenon": "无小车前限位"
+          },
+          {
+            "number": 15,
+            "sourceRow": 17,
+            "lineTag": "",
+            "faultPoint": "SQ42:1--KA242:1",
+            "phenomenon": "无小车后限位"
+          },
+          {
+            "number": 16,
+            "sourceRow": 18,
+            "lineTag": "",
+            "faultPoint": "SQ44:3--KA244:1",
+            "phenomenon": "无小车制动器限位"
+          }
+        ]
+      },
+      {
+        "name": "导板机构",
+        "faults": [
+          {
+            "number": 17,
+            "sourceRow": 19,
+            "lineTag": "",
+            "faultPoint": "PLC:Q4.5--KA14:14",
+            "phenomenon": "导板机构无动作"
+          },
+          {
+            "number": 18,
+            "sourceRow": 20,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.4--KA24:14",
+            "phenomenon": "导板机构抱闸无动作"
+          },
+          {
+            "number": 19,
+            "sourceRow": 21,
+            "lineTag": "",
+            "faultPoint": "SQ32:1--KA232:1",
+            "phenomenon": "无导板上升限位"
+          },
+          {
+            "number": 20,
+            "sourceRow": 22,
+            "lineTag": "",
+            "faultPoint": "SQ31:1--KA231:1",
+            "phenomenon": "无导板水平限位"
+          },
+          {
+            "number": 21,
+            "sourceRow": 23,
+            "lineTag": "",
+            "faultPoint": "SQ34:3--KA234:1",
+            "phenomenon": "无导板制动器限位"
+          }
+        ]
+      },
+      {
+        "name": "前后倾机构",
+        "faults": [
+          {
+            "number": 22,
+            "sourceRow": 24,
+            "lineTag": "",
+            "faultPoint": "PLC:Q4.6--KA15:14",
+            "phenomenon": "前后倾电机无动作"
+          },
+          {
+            "number": 23,
+            "sourceRow": 25,
+            "lineTag": "",
+            "faultPoint": "SQ502:3--KA2502:1",
+            "phenomenon": "无前后倾终点限位"
+          },
+          {
+            "number": 24,
+            "sourceRow": 26,
+            "lineTag": "",
+            "faultPoint": "SQ505:3--KA2505:1",
+            "phenomenon": "无前后倾归零限位"
+          }
+        ]
+      },
+      {
+        "name": "平面回转机构",
+        "faults": [
+          {
+            "number": 25,
+            "sourceRow": 27,
+            "lineTag": "",
+            "faultPoint": "PLC:Q4.7--KA16:14",
+            "phenomenon": "平面回转电机无动作"
+          },
+          {
+            "number": 26,
+            "sourceRow": 28,
+            "lineTag": "",
+            "faultPoint": "SQ503:3--KA2503:1",
+            "phenomenon": "无平面回转终点限位"
+          },
+          {
+            "number": 27,
+            "sourceRow": 29,
+            "lineTag": "",
+            "faultPoint": "SQ506:3--KA2506:1",
+            "phenomenon": "无平面回转归零限位"
+          }
+        ]
+      },
+      {
+        "name": "左右倾机构",
+        "faults": [
+          {
+            "number": 28,
+            "sourceRow": 30,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.0--KA17:14",
+            "phenomenon": "左右倾电机无动作"
+          },
+          {
+            "number": 29,
+            "sourceRow": 31,
+            "lineTag": "",
+            "faultPoint": "SQ501:3--KA2501:1",
+            "phenomenon": "无左右倾终点限位"
+          },
+          {
+            "number": 30,
+            "sourceRow": 32,
+            "lineTag": "",
+            "faultPoint": "SQ504:3--KA2504:1",
+            "phenomenon": "无左右倾归零限位"
+          }
+        ]
+      },
+      {
+        "name": "夹轮器",
+        "faults": [
+          {
+            "number": 31,
+            "sourceRow": 33,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.5--KA25:14",
+            "phenomenon": "夹轮器机构无动作"
+          },
+          {
+            "number": 32,
+            "sourceRow": 34,
+            "lineTag": "",
+            "faultPoint": "SQ512:3--KA2512:1",
+            "phenomenon": "无夹轮器开限位"
+          },
+          {
+            "number": 33,
+            "sourceRow": 35,
+            "lineTag": "",
+            "faultPoint": "SQ513:3--KA2513:1",
+            "phenomenon": "无夹轮器闭限位"
+          }
+        ]
+      },
+      {
+        "name": "吊具泵",
+        "faults": [
+          {
+            "number": 34,
+            "sourceRow": 36,
+            "lineTag": "",
+            "faultPoint": "PLC:Q5.6--KA26:14",
+            "phenomenon": "吊具泵开无动作"
+          }
+        ]
+      },
+      {
+        "name": "元器件损坏",
+        "faults": [
+          {
+            "number": 35,
+            "sourceRow": 37,
+            "lineTag": "",
+            "faultPoint": "SQ11:1--KA211:1",
+            "phenomenon": "SQ11元器件损坏"
+          },
+          {
+            "number": 36,
+            "sourceRow": 38,
+            "lineTag": "",
+            "faultPoint": "SQ12:1--KA212:1",
+            "phenomenon": "SQ12元器件损坏"
+          },
+          {
+            "number": 37,
+            "sourceRow": 39,
+            "lineTag": "",
+            "faultPoint": "SQ13:1--KA213:1",
+            "phenomenon": "SQ13元器件损坏"
+          },
+          {
+            "number": 38,
+            "sourceRow": 40,
+            "lineTag": "",
+            "faultPoint": "SQ21:1--KA221:1",
+            "phenomenon": "SQ21元器件损坏"
+          },
+          {
+            "number": 39,
+            "sourceRow": 41,
+            "lineTag": "",
+            "faultPoint": "SQ22:1--KA222:1",
+            "phenomenon": "SQ22元器件损坏"
+          },
+          {
+            "number": 40,
+            "sourceRow": 42,
+            "lineTag": "",
+            "faultPoint": "SQ31:1--KA231:1",
+            "phenomenon": "SQ31元器件损坏"
+          },
+          {
+            "number": 41,
+            "sourceRow": 43,
+            "lineTag": "",
+            "faultPoint": "SQ32:1--KA232:1",
+            "phenomenon": "SQ32元器件损坏"
+          },
+          {
+            "number": 42,
+            "sourceRow": 44,
+            "lineTag": "",
+            "faultPoint": "SQ33:1--KA233:1",
+            "phenomenon": "SQ33元器件损坏"
+          },
+          {
+            "number": 43,
+            "sourceRow": 45,
+            "lineTag": "",
+            "faultPoint": "SQ41:1--KA241:1",
+            "phenomenon": "SQ41元器件损坏"
+          },
+          {
+            "number": 44,
+            "sourceRow": 46,
+            "lineTag": "",
+            "faultPoint": "SQ42:1--KA242:1",
+            "phenomenon": "SQ42元器件损坏"
+          },
+          {
+            "number": 45,
+            "sourceRow": 47,
+            "lineTag": "",
+            "faultPoint": "SQ43:1--KA243:1",
+            "phenomenon": "SQ43元器件损坏"
+          },
+          {
+            "number": 46,
+            "sourceRow": 48,
+            "lineTag": "",
+            "faultPoint": "SQ14:3--KA214:1",
+            "phenomenon": "SQ14元器件损坏"
+          },
+          {
+            "number": 47,
+            "sourceRow": 49,
+            "lineTag": "",
+            "faultPoint": "SQ23:3--KA223:1",
+            "phenomenon": "SQ23元器件损坏"
+          },
+          {
+            "number": 48,
+            "sourceRow": 50,
+            "lineTag": "",
+            "faultPoint": "SQ34:3--KA234:1",
+            "phenomenon": "SQ34元器件损坏"
+          },
+          {
+            "number": 49,
+            "sourceRow": 51,
+            "lineTag": "",
+            "faultPoint": "SQ44:3--KA244:1",
+            "phenomenon": "SQ44元器件损坏"
+          },
+          {
+            "number": 50,
+            "sourceRow": 52,
+            "lineTag": "",
+            "faultPoint": "SQ501:3--KA2501:1",
+            "phenomenon": "SQ501元器件损坏"
+          },
+          {
+            "number": 51,
+            "sourceRow": 53,
+            "lineTag": "",
+            "faultPoint": "SQ502:3--KA2502:1",
+            "phenomenon": "SQ502元器件损坏"
+          },
+          {
+            "number": 52,
+            "sourceRow": 54,
+            "lineTag": "",
+            "faultPoint": "SQ503:3--KA2503:1",
+            "phenomenon": "SQ503元器件损坏"
+          },
+          {
+            "number": 53,
+            "sourceRow": 55,
+            "lineTag": "",
+            "faultPoint": "SQ504:3--KA2504:1",
+            "phenomenon": "SQ504元器件损坏"
+          },
+          {
+            "number": 54,
+            "sourceRow": 56,
+            "lineTag": "",
+            "faultPoint": "SQ505:3--KA2505:1",
+            "phenomenon": "SQ505元器件损坏"
+          },
+          {
+            "number": 55,
+            "sourceRow": 57,
+            "lineTag": "",
+            "faultPoint": "SQ506:3--KA2506:1",
+            "phenomenon": "SQ506元器件损坏"
+          },
+          {
+            "number": 56,
+            "sourceRow": 58,
+            "lineTag": "",
+            "faultPoint": "SQ507:3--KA2507:1",
+            "phenomenon": "SQ507元器件损坏"
+          },
+          {
+            "number": 57,
+            "sourceRow": 59,
+            "lineTag": "",
+            "faultPoint": "SQ508:3--KA2508:1",
+            "phenomenon": "SQ508元器件损坏"
+          },
+          {
+            "number": 58,
+            "sourceRow": 60,
+            "lineTag": "",
+            "faultPoint": "SQ509:3--KA2509:1",
+            "phenomenon": "SQ509元器件损坏"
+          },
+          {
+            "number": 59,
+            "sourceRow": 61,
+            "lineTag": "",
+            "faultPoint": "SQ510:3--KA2510:1",
+            "phenomenon": "SQ510元器件损坏"
+          },
+          {
+            "number": 60,
+            "sourceRow": 62,
+            "lineTag": "",
+            "faultPoint": "SQ511:3--KA2511:1",
+            "phenomenon": "SQ511元器件损坏"
+          },
+          {
+            "number": 61,
+            "sourceRow": 63,
+            "lineTag": "",
+            "faultPoint": "SQ512:3--KA2512:1",
+            "phenomenon": "SQ512元器件损坏"
+          },
+          {
+            "number": 62,
+            "sourceRow": 64,
+            "lineTag": "",
+            "faultPoint": "SQ513:3--KA2513:1",
+            "phenomenon": "SQ513元器件损坏"
+          },
+          {
+            "number": 63,
+            "sourceRow": 65,
+            "lineTag": "",
+            "faultPoint": "SQ514:3--KA2514:1",
+            "phenomenon": "SQ514元器件损坏"
+          },
+          {
+            "number": 64,
+            "sourceRow": 66,
+            "lineTag": "",
+            "faultPoint": "SQ515:3--KA2515:1",
+            "phenomenon": "SQ515元器件损坏"
+          }
+        ]
+      }
+    ],
+    "unclassifiedFaults": []
+  },
+  "yardCrane": {
+    "craneType": "场桥",
+    "sourceWorkbook": "场桥故障信息.asset",
+    "sourceSheet": "Assets/Data",
+    "categories": [
+      {
+        "name": "电源故障",
+        "faults": [
+          {
+            "number": 1,
+            "sourceRow": 3,
+            "lineTag": "010-1",
+            "faultPoint": "KM04:2--KM01:21",
+            "phenomenon": "主电路无供电"
+          },
+          {
+            "number": 2,
+            "sourceRow": 4,
+            "lineTag": "1L11",
+            "faultPoint": "QF04:2--TC1:1",
+            "phenomenon": "整机无供电（TC1变压器缺相）"
+          },
+          {
+            "number": 3,
+            "sourceRow": 5,
+            "lineTag": "4L01",
+            "faultPoint": "QF50:02--X0:05",
+            "phenomenon": "各抱闸机构缺相（注意观察各FR热继电器）"
+          },
+          {
+            "number": 4,
+            "sourceRow": 6,
+            "lineTag": "1",
+            "faultPoint": "KMO3:2--X0:09",
+            "phenomenon": "俯仰、小车、起升、大车控制线路无供电"
+          },
+          {
+            "number": 5,
+            "sourceRow": 7,
+            "lineTag": "8",
+            "faultPoint": "QF61:02--XO:13",
+            "phenomenon": "联动台无直流供电"
+          },
+          {
+            "number": 6,
+            "sourceRow": 8,
+            "lineTag": "9",
+            "faultPoint": "QF62:02--X0:14",
+            "phenomenon": "各限位开关供电"
+          },
+          {
+            "number": 7,
+            "sourceRow": 9,
+            "lineTag": "11",
+            "faultPoint": "KMO2:22--KM01：A1",
+            "phenomenon": "主电源控制KM01不工作"
+          },
+          {
+            "number": 8,
+            "sourceRow": 10,
+            "lineTag": "15",
+            "faultPoint": "SQ01:21--KM04:A1",
+            "phenomenon": "KM04无动作（主电路无供电）"
+          },
+          {
+            "number": 9,
+            "sourceRow": 11,
+            "lineTag": "19",
+            "faultPoint": "KM03:4--KMO5:A1",
+            "phenomenon": "控制回路KM05不工作"
+          },
+          {
+            "number": 10,
+            "sourceRow": 12,
+            "lineTag": "22",
+            "faultPoint": "KA02:9--KM06:A1",
+            "phenomenon": "投光灯控制KM06不工作"
+          },
+          {
+            "number": 11,
+            "sourceRow": 13,
+            "lineTag": "6N11",
+            "faultPoint": "QF07:4--KM01:A2",
+            "phenomenon": "整机无供电"
+          },
+          {
+            "number": 12,
+            "sourceRow": 14,
+            "lineTag": "4N11",
+            "faultPoint": "QF06:4--Z1:N",
+            "phenomenon": "控制回路无供电"
+          }
+        ]
+      },
+      {
+        "name": "起升机构",
+        "faults": [
+          {
+            "number": 27,
+            "sourceRow": 29,
+            "lineTag": "101",
+            "faultPoint": "PLC:I0.0--X0:26",
+            "phenomenon": "起升机构、大车机构无动作"
+          },
+          {
+            "number": 28,
+            "sourceRow": 30,
+            "lineTag": "303",
+            "faultPoint": "PLC:Q0.2--KA11:14",
+            "phenomenon": "起升机构无动作"
+          },
+          {
+            "number": 30,
+            "sourceRow": 32,
+            "lineTag": "309",
+            "faultPoint": "PLC:Q1.0--KA12:14",
+            "phenomenon": "起升机构抱闸无动作"
+          },
+          {
+            "number": 32,
+            "sourceRow": 34,
+            "lineTag": "151",
+            "faultPoint": "X0:90--SQ11:2",
+            "phenomenon": "无起升上升限位"
+          },
+          {
+            "number": 35,
+            "sourceRow": 37,
+            "lineTag": "6L03",
+            "faultPoint": "QF11:6--A2:L3",
+            "phenomenon": "A2变频器不工作（输入电源缺相）"
+          },
+          {
+            "number": 36,
+            "sourceRow": 38,
+            "lineTag": "W11",
+            "faultPoint": "X2:11 --M11:W",
+            "phenomenon": "A2变频器报警（输出缺相）"
+          },
+          {
+            "number": 38,
+            "sourceRow": 40,
+            "lineTag": "506",
+            "faultPoint": "X1:19--KA38:5",
+            "phenomenon": "A2变频器无正转输出"
+          },
+          {
+            "number": 39,
+            "sourceRow": 41,
+            "lineTag": "507",
+            "faultPoint": "X1:20--KA39:5",
+            "phenomenon": "A2变频器无反转输出"
+          },
+          {
+            "number": 40,
+            "sourceRow": 42,
+            "lineTag": "401",
+            "faultPoint": "KM21:22--X1:26",
+            "phenomenon": "KM11交流接触器无动作"
+          },
+          {
+            "number": 41,
+            "sourceRow": 43,
+            "lineTag": "405",
+            "faultPoint": "X1:30--KM12:A1",
+            "phenomenon": "KM12交流接触器无动作"
+          }
+        ]
+      },
+      {
+        "name": "大车机构",
+        "faults": [
+          {
+            "number": 29,
+            "sourceRow": 31,
+            "lineTag": "304",
+            "faultPoint": "PLC:Q0.3--KA21:14",
+            "phenomenon": "大车机构无动作"
+          },
+          {
+            "number": 31,
+            "sourceRow": 33,
+            "lineTag": "310",
+            "faultPoint": "PLC:Q1.1--KA22:14",
+            "phenomenon": "大车机构抱闸无动作"
+          },
+          {
+            "number": 33,
+            "sourceRow": 35,
+            "lineTag": "154",
+            "faultPoint": "X0：93--SQ21:2",
+            "phenomenon": "无大车左停限位"
+          },
+          {
+            "number": 34,
+            "sourceRow": 36,
+            "lineTag": "155",
+            "faultPoint": "PLC:I6.5--X0:94",
+            "phenomenon": "无大车右停限位"
+          },
+          {
+            "number": 37,
+            "sourceRow": 39,
+            "lineTag": "W21",
+            "faultPoint": "KM21:6--X2:15",
+            "phenomenon": "A2变频器报警（输出缺相）"
+          },
+          {
+            "number": 42,
+            "sourceRow": 44,
+            "lineTag": "406",
+            "faultPoint": "KA22:5--X1:31",
+            "phenomenon": "KM22交流接触器无动作"
+          },
+          {
+            "number": 43,
+            "sourceRow": 45,
+            "lineTag": "404",
+            "faultPoint": "KA21:5--X1:29",
+            "phenomenon": "KM21交流接触器无动作"
+          }
+        ]
+      },
+      {
+        "name": "小车机构",
+        "faults": [
+          {
+            "number": 13,
+            "sourceRow": 15,
+            "lineTag": "114",
+            "faultPoint": "PLC:I1.5--X0:39",
+            "phenomenon": "小车机构无动作"
+          },
+          {
+            "number": 15,
+            "sourceRow": 17,
+            "lineTag": "306",
+            "faultPoint": "PLC:Q0.5--KA41:14",
+            "phenomenon": "小车机构无动作"
+          },
+          {
+            "number": 17,
+            "sourceRow": 19,
+            "lineTag": "159",
+            "faultPoint": "X0：98--SQ41：2",
+            "phenomenon": "无小车前限位"
+          },
+          {
+            "number": 18,
+            "sourceRow": 20,
+            "lineTag": "160",
+            "faultPoint": "X0:99--SQ42:2",
+            "phenomenon": "无小车后限位"
+          },
+          {
+            "number": 21,
+            "sourceRow": 23,
+            "lineTag": "U41",
+            "faultPoint": "X2:05 --M41:U",
+            "phenomenon": "A1 变频器报警（输出缺相）"
+          },
+          {
+            "number": 25,
+            "sourceRow": 27,
+            "lineTag": "412",
+            "faultPoint": "KA41:5--X1:37",
+            "phenomenon": "KM41交流接触器无动作"
+          }
+        ]
+      },
+      {
+        "name": "俯仰机构",
+        "faults": [
+          {
+            "number": 14,
+            "sourceRow": 16,
+            "lineTag": "305",
+            "faultPoint": "PLC:Q0.4--KA31:14",
+            "phenomenon": "俯仰机构无动作"
+          },
+          {
+            "number": 16,
+            "sourceRow": 18,
+            "lineTag": "157",
+            "faultPoint": "X0:96--SQ32:2",
+            "phenomenon": "无俯仰上升限位"
+          },
+          {
+            "number": 19,
+            "sourceRow": 21,
+            "lineTag": "5L01",
+            "faultPoint": "QF31:2 --A1:L1",
+            "phenomenon": "A1变频器不工作（输入电源缺相）"
+          },
+          {
+            "number": 20,
+            "sourceRow": 22,
+            "lineTag": "V31",
+            "faultPoint": "KM31：4--X2:2",
+            "phenomenon": "A1 变频器报警（输出缺相）"
+          },
+          {
+            "number": 22,
+            "sourceRow": 24,
+            "lineTag": "501",
+            "faultPoint": "X1:12--KA34:5",
+            "phenomenon": "A1变频器无正转输出"
+          },
+          {
+            "number": 23,
+            "sourceRow": 25,
+            "lineTag": "502",
+            "faultPoint": "X1:13 --KA35:5",
+            "phenomenon": "A1变频器无反转输出"
+          },
+          {
+            "number": 24,
+            "sourceRow": 26,
+            "lineTag": "409",
+            "faultPoint": "KA31:12--X1:34",
+            "phenomenon": "KM31交流接触器无动作（俯仰）"
+          },
+          {
+            "number": 26,
+            "sourceRow": 28,
+            "lineTag": "V32",
+            "faultPoint": "FR31:4--X2:26",
+            "phenomenon": "俯仰机构抱闸无动作"
+          }
+        ]
+      },
+      {
+        "name": "前后倾机构",
+        "faults": [
+          {
+            "number": 47,
+            "sourceRow": 49,
+            "lineTag": "315",
+            "faultPoint": "PLC:Q2.4--KA53:14",
+            "phenomenon": "前后倾电机无正转"
+          },
+          {
+            "number": 48,
+            "sourceRow": 50,
+            "lineTag": "316",
+            "faultPoint": "PLC:Q2.5--KA54:14",
+            "phenomenon": "前后倾电机无反转"
+          },
+          {
+            "number": 49,
+            "sourceRow": 51,
+            "lineTag": "189",
+            "faultPoint": "PLC:I11.0--X0:138",
+            "phenomenon": "前后倾电机无动作"
+          },
+          {
+            "number": 50,
+            "sourceRow": 52,
+            "lineTag": "419",
+            "faultPoint": "KA53:9--X1:44",
+            "phenomenon": "KM53交流接触器无动作（前后倾）"
+          },
+          {
+            "number": 51,
+            "sourceRow": 53,
+            "lineTag": "422",
+            "faultPoint": "KA54:5--X1:47",
+            "phenomenon": "KM54交流接触器无动作"
+          }
+        ]
+      },
+      {
+        "name": "平面回转机构",
+        "faults": [
+          {
+            "number": 58,
+            "sourceRow": 60,
+            "lineTag": "317",
+            "faultPoint": "PLC:Q2.6--KA55:14",
+            "phenomenon": "平面回转电机无正转"
+          },
+          {
+            "number": 59,
+            "sourceRow": 61,
+            "lineTag": "318",
+            "faultPoint": "PLC:Q2.7--KA56:14",
+            "phenomenon": "平面回转电机无反转"
+          },
+          {
+            "number": 60,
+            "sourceRow": 62,
+            "lineTag": "190",
+            "faultPoint": "PLC：I11.1--X0:139",
+            "phenomenon": "平面回转电机无动作"
+          },
+          {
+            "number": 61,
+            "sourceRow": 63,
+            "lineTag": "V54",
+            "faultPoint": "X2:46--M54:V",
+            "phenomenon": "平面回转机构无动作"
+          }
+        ]
+      },
+      {
+        "name": "左右倾机构",
+        "faults": [
+          {
+            "number": 52,
+            "sourceRow": 54,
+            "lineTag": "319",
+            "faultPoint": "PLC:Q3.0--KA57:14",
+            "phenomenon": "左右倾电机无正转"
+          },
+          {
+            "number": 53,
+            "sourceRow": 55,
+            "lineTag": "320",
+            "faultPoint": "PLC:Q3.1--KA58:14",
+            "phenomenon": "左右倾电机无反转"
+          },
+          {
+            "number": 54,
+            "sourceRow": 56,
+            "lineTag": "162",
+            "faultPoint": "PLC：I7.4--X0:101",
+            "phenomenon": "无左右倾终点限位"
+          },
+          {
+            "number": 55,
+            "sourceRow": 57,
+            "lineTag": "165",
+            "faultPoint": "X0:104--SQ504:OUT",
+            "phenomenon": "无左右倾归零限位"
+          },
+          {
+            "number": 56,
+            "sourceRow": 58,
+            "lineTag": "188",
+            "faultPoint": "PLC:I10.7--X0:137",
+            "phenomenon": "左右倾电机无动作"
+          },
+          {
+            "number": 57,
+            "sourceRow": 59,
+            "lineTag": "429",
+            "faultPoint": "X1:54--KA58:9",
+            "phenomenon": "KM58交流接触器无动作"
+          }
+        ]
+      },
+      {
+        "name": "夹轮器",
+        "faults": [
+          {
+            "number": 44,
+            "sourceRow": 46,
+            "lineTag": "125",
+            "faultPoint": "SB03:4--X0:50",
+            "phenomenon": "夹轮器无夹轮"
+          },
+          {
+            "number": 45,
+            "sourceRow": 47,
+            "lineTag": "126",
+            "faultPoint": "SB04:4--X0:51",
+            "phenomenon": "夹轮器无松轮"
+          },
+          {
+            "number": 46,
+            "sourceRow": 48,
+            "lineTag": "313",
+            "faultPoint": "PLC:Q2.2--KA51:14",
+            "phenomenon": "夹轮器机构无动作"
+          }
+        ]
+      },
+      {
+        "name": "吊具泵",
+        "faults": [
+          {
+            "number": 62,
+            "sourceRow": 64,
+            "lineTag": "131",
+            "faultPoint": "SB05:4--X0:56",
+            "phenomenon": "吊具泵开无动作"
+          },
+          {
+            "number": 63,
+            "sourceRow": 65,
+            "lineTag": "132",
+            "faultPoint": "SB06:4--X0:57",
+            "phenomenon": "吊具泵关无动作"
+          },
+          {
+            "number": 64,
+            "sourceRow": 66,
+            "lineTag": "134",
+            "faultPoint": "SA03:2--X0:59",
+            "phenomenon": "吊具旋转无左旋"
+          },
+          {
+            "number": 65,
+            "sourceRow": 67,
+            "lineTag": "135",
+            "faultPoint": "SA03:4--X0:60",
+            "phenomenon": "吊具旋转无右旋"
+          },
+          {
+            "number": 66,
+            "sourceRow": 68,
+            "lineTag": "136",
+            "faultPoint": "SA04:2--X0:61",
+            "phenomenon": "吊具倾转无左倾"
+          },
+          {
+            "number": 67,
+            "sourceRow": 69,
+            "lineTag": "137",
+            "faultPoint": "SA04:4--X0:62",
+            "phenomenon": "吊具倾转无右倾"
+          }
+        ]
+      },
+      {
+        "name": "元器件损坏",
+        "faults": [
+          {
+            "number": 68,
+            "sourceRow": 70,
+            "lineTag": "SQ11",
+            "faultPoint": "SQ11(3:4)",
+            "phenomenon": "SQ11元器件损坏"
+          },
+          {
+            "number": 69,
+            "sourceRow": 71,
+            "lineTag": "SQ12",
+            "faultPoint": "SQ12(3:4)",
+            "phenomenon": "SQ12元器件损坏"
+          },
+          {
+            "number": 70,
+            "sourceRow": 72,
+            "lineTag": "SQ13",
+            "faultPoint": "SQ13(3:4)",
+            "phenomenon": "SQ13元器件损坏"
+          },
+          {
+            "number": 71,
+            "sourceRow": 73,
+            "lineTag": "SQ21",
+            "faultPoint": "SQ21(3:4)",
+            "phenomenon": "SQ21元器件损坏"
+          },
+          {
+            "number": 72,
+            "sourceRow": 74,
+            "lineTag": "SQ22",
+            "faultPoint": "SQ22(3:4)",
+            "phenomenon": "SQ22元器件损坏"
+          },
+          {
+            "number": 73,
+            "sourceRow": 75,
+            "lineTag": "SQ31",
+            "faultPoint": "SQ31(3:4)",
+            "phenomenon": "SQ31元器件损坏"
+          },
+          {
+            "number": 74,
+            "sourceRow": 76,
+            "lineTag": "SQ32",
+            "faultPoint": "SQ32(3:4)",
+            "phenomenon": "SQ32元器件损坏"
+          },
+          {
+            "number": 75,
+            "sourceRow": 77,
+            "lineTag": "SQ33",
+            "faultPoint": "SQ33(3:4)",
+            "phenomenon": "SQ33元器件损坏"
+          },
+          {
+            "number": 76,
+            "sourceRow": 78,
+            "lineTag": "SQ41",
+            "faultPoint": "SQ41(3:4)",
+            "phenomenon": "SQ41元器件损坏"
+          },
+          {
+            "number": 77,
+            "sourceRow": 79,
+            "lineTag": "SQ42",
+            "faultPoint": "SQ42(3:4)",
+            "phenomenon": "SQ42元器件损坏"
+          },
+          {
+            "number": 78,
+            "sourceRow": 80,
+            "lineTag": "SQ43",
+            "faultPoint": "SQ43(3:4)",
+            "phenomenon": "SQ43元器件损坏"
+          },
+          {
+            "number": 79,
+            "sourceRow": 81,
+            "lineTag": "SQ501",
+            "faultPoint": "SQ501:OUT",
+            "phenomenon": "SQ501元器件损坏"
+          },
+          {
+            "number": 80,
+            "sourceRow": 82,
+            "lineTag": "SQ502",
+            "faultPoint": "SQ502:OUT",
+            "phenomenon": "SQ502元器件损坏"
+          },
+          {
+            "number": 81,
+            "sourceRow": 83,
+            "lineTag": "SQ503",
+            "faultPoint": "SQ503:OUT",
+            "phenomenon": "SQ503元器件损坏"
+          },
+          {
+            "number": 82,
+            "sourceRow": 84,
+            "lineTag": "SQ504",
+            "faultPoint": "SQ504:OUT",
+            "phenomenon": "SQ504元器件损坏"
+          },
+          {
+            "number": 83,
+            "sourceRow": 85,
+            "lineTag": "SQ505",
+            "faultPoint": "SQ505:OUT",
+            "phenomenon": "SQ505元器件损坏"
+          },
+          {
+            "number": 84,
+            "sourceRow": 86,
+            "lineTag": "SQ506",
+            "faultPoint": "SQ506:OUT",
+            "phenomenon": "SQ506元器件损坏"
+          },
+          {
+            "number": 85,
+            "sourceRow": 87,
+            "lineTag": "SQ14",
+            "faultPoint": "SQ14:OUT",
+            "phenomenon": "SQ14元器件损坏"
+          },
+          {
+            "number": 86,
+            "sourceRow": 88,
+            "lineTag": "SQ23",
+            "faultPoint": "SQ23:OUT",
+            "phenomenon": "SQ23元器件损坏"
+          },
+          {
+            "number": 87,
+            "sourceRow": 89,
+            "lineTag": "SQ34",
+            "faultPoint": "SQ34:OUT",
+            "phenomenon": "SQ34元器件损坏"
+          },
+          {
+            "number": 88,
+            "sourceRow": 90,
+            "lineTag": "SQ44",
+            "faultPoint": "SQ44:OUT",
+            "phenomenon": "SQ44元器件损坏"
+          },
+          {
+            "number": 89,
+            "sourceRow": 91,
+            "lineTag": "SQ513",
+            "faultPoint": "SQ513:OUT",
+            "phenomenon": "SQ513元器件损坏"
+          },
+          {
+            "number": 90,
+            "sourceRow": 92,
+            "lineTag": "SQ514",
+            "faultPoint": "SQ514:OUT",
+            "phenomenon": "SQ514元器件损坏"
+          },
+          {
+            "number": 91,
+            "sourceRow": 93,
+            "lineTag": "SQ515",
+            "faultPoint": "SQ515:OUT",
+            "phenomenon": "SQ515元器件损坏"
+          },
+          {
+            "number": 92,
+            "sourceRow": 94,
+            "lineTag": "KM03",
+            "faultPoint": "KM01(A1:A2)",
+            "phenomenon": "KM01元器件损坏"
+          },
+          {
+            "number": 93,
+            "sourceRow": 95,
+            "lineTag": "KM04",
+            "faultPoint": "KM02(A1:A2)",
+            "phenomenon": "KM02元器件损坏"
+          },
+          {
+            "number": 94,
+            "sourceRow": 96,
+            "lineTag": "KM05",
+            "faultPoint": "KM03(A1:A2)",
+            "phenomenon": "KM03元器件损坏"
+          },
+          {
+            "number": 95,
+            "sourceRow": 97,
+            "lineTag": "KM11",
+            "faultPoint": "KM11(A1:A2)",
+            "phenomenon": "KM11元器件损坏"
+          },
+          {
+            "number": 96,
+            "sourceRow": 98,
+            "lineTag": "KM21",
+            "faultPoint": "KM21(A1:A2)",
+            "phenomenon": "KM21元器件损坏"
+          },
+          {
+            "number": 97,
+            "sourceRow": 99,
+            "lineTag": "KM31",
+            "faultPoint": "KM31(A1:A2)",
+            "phenomenon": "KM31元器件损坏"
+          },
+          {
+            "number": 98,
+            "sourceRow": 100,
+            "lineTag": "KM41",
+            "faultPoint": "KM41(A1:A2)",
+            "phenomenon": "KM41元器件损坏"
+          },
+          {
+            "number": 99,
+            "sourceRow": 101,
+            "lineTag": "KM53",
+            "faultPoint": "KM53(A1:A2)",
+            "phenomenon": "KM53元器件损坏"
+          },
+          {
+            "number": 100,
+            "sourceRow": 102,
+            "lineTag": "KM55",
+            "faultPoint": "KM55(A1:A2)",
+            "phenomenon": "KM55元器件损坏"
+          }
+        ]
+      }
+    ],
+    "unclassifiedFaults": []
+  }
+}

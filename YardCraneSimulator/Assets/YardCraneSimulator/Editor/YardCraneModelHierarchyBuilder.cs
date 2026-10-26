@@ -11,13 +11,11 @@ using UnityEngine.SceneManagement;
 
 namespace PortTraining.YardCraneSimulator.Editor
 {
-    [InitializeOnLoad]
     public static class YardCraneModelHierarchyBuilder
     {
         public const string RootName = "YC_RuntimeRoot";
-        private const string TestScenePath = "Assets/test.unity";
+        public const string OperationalScenePath = "Assets/YardCraneSimulator/Scenes/YardCrane.unity";
         private const string GrayboxMaterialFolder = "Assets/YardCraneSimulator/Art/Materials/Graybox";
-        private const string AutoCreateSessionKey = "YardCraneSimulator.ModelHierarchy.AutoCreated.max8.v1";
 
         private static readonly string[] RequiredPaths =
         {
@@ -40,6 +38,8 @@ namespace PortTraining.YardCraneSimulator.Editor
             "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit",
             "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop07_Exit",
             "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop08_Exit",
+            // Legacy v1 top-anchor candidates remain stable scene slots. The v2 straight-rope
+            // profile selects only four of these via topAnchorPath; none creates a second leg.
             "20_TrolleyMotion/RopeDeadEnds/Loop01_DeadEnd",
             "20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd",
             "20_TrolleyMotion/RopeDeadEnds/Loop03_DeadEnd",
@@ -55,6 +55,7 @@ namespace PortTraining.YardCraneSimulator.Editor
             "30_SpreaderPhysics/Visual/Graybox_Placeholder",
             "30_SpreaderPhysics/Physics/RigidbodyRoot",
             "30_SpreaderPhysics/Physics/Colliders",
+            "30_SpreaderPhysics/Physics/Colliders/Graybox_HeadblockSpreaderCollider",
             "30_SpreaderPhysics/Headblock/Visual",
             "30_SpreaderPhysics/RopeSheaves/Loop01_Sheave",
             "30_SpreaderPhysics/RopeSheaves/Loop02_Sheave",
@@ -81,8 +82,10 @@ namespace PortTraining.YardCraneSimulator.Editor
             "40_RopeRig/EightRopeLoops/Loop06_Z_FR",
             "40_RopeRig/EightRopeLoops/Loop07_Z_RL",
             "40_RopeRig/EightRopeLoops/Loop08_Z_RR",
+            "40_RopeRig/_ObiSceneComponents",
             "50_ContainerWorkspace/ActiveContainer",
             "50_ContainerWorkspace/ActiveContainer/Graybox_Placeholder",
+            "50_ContainerWorkspace/ContainerFreeBody",
             "50_ContainerWorkspace/AttachmentProxy",
             "60_Sensors/CollisionSensors",
             "60_Sensors/AlignmentSensors",
@@ -97,11 +100,6 @@ namespace PortTraining.YardCraneSimulator.Editor
             "90_Diagnostics/DebugVisuals",
             "90_Diagnostics/RuntimeEvidence"
         };
-
-        static YardCraneModelHierarchyBuilder()
-        {
-            EditorApplication.delayCall += AutoCreateInOpenTestScene;
-        }
 
         [MenuItem("Tools/Yard Crane/Model Hierarchy/Create or Repair YC Runtime Root")]
         public static void CreateOrRepairInActiveScene()
@@ -146,11 +144,47 @@ namespace PortTraining.YardCraneSimulator.Editor
             Debug.Log($"[YC_HIERARCHY_READY] {RootName} created/repaired with {RequiredPaths.Length} required slots.");
         }
 
-        public static void CreateAndValidateTestSceneHierarchy()
+        // 2026-09-11: ApplyDefaultMaxPrototypePose only runs automatically the first time the
+        // YardCraneEightRopeMaxPrototypeRig component is added to a scene (see
+        // CreateOrRepairInActiveScene above), so an existing scene's trolley/spreader/rope-node
+        // local positions do not pick up new pose defaults on their own. This menu item is the
+        // explicit, opt-in way to push current defaults (e.g. the 2026-09-11 24m/13.5m rescale)
+        // onto an already-populated scene without silently altering CreateOrRepairInActiveScene's
+        // existing first-creation-only behavior.
+        [MenuItem("Tools/Yard Crane/Model Hierarchy/Reapply Default MAX Prototype Pose")]
+        public static void ReapplyDefaultPoseInActiveScene()
         {
-            EditorSceneManager.OpenScene(TestScenePath, OpenSceneMode.Single);
+            var scene = SceneManager.GetActiveScene();
+            if (!scene.IsValid() || !scene.isLoaded)
+            {
+                throw new InvalidOperationException("No loaded scene is available for the yard-crane hierarchy.");
+            }
+
+            var root = FindRoot(scene);
+            if (root == null)
+            {
+                throw new InvalidOperationException($"{RootName} does not exist in the active scene; run \"Create or Repair YC Runtime Root\" first.");
+            }
+
+            Undo.RegisterFullObjectHierarchyUndo(root, "Reapply Default MAX Prototype Pose");
+            ApplyDefaultMaxPrototypePose(root.transform);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log($"[YC_HIERARCHY_POSE_REAPPLIED] {RootName} trolley/spreader/rope-node local positions reset to current ApplyDefaultMaxPrototypePose defaults.");
+        }
+
+        public static void CreateAndValidateOperationalSceneHierarchy()
+        {
+            EditorSceneManager.OpenScene(OperationalScenePath, OpenSceneMode.Single);
             CreateOrRepairInActiveScene();
             ValidateInActiveScene();
+        }
+
+        // Retained for existing automation callers while the scene name migrates.
+        [Obsolete("Use CreateAndValidateOperationalSceneHierarchy instead.")]
+        public static void CreateAndValidateTestSceneHierarchy()
+        {
+            CreateAndValidateOperationalSceneHierarchy();
         }
 
         [MenuItem("Tools/Yard Crane/Model Hierarchy/Validate YC Runtime Root")]
@@ -309,24 +343,6 @@ namespace PortTraining.YardCraneSimulator.Editor
             }
         }
 
-        private static void AutoCreateInOpenTestScene()
-        {
-            if (SessionState.GetBool(AutoCreateSessionKey, false))
-            {
-                return;
-            }
-
-            var scene = SceneManager.GetActiveScene();
-            if (scene.path != TestScenePath)
-            {
-                return;
-            }
-
-            SessionState.SetBool(AutoCreateSessionKey, true);
-            CreateOrRepairInActiveScene();
-            ValidateInActiveScene();
-        }
-
         private static GameObject FindRoot(Scene scene)
         {
             foreach (var root in scene.GetRootGameObjects())
@@ -362,11 +378,23 @@ namespace PortTraining.YardCraneSimulator.Editor
 
         private static void ApplyDefaultMaxPrototypePose(Transform root)
         {
-            SetLocalPosition(root, "20_TrolleyMotion", new Vector3(0f, 8f, 0f));
-            SetLocalPosition(root, "30_SpreaderPhysics", new Vector3(0f, 3.2f, 0f));
+            // 2026-09-11 real-scale recalibration: trolley Y tracks the user-specified 24m
+            // structure height directly (this is the "trolleyWorldY" reference the hoist-range
+            // math in YardCraneEightRopeMaxProfile.GeometryAndSafetySection is derived from -
+            // keep these two in sync if either changes). Spreader startup Y is placed at the
+            // same proportion of the new reachable range [0m, 21m] that the old startup pose
+            // (3.2) occupied in the old range [-0.5m, 5.2m] (~65% of the way up) - a reasoned
+            // carry-over, not a requirement; the physics settles it on its own after startup
+            // pre-tensioning regardless of the exact starting value. Container rest Y is
+            // unchanged - it is half the container's own physical height above ground, and
+            // container size is not part of this round's rescale.
+            SetLocalPosition(root, "20_TrolleyMotion", new Vector3(0f, 24f, 0f));
+            SetLocalPosition(root, "30_SpreaderPhysics", new Vector3(0f, 13.5f, 0f));
             SetLocalPosition(root, "50_ContainerWorkspace/ActiveContainer", new Vector3(0f, 1.35f, 0f));
 
-            // Drum A: four triangles whose top bases run in trolley (X) direction.
+            // Drum A legacy top-anchor candidates. The v2 straight-rope profile selects a
+            // left/right symmetric subset from Exit and DeadEnd slots; these points no longer
+            // form four two-leg triangles.
             SetLocalPosition(root, "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit", new Vector3(-2.2f, -0.35f, 0.85f));
             SetLocalPosition(root, "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop02_Exit", new Vector3(0.1f, -0.35f, 0.85f));
             SetLocalPosition(root, "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit", new Vector3(-2.2f, -0.35f, -0.85f));
@@ -376,7 +404,8 @@ namespace PortTraining.YardCraneSimulator.Editor
             SetLocalPosition(root, "20_TrolleyMotion/RopeDeadEnds/Loop03_DeadEnd", new Vector3(-0.1f, -0.35f, -0.85f));
             SetLocalPosition(root, "20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd", new Vector3(2.2f, -0.35f, -0.85f));
 
-            // Drum B: four triangles whose top bases run in gantry (Z) direction.
+            // Drum B legacy top-anchor candidates. The v2 profile selects a front/rear
+            // symmetric subset so the eight independent ropes do not introduce a net side load.
             SetLocalPosition(root, "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit", new Vector3(-0.95f, -0.35f, 1.9f));
             SetLocalPosition(root, "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit", new Vector3(0.95f, -0.35f, 1.9f));
             SetLocalPosition(root, "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop07_Exit", new Vector3(-0.95f, -0.35f, 0f));
@@ -403,12 +432,20 @@ namespace PortTraining.YardCraneSimulator.Editor
             var spreader = root.Find("30_SpreaderPhysics/Visual/Graybox_Placeholder");
             var container = root.Find("50_ContainerWorkspace/ActiveContainer/Graybox_Placeholder");
 
-            CreateCube(gantry, "Gantry_Leg_FL", new Vector3(-6f, 3.8f, 2.8f), new Vector3(0.45f, 7.6f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
-            CreateCube(gantry, "Gantry_Leg_FR", new Vector3(6f, 3.8f, 2.8f), new Vector3(0.45f, 7.6f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
-            CreateCube(gantry, "Gantry_Leg_RL", new Vector3(-6f, 3.8f, -2.8f), new Vector3(0.45f, 7.6f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
-            CreateCube(gantry, "Gantry_Leg_RR", new Vector3(6f, 3.8f, -2.8f), new Vector3(0.45f, 7.6f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
-            CreateCube(gantry, "Gantry_TopBeam_Front", new Vector3(0f, 7.6f, 2.8f), new Vector3(12.6f, 0.5f, 0.55f), "GantryLightBlue", new Color(0.12f, 0.52f, 0.95f));
-            CreateCube(gantry, "Gantry_TopBeam_Rear", new Vector3(0f, 7.6f, -2.8f), new Vector3(12.6f, 0.5f, 0.55f), "GantryLightBlue", new Color(0.12f, 0.52f, 0.95f));
+            // 2026-09-11 real-scale recalibration: X spread (~29m between leg centers, 30m
+            // beam) matches the user's 30m span; leg height 24f matches the user's 24m structure
+            // height (kept equal to "20_TrolleyMotion" Y above, and to the hoist-range math in
+            // YardCraneEightRopeMaxProfile - all three must move together). Z leg spread (2.8f,
+            // the gantry's own travel-direction wheelbase footprint) and the leg/beam cross-
+            // section thickness are left unchanged - they are not driven by any of the three
+            // user-specified numbers (span/height/rail length), just kept as a reasonable
+            // greybox proportion; this is a placeholder box, not a structural design.
+            CreateCube(gantry, "Gantry_Leg_FL", new Vector3(-14.5f, 12f, 2.8f), new Vector3(0.45f, 24f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
+            CreateCube(gantry, "Gantry_Leg_FR", new Vector3(14.5f, 12f, 2.8f), new Vector3(0.45f, 24f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
+            CreateCube(gantry, "Gantry_Leg_RL", new Vector3(-14.5f, 12f, -2.8f), new Vector3(0.45f, 24f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
+            CreateCube(gantry, "Gantry_Leg_RR", new Vector3(14.5f, 12f, -2.8f), new Vector3(0.45f, 24f, 0.45f), "GantryBlue", new Color(0.10f, 0.38f, 0.82f));
+            CreateCube(gantry, "Gantry_TopBeam_Front", new Vector3(0f, 24f, 2.8f), new Vector3(30f, 0.5f, 0.55f), "GantryLightBlue", new Color(0.12f, 0.52f, 0.95f));
+            CreateCube(gantry, "Gantry_TopBeam_Rear", new Vector3(0f, 24f, -2.8f), new Vector3(30f, 0.5f, 0.55f), "GantryLightBlue", new Color(0.12f, 0.52f, 0.95f));
 
             CreateCube(trolley, "Trolley_Body", Vector3.zero, new Vector3(3f, 0.55f, 2.5f), "TrolleyAmber", new Color(1f, 0.68f, 0.08f));
             CreateCube(spreader, "Spreader_Body", Vector3.zero, new Vector3(4f, 0.5f, 2.2f), "SpreaderCyan", new Color(0.10f, 0.82f, 0.68f));

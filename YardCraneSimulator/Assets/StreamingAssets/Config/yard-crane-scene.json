@@ -4,9 +4,11 @@
   "sceneProfileId": "YC-SCENE-DEV",
   "pointMapVersion": "YC-POINTMAP-PENDING",
   "protocolVersion": "1.1.0",
-  "defaultDisplayProfileId": "DESKTOP-16X9-V1",
-  "operationalSceneName": "test",
+  "defaultDisplayProfileId": "SIMULATOR-DUAL-DISPLAY-1920X1080X2-V2",
+  "operationalSceneName": "YardCrane",
   "supportedDisplayProfileIds": [
+    "SIMULATOR-DUAL-DISPLAY-1920X1080X2-V2",
+    "SIMULATOR-DUAL-STACK-1920X2160-V1",
     "DESKTOP-16X9-V1",
     "SIMULATOR-PORTRAIT-9X16-V1"
   ],

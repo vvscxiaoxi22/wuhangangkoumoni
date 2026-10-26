@@ -6,10 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/YardCraneSimulator/Scenes/StudentEntry.unity
+    guid: 3d8c5c97123c451d8b745916f1767988
+  - enabled: 1
     path: Assets/YardCraneSimulator/Scenes/Bootstrap.unity
     guid: 728c1fb78d8b74847806ac69b98f85ce
   - enabled: 1
-    path: Assets/test.unity
-    guid: e4d99c6777192454fb31cbcc95cc537f
-  m_configObjects: {}
+    path: Assets/YardCraneSimulator/Scenes/YardCrane.unity
+    guid: f6d4802d697df644c92ca0a46b68c099
+  - enabled: 1
+    path: Assets/YardCraneSimulator/Scenes/StudentHome.unity
+    guid: 6d54ac9c298b03541b3e0e45cf99f1e4
+  - enabled: 1
+    path: Assets/YardCraneSimulator/Scenes/TeacherHome.unity
+    guid: 81ea0a912e5ce934b9578afc41b07515
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c7bcfa0da16f7ff48a0ec2b31e5d44bf, type: 3}
   m_UseUCBPForAssetBundles: 0

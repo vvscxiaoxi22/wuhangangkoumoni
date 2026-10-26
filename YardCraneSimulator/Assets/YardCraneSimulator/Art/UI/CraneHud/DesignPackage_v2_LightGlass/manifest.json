@@ -1,0 +1,35 @@
+{
+  "package": "YardCrane.CraneHud.LightGlass",
+  "version": "2.0.0",
+  "designResolution": { "width": 1920, "height": 1080 },
+  "reference": "Reference/crane-hud-light-reference-v2.png",
+  "layout": [
+    "Layout/timer-panel.svg",
+    "Layout/task-title-panel.svg",
+    "Layout/status-strip-panel.svg",
+    "Layout/telemetry-panel.svg",
+    "Layout/task-panel.svg",
+    "Layout/pose-panel.svg",
+    "Layout/lock-panel.svg",
+    "Layout/lock-selected-pill.svg",
+    "Layout/status-divider.svg"
+  ],
+  "icons": [
+    "Icons/icon-clock.svg",
+    "Icons/icon-back.svg",
+    "Icons/icon-close.svg",
+    "Icons/icon-task.svg",
+    "Icons/icon-target.svg",
+    "Icons/icon-location.svg",
+    "Icons/icon-lock.svg",
+    "Icons/icon-info-dot.svg"
+  ],
+  "statusLamps": [
+    "StatusLamps/brake-on.svg", "StatusLamps/brake-off.svg",
+    "StatusLamps/anchor-on.svg", "StatusLamps/anchor-off.svg",
+    "StatusLamps/unlock-on.svg", "StatusLamps/unlock-off.svg",
+    "StatusLamps/single-on.svg", "StatusLamps/single-off.svg",
+    "StatusLamps/twin-on.svg", "StatusLamps/twin-off.svg"
+  ]
+}
+

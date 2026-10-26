@@ -1,0 +1,22 @@
+.shell-lower {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: rgb(4, 45, 97);
+    overflow: hidden;
+    color: rgb(231, 240, 244);
+}
+
+Label { margin: 0; padding: 0; -unity-font-style: normal; }
+
+.lower-editorial { width: 1110px; height: 1080px; padding: 118px 104px 92px 118px; justify-content: center; background-color: rgb(4, 45, 97); border-right-width: 1px; border-right-color: rgba(171, 220, 255, 0.24); }
+.lower-kicker { color: rgb(156, 220, 244); font-size: 14px; letter-spacing: 4px; }
+.lower-headline { margin-top: 44px; color: rgb(244, 250, 255); font-size: 66px; white-space: normal; }
+.lower-caption { margin-top: 42px; color: rgb(179, 206, 228); font-size: 14px; letter-spacing: 2px; }
+.lower-rule { width: 310px; height: 2px; margin-top: 54px; background-color: rgb(50, 210, 255); }
+.lower-index { margin-top: 28px; color: rgb(128, 181, 213); font-size: 13px; letter-spacing: 3px; }
+.lower-poster { width: 810px; height: 1080px; flex-grow: 0; flex-shrink: 0; }

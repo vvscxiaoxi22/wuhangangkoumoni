@@ -168,8 +168,7 @@ namespace PortTraining.YardCraneSimulator.Crane
     {
         Unknown = 0,
         Ft20 = 1,
-        Ft40 = 2,
-        Twin20 = 3
+        Ft40 = 2
     }
 
     public enum YardCraneSpreaderSizeMechanismState
@@ -180,11 +179,14 @@ namespace PortTraining.YardCraneSimulator.Crane
     }
 
     /// <summary>
-    /// Unity-independent spreader size (20ft/40ft/Twin20) state machine. Mirrors
-    /// YardCraneAnchorInterlock's transition timing, but carries a three-way target
+    /// Unity-independent spreader size (20ft/40ft) state machine. Mirrors
+    /// YardCraneAnchorInterlock's transition timing, but carries a two-way target
     /// size instead of a boolean, and gates the request on the spreader hydraulic
     /// pump being on and the crane being unloaded in addition to stationary - resizing
     /// while a container is locked or the pump is off is not physically possible.
+    /// Twin20 (dual 20ft) is a quay-crane-only capability per the project baseline
+    /// (see PortTraining/LM-Wiki 项目开发基线-2026-08-28.md §3.5 vs §3.6) and is
+    /// deliberately not represented here.
     /// </summary>
     public sealed class YardCraneSpreaderSizeInterlock
     {

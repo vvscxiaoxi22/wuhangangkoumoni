@@ -1,0 +1,387 @@
+.shell {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: rgb(231, 240, 244);
+    background-color: rgb(3, 43, 96);
+    font-size: 18px;
+    overflow: hidden;
+}
+
+Label { margin: 0; padding: 0; -unity-font-style: normal; }
+.shell Button { background-image: none; }
+.page { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.glass-card { background-color: rgba(7, 57, 105, 0.84); border-width: 1px; border-color: rgba(171, 220, 255, 0.24); border-top-color: rgba(212, 242, 255, 0.48); border-radius: 28px; }
+.ambient { position: absolute; border-radius: 50%; }
+.ambient-one { width: 920px; height: 920px; left: -260px; bottom: -500px; background-color: rgba(9, 142, 205, 0.22); }
+.ambient-two { width: 620px; height: 620px; right: -180px; top: -260px; background-color: rgba(37, 198, 255, 0.12); }
+.port-grid { position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background-color: rgba(34, 72, 87, 0.28); border-top-width: 1px; border-top-color: rgba(146, 196, 211, 0.14); }
+.crane-mark { position: absolute; background-color: rgba(112, 171, 191, 0.10); }
+.crane-leg-left { left: 210px; bottom: 145px; width: 24px; height: 450px; }
+.crane-leg-right { left: 750px; bottom: 145px; width: 24px; height: 450px; }
+.crane-beam { left: 165px; bottom: 570px; width: 720px; height: 26px; }
+.crane-trolley { left: 465px; bottom: 535px; width: 92px; height: 34px; }
+.crane-rope { left: 506px; bottom: 310px; width: 8px; height: 225px; }
+.crane-spreader { left: 438px; bottom: 286px; width: 144px; height: 22px; }
+
+.section-code { margin-top: 0; color: rgb(156, 220, 244); font-size: 14px; letter-spacing: 3px; }
+.login-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.login-blue-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(3, 44, 91, 0.66); }
+/* Declarative-only (USS url(), not a C#-loaded Image.image) so a missing file
+   cannot fail the whole document to build - same pattern as the drill-card photos and
+   Display2's poster. Image elements ignore background-image entirely (they render from
+   .image/.sprite instead), which is why student-home-background/student-learning-background
+   are VisualElement, not ui:Image. */
+.student-home-skin { background-image: url('StudentHomeSkin_v1.png'); -unity-background-scale-mode: scale-and-crop; }
+.student-learning-skin { background-image: url('StudentLearningSkin_v1.png'); -unity-background-scale-mode: scale-and-crop; }
+
+.home-page { display: none; flex-direction: row; padding: 28px; background-color: rgb(5, 80, 145); }
+.home-sidebar { width: 300px; height: 1024px; flex-shrink: 0; padding: 26px 18px 20px 18px; border-radius: 30px; background-color: rgba(17, 91, 148, 0.74); }
+.shell-brand-row { height: 88px; padding: 0 10px 24px 10px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(171, 220, 255, 0.18); }
+.sidebar-monogram { width: 52px; height: 52px; margin-right: 14px; border-width: 1px; border-color: rgba(182, 239, 255, 0.48); border-radius: 16px; color: rgb(182, 239, 255); font-size: 28px; -unity-text-align: middle-center; }
+.sidebar-brand-title { font-size: 18px; -unity-font-style: bold; }
+.sidebar-brand-code { margin-top: 4px; color: rgb(134, 199, 232); font-size: 11px; letter-spacing: 3px; }
+.station-label { height: 64px; padding: 21px 12px; border-bottom-width: 1px; border-bottom-color: rgba(171, 220, 255, 0.18); font-size: 14px; }
+.sidebar-nav { margin-top: 18px; }
+.nav-item { height: 58px; margin-bottom: 5px; padding: 0 15px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(0, 0, 0, 0); border-radius: 14px; color: rgb(189, 215, 237); font-size: 16px; }
+.nav-item.active { color: rgb(244, 250, 255); background-color: rgba(55, 189, 250, 0.23); border-color: rgba(135, 220, 255, 0.28); }
+.nav-icon { width: 31px; color: rgb(181, 232, 250); font-size: 18px; }
+.nav-tail { margin-left: auto; color: rgb(128, 181, 213); font-size: 11px; }
+.sidebar-spacer { flex-grow: 1; }
+.sidebar-nav-bottom { margin-top: 0; padding-top: 12px; border-top-width: 1px; border-top-color: rgba(171, 220, 255, 0.18); }
+.profile-panel { min-height: 96px; margin-top: 12px; padding: 15px 8px 0 8px; flex-direction: row; align-items: center; border-top-width: 1px; border-top-color: rgba(171, 220, 255, 0.18); }
+.profile-avatar { width: 42px; height: 42px; margin-right: 10px; border-radius: 50%; background-color: rgb(72, 177, 221); color: rgb(1, 44, 81); font-size: 13px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.profile-copy { flex-grow: 1; min-width: 0; }
+.profile-name { color: rgb(244, 250, 255); font-size: 12px; white-space: normal; }
+.profile-caption { margin-top: 4px; color: rgb(163, 199, 224); font-size: 10px; }
+.sidebar-button { width: 45px; height: 34px; margin: 0 0 0 5px; padding: 0; border-width: 1px; border-color: rgba(171, 220, 255, 0.18); border-radius: 11px; background-color: rgba(0, 32, 73, 0.20); color: rgb(213, 232, 246); font-size: 11px; }
+.quiet-button { color: rgb(143, 181, 208); }
+.workspace-body { flex-grow: 1; min-width: 0; height: 1024px; margin-left: 28px; }
+.topbar { height: 88px; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.workspace-path { color: rgb(167, 209, 232); font-size: 14px; }
+.home-title { margin-top: 7px; font-size: 36px; -unity-font-style: normal; }
+.top-actions { flex-direction: row; align-items: center; }
+.machine-chip { min-width: 70px; height: 44px; padding: 12px 18px; border-width: 1px; border-color: rgba(171, 220, 255, 0.14); color: rgb(179, 206, 228); font-size: 14px; -unity-text-align: middle-center; }
+.selected-chip { border-radius: 15px; background-color: rgba(82, 178, 235, 0.34); color: rgb(244, 250, 255); }
+.local-badge { height: 42px; margin-left: 16px; padding: 11px 16px; border-radius: 18px; color: rgb(185, 229, 246); background-color: rgba(106, 182, 235, 0.12); border-width: 1px; border-color: rgba(171, 220, 255, 0.22); font-size: 13px; }
+.welcome-panel { height: 228px; padding: 30px 38px; flex-direction: row; background-color: rgba(21, 116, 180, 0.64); }
+.welcome-copy { flex-grow: 1; justify-content: center; }
+.welcome-title { margin-top: 12px; color: rgb(244, 250, 255); font-size: 31px; white-space: normal; }
+.welcome-caption { margin-top: 12px; color: rgb(184, 217, 237); font-size: 15px; }
+.welcome-copy .launch-button { width: 260px; height: 52px; margin-top: 20px; font-size: 16px; }
+.launch-status { position: absolute; left: 320px; bottom: 41px; color: rgb(154, 204, 228); font-size: 12px; }
+.welcome-mark { width: 250px; margin-left: 28px; align-items: center; justify-content: center; border-left-width: 1px; border-left-color: rgba(171, 220, 255, 0.20); }
+.welcome-mark-title { color: rgb(181, 232, 255); font-size: 72px; }
+.welcome-mark-caption { margin-top: 5px; color: rgb(144, 205, 234); font-size: 14px; }
+.stats-row { height: 148px; margin-top: 20px; flex-direction: row; }
+.metric-card { flex-grow: 1; width: 33%; margin-right: 18px; padding: 23px 28px; border-radius: 22px; }
+.metric-card.metric-last { margin-right: 0; }
+.metric-label { color: rgb(195, 224, 240); font-size: 14px; }
+.metric-value { margin-top: 5px; color: rgb(244, 250, 255); font-size: 44px; }
+.metric-caption { margin-top: 2px; color: rgb(156, 199, 226); font-size: 12px; }
+.home-content { flex-grow: 1; flex-direction: row; padding-top: 20px; min-height: 0; }
+.main-column { flex-grow: 1; margin-right: 20px; }
+.side-column { width: 390px; flex-shrink: 0; }
+.section-card { padding: 24px; }
+.section-heading { height: 64px; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.section-title { font-size: 23px; -unity-font-style: bold; }
+.section-caption { margin-top: 6px; color: rgb(163, 199, 224); font-size: 13px; }
+.count-pill { padding: 7px 13px; border-radius: 15px; background-color: rgba(75, 222, 255, 0.13); color: rgb(156, 220, 244); font-size: 12px; }
+.task-card { flex-direction: row; align-items: center; min-height: 118px; padding: 20px; border-radius: 19px; background-color: rgba(4, 55, 109, 0.42); border-width: 1px; border-color: rgba(171, 220, 255, 0.17); }
+.selected-task { border-color: rgba(75, 222, 255, 0.48); border-left-width: 3px; background-color: rgba(17, 101, 157, 0.48); }
+.task-index { width: 46px; height: 46px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 15px; background-color: rgba(75, 222, 255, 0.13); color: rgb(126, 220, 244); font-size: 14px; }
+.task-copy { flex-grow: 1; margin-left: 18px; margin-right: 16px; }
+.task-title { font-size: 22px; -unity-font-style: bold; }
+.task-description { margin-top: 7px; color: rgb(174, 207, 227); font-size: 13px; white-space: normal; }
+.task-tags { margin-top: 9px; color: rgb(126, 204, 232); font-size: 12px; }
+.availability { padding: 7px 12px; border-radius: 13px; background-color: rgba(116, 143, 151, 0.13); color: rgb(145, 181, 204); font-size: 12px; }
+.planned-row { flex-grow: 1; flex-direction: row; margin-top: 14px; }
+.compact-task { width: 50%; min-height: 145px; margin-right: 7px; align-items: flex-start; }
+.second-compact { margin-left: 7px; margin-right: 0; }
+.compact-task .task-title { font-size: 18px; }
+.compact-task .task-description { font-size: 12px; }
+.compact-task .task-index { width: 38px; height: 38px; border-radius: 12px; }
+.compact-task .availability { position: absolute; right: 14px; bottom: 14px; }
+.unavailable { opacity: 0.48; }
+.readiness-card { padding: 24px; }
+.focus-title { margin-top: 9px; margin-bottom: 8px; }
+.device-row { height: 76px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(171, 220, 255, 0.13); }
+.device-symbol { width: 40px; height: 40px; margin-right: 13px; border-radius: 12px; align-items: center; justify-content: center; background-color: rgba(75, 222, 255, 0.11); color: rgb(142, 211, 235); font-size: 11px; -unity-font-style: bold; }
+.device-copy { flex-grow: 1; }
+.device-title { font-size: 14px; -unity-font-style: bold; }
+.device-caption { margin-top: 3px; color: rgb(143, 181, 208); font-size: 11px; }
+.device-status { font-size: 12px; }
+.disabled-device { border-bottom-width: 0; }
+.mode-notice { margin-top: 15px; padding: 15px; border-radius: 15px; background-color: rgba(106, 182, 235, 0.10); }
+.mode-title { color: rgb(213, 232, 246); font-size: 13px; -unity-font-style: bold; }
+.mode-copy { margin-top: 5px; color: rgb(156, 199, 226); font-size: 11px; white-space: normal; }
+.disabled-module { opacity: 0.50; }
+.good { color: rgb(99, 224, 174); }
+.muted { color: rgb(113, 141, 151); }
+.danger { color: rgb(255, 142, 142); }
+
+.shell.portrait .crane-leg-left { left: 90px; }
+.shell.portrait .crane-leg-right { left: 690px; }
+.shell.portrait .crane-beam { left: 60px; width: 780px; }
+.shell.portrait .home-page { padding: 64px 52px 48px 52px; }
+.shell.portrait .topbar { height: 190px; flex-direction: column; }
+.shell.portrait .top-actions { margin-top: 20px; }
+.shell.portrait .home-content { flex-direction: column; }
+.shell.portrait .main-column { margin-right: 0; }
+.shell.portrait .side-column { width: 100%; margin-top: 28px; flex-direction: row; align-items: flex-start; }
+.shell.portrait .readiness-card { flex-grow: 1; margin-right: 24px; }
+.shell.portrait .launch-button { width: 300px; margin-top: 0; }
+.shell.portrait .launch-status { position: absolute; right: 0; top: 72px; width: 300px; }
+
+/* StudentHome / Display1 — reference composition at 1920 x 1080.  The old
+   dashboard remains below as a dormant template, but never participates in
+   the student-facing layout. */
+#student-home-page { background-color: rgb(10, 55, 108); padding: 0; }
+#student-home-page .student-home-background { opacity: 1; }
+#student-home-page .home-sidebar, #student-home-page .workspace-body { display: none; }
+.student-home-tone { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(9, 67, 132, 0.13); }
+.student-home-vignette-left { position: absolute; left: -540px; top: -110px; width: 1180px; height: 1320px; border-radius: 590px; background-color: rgba(1, 28, 72, 0.15); }
+.student-home-vignette-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 210px; background-color: rgba(2, 27, 65, 0.13); }
+.student-mode-content { position: absolute; left: 0; right: 0; top: 0; bottom: 0; padding: 34px 48px 42px 48px; color: rgb(244, 250, 255); }
+
+/* Top system navigation. Geometry follows the external StudentSide/Display1UI
+   reference while the current navigation structure and bindings stay intact. */
+.mode-topbar { position: absolute; left: 48px; right: 48px; top: 34px; height: 46px; flex-direction: row; align-items: center; }
+.mode-badge-glow { position: absolute; border-color: rgba(69, 192, 255, 0.10); background-color: rgba(69, 192, 255, 0.035); }
+.mode-badge-glow-outer { left: -10px; top: -8px; width: 152px; height: 72px; border-width: 8px; border-radius: 36px; border-color: rgba(69, 192, 255, 0.055); }
+.mode-badge-glow-inner { left: -5px; top: -3px; width: 142px; height: 62px; border-width: 4px; border-radius: 31px; border-color: rgba(96, 210, 255, 0.10); }
+.mode-badge { position: absolute; left: 0; top: 5px; width: auto; height: auto; padding: 9px 17px; align-items: center; justify-content: center; border-width: 1px; border-color: rgba(203, 244, 255, 0.75); border-radius: 11px; background-color: rgba(49, 168, 239, 0.82); color: rgb(247, 252, 255); font-size: 15px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.mode-navigation-glass { position: absolute; left: 116px; right: 108px; top: 0; width: auto; height: 46px; padding: 0 20px; flex-direction: row; align-items: center; justify-content: space-between; border-width: 1px; border-color: rgba(195, 226, 249, 0.24); border-top-color: rgba(226, 245, 255, 0.40); border-radius: 23px; background-color: rgba(18, 71, 126, 0.48); }
+.mode-breadcrumb { flex-direction: row; align-items: center; }
+.mode-crumb-identity, .mode-crumb-role { color: rgba(231, 244, 255, 0.72); font-size: 14px; }
+.mode-crumb-dot { margin: 0 10px; color: rgba(195, 222, 243, 0.48); font-size: 14px; }
+.mode-crumb-current { color: rgb(111, 230, 245); font-size: 14px; }
+.mode-top-label { margin-right: 18px; color: rgba(210, 234, 250, 0.52); font-size: 11px; letter-spacing: 3px; }
+.mode-top-right { position: absolute; right: 0; top: 1px; flex-direction: row; align-items: center; }
+.mode-icon-button { width: 44px; height: 44px; margin: 0 0 0 10px; padding: 0; border-width: 1px; border-color: rgba(209, 236, 255, 0.38); border-top-color: rgba(241, 251, 255, 0.64); border-radius: 22px; background-color: rgba(28, 87, 145, 0.52); color: rgb(243, 250, 255); font-size: 26px; -unity-text-align: middle-center; }
+.mode-back-button { font-size: 26px; padding: 0; }
+.mode-icon-button:hover { background-color: rgba(54, 144, 211, 0.76); border-color: rgba(169, 237, 255, 0.82); }
+.mode-icon-button:active { background-color: rgba(25, 99, 170, 0.88); }
+
+/* Hero title. */
+.mode-title-block { position: absolute; left: 0; right: 0; top: 267px; align-items: center; }
+.mode-overline { height: auto; margin-bottom: 16px; color: rgb(111, 230, 245); font-size: 12px; letter-spacing: 4px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.mode-heading { height: auto; margin-top: 0; color: rgb(247, 251, 255); font-size: 62px; -unity-font-style: normal; -unity-text-align: middle-center; }
+.mode-subheading { height: auto; margin-top: 12px; color: rgba(225, 239, 252, 0.66); font-size: 17px; -unity-text-align: middle-center; }
+
+/* Three primary modes. */
+.mode-grid { position: absolute; left: 400px; top: 431px; width: 1120px; height: 420px; flex-direction: row; justify-content: center; }
+.mode-card { position: relative; width: 344px; height: 420px; margin: 0 12px; padding: 24px 28px 26px 28px; align-items: flex-start; overflow: visible; border-width: 1.5px; border-color: rgba(191, 225, 249, 0.44); border-top-color: rgba(232, 248, 255, 0.66); border-radius: 26px; background-color: rgba(24, 77, 134, 0.61); color: rgb(246, 251, 255); }
+.mode-card:hover { border-width: 2px; border-color: rgba(143, 234, 255, 0.90); border-top-color: rgb(226, 250, 255); background-color: rgba(40, 151, 232, 0.78); }
+.mode-card-glow { position: absolute; opacity: 0; background-color: rgba(60, 194, 255, 0.025); }
+.mode-card-glow-outer { left: -14px; right: -14px; top: -14px; bottom: -14px; border-width: 9px; border-radius: 42px; border-color: rgba(60, 194, 255, 0.055); }
+.mode-card-glow-inner { left: -7px; right: -7px; top: -7px; bottom: -7px; border-width: 5px; border-radius: 35px; border-color: rgba(99, 215, 255, 0.115); }
+.mode-card:hover .mode-card-glow { opacity: 1; }
+.mode-card:active { background-color: rgba(32, 125, 205, 0.84); }
+.mode-card-index { height: auto; color: rgb(114, 217, 242); font-size: 26px; }
+.mode-card-eyebrow { height: auto; margin-top: 2px; color: rgba(204, 228, 245, 0.68); font-size: 11px; letter-spacing: 3px; }
+.mode-card-art { width: 82px; height: 82px; margin-left: 0; margin-top: 20px; -unity-background-scale-mode: scale-to-fit; }
+.mode-art-learning { background-image: url('ModeIcons/ModeLearning.png'); }
+.mode-art-free { background-image: url('ModeIcons/ModeFreePractice.png'); }
+.mode-art-assessment { background-image: url('ModeIcons/ModeTaskAssessment.png'); }
+.mode-card-rule { position: absolute; left: 28px; right: 78px; bottom: 43px; width: auto; height: 1px; margin: 0; background-color: rgba(210, 239, 252, 0.72); }
+.mode-card-title { height: auto; margin-top: 18px; color: rgb(247, 251, 255); font-size: 25px; -unity-font-style: bold; }
+.mode-card-desc { margin-top: 9px; color: rgba(224, 239, 250, 0.72); font-size: 13px; white-space: normal; }
+.mode-card-arrow { position: absolute; right: 28px; bottom: 24px; width: 38px; height: 38px; padding: 0; border-width: 1px; border-color: rgba(212, 240, 255, 0.48); border-radius: 19px; background-color: rgba(213, 241, 255, 0.10); color: rgb(246, 252, 255); font-size: 17px; -unity-text-align: middle-center; }
+.mode-card-arrow-glow { position: absolute; right: 23px; bottom: 19px; width: 48px; height: 48px; opacity: 0; border-width: 5px; border-color: rgba(92, 220, 255, 0.09); border-radius: 24px; background-color: rgba(92, 220, 255, 0.035); }
+.mode-card:hover .mode-card-arrow-glow { opacity: 1; }
+.mode-card:hover .mode-card-arrow { border-color: rgba(223, 250, 255, 0.95); background-color: rgba(67, 202, 255, 0.42); }
+.mode-launch-status { position: absolute; left: 400px; top: 865px; width: 1120px; min-height: 20px; color: rgba(226, 241, 252, 0.78); font-size: 11px; -unity-text-align: middle-center; }
+
+/* Quiet editorial footer. */
+.mode-footer-strip { position: absolute; left: 48px; bottom: 30px; }
+.mode-footer-rule { width: 120px; height: 2px; margin-bottom: 10px; background-color: rgba(207, 244, 255, 0.72); }
+.mode-footer-caption { color: rgba(214, 232, 246, 0.48); font-size: 11px; letter-spacing: 4px; }
+.mode-footer-right { position: absolute; right: 48px; bottom: 30px; align-items: flex-end; }
+.mode-footer-right-copy { color: rgba(221, 238, 250, 0.62); font-size: 12px; letter-spacing: 2px; -unity-text-align: upper-right; }
+.mode-footer-right-rule { width: 28px; height: 2px; margin-top: 12px; background-color: rgba(215, 242, 255, 0.60); }
+
+/* Student task-assessment paper.  The page itself stays declarative; runtime code only
+   binds the published paper and appends responsive rows to assessment-question-list. */
+.student-assessment-page { display: none; padding: 30px 40px 28px 40px; background-color: rgb(10, 55, 108); }
+#student-assessment-page .student-learning-skin { opacity: 1; }
+#student-assessment-page .assessment-blue-overlay { background-color: rgba(3, 23, 55, 0.54); }
+.assessment-topbar { position: absolute; left: 40px; right: 40px; top: 30px; height: 46px; flex-direction: row; justify-content: space-between; align-items: center; }
+.assessment-breadcrumb { flex-direction: row; align-items: center; }
+.assessment-crumb-label { color: rgba(214, 235, 250, 0.72); font-size: 14px; }
+.assessment-back-button { width: 158px; height: 44px; margin: 0 0 0 10px; padding: 0 16px; border-width: 1px; border-color: rgba(209, 236, 255, 0.38); border-top-color: rgba(241, 251, 255, 0.64); border-radius: 22px; background-color: rgba(28, 87, 145, 0.52); color: rgb(243, 250, 255); font-size: 14px; -unity-text-align: middle-center; }
+.assessment-back-button:hover { background-color: rgba(54, 144, 211, 0.76); border-color: rgba(169, 237, 255, 0.82); }
+.assessment-back-button:active { background-color: rgba(25, 99, 170, 0.88); }
+.assessment-workspace { position: absolute; left: 72px; right: 72px; top: 122px; bottom: 44px; min-width: 0; }
+.assessment-heading-row { height: 112px; flex-shrink: 0; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.assessment-heading-copy { flex-grow: 1; min-width: 0; }
+.assessment-overline { height: auto; color: rgb(111, 230, 245); font-size: 11px; letter-spacing: 4px; -unity-font-style: bold; }
+.assessment-paper-title { height: auto; margin-top: 8px; color: rgb(247, 251, 255); font-size: 34px; -unity-font-style: bold; white-space: normal; }
+.assessment-paper-subtitle { height: auto; margin-top: 9px; color: rgba(225, 239, 252, 0.72); font-size: 15px; white-space: normal; }
+.assessment-paper-count { min-width: 104px; height: 40px; margin-top: 10px; padding: 0 18px; border-width: 1px; border-color: rgba(193, 226, 249, 0.30); border-top-color: rgba(235, 249, 255, 0.48); border-radius: 20px; background-color: rgba(20, 70, 128, 0.62); color: rgb(112, 216, 242); font-size: 14px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.assessment-paper-status { min-height: 42px; flex-shrink: 0; margin: 8px 0 16px 0; padding: 10px 14px; border-left-width: 3px; border-left-color: rgb(112, 216, 242); border-radius: 10px; background-color: rgba(15, 58, 106, 0.64); color: rgba(218, 236, 249, 0.86); font-size: 13px; white-space: normal; }
+.assessment-paper-status.danger { border-left-color: rgb(255, 142, 142); color: rgb(255, 188, 188); }
+.assessment-list-shell { flex-grow: 1; min-height: 0; overflow: hidden; border-radius: 22px; background-color: rgba(13, 55, 103, 0.72); }
+.assessment-list-header { height: 54px; flex-shrink: 0; padding: 0 20px; flex-direction: row; align-items: center; background-color: rgba(50, 151, 244, 0.72); border-bottom-width: 1px; border-bottom-color: rgba(221, 245, 255, 0.40); }
+.assessment-list-header Label { color: rgb(247, 252, 255); font-size: 12px; -unity-font-style: bold; -unity-text-align: middle-left; }
+.assessment-header-kind { width: 140px; flex-shrink: 0; }
+.assessment-header-title { flex-grow: 1; min-width: 0; }
+.assessment-header-meta { width: 390px; flex-shrink: 0; }
+.assessment-header-action { width: 132px; flex-shrink: 0; -unity-text-align: middle-center; }
+.assessment-question-list { flex-grow: 1; min-height: 0; padding: 10px 12px 4px 12px; }
+.assessment-question-row { min-height: 82px; margin-bottom: 10px; padding: 12px 14px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(193, 226, 249, 0.22); border-top-color: rgba(231, 247, 255, 0.40); border-radius: 16px; background-color: rgba(20, 70, 128, 0.54); }
+.assessment-question-row:hover { border-color: rgba(139, 229, 255, 0.64); background-color: rgba(27, 91, 158, 0.66); }
+.assessment-question-kind, .assessment-question-row .kind { width: 112px; height: 32px; flex-shrink: 0; margin-right: 28px; padding: 0 12px; border-width: 1px; border-color: rgba(178, 231, 251, 0.42); border-radius: 16px; background-color: rgba(49, 168, 239, 0.28); color: rgb(181, 235, 250); font-size: 12px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.assessment-question-title, .assessment-question-row .title { flex-grow: 1; min-width: 0; height: auto; margin-right: 30px; color: rgb(247, 251, 255); font-size: 18px; -unity-font-style: bold; white-space: normal; }
+.assessment-question-meta, .assessment-question-row .meta { width: 360px; flex-shrink: 0; height: auto; margin-right: 30px; color: rgba(205, 227, 244, 0.72); font-size: 12px; white-space: normal; }
+.assessment-question-start, .assessment-question-row .start { width: 118px; height: 42px; flex-shrink: 0; margin: 0; padding: 0 14px; border-width: 1px; border-color: rgba(203, 242, 255, 0.86); border-top-color: rgb(245, 253, 255); border-radius: 14px; background-color: rgba(50, 151, 244, 0.94); color: rgb(247, 252, 255); font-size: 14px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.assessment-question-start:hover, .assessment-question-row .start:hover { background-color: rgb(67, 173, 248); }
+.assessment-question-start:active, .assessment-question-row .start:active { background-color: rgb(33, 128, 224); }
+.assessment-footer-note { height: 32px; flex-shrink: 0; margin-top: 12px; flex-direction: row; align-items: center; }
+.assessment-footer-rule { width: 42px; height: 2px; margin-right: 14px; background-color: rgba(207, 240, 255, 0.70); }
+.assessment-footer-copy { color: rgba(219, 237, 250, 0.60); font-size: 11px; letter-spacing: 1px; }
+
+/* Student learning-training page, authored against one 1920 x 1080 Display1.
+   The five cards deliberately keep their legacy query IDs so this visual
+   revision does not fork the training/navigation event contract. */
+.student-learning-page { display: none; padding: 30px 40px 26px 40px; }
+#student-learning-page .student-learning-background { opacity: 1; }
+#student-learning-page .login-blue-overlay { background-color: rgba(3, 23, 55, 0.42); }
+.learning-topbar { position: absolute; left: 40px; right: 40px; top: 30px; height: 46px; flex-direction: row; justify-content: space-between; align-items: center; }
+.learning-breadcrumb { flex-direction: row; align-items: center; }
+.mode-crumb-chevron { margin: 0 10px; color: rgba(185, 218, 241, 0.58); font-size: 13px; }
+.mode-crumb-back { height: auto; padding: 0; margin: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); color: rgba(214, 235, 250, 0.72); font-size: 14px; }
+.mode-crumb-back:hover { color: rgb(239, 249, 255); }
+
+.learning-body { position: absolute; left: 40px; right: 40px; top: 96px; bottom: 26px; height: 958px; flex-direction: row; }
+.learning-left-rail { position: relative; width: 216px; height: 958px; flex-shrink: 0; margin-right: 22px; }
+.learning-sidebar { width: 216px; height: 958px; flex-shrink: 0; padding: 18px 14px; border-radius: 26px; background-color: rgba(20, 73, 130, 0.62); border-color: rgba(198, 229, 250, 0.34); border-top-color: rgba(235, 249, 255, 0.54); }
+.drill-nav-item { height: 50px; margin-bottom: 8px; padding: 0 14px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(198, 229, 250, 0.12); border-radius: 14px; background-color: rgba(203, 229, 248, 0.08); color: rgba(226, 240, 251, 0.76); font-size: 15px; }
+.drill-nav-item.active { color: rgb(247, 252, 255); background-color: rgba(56, 163, 245, 0.88); border-color: rgba(197, 239, 255, 0.76); border-top-color: rgba(239, 253, 255, 0.94); -unity-font-style: bold; }
+.drill-nav-item:hover { background-color: rgba(66, 153, 222, 0.48); color: rgb(247, 252, 255); }
+.drill-nav-icon { width: 26px; color: rgba(231, 248, 255, 0.92); font-size: 16px; }
+.drill-nav-item.disabled-module { opacity: 0.66; }
+.learning-sidebar-footer { position: absolute; left: 14px; bottom: 18px; width: 188px; margin: 0; padding-top: 14px; }
+.learning-sidebar-footer-rule { width: 38px; height: 2px; margin-bottom: 12px; background-color: rgba(206, 240, 255, 0.72); }
+.drill-sidebar-footer-line { margin-top: 2px; color: rgba(214, 232, 246, 0.52); font-size: 10px; letter-spacing: 3px; }
+
+.learning-main { position: relative; flex-grow: 1; min-width: 0; height: 958px; }
+.learning-head-row { height: auto; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.learning-title-wrap { flex-direction: row; align-items: flex-start; }
+.learning-title-icon { width: 62px; height: 62px; margin-top: 2px; margin-right: 18px; background-image: url('ModeIcons/ModeLearning.png'); -unity-background-scale-mode: scale-to-fit; }
+.learning-title-copy { justify-content: flex-start; }
+.learning-heading { height: auto; margin: 0; color: rgb(247, 251, 255); font-size: 34px; -unity-font-style: bold; -unity-text-align: middle-left; }
+.learning-subheading { height: auto; margin-top: 12px; color: rgba(225, 239, 252, 0.72); font-size: 17px; -unity-text-align: middle-left; }
+.learning-scope-toggle { width: auto; height: 40px; margin-top: 0; padding: 0; flex-direction: row; border-radius: 20px; background-color: rgba(13, 61, 116, 0.66); border-width: 1px; border-color: rgba(193, 226, 249, 0.22); }
+.learning-scope-chip { flex-grow: 0; height: 40px; margin: 0 0 0 10px; padding: 0 16px; flex-direction: row; align-items: center; justify-content: center; border-width: 1px; border-color: rgba(0, 0, 0, 0); border-radius: 20px; background-color: rgba(0, 0, 0, 0); color: rgba(220, 237, 250, 0.72); font-size: 13px; }
+.learning-scope-chip-active { border-color: rgba(207, 244, 255, 0.80); border-top-color: rgb(244, 253, 255); background-color: rgba(62, 157, 244, 0.86); color: rgb(248, 252, 255); -unity-font-style: bold; }
+.learning-scope-icon { margin-right: 8px; color: rgb(238, 253, 255); font-size: 14px; }
+
+.learning-drill-row { flex-grow: 1; height: auto; flex-direction: row; align-items: stretch; margin-top: 22px; }
+.drill-card { flex-grow: 1; width: 20%; height: auto; margin-right: 14px; padding: 18px; border-radius: 22px; background-color: rgba(20, 70, 128, 0.64); border-width: 1px; border-color: rgba(193, 226, 249, 0.34); border-top-color: rgba(231, 247, 255, 0.58); }
+.drill-card:hover { border-color: rgba(139, 229, 255, 0.72); background-color: rgba(27, 91, 158, 0.72); }
+.drill-card-last { margin-right: 0; }
+.drill-card-head { height: auto; flex-direction: row; align-items: baseline; }
+.drill-card-index { color: rgb(112, 216, 242); font-size: 19px; -unity-font-style: bold; }
+.drill-card-eyebrow { margin-left: 8px; color: rgba(195, 223, 243, 0.68); font-size: 9px; letter-spacing: 2px; }
+.drill-card-title { height: auto; margin-top: 6px; color: rgb(247, 251, 255); font-size: 19px; -unity-font-style: bold; }
+.drill-card-media { position: relative; height: 128px; margin-top: 12px; border-radius: 14px; background-color: rgba(255, 255, 255, 0.06); border-width: 1px; border-color: rgba(224, 244, 255, 0.34); align-items: center; justify-content: center; overflow: hidden; }
+.drill-card-photo { position: absolute; left: 0; right: 0; top: 0; bottom: 0; -unity-background-scale-mode: scale-and-crop; }
+.drill-card-motion-glyph { position: relative; right: auto; bottom: auto; width: 44px; height: 44px; border-radius: 22px; background-color: rgba(4, 32, 66, 0.62); border-width: 1px; border-color: rgba(225, 247, 255, 0.60); color: rgb(96, 235, 255); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.drill-card-field-label { height: auto; margin-top: 14px; color: rgba(218, 236, 249, 0.80); font-size: 12px; }
+.drill-options { margin-top: 6px; }
+.drill-option { height: auto; margin-top: 4px; color: rgb(229, 241, 251); }
+.drill-option Label { color: rgb(229, 241, 251); font-size: 13px; }
+.drill-card-spacer { flex-grow: 1; }
+.drill-start-button { height: 42px; margin-top: 14px; border-width: 1px; border-color: rgba(203, 242, 255, 0.86); border-top-color: rgb(245, 253, 255); border-radius: 14px; background-color: rgba(50, 151, 244, 0.94); color: rgb(247, 252, 255); font-size: 14px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.drill-start-button:hover { background-color: rgb(67, 173, 248); }
+.drill-start-button:active { background-color: rgb(33, 128, 224); }
+.fault-drill-view { flex-direction: column; align-items: stretch; }
+.fault-list-heading { height: auto; flex-shrink: 0; margin: 0 0 4px 2px; padding: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); color: rgba(225, 239, 252, 0.82); font-size: 14px; -unity-font-style: bold; -unity-text-align: middle-left; }
+.fault-card-grid { flex-grow: 1; min-height: 0; margin-top: 12px; padding: 0; flex-direction: row; flex-wrap: wrap; align-content: stretch; border-width: 0; border-radius: 0; background-color: rgba(0, 0, 0, 0); }
+.fault-card { width: 24%; height: 31%; flex-grow: 1; margin: 0 14px 12px 0; padding: 12px 14px; align-items: center; justify-content: center; border-width: 1px; border-color: rgba(193, 226, 249, 0.34); border-top-color: rgba(231, 247, 255, 0.58); border-radius: 18px; background-color: rgba(20, 70, 128, 0.64); color: rgb(247, 251, 255); }
+.fault-card-row-end { margin-right: 0; }
+.fault-card-bottom { margin-bottom: 0; }
+.fault-card:hover { border-color: rgba(139, 229, 255, 0.72); background-color: rgba(27, 91, 158, 0.72); }
+.fault-card.selected { border-color: rgba(197, 239, 255, 0.76); border-top-color: rgba(239, 253, 255, 0.94); background-color: rgba(56, 163, 245, 0.88); }
+.fault-card-eyebrow { position: absolute; left: 14px; top: 10px; color: rgba(195, 223, 243, 0.68); font-size: 8px; letter-spacing: 1px; }
+.fault-card-glyph { width: 40px; height: 40px; margin-bottom: 6px; border-width: 1px; border-color: rgba(224, 244, 255, 0.34); border-radius: 20px; background-color: rgba(255, 255, 255, 0.06); color: rgb(112, 216, 242); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.fault-card-title { height: auto; color: rgb(247, 251, 255); font-size: 16px; -unity-font-style: bold; -unity-text-align: middle-center; white-space: normal; }
+.fault-card-note { height: auto; margin-top: 5px; color: rgba(218, 236, 249, 0.80); font-size: 10px; -unity-text-align: middle-center; white-space: normal; }
+.fault-detail-view { flex-grow: 1; min-height: 0; flex-direction: column; }
+.fault-detail-toolbar { height: 48px; flex-shrink: 0; flex-direction: row; align-items: center; }
+.fault-detail-back-button { width: 156px; height: 38px; margin: 0; padding: 0 14px; border-width: 1px; border-color: rgba(193, 226, 249, 0.34); border-radius: 14px; background-color: rgba(20, 70, 128, 0.64); color: rgb(229, 241, 251); font-size: 13px; }
+.fault-detail-back-button:hover { border-color: rgba(139, 229, 255, 0.72); background-color: rgba(27, 91, 158, 0.72); }
+.fault-detail-title { flex-grow: 1; height: auto; margin-left: 18px; color: rgb(247, 251, 255); font-size: 24px; -unity-font-style: bold; -unity-text-align: middle-left; }
+.fault-detail-count { width: 72px; height: 32px; border-width: 1px; border-color: rgba(193, 226, 249, 0.28); border-radius: 16px; background-color: rgba(20, 70, 128, 0.54); color: rgb(112, 216, 242); font-size: 12px; -unity-text-align: middle-center; }
+.fault-detail-notice { min-height: 34px; margin-top: 8px; padding: 7px 12px; border-left-width: 3px; border-left-color: rgb(112, 216, 242); border-radius: 8px; background-color: rgba(15, 58, 106, 0.58); color: rgba(218, 236, 249, 0.82); font-size: 12px; white-space: normal; }
+.fault-table-shell { height: 500px; flex-shrink: 0; margin-top: 12px; padding: 0; overflow: hidden; border-radius: 18px; background-color: rgba(13, 55, 103, 0.66); border-color: rgba(193, 226, 249, 0.30); }
+.fault-table-header { height: 44px; flex-shrink: 0; padding: 0 8px; flex-direction: row; align-items: center; background-color: rgba(50, 151, 244, 0.86); }
+.fault-table-header-cell { height: 44px; margin-right: 6px; color: rgb(247, 252, 255); font-size: 12px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.fault-table-scroll { flex-grow: 1; min-height: 0; }
+.fault-table-scroll .unity-scroll-view__vertical-scroller { width: 12px; min-width: 12px; margin: 8px 6px 8px 0; padding: 0; border-width: 0; background-image: none; background-color: rgba(0, 0, 0, 0); }
+.fault-table-scroll .unity-scroller__slider { width: 12px; min-width: 12px; flex-grow: 1; margin: 0; padding: 0; border-width: 0; background-image: none; background-color: rgba(0, 0, 0, 0); }
+.fault-table-scroll .unity-base-slider__input { margin: 0; padding: 0; border-width: 0; background-image: none; background-color: rgba(0, 0, 0, 0); }
+.fault-table-scroll .unity-base-slider__drag-container { flex-grow: 1; width: 12px; margin: 0; }
+.fault-table-scroll .unity-base-slider__tracker { left: 2px; right: 2px; top: 0; bottom: 0; width: 8px; border-width: 0; border-radius: 4px; background-image: none; background-color: rgba(57, 129, 181, 0.20); }
+.fault-table-scroll .unity-base-slider__dragger { left: 2px; width: 8px; min-width: 8px; border-width: 0; border-radius: 4px; background-image: none; background-color: rgba(96, 214, 239, 0.64); }
+.fault-table-scroll .unity-base-slider__dragger:hover { background-color: rgba(140, 237, 251, 0.94); }
+.fault-table-scroll .unity-base-slider__dragger:active { background-color: rgb(173, 244, 253); }
+.fault-table-scroll .unity-base-slider__dragger-border,
+.fault-table-scroll .unity-scroller__low-button,
+.fault-table-scroll .unity-scroller__high-button,
+.fault-table-scroll .unity-scroll-view__horizontal-scroller { display: none; }
+.fault-detail-list { padding: 8px 6px 0 6px; }
+.fault-detail-row { height: 58px; min-height: 58px; margin-bottom: 8px; padding: 6px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(193, 226, 249, 0.20); border-radius: 12px; background-color: rgba(20, 70, 128, 0.48); }
+.fault-table-cell { height: 44px; margin-right: 6px; padding: 0 9px; border-width: 1px; border-color: rgba(193, 226, 249, 0.20); border-radius: 8px; background-color: rgba(255, 255, 255, 0.05); color: rgb(229, 241, 251); font-size: 12px; white-space: normal; -unity-text-align: middle-center; }
+.fault-col-number { width: 72px; flex-shrink: 0; }
+.fault-col-point { width: 0; min-width: 0; flex-grow: 3; flex-shrink: 1; }
+.fault-col-symptom { width: 0; min-width: 0; flex-grow: 5; flex-shrink: 1; }
+.fault-col-category { width: 140px; flex-shrink: 0; }
+.fault-simulation-button { width: 48%; height: 50px; align-self: center; margin-top: 14px; border-width: 1px; border-color: rgba(203, 242, 255, 0.86); border-top-color: rgb(245, 253, 255); border-radius: 14px; background-color: rgba(50, 151, 244, 0.94); color: rgb(247, 252, 255); font-size: 15px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.fault-simulation-button:hover { background-color: rgb(67, 173, 248); }
+.learning-launch-status { position: relative; left: auto; right: auto; top: auto; min-height: 18px; margin-top: 14px; color: rgb(161, 211, 237); font-size: 12px; white-space: normal; -unity-text-align: middle-center; }
+.learning-footer-right { position: absolute; right: 52px; bottom: 38px; flex-direction: row; align-items: center; }
+.learning-footer-right-rule { width: 42px; height: 2px; margin-right: 20px; background-color: rgba(207, 240, 255, 0.70); }
+.learning-footer-right-copy { color: rgba(219, 237, 250, 0.60); font-size: 13px; letter-spacing: 2px; }
+
+.shell.portrait .mode-topbar { left: 28px; right: 28px; top: 28px; }
+.shell.portrait .mode-navigation-glass { display: none; }
+.shell.portrait .mode-top-right { right: 0; }
+.shell.portrait .mode-title-block { top: 126px; }
+.shell.portrait .mode-overline { font-size: 10px; letter-spacing: 2px; }
+.shell.portrait .mode-heading { height: 58px; margin-top: 10px; font-size: 42px; }
+.shell.portrait .mode-subheading { font-size: 17px; }
+.shell.portrait .mode-grid { left: 28px; right: 28px; top: 250px; width: auto; height: 700px; flex-direction: column; }
+.shell.portrait .mode-card { width: 100%; height: 220px; margin-bottom: 18px; padding: 18px 24px; }
+.shell.portrait .mode-card-art { position: absolute; left: 120px; top: 24px; width: 150px; height: 150px; margin: 0; }
+.shell.portrait .mode-card-rule { margin-top: 8px; margin-bottom: 8px; }
+.shell.portrait .mode-card-title { font-size: 24px; }
+.shell.portrait .mode-card-desc { font-size: 14px; }
+.shell.portrait .mode-card-arrow { right: 24px; bottom: 24px; width: 52px; height: 52px; border-radius: 26px; }
+.shell.portrait .mode-launch-status { left: 28px; right: 28px; top: 970px; width: auto; }
+.shell.portrait .mode-footer-strip, .shell.portrait .mode-footer-right { display: none; }
+.shell.portrait .student-assessment-page { padding: 24px 28px; }
+.shell.portrait .assessment-topbar { left: 28px; right: 28px; top: 24px; }
+.shell.portrait .assessment-breadcrumb, .shell.portrait .assessment-topbar .mode-top-label { display: none; }
+.shell.portrait .assessment-workspace { left: 28px; right: 28px; top: 92px; bottom: 28px; }
+.shell.portrait .assessment-heading-row { height: 132px; }
+.shell.portrait .assessment-paper-title { font-size: 28px; }
+.shell.portrait .assessment-paper-subtitle { width: 520px; }
+.shell.portrait .assessment-header-meta { width: 220px; }
+.shell.portrait .assessment-question-kind, .shell.portrait .assessment-question-row .kind { width: 92px; margin-right: 16px; }
+.shell.portrait .assessment-question-title, .shell.portrait .assessment-question-row .title { margin-right: 16px; }
+.shell.portrait .assessment-question-meta, .shell.portrait .assessment-question-row .meta { width: 204px; margin-right: 16px; }
+.shell.portrait .assessment-question-start, .shell.portrait .assessment-question-row .start { width: 104px; }
+.shell.portrait .student-learning-page { padding: 24px 28px; }
+.shell.portrait .learning-breadcrumb { display: none; }
+.shell.portrait .learning-body { flex-direction: column; }
+.shell.portrait .learning-sidebar { width: 100%; margin-right: 0; margin-bottom: 16px; flex-direction: row; flex-wrap: wrap; }
+.shell.portrait .drill-nav-item { width: 48%; margin-right: 2%; }
+.shell.portrait .learning-sidebar-footer { display: none; }
+.shell.portrait .learning-head-row { flex-direction: column; align-items: flex-start; }
+.shell.portrait .learning-scope-toggle { margin-top: 12px; }
+.shell.portrait .learning-drill-row { flex-direction: column; }
+.shell.portrait .drill-card { width: 100%; margin-right: 0; margin-bottom: 14px; }

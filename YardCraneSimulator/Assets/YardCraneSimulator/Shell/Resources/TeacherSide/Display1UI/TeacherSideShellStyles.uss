@@ -1,0 +1,594 @@
+.teacher-shell { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: rgb(244, 250, 255); background-color: rgb(8, 48, 98); }
+.teacher-shell Label { -unity-text-align: middle-left; }
+.teacher-home-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-image: url('../../YardCraneShell/StudentSide/Display1UI/StudentHomeSkin_v1.png'); -unity-background-scale-mode: scale-and-crop; }
+.teacher-home-tone { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(4, 41, 92, 0.30); }
+.teacher-home-vignette { position: absolute; background-color: rgba(1, 21, 58, 0.16); }
+.teacher-home-vignette-left { left: -520px; top: -120px; width: 1160px; height: 1320px; border-radius: 580px; }
+.teacher-home-vignette-bottom { left: 0; right: 0; bottom: 0; height: 220px; background-color: rgba(1, 20, 53, 0.20); }
+
+.teacher-topbar { position: absolute; left: 52px; right: 52px; top: 48px; height: 60px; }
+.teacher-badge-glow { position: absolute; border-color: rgba(69, 192, 255, 0.10); background-color: rgba(69, 192, 255, 0.035); }
+.teacher-badge-glow-outer { left: -10px; top: -8px; width: 152px; height: 72px; border-width: 8px; border-radius: 36px; border-color: rgba(69, 192, 255, 0.055); }
+.teacher-badge-glow-inner { left: -5px; top: -3px; width: 142px; height: 62px; border-width: 4px; border-radius: 31px; border-color: rgba(96, 210, 255, 0.10); }
+.teacher-badge { position: absolute; left: 0; top: 2px; width: 132px; height: 52px; border-width: 1px; border-color: rgba(203, 244, 255, 0.75); border-radius: 26px; background-color: rgba(49, 168, 239, 0.82); color: rgb(247, 252, 255); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-navigation-glass { position: absolute; left: 156px; top: 4px; width: 1456px; height: 52px; padding: 0 26px; flex-direction: row; align-items: center; justify-content: space-between; border-width: 1px; border-color: rgba(195, 226, 249, 0.24); border-top-color: rgba(226, 245, 255, 0.40); border-radius: 26px; background-color: rgba(13, 58, 112, 0.54); }
+.teacher-breadcrumb { flex-direction: row; align-items: center; }
+.teacher-crumb-identity, .teacher-crumb-role { color: rgba(231, 244, 255, 0.72); font-size: 16px; }
+.teacher-crumb-dot { margin: 0 16px; color: rgba(195, 222, 243, 0.48); font-size: 16px; }
+.teacher-crumb-current { color: rgb(111, 230, 245); font-size: 16px; }
+.teacher-top-label { color: rgba(210, 234, 250, 0.52); font-size: 12px; letter-spacing: 4px; }
+.teacher-top-actions { position: absolute; right: 12px; top: 0; flex-direction: row; align-items: center; }
+.teacher-icon-button { width: 58px; height: 58px; margin-left: 28px; padding: 0 0 3px 0; border-width: 1px; border-color: rgba(209, 236, 255, 0.38); border-top-color: rgba(241, 251, 255, 0.64); border-radius: 29px; background-image: none; background-color: rgba(28, 87, 145, 0.52); color: rgb(243, 250, 255); font-size: 34px; -unity-text-align: middle-center; }
+.teacher-back-button { padding-bottom: 4px; font-size: 30px; }
+.teacher-icon-button:hover { background-color: rgba(54, 144, 211, 0.76); border-color: rgba(169, 237, 255, 0.82); }
+.teacher-icon-button:active { background-color: rgba(25, 99, 170, 0.88); }
+
+.teacher-title-block { position: absolute; left: 0; right: 0; top: 158px; align-items: center; }
+.teacher-overline { height: 18px; color: rgb(111, 230, 245); font-size: 14px; letter-spacing: 5px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-heading { height: 78px; margin-top: 18px; color: rgb(247, 251, 255); font-size: 64px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-subheading { height: 30px; margin-top: 8px; color: rgba(225, 239, 252, 0.68); font-size: 22px; -unity-text-align: middle-center; }
+
+.teacher-management-grid { position: absolute; left: 372px; top: 368px; width: 1176px; height: 468px; flex-direction: row; justify-content: space-between; }
+.teacher-core-card { position: relative; width: 360px; height: 468px; margin: 0; padding: 0; overflow: visible; border-width: 1.5px; border-color: rgba(191, 225, 249, 0.44); border-top-color: rgba(232, 248, 255, 0.68); border-radius: 28px; background-image: none; background-color: rgba(20, 70, 127, 0.66); color: rgb(246, 251, 255); }
+.teacher-core-card:hover { border-width: 2px; border-color: rgba(143, 234, 255, 0.90); border-top-color: rgb(226, 250, 255); background-color: rgba(36, 132, 210, 0.80); }
+.teacher-core-card:active { background-color: rgba(29, 108, 184, 0.90); }
+.teacher-core-card.selected { border-width: 2px; border-color: rgba(143, 234, 255, 0.94); background-color: rgba(37, 142, 222, 0.84); }
+.teacher-card-glow { position: absolute; opacity: 0; background-color: rgba(60, 194, 255, 0.025); }
+.teacher-card-glow-outer { left: -14px; right: -14px; top: -14px; bottom: -14px; border-width: 9px; border-radius: 42px; border-color: rgba(60, 194, 255, 0.055); }
+.teacher-card-glow-inner { left: -7px; right: -7px; top: -7px; bottom: -7px; border-width: 5px; border-radius: 35px; border-color: rgba(99, 215, 255, 0.115); }
+.teacher-core-card:hover .teacher-card-glow, .teacher-core-card.selected .teacher-card-glow { opacity: 1; }
+.teacher-card-index { position: absolute; left: 40px; top: 30px; height: 39px; color: rgb(114, 217, 242); font-size: 32px; }
+.teacher-card-eyebrow { position: absolute; left: 40px; top: 70px; height: 18px; color: rgba(204, 228, 245, 0.68); font-size: 12px; letter-spacing: 3.5px; }
+.teacher-card-art { position: absolute; left: 85px; top: 96px; width: 190px; height: 154px; }
+.teacher-card-rule { position: absolute; left: 40px; top: 278px; width: 54px; height: 2px; background-color: rgba(210, 239, 252, 0.72); }
+.teacher-card-title { position: absolute; left: 40px; right: 40px; top: 302px; height: 48px; color: rgb(247, 251, 255); font-size: 34px; -unity-font-style: bold; }
+.teacher-card-description { position: absolute; left: 40px; right: 40px; top: 356px; height: 30px; color: rgba(224, 239, 250, 0.72); font-size: 18px; white-space: normal; }
+.teacher-card-availability { position: absolute; left: 40px; bottom: 33px; min-width: 126px; height: 32px; padding: 6px 12px; border-width: 1px; border-color: rgba(158, 220, 246, 0.24); border-radius: 16px; background-color: rgba(14, 50, 95, 0.34); color: rgba(210, 235, 250, 0.66); font-size: 12px; -unity-text-align: middle-center; }
+.teacher-card-arrow { position: absolute; right: 28px; bottom: 26px; width: 66px; height: 66px; padding-bottom: 3px; border-width: 1px; border-color: rgba(212, 240, 255, 0.48); border-radius: 33px; background-color: rgba(213, 241, 255, 0.10); color: rgb(246, 252, 255); font-size: 34px; -unity-text-align: middle-center; }
+.teacher-card-arrow-glow { position: absolute; right: 20px; bottom: 18px; width: 82px; height: 82px; opacity: 0; border-width: 7px; border-color: rgba(92, 220, 255, 0.09); border-radius: 41px; background-color: rgba(92, 220, 255, 0.035); }
+.teacher-core-card:hover .teacher-card-arrow-glow, .teacher-core-card.selected .teacher-card-arrow-glow { opacity: 1; }
+.teacher-core-card:hover .teacher-card-arrow, .teacher-core-card.selected .teacher-card-arrow { border-color: rgba(223, 250, 255, 0.95); background-color: rgba(67, 202, 255, 0.42); }
+
+.teacher-task-sheet { position: absolute; left: 38px; top: 13px; width: 114px; height: 134px; padding: 38px 18px 13px 18px; border-width: 2px; border-color: rgba(204, 242, 255, 0.82); border-radius: 16px; background-color: rgba(94, 190, 245, 0.18); }
+.teacher-task-clip { position: absolute; left: 31px; top: -13px; width: 52px; height: 30px; border-width: 2px; border-color: rgba(210, 246, 255, 0.88); border-radius: 12px; background-color: rgba(119, 219, 255, 0.32); }
+.teacher-task-row { height: 20px; margin-bottom: 10px; flex-direction: row; align-items: center; }
+.teacher-task-check { width: 13px; height: 13px; margin-right: 11px; border-width: 2px; border-color: rgb(129, 235, 250); border-radius: 3px; background-color: rgba(91, 213, 246, 0.20); }
+.teacher-task-line { width: 52px; height: 2px; background-color: rgba(221, 247, 255, 0.72); }
+.teacher-task-line-short { width: 38px; }
+.teacher-chart-art { border-width: 1px; border-color: rgba(201, 239, 255, 0.16); border-radius: 24px; background-color: rgba(77, 173, 232, 0.08); }
+.teacher-chart-axis { position: absolute; background-color: rgba(211, 242, 255, 0.70); }
+.teacher-chart-axis-y { left: 35px; top: 23px; width: 2px; height: 108px; }
+.teacher-chart-axis-x { left: 35px; bottom: 22px; width: 138px; height: 2px; }
+.teacher-chart-bar { position: absolute; bottom: 24px; width: 24px; border-top-left-radius: 7px; border-top-right-radius: 7px; background-color: rgba(77, 205, 247, 0.46); border-width: 1px; border-color: rgba(181, 240, 255, 0.56); }
+.teacher-chart-bar-one { left: 54px; height: 42px; }
+.teacher-chart-bar-two { left: 91px; height: 70px; background-color: rgba(84, 187, 251, 0.58); }
+.teacher-chart-bar-three { left: 128px; height: 98px; background-color: rgba(100, 224, 248, 0.68); }
+.teacher-chart-trend { position: absolute; height: 2px; background-color: rgb(128, 239, 250); }
+.teacher-chart-trend-one { left: 59px; top: 88px; width: 48px; }
+.teacher-chart-trend-two { left: 106px; top: 60px; width: 47px; }
+.teacher-chart-dot { position: absolute; width: 10px; height: 10px; border-width: 2px; border-color: rgb(210, 251, 255); border-radius: 5px; background-color: rgb(64, 208, 244); }
+.teacher-chart-dot-one { left: 56px; top: 84px; }
+.teacher-chart-dot-two { left: 102px; top: 56px; }
+.teacher-chart-dot-three { left: 148px; top: 38px; }
+
+.teacher-module-status { position: absolute; left: 372px; top: 850px; width: 1176px; min-height: 28px; color: rgba(226, 241, 252, 0.72); font-size: 14px; -unity-text-align: middle-center; }
+.teacher-module-status.notice { color: rgb(142, 231, 246); }
+.teacher-footer-strip { position: absolute; left: 52px; bottom: 32px; }
+.teacher-footer-rule { width: 126px; height: 2px; margin-bottom: 14px; background-color: rgba(207, 244, 255, 0.72); }
+.teacher-footer-caption { color: rgba(214, 232, 246, 0.48); font-size: 11px; letter-spacing: 3px; }
+.teacher-footer-right { position: absolute; right: 52px; bottom: 28px; align-items: flex-end; }
+.teacher-footer-right-copy { color: rgba(221, 238, 250, 0.62); font-size: 12px; letter-spacing: 2px; -unity-text-align: upper-right; }
+.teacher-footer-right-rule { width: 28px; height: 2px; margin-top: 12px; background-color: rgba(215, 242, 255, 0.60); }
+
+/* Shared page routing */
+.teacher-page { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.teacher-page-hidden { display: none; }
+
+/* Task management: keeps the legacy table information architecture while using the
+   same restrained blue glass language as TeacherHome. */
+.teacher-task-page { color: rgb(241, 248, 255); }
+.teacher-task-workspace { position: absolute; left: 82px; right: 82px; top: 136px; bottom: 46px; }
+.teacher-task-page-heading { position: absolute; left: 0; right: 0; top: 0; height: 122px; flex-direction: row; align-items: center; }
+.teacher-task-page-back { width: 64px; height: 64px; margin: 0 26px 0 0; padding: 0 0 4px 0; border-width: 1px; border-color: rgba(202, 235, 255, 0.42); border-top-color: rgba(237, 250, 255, 0.70); border-radius: 32px; background-image: none; background-color: rgba(22, 75, 134, 0.58); color: rgb(244, 251, 255); font-size: 32px; -unity-text-align: middle-center; }
+.teacher-task-page-back:hover { border-color: rgba(145, 235, 255, 0.90); background-color: rgba(47, 142, 211, 0.82); }
+.teacher-task-heading-copy { width: 720px; }
+.teacher-task-overline { height: 18px; color: rgb(113, 229, 245); font-size: 12px; letter-spacing: 4px; -unity-font-style: bold; }
+.teacher-task-heading { height: 54px; margin-top: 8px; color: rgb(248, 252, 255); font-size: 44px; -unity-font-style: bold; }
+.teacher-task-subheading { height: 26px; color: rgba(223, 238, 251, 0.68); font-size: 17px; }
+.teacher-task-summary { position: absolute; right: 0; top: 11px; width: 500px; height: 94px; padding: 12px 20px; flex-direction: row; align-items: center; justify-content: space-around; border-width: 1px; border-color: rgba(195, 229, 251, 0.25); border-top-color: rgba(231, 248, 255, 0.42); border-radius: 24px; background-color: rgba(16, 61, 116, 0.52); }
+.teacher-task-summary-item { width: 120px; align-items: center; }
+.teacher-task-summary-value { height: 38px; color: rgb(241, 250, 255); font-size: 28px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-task-summary-label { height: 24px; color: rgba(209, 231, 247, 0.58); font-size: 13px; -unity-text-align: middle-center; }
+.teacher-task-summary-divider { width: 1px; height: 48px; background-color: rgba(196, 226, 246, 0.20); }
+
+.teacher-task-toolbar { position: absolute; left: 0; right: 0; top: 132px; height: 66px; padding: 8px 10px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(194, 228, 250, 0.23); border-top-color: rgba(232, 248, 255, 0.42); border-radius: 20px; background-color: rgba(14, 57, 111, 0.58); }
+.teacher-task-filter-group { height: 50px; flex-direction: row; align-items: center; }
+.teacher-task-filter { height: 44px; min-width: 140px; margin: 0 6px 0 0; padding: 0 20px; border-width: 1px; border-color: rgba(189, 223, 246, 0.15); border-radius: 14px; background-image: none; background-color: rgba(211, 237, 252, 0.055); color: rgba(220, 237, 250, 0.68); font-size: 15px; }
+.teacher-task-filter:hover { border-color: rgba(136, 226, 249, 0.52); background-color: rgba(61, 158, 217, 0.22); color: rgb(239, 249, 255); }
+.teacher-task-filter.selected { border-color: rgba(129, 231, 247, 0.70); background-color: rgba(49, 164, 224, 0.38); color: rgb(246, 252, 255); }
+.teacher-task-service-state { position: absolute; right: 202px; height: 44px; padding: 0 17px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(171, 217, 244, 0.18); border-radius: 14px; background-color: rgba(7, 40, 84, 0.32); color: rgba(214, 234, 248, 0.62); font-size: 13px; }
+.teacher-task-service-dot { width: 8px; height: 8px; margin-right: 10px; border-radius: 4px; background-color: rgb(248, 188, 91); }
+.teacher-task-create-button { position: absolute; right: 10px; width: 176px; height: 46px; border-width: 1px; border-color: rgba(177, 240, 251, 0.76); border-top-color: rgb(224, 253, 255); border-radius: 15px; background-image: none; background-color: rgba(51, 180, 226, 0.80); color: rgb(249, 253, 255); font-size: 16px; -unity-font-style: bold; }
+.teacher-task-create-button:hover { background-color: rgb(57, 197, 235); border-color: rgb(232, 254, 255); }
+
+.teacher-task-table { position: absolute; left: 0; right: 0; top: 212px; height: 574px; overflow: hidden; border-width: 1px; border-color: rgba(193, 227, 249, 0.25); border-top-color: rgba(231, 248, 255, 0.46); border-radius: 24px; background-color: rgba(10, 47, 98, 0.57); }
+.teacher-task-table-header { height: 54px; padding: 0 22px; flex-direction: row; align-items: center; background-color: rgba(42, 117, 176, 0.22); color: rgba(191, 220, 241, 0.74); font-size: 13px; letter-spacing: 1px; }
+.teacher-task-list-scroll { position: absolute; left: 0; right: 0; top: 54px; bottom: 0; }
+.teacher-task-list-scroll .unity-scroll-view__content-container { padding: 0 10px 10px 0; }
+.teacher-task-list-scroll .unity-scroll-view__vertical-scroller { width: 9px; margin: 8px 4px 8px 0; }
+.teacher-task-list-row { min-height: 104px; flex-shrink: 0; padding: 0 22px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(183, 218, 241, 0.12); background-color: rgba(22, 75, 130, 0.16); }
+.teacher-task-list-row:hover { background-color: rgba(48, 137, 194, 0.24); }
+.teacher-task-list-row.published { background-color: rgba(37, 118, 170, 0.22); }
+.teacher-task-list-row-last { border-bottom-width: 0; }
+.teacher-task-col-status { width: 122px; }
+.teacher-task-col-type { width: 130px; }
+.teacher-task-col-mode { width: 130px; }
+.teacher-task-col-project { width: 330px; }
+.teacher-task-col-goal { flex-grow: 1; }
+.teacher-task-col-duration { width: 100px; }
+.teacher-task-col-actions { width: 258px; }
+.teacher-task-status-cell { flex-direction: row; align-items: center; color: rgba(222, 239, 251, 0.66); font-size: 14px; }
+.teacher-task-row-dot { width: 9px; height: 9px; margin-right: 11px; border-width: 2px; border-color: rgba(130, 232, 247, 0.92); border-radius: 5px; background-color: rgba(70, 197, 227, 0.34); }
+.teacher-task-inclusion-checkbox { width: 30px; height: 30px; margin: 0; padding: 0 0 2px 0; flex-shrink: 0; border-width: 2px; border-color: rgba(166, 218, 244, 0.66); border-radius: 7px; background-image: none; background-color: rgba(3, 31, 70, 0.72); color: rgb(246, 254, 255); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-task-inclusion-checkbox:hover { border-color: rgba(151, 239, 251, 0.96); background-color: rgba(35, 112, 174, 0.74); }
+.teacher-task-inclusion-checkbox.selected { border-color: rgb(142, 239, 250); background-color: rgb(45, 177, 218); color: rgb(255, 255, 255); }
+.teacher-task-publish-label { width: 72px; margin-left: 8px; color: rgba(220, 239, 251, 0.72); font-size: 13px; -unity-text-align: middle-left; }
+.teacher-task-list-empty { height: 160px; flex-shrink: 0; align-items: center; justify-content: center; color: rgba(201, 226, 243, 0.48); font-size: 15px; -unity-text-align: middle-center; }
+.teacher-task-chip { min-width: 72px; height: 32px; padding: 0 12px; border-width: 1px; border-radius: 16px; font-size: 13px; -unity-text-align: middle-center; }
+.teacher-task-chip-practice { border-color: rgba(100, 228, 217, 0.40); background-color: rgba(57, 186, 173, 0.15); color: rgb(157, 239, 226); }
+.teacher-task-chip-assessment { border-color: rgba(112, 191, 250, 0.46); background-color: rgba(68, 137, 223, 0.18); color: rgb(171, 218, 253); }
+.teacher-task-chip-local { border-color: rgba(165, 205, 244, 0.32); background-color: rgba(105, 150, 202, 0.14); color: rgba(214, 235, 251, 0.84); }
+.teacher-task-chip-remote { border-color: rgba(191, 164, 246, 0.40); background-color: rgba(128, 94, 210, 0.17); color: rgb(211, 192, 250); }
+.teacher-task-main-copy { color: rgb(239, 247, 253); font-size: 17px; -unity-font-style: bold; }
+.teacher-task-secondary-copy { padding-right: 22px; color: rgba(216, 234, 248, 0.72); font-size: 15px; }
+.teacher-task-duration { color: rgb(181, 230, 249); font-size: 15px; }
+.teacher-task-actions-cell { flex-direction: row; justify-content: flex-end; align-items: center; }
+.teacher-task-row-action { width: 74px; height: 38px; margin-left: 8px; padding: 0; border-width: 1px; border-color: rgba(168, 220, 247, 0.25); border-radius: 12px; background-image: none; background-color: rgba(79, 146, 193, 0.18); color: rgba(230, 243, 253, 0.80); font-size: 13px; }
+.teacher-task-row-action:hover { border-color: rgba(132, 230, 247, 0.66); background-color: rgba(53, 165, 211, 0.36); color: rgb(248, 253, 255); }
+.teacher-task-view-action { border-color: rgba(116, 226, 242, 0.42); background-color: rgba(47, 158, 207, 0.26); color: rgb(205, 244, 252); }
+.teacher-task-delete-action { color: rgba(255, 197, 197, 0.76); }
+.teacher-task-publish-action { border-color: rgba(129, 231, 247, 0.45); background-color: rgba(49, 164, 224, 0.28); color: rgb(226, 249, 255); }
+.teacher-task-publish-action:hover { border-color: rgba(132, 230, 247, 0.80); background-color: rgba(53, 165, 211, 0.48); }
+.teacher-task-delete-action:hover { border-color: rgba(255, 170, 170, 0.60); background-color: rgba(211, 78, 94, 0.24); color: rgb(255, 230, 230); }
+.teacher-task-page-footer { position: absolute; left: 4px; right: 4px; top: 804px; height: 42px; flex-direction: row; align-items: center; justify-content: space-between; }
+.teacher-task-page-status { color: rgba(207, 229, 245, 0.62); font-size: 13px; }
+.teacher-task-page-status.notice { color: rgb(139, 230, 245); }
+.teacher-task-pagination { width: 90px; color: rgba(190, 222, 243, 0.50); font-size: 12px; letter-spacing: 2px; -unity-text-align: middle-right; }
+
+/* Fault-task detail modal. The shell fills the list from one grouped fault task. */
+.teacher-fault-task-detail-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.teacher-fault-task-detail-scrim { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(1, 13, 35, 0.86); }
+.teacher-fault-task-detail-modal { position: absolute; left: 170px; right: 170px; top: 132px; bottom: 92px; overflow: hidden; border-width: 1px; border-color: rgba(179, 228, 251, 0.42); border-top-color: rgba(230, 250, 255, 0.72); border-radius: 28px; background-color: rgba(8, 44, 94, 0.98); }
+.teacher-fault-task-detail-header { height: 112px; padding: 22px 34px; border-bottom-width: 1px; border-bottom-color: rgba(184, 223, 246, 0.19); background-color: rgba(31, 101, 164, 0.30); }
+.teacher-fault-task-detail-overline { height: 18px; color: rgb(112, 231, 246); font-size: 11px; letter-spacing: 4px; -unity-font-style: bold; }
+.teacher-fault-task-detail-title { height: 44px; margin-top: 5px; color: rgb(248, 252, 255); font-size: 30px; -unity-font-style: bold; }
+.teacher-fault-task-detail-count { position: absolute; right: 112px; top: 46px; color: rgba(189, 228, 247, 0.76); font-size: 15px; }
+.teacher-fault-task-detail-close { position: absolute; right: 28px; top: 26px; width: 58px; height: 58px; padding: 0 0 4px 0; border-width: 1px; border-color: rgba(201, 235, 253, 0.38); border-radius: 29px; background-image: none; background-color: rgba(22, 74, 130, 0.56); color: rgb(241, 250, 255); font-size: 32px; -unity-text-align: middle-center; }
+.teacher-fault-task-detail-close:hover { border-color: rgba(153, 237, 251, 0.90); background-color: rgba(53, 154, 211, 0.82); }
+.teacher-fault-task-detail-table { position: absolute; left: 28px; right: 28px; top: 138px; bottom: 28px; overflow: hidden; border-width: 1px; border-color: rgba(190, 226, 248, 0.22); border-radius: 18px; background-color: rgba(8, 42, 88, 0.54); }
+.teacher-fault-task-detail-table-header { height: 50px; padding: 0 20px; flex-direction: row; align-items: center; background-color: rgba(43, 120, 178, 0.24); color: rgba(194, 224, 243, 0.72); font-size: 12px; }
+.teacher-fault-task-detail-list { position: absolute; left: 0; right: 0; top: 50px; bottom: 0; }
+.teacher-fault-task-detail-list .unity-scroll-view__content-container { padding: 0 8px 8px 0; }
+.teacher-fault-task-detail-row { min-height: 68px; flex-shrink: 0; padding: 0 20px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(184, 220, 243, 0.12); color: rgba(224, 240, 251, 0.82); font-size: 14px; }
+.teacher-fault-task-detail-row:hover { background-color: rgba(50, 143, 199, 0.20); }
+.teacher-fault-task-detail-col-index { width: 90px; }
+.teacher-fault-task-detail-col-category { width: 220px; }
+.teacher-fault-task-detail-col-phenomenon { flex-grow: 1; padding-right: 18px; white-space: normal; }
+.teacher-fault-task-detail-col-line { width: 210px; }
+.teacher-fault-task-detail-col-point { width: 290px; }
+.teacher-fault-task-detail-code { color: rgb(154, 224, 246); }
+
+/* Assessment analytics page */
+.teacher-assessment-page { color: rgb(241, 248, 255); }
+.teacher-assessment-workspace { position: absolute; left: 82px; right: 82px; top: 136px; bottom: 46px; }
+.teacher-assessment-page-heading { position: absolute; left: 0; right: 0; top: 0; height: 122px; flex-direction: row; align-items: center; }
+.teacher-assessment-page-back { width: 64px; height: 64px; margin: 0 26px 0 0; padding: 0 0 4px 0; border-width: 1px; border-color: rgba(202, 235, 255, 0.42); border-top-color: rgba(237, 250, 255, 0.70); border-radius: 32px; background-image: none; background-color: rgba(22, 75, 134, 0.58); color: rgb(244, 251, 255); font-size: 32px; -unity-text-align: middle-center; }
+.teacher-assessment-page-back:hover { border-color: rgba(145, 235, 255, 0.90); background-color: rgba(47, 142, 211, 0.82); }
+.teacher-assessment-heading-copy { width: 760px; }
+.teacher-assessment-overline { height: 18px; color: rgb(113, 229, 245); font-size: 12px; letter-spacing: 4px; -unity-font-style: bold; }
+.teacher-assessment-heading { height: 54px; margin-top: 8px; color: rgb(248, 252, 255); font-size: 44px; -unity-font-style: bold; }
+.teacher-assessment-subheading { height: 26px; color: rgba(223, 238, 251, 0.68); font-size: 17px; }
+.teacher-assessment-summary { position: absolute; right: 0; top: 11px; width: 500px; height: 94px; padding: 12px 20px; flex-direction: row; align-items: center; justify-content: space-around; border-width: 1px; border-color: rgba(195, 229, 251, 0.25); border-top-color: rgba(231, 248, 255, 0.42); border-radius: 24px; background-color: rgba(16, 61, 116, 0.52); }
+.teacher-assessment-summary-item { width: 126px; align-items: center; }
+.teacher-assessment-summary-value { height: 38px; color: rgb(241, 250, 255); font-size: 28px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-assessment-summary-accent { color: rgb(112, 231, 246); }
+.teacher-assessment-summary-label { height: 24px; color: rgba(209, 231, 247, 0.58); font-size: 13px; -unity-text-align: middle-center; }
+.teacher-assessment-summary-divider { width: 1px; height: 48px; background-color: rgba(196, 226, 246, 0.20); }
+.teacher-assessment-toolbar { position: absolute; left: 0; right: 0; top: 132px; height: 76px; padding: 10px 12px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(194, 228, 250, 0.23); border-top-color: rgba(232, 248, 255, 0.42); border-radius: 20px; background-color: rgba(14, 57, 111, 0.58); }
+.teacher-assessment-date-group { width: 374px; height: 54px; flex-direction: row; align-items: center; }
+.teacher-assessment-toolbar-label { width: 72px; color: rgba(204, 228, 245, 0.62); font-size: 13px; }
+.teacher-assessment-date-field { width: 218px; height: 46px; margin-right: 8px; }
+.teacher-assessment-date-field .unity-base-text-field__input { height: 44px; padding: 0 15px; border-width: 1px; border-color: rgba(179, 221, 246, 0.28); border-radius: 13px; background-color: rgba(3, 30, 70, 0.42); color: rgb(237, 247, 253); font-size: 15px; }
+.teacher-assessment-calendar-button { width: 48px; height: 44px; padding: 0; border-width: 1px; border-color: rgba(151, 227, 246, 0.40); border-radius: 13px; background-image: none; background-color: rgba(43, 139, 193, 0.26); color: rgb(167, 232, 248); font-size: 22px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-button:hover { border-color: rgba(143, 235, 251, 0.84); background-color: rgba(53, 169, 216, 0.44); color: rgb(245, 253, 255); }
+.teacher-assessment-filter-group { width: 518px; height: 50px; margin-left: 18px; flex-direction: row; align-items: center; }
+.teacher-assessment-filter { height: 44px; min-width: 146px; margin-right: 8px; padding: 0 18px; border-width: 1px; border-color: rgba(189, 223, 246, 0.15); border-radius: 14px; background-image: none; background-color: rgba(211, 237, 252, 0.055); color: rgba(220, 237, 250, 0.68); font-size: 14px; }
+.teacher-assessment-filter:hover { border-color: rgba(136, 226, 249, 0.52); background-color: rgba(61, 158, 217, 0.22); color: rgb(239, 249, 255); }
+.teacher-assessment-filter.selected { border-color: rgba(129, 231, 247, 0.70); background-color: rgba(49, 164, 224, 0.38); color: rgb(246, 252, 255); }
+.teacher-assessment-search-group { position: absolute; right: 12px; width: 498px; height: 54px; flex-direction: row; align-items: center; }
+.teacher-assessment-search-label { width: 76px; }
+.teacher-assessment-search-field { width: 314px; height: 46px; margin-right: 8px; }
+.teacher-assessment-search-field .unity-base-text-field__input { height: 44px; padding: 0 15px; border-width: 1px; border-color: rgba(179, 221, 246, 0.25); border-radius: 13px; background-color: rgba(3, 30, 70, 0.42); color: rgb(237, 247, 253); font-size: 14px; }
+.teacher-assessment-search-button { width: 92px; height: 44px; padding: 0; border-width: 1px; border-color: rgba(174, 238, 250, 0.66); border-radius: 13px; background-image: none; background-color: rgba(49, 171, 220, 0.60); color: rgb(248, 253, 255); font-size: 14px; -unity-font-style: bold; }
+.teacher-assessment-search-button:hover { border-color: rgb(231, 254, 255); background-color: rgba(57, 197, 235, 0.88); }
+.teacher-assessment-table { position: absolute; left: 0; right: 0; top: 222px; height: 530px; overflow: hidden; border-width: 1px; border-color: rgba(193, 227, 249, 0.25); border-top-color: rgba(231, 248, 255, 0.46); border-radius: 24px; background-color: rgba(10, 47, 98, 0.57); }
+.teacher-assessment-table-header { height: 58px; flex-shrink: 0; padding: 0 22px; flex-direction: row; align-items: center; background-color: rgba(42, 117, 176, 0.25); color: rgba(191, 220, 241, 0.74); font-size: 13px; letter-spacing: 1px; }
+.teacher-assessment-list-scroll { flex-grow: 1; flex-shrink: 1; min-height: 0; }
+/* Unity 6000.0.42f1 ScrollView uses BaseSlider parts for its scrollbar thumb. */
+.teacher-assessment-list-scroll .unity-scroll-view__vertical-scroller,
+.teacher-assessment-deduction-scroll .unity-scroll-view__vertical-scroller {
+    width: 12px;
+    min-width: 12px;
+    margin: 8px 7px 8px 0;
+    padding: 0;
+    border-width: 0;
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+.teacher-assessment-list-scroll .unity-scroller__slider,
+.teacher-assessment-deduction-scroll .unity-scroller__slider {
+    flex-grow: 1;
+    width: 12px;
+    min-width: 12px;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+.teacher-assessment-list-scroll .unity-base-slider__input,
+.teacher-assessment-deduction-scroll .unity-base-slider__input {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+.teacher-assessment-list-scroll .unity-base-slider__drag-container,
+.teacher-assessment-deduction-scroll .unity-base-slider__drag-container {
+    flex-grow: 1;
+    width: 12px;
+    margin: 0;
+}
+.teacher-assessment-list-scroll .unity-base-slider__tracker,
+.teacher-assessment-deduction-scroll .unity-base-slider__tracker {
+    left: 2px;
+    right: 2px;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    border-width: 0;
+    border-radius: 4px;
+    background-image: none;
+    background-color: rgba(57, 129, 181, 0.20);
+}
+.teacher-assessment-list-scroll .unity-base-slider__dragger,
+.teacher-assessment-deduction-scroll .unity-base-slider__dragger {
+    left: 2px;
+    width: 8px;
+    min-width: 8px;
+    border-width: 0;
+    border-radius: 4px;
+    background-image: none;
+    background-color: rgba(96, 214, 239, 0.64);
+}
+.teacher-assessment-list-scroll .unity-base-slider__dragger:hover,
+.teacher-assessment-deduction-scroll .unity-base-slider__dragger:hover {
+    background-color: rgba(140, 237, 251, 0.94);
+}
+.teacher-assessment-list-scroll .unity-base-slider__dragger:active,
+.teacher-assessment-deduction-scroll .unity-base-slider__dragger:active {
+    background-color: rgb(173, 244, 253);
+}
+.teacher-assessment-list-scroll .unity-base-slider__dragger-border,
+.teacher-assessment-deduction-scroll .unity-base-slider__dragger-border,
+.teacher-assessment-list-scroll .unity-scroller__low-button,
+.teacher-assessment-deduction-scroll .unity-scroller__low-button,
+.teacher-assessment-list-scroll .unity-scroller__high-button,
+.teacher-assessment-deduction-scroll .unity-scroller__high-button,
+.teacher-assessment-list-scroll .unity-scroll-view__horizontal-scroller,
+.teacher-assessment-deduction-scroll .unity-scroll-view__horizontal-scroller {
+    display: none;
+}
+.teacher-assessment-list-row { height: 112px; flex-shrink: 0; padding: 0 22px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(183, 218, 241, 0.12); background-color: rgba(22, 75, 130, 0.16); }
+.teacher-assessment-list-row:hover { background-color: rgba(48, 137, 194, 0.24); }
+.teacher-assessment-list-row-last { border-bottom-width: 0; }
+.teacher-assessment-col-name { width: 154px; }
+.teacher-assessment-col-major { width: 204px; }
+.teacher-assessment-col-class { width: 174px; }
+.teacher-assessment-col-student { width: 168px; }
+.teacher-assessment-col-project { flex-grow: 1; }
+.teacher-assessment-col-duration { width: 112px; }
+.teacher-assessment-col-score { width: 156px; }
+.teacher-assessment-col-detail { width: 104px; }
+.teacher-assessment-primary-copy { color: rgb(243, 250, 255); font-size: 17px; -unity-font-style: bold; }
+.teacher-assessment-secondary-copy { color: rgba(216, 234, 248, 0.72); font-size: 15px; }
+.teacher-assessment-mono-copy { color: rgb(170, 221, 245); font-size: 14px; letter-spacing: 1px; }
+.teacher-assessment-project-copy { padding-right: 20px; color: rgb(232, 243, 251); font-size: 16px; }
+.teacher-assessment-duration-copy { color: rgb(181, 230, 249); font-size: 15px; }
+.teacher-assessment-score-cell { flex-direction: row; align-items: center; }
+.teacher-assessment-score-value { width: 54px; color: rgb(246, 252, 255); font-size: 22px; -unity-font-style: bold; }
+.teacher-assessment-score-chip { min-width: 68px; height: 30px; padding: 0 10px; border-width: 1px; border-radius: 15px; font-size: 12px; -unity-text-align: middle-center; }
+.teacher-assessment-score-excellent { border-color: rgba(97, 229, 216, 0.44); background-color: rgba(48, 184, 169, 0.17); color: rgb(151, 241, 224); }
+.teacher-assessment-score-passed { border-color: rgba(108, 193, 249, 0.42); background-color: rgba(61, 137, 212, 0.18); color: rgb(170, 218, 253); }
+.teacher-assessment-score-review { border-color: rgba(249, 191, 99, 0.42); background-color: rgba(180, 115, 27, 0.16); color: rgb(249, 211, 145); }
+.teacher-assessment-score-failed { border-color: rgba(255, 170, 170, 0.48); background-color: rgba(211, 78, 94, 0.20); color: rgb(255, 210, 210); }
+.teacher-assessment-detail-cell { align-items: flex-end; }
+.teacher-assessment-detail-button { width: 86px; height: 38px; padding: 0; border-width: 1px; border-color: rgba(168, 220, 247, 0.26); border-radius: 12px; background-image: none; background-color: rgba(79, 146, 193, 0.18); color: rgba(230, 243, 253, 0.82); font-size: 13px; }
+.teacher-assessment-detail-button:hover { border-color: rgba(132, 230, 247, 0.66); background-color: rgba(53, 165, 211, 0.36); color: rgb(248, 253, 255); }
+.teacher-assessment-page-footer { position: absolute; left: 4px; right: 4px; top: 770px; height: 58px; flex-direction: row; align-items: center; justify-content: space-between; }
+.teacher-assessment-service-state { height: 40px; padding: 0 15px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(248, 195, 102, 0.18); border-radius: 13px; background-color: rgba(150, 103, 29, 0.10); color: rgba(232, 222, 198, 0.72); font-size: 12px; }
+.teacher-assessment-page-status.notice { color: rgb(145, 229, 246); }
+.teacher-assessment-service-dot { width: 8px; height: 8px; margin-right: 10px; border-radius: 4px; background-color: rgb(248, 188, 91); }
+.teacher-assessment-pagination { width: 190px; color: rgba(190, 222, 243, 0.50); font-size: 12px; letter-spacing: 2px; -unity-text-align: middle-right; }
+
+/* Assessment detail modal */
+.teacher-assessment-detail-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.teacher-assessment-detail-scrim { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(1, 13, 35, 0.84); }
+.teacher-assessment-detail-modal { position: absolute; left: 116px; right: 116px; top: 104px; bottom: 62px; overflow: hidden; border-width: 1px; border-color: rgba(179, 228, 251, 0.42); border-top-color: rgba(230, 250, 255, 0.72); border-radius: 30px; background-color: rgba(8, 44, 94, 0.98); }
+.teacher-assessment-detail-header { height: 112px; padding: 22px 36px; border-bottom-width: 1px; border-bottom-color: rgba(184, 223, 246, 0.19); background-color: rgba(31, 101, 164, 0.30); }
+.teacher-assessment-detail-overline { height: 18px; color: rgb(112, 231, 246); font-size: 11px; letter-spacing: 4px; -unity-font-style: bold; }
+.teacher-assessment-detail-title { height: 46px; margin-top: 5px; color: rgb(248, 252, 255); font-size: 32px; -unity-font-style: bold; }
+.teacher-assessment-detail-record { position: absolute; right: 112px; top: 44px; color: rgba(195, 225, 245, 0.54); font-size: 12px; letter-spacing: 2px; }
+.teacher-assessment-detail-close { position: absolute; right: 30px; top: 25px; width: 58px; height: 58px; padding: 0 0 4px 0; border-width: 1px; border-color: rgba(201, 235, 253, 0.38); border-radius: 29px; background-image: none; background-color: rgba(22, 74, 130, 0.56); color: rgb(241, 250, 255); font-size: 32px; -unity-text-align: middle-center; }
+.teacher-assessment-detail-close:hover { border-color: rgba(153, 237, 251, 0.90); background-color: rgba(53, 154, 211, 0.82); }
+.teacher-assessment-detail-body { position: absolute; left: 30px; right: 30px; top: 138px; bottom: 28px; }
+.teacher-assessment-detail-identity-row { position: absolute; left: 0; right: 0; top: 0; height: 88px; flex-direction: row; }
+.teacher-assessment-detail-info-card { flex-grow: 1; height: 88px; margin-right: 14px; padding: 15px 20px; border-width: 1px; border-color: rgba(188, 225, 248, 0.20); border-top-color: rgba(226, 247, 255, 0.36); border-radius: 18px; background-color: rgba(18, 66, 121, 0.58); }
+.teacher-assessment-detail-info-label { height: 22px; color: rgba(188, 218, 239, 0.55); font-size: 11px; letter-spacing: 2px; }
+.teacher-assessment-detail-info-value { height: 34px; margin-top: 4px; color: rgb(242, 250, 255); font-size: 19px; -unity-font-style: bold; }
+.teacher-assessment-detail-mono { color: rgb(151, 224, 246); letter-spacing: 1px; }
+.teacher-assessment-detail-summary-row { position: absolute; left: 0; right: 0; top: 106px; height: 132px; flex-direction: row; }
+.teacher-assessment-detail-summary-card { height: 132px; margin-right: 14px; padding: 18px 22px; border-width: 1px; border-color: rgba(187, 224, 247, 0.20); border-top-color: rgba(228, 248, 255, 0.37); border-radius: 20px; background-color: rgba(13, 57, 112, 0.62); }
+.teacher-assessment-detail-project-card { width: 640px; }
+.teacher-assessment-detail-duration-card { width: 210px; align-items: center; }
+.teacher-assessment-detail-score-card { width: 220px; align-items: center; }
+.teacher-assessment-detail-verdict-card { flex-grow: 1; align-items: center; }
+.teacher-assessment-detail-summary-label { height: 22px; color: rgba(188, 218, 239, 0.54); font-size: 11px; letter-spacing: 2px; }
+.teacher-assessment-detail-project-value { height: 34px; margin-top: 5px; color: rgb(242, 250, 255); font-size: 20px; -unity-font-style: bold; }
+.teacher-assessment-detail-summary-copy { height: 32px; margin-top: 7px; color: rgba(207, 230, 246, 0.64); font-size: 13px; }
+.teacher-assessment-detail-duration-value { height: 60px; color: rgb(180, 231, 249); font-size: 30px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-assessment-detail-score-number { height: 70px; font-size: 50px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-assessment-detail-score-excellent { color: rgb(112, 235, 217); }
+.teacher-assessment-detail-score-passed { color: rgb(126, 207, 250); }
+.teacher-assessment-detail-score-review { color: rgb(249, 197, 111); }
+.teacher-assessment-detail-score-failed { color: rgb(255, 176, 176); }
+.teacher-assessment-detail-verdict { min-width: 112px; height: 42px; margin-top: 8px; padding: 0 18px; border-width: 1px; border-radius: 21px; font-size: 16px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-assessment-detail-verdict-excellent { border-color: rgba(100, 229, 216, 0.52); background-color: rgba(48, 184, 169, 0.18); color: rgb(151, 241, 224); }
+.teacher-assessment-detail-verdict-passed { border-color: rgba(108, 193, 249, 0.48); background-color: rgba(61, 137, 212, 0.20); color: rgb(177, 224, 253); }
+.teacher-assessment-detail-verdict-review { border-color: rgba(249, 191, 99, 0.48); background-color: rgba(180, 115, 27, 0.18); color: rgb(249, 211, 145); }
+.teacher-assessment-detail-verdict-failed { border-color: rgba(255, 170, 170, 0.52); background-color: rgba(211, 78, 94, 0.22); color: rgb(255, 214, 214); }
+.teacher-assessment-detail-preview-tag { height: 20px; margin-top: 8px; color: rgba(179, 215, 238, 0.40); font-size: 9px; letter-spacing: 2px; -unity-text-align: middle-center; }
+.teacher-assessment-detail-deduction-panel { position: absolute; left: 0; right: 0; top: 258px; bottom: 56px; overflow: hidden; border-width: 1px; border-color: rgba(191, 226, 248, 0.22); border-top-color: rgba(229, 248, 255, 0.40); border-radius: 22px; background-color: rgba(9, 46, 96, 0.62); }
+.teacher-assessment-detail-deduction-heading { height: 70px; flex-shrink: 0; padding: 13px 22px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(186, 222, 245, 0.14); background-color: rgba(35, 112, 170, 0.18); }
+.teacher-assessment-detail-deduction-title { height: 28px; color: rgb(241, 250, 255); font-size: 20px; -unity-font-style: bold; }
+.teacher-assessment-detail-deduction-overline { height: 16px; color: rgba(113, 229, 245, 0.56); font-size: 9px; letter-spacing: 3px; }
+.teacher-assessment-detail-deduction-caption { position: absolute; right: 22px; color: rgba(202, 226, 242, 0.46); font-size: 11px; }
+.teacher-assessment-detail-rule-header { height: 48px; flex-shrink: 0; padding: 0 22px; flex-direction: row; align-items: center; background-color: rgba(44, 121, 178, 0.20); color: rgba(190, 221, 241, 0.70); font-size: 12px; letter-spacing: 1px; }
+.teacher-assessment-deduction-scroll { flex-grow: 1; flex-shrink: 1; min-height: 0; }
+.teacher-assessment-detail-rule-row { height: 88px; flex-shrink: 0; padding: 0 22px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(181, 218, 241, 0.11); background-color: rgba(22, 75, 130, 0.12); }
+.teacher-assessment-detail-rule-row:hover { background-color: rgba(48, 137, 194, 0.20); }
+.teacher-assessment-detail-rule-row-last { border-bottom-width: 0; }
+.teacher-assessment-detail-col-item { width: 380px; }
+.teacher-assessment-detail-col-value { width: 130px; }
+.teacher-assessment-detail-col-count { width: 150px; }
+.teacher-assessment-detail-col-note { flex-grow: 1; }
+.teacher-assessment-detail-rule-item { color: rgb(235, 246, 253); font-size: 16px; -unity-font-style: bold; }
+.teacher-assessment-detail-rule-value { color: rgb(249, 190, 116); font-size: 18px; -unity-font-style: bold; }
+.teacher-assessment-detail-rule-count { color: rgb(172, 224, 247); font-size: 15px; }
+.teacher-assessment-detail-rule-note { padding-right: 12px; color: rgba(211, 232, 247, 0.68); font-size: 14px; }
+.teacher-assessment-detail-boundary { position: absolute; left: 0; right: 0; bottom: 0; height: 40px; padding: 0 15px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(248, 195, 102, 0.20); border-radius: 13px; background-color: rgba(150, 103, 29, 0.11); color: rgba(244, 219, 170, 0.72); font-size: 11px; }
+.teacher-assessment-detail-boundary-dot { width: 8px; height: 8px; margin-right: 10px; border-radius: 4px; background-color: rgb(248, 188, 91); }
+
+/* Create-task modal: category buttons switch the visible catalogue while project buttons
+   preserve independent selected states, allowing one paper to collect items across categories. */
+.teacher-task-editor-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.teacher-task-editor-scrim { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(1, 13, 35, 0.82); }
+.teacher-task-editor-modal { position: absolute; left: 94px; right: 94px; top: 116px; bottom: 68px; overflow: hidden; border-width: 1px; border-color: rgba(179, 228, 251, 0.42); border-top-color: rgba(230, 250, 255, 0.72); border-radius: 30px; background-color: rgba(8, 44, 94, 0.98); }
+.teacher-task-editor-header { height: 116px; padding: 24px 36px; border-bottom-width: 1px; border-bottom-color: rgba(184, 223, 246, 0.19); background-color: rgba(31, 101, 164, 0.30); }
+.teacher-task-editor-overline { height: 18px; color: rgb(112, 231, 246); font-size: 11px; letter-spacing: 4px; -unity-font-style: bold; }
+.teacher-task-editor-title { height: 46px; margin-top: 6px; color: rgb(248, 252, 255); font-size: 32px; -unity-font-style: bold; }
+.teacher-task-editor-description { position: absolute; right: 112px; top: 47px; color: rgba(218, 236, 250, 0.62); font-size: 15px; }
+.teacher-task-editor-close { position: absolute; right: 30px; top: 27px; width: 58px; height: 58px; padding: 0 0 4px 0; border-width: 1px; border-color: rgba(201, 235, 253, 0.38); border-radius: 29px; background-image: none; background-color: rgba(22, 74, 130, 0.56); color: rgb(241, 250, 255); font-size: 32px; -unity-text-align: middle-center; }
+.teacher-task-editor-close:hover { border-color: rgba(153, 237, 251, 0.90); background-color: rgba(53, 154, 211, 0.82); }
+.teacher-task-editor-body { position: absolute; left: 30px; right: 30px; top: 142px; bottom: 30px; flex-direction: row; }
+.teacher-task-editor-panel-surface { height: 100%; padding: 28px; border-width: 1px; border-color: rgba(188, 225, 248, 0.22); border-top-color: rgba(226, 247, 255, 0.38); border-radius: 22px; background-color: rgba(15, 61, 116, 0.64); }
+.teacher-task-category-panel { width: 258px; margin-right: 18px; }
+.teacher-task-project-panel { width: 492px; margin-right: 18px; }
+.teacher-task-config-panel { flex-grow: 1; }
+.teacher-task-editor-section-label { height: 34px; color: rgb(242, 250, 255); font-size: 22px; -unity-font-style: bold; }
+.teacher-task-editor-section-overline { height: 28px; margin-bottom: 20px; color: rgba(181, 218, 241, 0.48); font-size: 10px; letter-spacing: 2px; }
+.teacher-task-category-button { height: 70px; margin: 0 0 12px 0; padding: 0 22px; border-width: 1px; border-color: rgba(181, 220, 245, 0.18); border-radius: 16px; background-image: none; background-color: rgba(215, 239, 252, 0.055); color: rgba(220, 237, 250, 0.76); font-size: 17px; -unity-text-align: middle-left; }
+.teacher-task-category-button:hover { border-color: rgba(133, 229, 248, 0.58); background-color: rgba(54, 150, 211, 0.25); color: rgb(244, 251, 255); }
+.teacher-task-category-button.selected { border-color: rgba(129, 233, 248, 0.82); border-left-width: 4px; background-color: rgba(49, 172, 221, 0.42); color: rgb(249, 253, 255); -unity-font-style: bold; }
+.teacher-task-project-button { height: 72px; margin: 0 0 13px 0; padding: 0 24px; border-width: 1px; border-color: rgba(181, 220, 245, 0.18); border-radius: 16px; background-image: none; background-color: rgba(7, 39, 82, 0.34); color: rgba(222, 239, 251, 0.80); font-size: 17px; -unity-text-align: middle-left; }
+.teacher-task-project-button:hover { border-color: rgba(135, 226, 248, 0.56); background-color: rgba(49, 139, 199, 0.24); }
+.teacher-task-project-button.selected { padding-left: 20px; border-color: rgba(126, 233, 247, 0.78); border-left-width: 5px; background-color: rgba(52, 183, 219, 0.34); color: rgb(248, 253, 255); -unity-font-style: bold; }
+.teacher-task-editor-selection-count { position: absolute; right: 28px; top: 28px; min-width: 92px; height: 30px; padding: 0 12px; border-width: 1px; border-color: rgba(127, 232, 248, 0.34); border-radius: 15px; background-color: rgba(45, 166, 214, 0.20); color: rgb(139, 232, 247); font-size: 11px; -unity-text-align: middle-center; }
+.teacher-task-project-note { position: absolute; left: 28px; right: 28px; bottom: 24px; height: 42px; padding: 0 13px; flex-direction: row; align-items: center; border-radius: 12px; background-color: rgba(4, 32, 72, 0.28); color: rgba(197, 223, 241, 0.54); font-size: 11px; }
+.teacher-task-project-note-dot { width: 7px; height: 7px; margin-right: 9px; border-radius: 4px; background-color: rgb(100, 218, 239); }
+.teacher-task-config-label { height: 24px; margin-top: 8px; color: rgba(207, 230, 246, 0.66); font-size: 13px; }
+.teacher-task-config-input { height: 52px; margin: 3px 0 15px 0; }
+.teacher-task-config-input .unity-base-text-field__input { height: 50px; padding: 0 16px; border-width: 1px; border-color: rgba(178, 220, 245, 0.28); border-radius: 13px; background-color: rgba(3, 29, 68, 0.46); color: rgb(240, 248, 254); font-size: 16px; }
+.teacher-task-target-dropdown .unity-base-field__input { height: 50px; padding: 0 16px; border-width: 1px; border-color: rgba(178, 220, 245, 0.28); border-radius: 13px; background-image: none; background-color: rgba(3, 29, 68, 0.46); color: rgb(240, 248, 254); font-size: 16px; }
+.teacher-task-target-dropdown .unity-base-popup-field__text { flex-grow: 1; flex-shrink: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: rgb(240, 248, 254); font-size: 16px; }
+.teacher-task-target-dropdown .unity-base-popup-field__arrow { width: 9px; height: 9px; flex-shrink: 0; align-self: center; margin: 0 3px 5px 16px; border-width: 0 2px 2px 0; border-color: rgb(131, 226, 246); border-radius: 0; background-image: none; background-color: rgba(0, 0, 0, 0); rotate: 45deg; }
+.teacher-task-target-dropdown:hover .unity-base-field__input { border-color: rgba(128, 225, 247, 0.55); }
+/* Unity mounts popup menus at the document root, outside the DropdownField. */
+.unity-base-dropdown__container-outer { padding: 6px; border-width: 1px; border-color: rgba(128, 225, 247, 0.62); border-radius: 12px; background-image: none; background-color: rgb(8, 39, 78); color: rgb(232, 245, 254); }
+.unity-base-dropdown__container-inner { max-height: 360px; padding: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); }
+.unity-base-dropdown__item { min-height: 44px; margin: 2px 0; padding: 0 12px; border-width: 1px; border-color: rgba(0, 0, 0, 0); border-radius: 8px; background-image: none; background-color: rgba(0, 0, 0, 0); color: rgb(222, 239, 251); }
+.unity-base-dropdown__item:hover { border-color: rgba(135, 226, 248, 0.48); background-color: rgba(49, 139, 199, 0.42); }
+.unity-base-dropdown__item:checked { border-color: rgba(126, 233, 247, 0.66); background-color: rgba(52, 183, 219, 0.32); }
+.unity-base-dropdown__item:checked:hover { background-color: rgba(52, 183, 219, 0.46); }
+.unity-base-dropdown__item-content { min-height: 42px; flex-direction: row; align-items: center; }
+.unity-base-dropdown__label { flex-grow: 1; flex-shrink: 1; min-width: 0; margin: 0; padding: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: rgb(232, 245, 254); font-size: 16px; -unity-text-align: middle-left; }
+.unity-base-dropdown__item:checked .unity-base-dropdown__label { color: rgb(249, 253, 255); -unity-font-style: bold; }
+.unity-base-dropdown__checkmark { width: 18px; height: 18px; flex-shrink: 0; margin: 0 10px 0 0; -unity-background-image-tint-color: rgb(131, 226, 246); }
+.unity-base-dropdown__separator { height: 1px; margin: 6px 12px; background-color: rgba(128, 225, 247, 0.22); }
+.unity-base-dropdown .unity-scroller--vertical { width: 10px; min-width: 10px; margin-left: 4px; }
+.unity-base-dropdown .unity-base-slider__tracker { width: 6px; margin: 0 2px; border-width: 0; border-radius: 3px; background-color: rgba(67, 137, 189, 0.22); }
+.unity-base-dropdown .unity-base-slider__dragger { left: 2px; width: 6px; min-width: 6px; border-width: 0; border-radius: 3px; background-image: none; background-color: rgba(110, 215, 241, 0.64); }
+.unity-base-dropdown .unity-base-slider__dragger:hover { background-color: rgb(145, 235, 251); }
+.unity-base-dropdown .unity-base-slider__dragger-border,
+.unity-base-dropdown .unity-scroller__low-button,
+.unity-base-dropdown .unity-scroller__high-button,
+.unity-base-dropdown .unity-scroll-view__horizontal-scroller { display: none; }
+.teacher-task-config-note { min-height: 38px; margin: -7px 0 5px 0; color: rgba(181, 218, 241, 0.54); font-size: 11px; white-space: normal; }
+.teacher-task-choice-row { height: 48px; margin: 3px 0 15px 0; flex-direction: row; }
+.teacher-task-choice { min-width: 116px; height: 44px; margin: 0 10px 0 0; padding: 0 15px; border-width: 1px; border-color: rgba(181, 220, 245, 0.18); border-radius: 13px; background-image: none; background-color: rgba(7, 37, 79, 0.34); color: rgba(219, 237, 250, 0.70); font-size: 14px; }
+.teacher-task-choice:hover { border-color: rgba(128, 225, 247, 0.55); color: rgb(243, 251, 255); }
+.teacher-task-choice.selected { border-color: rgba(126, 231, 247, 0.76); background-color: rgba(51, 172, 221, 0.38); color: rgb(249, 253, 255); -unity-font-style: bold; }
+.teacher-task-duration-choice { min-width: 94px; }
+.teacher-task-editor-boundary { height: 44px; margin-top: 2px; padding: 0 13px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(248, 195, 102, 0.22); border-radius: 12px; background-color: rgba(150, 103, 29, 0.12); color: rgba(247, 218, 163, 0.76); font-size: 11px; }
+.teacher-task-editor-boundary-dot { width: 8px; height: 8px; margin-right: 10px; border-radius: 4px; background-color: rgb(248, 188, 91); }
+.teacher-task-editor-status { position: absolute; left: 28px; right: 28px; bottom: 91px; min-height: 24px; color: rgba(174, 224, 244, 0.82); font-size: 12px; white-space: normal; -unity-text-align: middle-left; }
+.teacher-task-editor-status.error { color: rgb(255, 184, 151); }
+.teacher-task-editor-create { position: absolute; left: 28px; right: 28px; bottom: 27px; height: 58px; border-width: 1px; border-color: rgba(182, 242, 251, 0.78); border-top-color: rgb(229, 253, 255); border-radius: 16px; background-image: none; background-color: rgba(51, 181, 226, 0.84); color: rgb(249, 253, 255); font-size: 18px; -unity-font-style: bold; }
+.teacher-task-editor-create:hover { border-color: rgb(239, 255, 255); background-color: rgb(56, 198, 235); }
+
+/* Fault-publishing task selection and local question-bank workflow. */
+.teacher-fault-art { left: 84px; }
+.teacher-fault-art-ring { position: absolute; border-width: 1px; border-color: rgba(133, 229, 249, 0.25); border-radius: 80px; background-color: rgba(60, 178, 231, 0.04); }
+.teacher-fault-art-ring-outer { left: 8px; top: -1px; width: 174px; height: 154px; }
+.teacher-fault-art-ring-inner { left: 26px; top: 16px; width: 138px; height: 120px; border-color: rgba(152, 237, 250, 0.42); }
+.teacher-fault-art-panel { position: absolute; left: 48px; top: 35px; width: 96px; height: 82px; border-width: 2px; border-color: rgba(209, 247, 255, 0.82); border-radius: 18px; background-color: rgba(71, 184, 234, 0.20); }
+.teacher-fault-art-line { position: absolute; left: 18px; height: 2px; background-color: rgba(216, 248, 255, 0.68); }
+.teacher-fault-art-line-one { top: 22px; width: 58px; }
+.teacher-fault-art-line-two { top: 56px; width: 42px; }
+.teacher-fault-art-node { position: absolute; width: 10px; height: 10px; border-width: 2px; border-color: rgb(208, 250, 255); border-radius: 5px; background-color: rgb(70, 210, 239); }
+.teacher-fault-art-node-one { left: 14px; top: 18px; }
+.teacher-fault-art-node-two { left: 56px; top: 52px; }
+.teacher-fault-art-mark { position: absolute; right: 9px; bottom: 7px; width: 30px; height: 30px; border-width: 1px; border-color: rgba(255, 217, 139, 0.90); border-radius: 15px; background-color: rgba(225, 149, 55, 0.82); color: rgb(255, 248, 230); font-size: 21px; -unity-font-style: bold; -unity-text-align: middle-center; }
+
+.teacher-fault-publish-page { color: rgb(241, 248, 255); }
+.teacher-fault-workspace { position: absolute; left: 82px; right: 82px; top: 136px; bottom: 46px; }
+.teacher-fault-page-heading { position: absolute; left: 0; right: 0; top: 0; height: 122px; flex-direction: row; align-items: center; }
+.teacher-fault-page-back { width: 64px; height: 64px; margin: 0 26px 0 0; padding: 0 0 4px 0; border-width: 1px; border-color: rgba(202, 235, 255, 0.42); border-top-color: rgba(237, 250, 255, 0.70); border-radius: 32px; background-image: none; background-color: rgba(22, 75, 134, 0.58); color: rgb(244, 251, 255); font-size: 32px; -unity-text-align: middle-center; }
+.teacher-fault-page-back:hover { border-color: rgba(145, 235, 255, 0.90); background-color: rgba(47, 142, 211, 0.82); }
+.teacher-fault-heading-copy { width: 760px; }
+.teacher-fault-overline { height: 18px; color: rgb(113, 229, 245); font-size: 12px; letter-spacing: 4px; -unity-font-style: bold; }
+.teacher-fault-heading { height: 54px; margin-top: 8px; color: rgb(248, 252, 255); font-size: 44px; -unity-font-style: bold; }
+.teacher-fault-subheading { height: 28px; color: rgba(219, 237, 250, 0.64); font-size: 16px; }
+.teacher-fault-summary { position: absolute; right: 0; top: 16px; width: 620px; height: 88px; padding: 0 24px; flex-direction: row; align-items: center; justify-content: space-around; border-width: 1px; border-color: rgba(189, 226, 248, 0.24); border-top-color: rgba(225, 247, 255, 0.40); border-radius: 22px; background-color: rgba(15, 64, 119, 0.55); }
+.teacher-fault-summary-item { width: 150px; align-items: center; }
+.teacher-fault-summary-value { height: 42px; color: rgb(142, 232, 247); font-size: 30px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-fault-summary-warning { color: rgb(250, 191, 107); }
+.teacher-fault-summary-label { height: 20px; color: rgba(208, 230, 246, 0.58); font-size: 12px; letter-spacing: 1px; -unity-text-align: middle-center; }
+.teacher-fault-summary-divider { width: 1px; height: 48px; background-color: rgba(190, 224, 246, 0.18); }
+
+.teacher-fault-source-toolbar { position: absolute; left: 0; right: 0; top: 130px; height: 70px; padding: 0 20px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(193, 227, 249, 0.22); border-radius: 18px; background-color: rgba(12, 55, 108, 0.52); }
+.teacher-fault-toolbar-label { width: 98px; color: rgba(208, 230, 246, 0.66); font-size: 13px; }
+.teacher-fault-source-button { width: 132px; height: 42px; margin-right: 10px; border-width: 1px; border-color: rgba(182, 222, 246, 0.24); border-radius: 12px; background-image: none; background-color: rgba(14, 54, 102, 0.45); color: rgba(220, 238, 250, 0.74); font-size: 14px; }
+.teacher-fault-source-button:hover { border-color: rgba(131, 226, 247, 0.62); color: rgb(245, 252, 255); }
+.teacher-fault-source-button.selected { border-color: rgba(127, 233, 248, 0.80); background-color: rgba(48, 170, 218, 0.42); color: rgb(250, 254, 255); -unity-font-style: bold; }
+.teacher-fault-source-state { margin-left: 18px; flex-direction: row; align-items: center; color: rgba(211, 233, 248, 0.62); font-size: 12px; }
+.teacher-fault-source-dot { width: 8px; height: 8px; margin-right: 9px; border-radius: 4px; background-color: rgb(101, 224, 239); }
+.teacher-fault-preview-badge { position: absolute; right: 20px; min-width: 245px; height: 34px; padding: 0 14px; border-width: 1px; border-color: rgba(249, 196, 105, 0.30); border-radius: 17px; background-color: rgba(142, 94, 26, 0.16); color: rgba(250, 217, 159, 0.78); font-size: 12px; -unity-text-align: middle-center; }
+
+.teacher-fault-content { position: absolute; left: 0; right: 0; top: 218px; bottom: 52px; flex-direction: row; }
+.teacher-fault-panel-surface { height: 100%; padding: 22px; border-width: 1px; border-color: rgba(188, 225, 248, 0.22); border-top-color: rgba(226, 247, 255, 0.38); border-radius: 22px; background-color: rgba(13, 58, 112, 0.66); }
+.teacher-fault-panel-title { height: 30px; color: rgb(243, 250, 255); font-size: 20px; -unity-font-style: bold; }
+.teacher-fault-panel-overline { height: 21px; margin-bottom: 14px; color: rgba(177, 217, 240, 0.48); font-size: 9px; letter-spacing: 2px; }
+.teacher-fault-category-panel { width: 300px; margin-right: 16px; }
+.teacher-fault-category-scroll { position: absolute; left: 18px; right: 10px; top: 82px; bottom: 14px; }
+.teacher-fault-category-scroll .unity-scroll-view__content-container { padding-right: 8px; }
+.teacher-fault-category-scroll .unity-scroll-view__vertical-scroller { width: 7px; }
+.teacher-fault-category-button { height: 52px; margin-bottom: 7px; padding: 0 15px; flex-direction: row; align-items: center; justify-content: space-between; border-width: 1px; border-color: rgba(181, 220, 245, 0.17); border-radius: 13px; background-image: none; background-color: rgba(5, 34, 74, 0.28); color: rgba(220, 238, 250, 0.76); font-size: 14px; -unity-text-align: middle-left; }
+.teacher-fault-category-button:hover { border-color: rgba(134, 228, 248, 0.55); background-color: rgba(47, 143, 200, 0.24); color: rgb(247, 253, 255); }
+.teacher-fault-category-button.selected { border-color: rgba(128, 234, 248, 0.82); border-left-width: 4px; background-color: rgba(50, 176, 220, 0.38); color: rgb(250, 254, 255); -unity-font-style: bold; }
+.teacher-fault-category-count { min-width: 36px; height: 26px; border-radius: 13px; background-color: rgba(4, 31, 69, 0.34); color: rgb(141, 232, 247); font-size: 11px; -unity-text-align: middle-center; }
+
+.teacher-fault-list-panel { width: 830px; margin-right: 16px; padding: 0; overflow: hidden; }
+.teacher-fault-list-heading { height: 82px; padding: 17px 20px 0 20px; flex-direction: row; justify-content: space-between; }
+.teacher-fault-selected-count { min-width: 92px; height: 30px; padding: 0 11px; border-width: 1px; border-color: rgba(127, 232, 248, 0.32); border-radius: 15px; background-color: rgba(45, 166, 214, 0.20); color: rgb(139, 232, 247); font-size: 11px; -unity-text-align: middle-center; }
+.teacher-fault-list-header { height: 44px; padding: 0 16px; flex-direction: row; align-items: center; border-top-width: 1px; border-bottom-width: 1px; border-color: rgba(184, 221, 244, 0.14); background-color: rgba(45, 121, 178, 0.19); color: rgba(194, 222, 241, 0.68); font-size: 11px; letter-spacing: 1px; }
+.teacher-fault-list-scroll { position: absolute; left: 0; right: 0; top: 126px; bottom: 34px; }
+.teacher-fault-list-scroll .unity-scroll-view__content-container { padding: 0 12px 8px 12px; }
+.teacher-fault-list-scroll .unity-scroll-view__vertical-scroller { width: 8px; margin-right: 4px; }
+.teacher-fault-list-row { min-height: 68px; margin-top: 8px; padding: 0 4px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(181, 219, 243, 0.14); border-radius: 12px; background-image: none; background-color: rgba(6, 35, 77, 0.30); color: rgb(230, 242, 251); -unity-text-align: middle-left; }
+.teacher-fault-list-row:hover { border-color: rgba(134, 226, 247, 0.48); background-color: rgba(43, 132, 192, 0.24); }
+.teacher-fault-list-row.selected { border-color: rgba(129, 233, 248, 0.74); background-color: rgba(49, 169, 215, 0.30); }
+.teacher-fault-col-index { width: 60px; }
+.teacher-fault-col-phenomenon { width: 360px; }
+.teacher-fault-col-line { width: 120px; }
+.teacher-fault-col-point { flex-grow: 1; }
+.teacher-fault-row-index { color: rgb(119, 225, 243); font-size: 12px; -unity-text-align: middle-center; }
+.teacher-fault-row-primary { padding-right: 10px; color: rgb(239, 248, 254); font-size: 13px; }
+.teacher-fault-row-code { color: rgba(206, 230, 246, 0.70); font-size: 11px; }
+.teacher-fault-list-caption { position: absolute; left: 20px; right: 20px; bottom: 7px; height: 22px; color: rgba(191, 219, 238, 0.42); font-size: 10px; }
+
+.teacher-fault-config-panel { flex-grow: 1; min-width: 450px; }
+.teacher-fault-config-label { height: 21px; margin-top: 4px; color: rgba(204, 228, 244, 0.62); font-size: 12px; }
+.teacher-fault-selected-card { height: 100px; margin: 5px 0 13px 0; padding: 13px 15px; border-width: 1px; border-color: rgba(128, 231, 248, 0.34); border-radius: 14px; background-color: rgba(38, 139, 192, 0.18); }
+.teacher-fault-selected-category { height: 19px; color: rgb(113, 226, 244); font-size: 10px; letter-spacing: 2px; }
+.teacher-fault-selected-title { height: 34px; color: rgb(247, 252, 255); font-size: 20px; -unity-font-style: bold; }
+.teacher-fault-selected-meta { height: 22px; color: rgba(202, 227, 244, 0.60); font-size: 11px; }
+.teacher-fault-choice-row { height: 43px; margin: 3px 0 10px 0; flex-direction: row; }
+.teacher-fault-choice { min-width: 112px; height: 39px; margin-right: 8px; padding: 0 12px; border-width: 1px; border-color: rgba(181, 220, 245, 0.18); border-radius: 11px; background-image: none; background-color: rgba(6, 35, 75, 0.34); color: rgba(219, 237, 250, 0.70); font-size: 12px; }
+.teacher-fault-choice:hover { border-color: rgba(128, 225, 247, 0.55); color: rgb(243, 251, 255); }
+.teacher-fault-choice.selected { border-color: rgba(126, 231, 247, 0.76); background-color: rgba(51, 172, 221, 0.36); color: rgb(249, 253, 255); -unity-font-style: bold; }
+.teacher-fault-duration-choice { min-width: 88px; }
+.teacher-fault-boundary { height: 46px; margin-top: 3px; padding: 0 12px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(248, 195, 102, 0.22); border-radius: 12px; background-color: rgba(150, 103, 29, 0.12); color: rgba(247, 218, 163, 0.73); font-size: 10px; }
+.teacher-fault-boundary-dot { width: 8px; height: 8px; margin-right: 9px; border-radius: 4px; background-color: rgb(248, 188, 91); }
+.teacher-fault-publish-button { position: absolute; left: 22px; right: 22px; bottom: 20px; height: 54px; border-width: 1px; border-color: rgba(183, 242, 251, 0.76); border-top-color: rgb(228, 253, 255); border-radius: 15px; background-image: none; background-color: rgba(50, 179, 224, 0.82); color: rgb(249, 253, 255); font-size: 17px; -unity-font-style: bold; }
+.teacher-fault-publish-button:hover { border-color: rgb(237, 255, 255); background-color: rgb(55, 197, 234); }
+.teacher-fault-page-footer { position: absolute; left: 4px; right: 4px; bottom: 0; height: 40px; flex-direction: row; align-items: center; justify-content: space-between; }
+.teacher-fault-page-status { color: rgba(206, 229, 245, 0.64); font-size: 12px; }
+.teacher-fault-page-status.notice { color: rgb(143, 230, 246); }
+.teacher-fault-page-version { color: rgba(188, 216, 236, 0.40); font-size: 10px; letter-spacing: 2px; }
+
+/* Teacher assessment calendar. Third-party selectors remain inside the picker. */
+.teacher-assessment-calendar-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.teacher-assessment-calendar-scrim { position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: 0; padding: 0; border-width: 0; border-radius: 0; background-image: none; background-color: rgba(1, 15, 37, 0.46); }
+.teacher-assessment-calendar-card { position: absolute; left: 94px; top: 340px; width: 430px; padding: 18px; border-width: 1px; border-color: rgba(144, 219, 245, 0.52); border-top-color: rgba(203, 246, 255, 0.72); border-radius: 22px; background-color: rgba(7, 39, 81, 0.99); color: rgb(236, 249, 255); }
+.teacher-assessment-calendar-heading { height: 34px; margin-bottom: 10px; flex-direction: row; align-items: center; justify-content: space-between; }
+.teacher-assessment-calendar-title { color: rgb(237, 249, 255); font-size: 18px; -unity-font-style: bold; }
+.teacher-assessment-calendar-close { width: 32px; height: 32px; margin: 0; padding: 0 0 2px 0; border-width: 1px; border-color: rgba(165, 222, 246, 0.28); border-radius: 16px; background-image: none; background-color: rgba(45, 110, 167, 0.24); color: rgb(210, 241, 252); font-size: 22px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-close:hover { border-color: rgba(139, 233, 250, 0.78); background-color: rgba(57, 155, 206, 0.44); }
+.teacher-assessment-calendar-actions { height: 38px; margin-top: 12px; flex-direction: row; justify-content: space-between; }
+.teacher-assessment-calendar-action { flex-grow: 1; height: 38px; margin: 0 4px; padding: 0 10px; border-width: 1px; border-color: rgba(139, 217, 243, 0.34); border-radius: 10px; background-image: none; background-color: rgba(42, 116, 177, 0.25); color: rgb(219, 246, 255); font-size: 13px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-action:hover { border-color: rgba(145, 235, 251, 0.84); background-color: rgba(44, 155, 207, 0.48); color: rgb(247, 253, 255); }
+.teacher-assessment-calendar-hint { min-height: 28px; margin-top: 8px; padding: 0 5px; white-space: normal; color: rgba(187, 220, 241, 0.76); font-size: 11px; -unity-text-align: middle-left; }
+.teacher-assessment-calendar-picker { position: relative; width: 100%; flex-grow: 0; flex-shrink: 0; padding: 0; border-width: 0; border-radius: 0; background-color: rgba(0, 0, 0, 0); color: rgb(232, 247, 255); align-self: stretch; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container { height: 42px; margin-bottom: 8px; flex-direction: row; align-items: center; justify-content: center; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__navigation-button { position: absolute; top: 0; width: 42px; height: 42px; margin: 0; padding: 0; border-width: 1px; border-color: rgba(135, 214, 241, 0.27); border-radius: 11px; background-image: none; background-color: rgba(35, 103, 161, 0.20); color: rgb(170, 231, 249); justify-content: center; align-items: center; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__navigation-button.left { left: 0; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__navigation-button.right { right: 0; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__navigation-button:hover { border-color: rgba(137, 235, 251, 0.75); background-color: rgba(45, 149, 202, 0.40); color: rgb(242, 253, 255); }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__navigation-button .icon { width: 100%; height: 100%; margin: 0; padding: 0; background-image: none; color: rgb(185, 236, 251); font-size: 25px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__dropdown { height: 42px; margin: 0 4px; padding: 0 22px 0 9px; border-width: 1px; border-color: rgba(128, 208, 239, 0.25); border-radius: 10px; background-image: none; background-color: rgba(31, 87, 144, 0.30); color: rgb(223, 244, 253); font-size: 15px; -unity-text-align: middle-center; justify-content: center; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__dropdown.month { width: 126px; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__dropdown.year { width: 108px; }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__dropdown:hover { border-color: rgba(130, 230, 248, 0.66); background-color: rgba(43, 124, 180, 0.36); }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__dropdown.open { border-color: rgba(137, 234, 250, 0.82); background-color: rgba(42, 133, 188, 0.42); }
+.teacher-assessment-calendar-picker .omg__date-picker__header-container__dropdown__chevron { position: absolute; right: 7px; top: 10px; width: 16px; height: 20px; margin: 0; padding: 0; background-image: none; color: rgb(133, 222, 244); font-size: 15px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-picker .omg__date-picker__week-labels-container { height: 24px; margin-bottom: 8px; flex-direction: row; align-self: center; }
+.teacher-assessment-calendar-picker .omg__date-picker__week-labels-container__week-label { width: 54px; height: 24px; margin: 0; padding: 0; color: rgba(155, 214, 240, 0.75); font-size: 12px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-picker .omg__date-picker__grid-container { flex-grow: 0; flex-shrink: 0; align-self: center; }
+.teacher-assessment-calendar-picker .omg__date-picker__grid-container__row-container { height: 40px; flex-shrink: 0; flex-direction: row; align-self: center; }
+.teacher-assessment-calendar-picker .omg__date-picker__grid-container__row-container__grid-day { position: relative; width: 54px; height: 40px; flex-shrink: 0; flex-grow: 0; margin: 0; padding: 0 0 6px 0; border-width: 1px; border-color: rgba(0, 0, 0, 0); border-radius: 10px; background-color: rgba(0, 0, 0, 0); color: rgba(165, 200, 222, 0.42); font-size: 15px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-picker .omg__date-picker__record-dot { display: none; position: absolute; left: 24px; bottom: 4px; width: 5px; height: 5px; border-radius: 3px; background-color: rgb(126, 232, 249); }
+.teacher-assessment-calendar-picker .has-record .omg__date-picker__record-dot { display: flex; }
+.teacher-assessment-calendar-picker .selected .omg__date-picker__record-dot { background-color: rgb(6, 64, 93); }
+.teacher-assessment-calendar-picker .omg__date-picker__grid-container__row-container__grid-day.this-month { color: rgb(222, 241, 252); }
+.teacher-assessment-calendar-picker .omg__date-picker__grid-container__row-container__grid-day:hover { border-color: rgba(136, 226, 249, 0.32); background-color: rgba(50, 140, 197, 0.37); color: rgb(241, 252, 255); }
+.teacher-assessment-calendar-picker .omg__date-picker__grid-container__row-container__grid-day.selected { border-color: rgb(165, 240, 253); background-color: rgb(84, 200, 231); color: rgb(6, 45, 78); -unity-font-style: bold; }
+.teacher-assessment-calendar-picker .omg__date-picker__dropdown-list { height: 210px; max-height: 210px; min-height: 0; border-width: 1px; border-color: rgba(139, 228, 246, 0.60); border-radius: 12px; background-color: rgb(11, 50, 95); overflow: hidden; }
+.teacher-assessment-calendar-picker .omg__date-picker__dropdown-list .unity-scroll-view { flex-grow: 1; min-height: 0; padding: 4px; border-width: 0; background-color: rgb(11, 50, 95); }
+.teacher-assessment-calendar-picker .omg__date-picker__dropdown-list .unity-collection-view__item { margin: 0; padding: 0 5px; border-width: 0; border-radius: 7px; background-image: none; background-color: rgba(0, 0, 0, 0); color: rgb(209, 237, 251); font-size: 14px; -unity-text-align: middle-center; }
+.teacher-assessment-calendar-picker .omg__date-picker__dropdown-list .unity-collection-view__item:hover { background-color: rgba(60, 159, 206, 0.42); color: rgb(248, 254, 255); }
+.teacher-assessment-calendar-picker .omg__date-picker__dropdown-list .unity-collection-view__item--selected { background-color: rgba(69, 184, 222, 0.54); color: rgb(248, 254, 255); }
+.teacher-assessment-calendar-picker .unity-scroll-view__vertical-scroller { width: 10px; min-width: 10px; margin: 3px 2px 3px 0; padding: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); }
+.teacher-assessment-calendar-picker .unity-scroller__slider { width: 10px; min-width: 10px; flex-grow: 1; margin: 0; padding: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); }
+.teacher-assessment-calendar-picker .unity-base-slider__input { margin: 0; padding: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); }
+.teacher-assessment-calendar-picker .unity-base-slider__drag-container { width: 10px; flex-grow: 1; margin: 0; }
+.teacher-assessment-calendar-picker .unity-base-slider__tracker { left: 2px; right: 2px; top: 0; bottom: 0; width: 6px; border-width: 0; border-radius: 3px; background-image: none; background-color: rgba(67, 137, 189, 0.22); }
+.teacher-assessment-calendar-picker .unity-base-slider__dragger { left: 2px; width: 6px; min-width: 6px; border-width: 0; border-radius: 3px; background-image: none; background-color: rgba(110, 215, 241, 0.64); }
+.teacher-assessment-calendar-picker .unity-base-slider__dragger:hover { background-color: rgb(145, 235, 251); }
+.teacher-assessment-calendar-picker .unity-base-slider__dragger-border,
+.teacher-assessment-calendar-picker .unity-scroller__low-button,
+.teacher-assessment-calendar-picker .unity-scroller__high-button,
+.teacher-assessment-calendar-picker .unity-scroll-view__horizontal-scroller { display: none; }
+.teacher-assessment-calendar-picker .hidden { display: none; }
+.teacher-assessment-calendar-picker .invisible { visibility: hidden; }

@@ -1,0 +1,474 @@
+{
+    "name": "InputAction_岸桥",
+    "maps": [
+        {
+            "name": "操控台",
+            "id": "c181b506-7234-40f4-ad60-c5e7fbed7f3b",
+            "actions": [
+                {
+                    "name": "大车移动",
+                    "type": "Value",
+                    "id": "410ba74f-56bd-43cf-b66d-1133a87c6698",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "小车移动",
+                    "type": "Value",
+                    "id": "8584cfc0-65af-4bfa-9e7d-76c5f622b3af",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具升降",
+                    "type": "Value",
+                    "id": "384d6619-796b-4c38-9b28-0ab15b6b4a80",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具旋转",
+                    "type": "Value",
+                    "id": "a16c02ff-1aa7-4627-8d23-0adf8003ddc2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具前后倾斜",
+                    "type": "Value",
+                    "id": "50b0146a-5002-4a57-a359-9f7a17f2f577",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具左右倾斜",
+                    "type": "Value",
+                    "id": "1a5f325b-5d0b-423f-9665-78bdc1f131f6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "海左导板上下",
+                    "type": "Value",
+                    "id": "f348a903-5cc9-4d35-8855-67d06bcc9724",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "海右导板上下",
+                    "type": "Value",
+                    "id": "506a96a6-58b1-4688-b9aa-3d694e8d3613",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "陆左导板上下",
+                    "type": "Value",
+                    "id": "41aeacaa-25ef-4190-ada7-87eba6983409",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "陆右导板上下",
+                    "type": "Value",
+                    "id": "06977490-1c51-4c01-a654-10ae1ff6b34d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "导板全部上下",
+                    "type": "Value",
+                    "id": "9100fba2-9cd3-4032-bc14-e00a69a3f8bc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具回零",
+                    "type": "Button",
+                    "id": "0801e954-8a14-4a8b-9c3a-313f133e6a2c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具泵开",
+                    "type": "Button",
+                    "id": "b9251fa1-34a2-4181-9bc9-f34573845c20",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具泵关",
+                    "type": "Button",
+                    "id": "2da49515-ef8a-46d1-9e95-f28d849fa515",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具20英尺",
+                    "type": "Button",
+                    "id": "b5522d53-4626-4895-aaaa-edec499d4c32",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具40英尺",
+                    "type": "Button",
+                    "id": "6a751a4a-4f43-4e15-a274-5e2b4656030a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "大车鸣笛",
+                    "type": "Button",
+                    "id": "33fad38c-00b6-4d0f-b832-fdd5e6a337c9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "控制合",
+                    "type": "Button",
+                    "id": "aaa972d6-2c29-499a-80c4-95ac9f9b9ef9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "控制关",
+                    "type": "Button",
+                    "id": "a1da9d6f-fc33-4656-b9c0-7127891bc03e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "吊具开闭锁",
+                    "type": "Value",
+                    "id": "447bbea2-5a21-4abe-8912-4b5500e0412c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "夹轮",
+                    "type": "Button",
+                    "id": "9698eba2-6690-4cb5-b6f0-843d008842c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "松轮",
+                    "type": "Button",
+                    "id": "f869125c-5e18-479f-81a2-e185f0c6f064",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "单双箱选择",
+                    "type": "Value",
+                    "id": "a09ae46d-d9b8-4d7e-b350-4b8e9765b2b6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "51ac3c5b-b687-4510-84b7-8215572f4fbc",
+                    "path": "<AnqiaoDevice>/大车移动绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车移动",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "794c3447-5abf-42d7-95ec-aa1a95eeae52",
+                    "path": "<AnqiaoDevice>/小车移动绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "小车移动",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d47557ab-564a-4229-af4e-84468de5a116",
+                    "path": "<AnqiaoDevice>/海左导板上下绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "海左导板上下",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe62057a-90f1-4aff-b5e1-080b6457adc2",
+                    "path": "<AnqiaoDevice>/海右导板上下绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "海右导板上下",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca73d234-ce61-4458-a09b-2898d908f11b",
+                    "path": "<AnqiaoDevice>/陆左导板上下绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "陆左导板上下",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c799f0f-5115-473e-ac52-7e3bc9b6ba9a",
+                    "path": "<AnqiaoDevice>/陆右导板上下绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "陆右导板上下",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cecc9c3b-f574-41fd-9433-c7012877b82a",
+                    "path": "<AnqiaoDevice>/导板全部上下绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "导板全部上下",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80dbacad-2baa-4f04-9949-3a40a5e5915d",
+                    "path": "<AnqiaoDevice>/吊具回零绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具回零",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ba78e1c-766e-495c-844e-3c18309e45d9",
+                    "path": "<AnqiaoDevice>/吊具泵开绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具泵开",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4e53cfa-194c-489f-9f36-25ccc6bcb3ac",
+                    "path": "<AnqiaoDevice>/吊具泵关绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具泵关",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "618dadf1-ffe4-4a22-948e-2072a17bf4fa",
+                    "path": "<AnqiaoDevice>/吊具20英尺绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具20英尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2041146b-d8c2-476b-bc56-6e6ce5ffd4a4",
+                    "path": "<AnqiaoDevice>/吊具40英尺绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具40英尺",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9c93c5e-ad3f-4702-a024-99b3ae77e4d9",
+                    "path": "<AnqiaoDevice>/大车鸣笛绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "大车鸣笛",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b30a4e9-6d64-4a43-b3cd-8f329144005e",
+                    "path": "<AnqiaoDevice>/控制合绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "控制合",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79bd71c9-8dd7-410b-996a-05ce65255be8",
+                    "path": "<AnqiaoDevice>/控制关绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "控制关",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df5101e8-b249-4728-8492-69ec625f9957",
+                    "path": "<AnqiaoDevice>/吊具开闭锁绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具开闭锁",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88f8dbba-e46e-41f7-b705-6dbe0ac2c529",
+                    "path": "<AnqiaoDevice>/夹轮绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "夹轮",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "211fa1ae-5618-49e1-a809-ece601154fb3",
+                    "path": "<AnqiaoDevice>/松轮绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "松轮",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "860c0608-6cae-4101-8b7f-0f16065a2fb3",
+                    "path": "<AnqiaoDevice>/单双箱选择绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "单双箱选择",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95a7cec0-515a-4b95-87f0-b9c247d8879c",
+                    "path": "<AnqiaoDevice>/吊具升降绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具升降",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd925332-3cb1-4752-95f4-bb26490ece69",
+                    "path": "<AnqiaoDevice>/吊具旋转绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具旋转",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45be867a-a07c-4923-878a-afa1edfe202d",
+                    "path": "<AnqiaoDevice>/吊具前后倾斜绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具前后倾斜",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "145d7c34-5aaa-4bc6-828a-5faf2433b440",
+                    "path": "<AnqiaoDevice>/吊具左右倾斜绑定",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "吊具左右倾斜",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

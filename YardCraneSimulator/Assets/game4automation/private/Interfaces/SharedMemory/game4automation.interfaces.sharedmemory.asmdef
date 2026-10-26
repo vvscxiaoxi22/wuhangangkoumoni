@@ -1,0 +1,14 @@
+{
+    "name": "game4automation.interfaces.sharedmemory",
+    "references": [
+        "game4automation.base"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

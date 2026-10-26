@@ -1,0 +1,10 @@
+{
+  "configVersion": 1,
+  "canvasDisplayIndex": -1,
+  "feeds": [
+    { "feedId": "feed1", "displayIndex": 0, "host": "192.168.199.71", "rtspPort": 554, "channel": "1", "streamType": "Main", "credentialKey": "feed1", "enabled": true },
+    { "feedId": "feed2", "displayIndex": 1, "host": "192.168.199.71", "rtspPort": 554, "channel": "1", "streamType": "Main", "credentialKey": "feed1", "enabled": true },
+    { "feedId": "feed3", "displayIndex": 2, "host": "192.168.199.71", "rtspPort": 554, "channel": "1", "streamType": "Main", "credentialKey": "feed1", "enabled": true },
+    { "feedId": "feed4", "displayIndex": 3, "host": "192.168.199.71", "rtspPort": 554, "channel": "1", "streamType": "Main", "credentialKey": "feed1", "enabled": true }
+  ]
+}

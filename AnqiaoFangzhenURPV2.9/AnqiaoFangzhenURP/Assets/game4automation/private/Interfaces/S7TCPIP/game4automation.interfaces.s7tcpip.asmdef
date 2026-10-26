@@ -1,0 +1,17 @@
+{
+    "name": "game4automation.interfaces.s7tcpip",
+    "rootNamespace": "",
+    "references": [
+        "game4automation.base",
+        "NaughtyAttributes.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

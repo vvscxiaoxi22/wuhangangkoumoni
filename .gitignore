@@ -1,6 +1,7 @@
 # Root-local scratch and generated logs
 /Temp/
 /tmp/
+/.codex-validation/
 /*.log
 
 # Unity generated content (all Unity projects)
@@ -61,3 +62,15 @@ pnpm-debug.log*
 
 # Local collaboration process state
 PortTraining/Docs/Claude交接/.claude-task.lock
+
+# Local training records contain student identities and are not source assets.
+LocalTrainingData/
+**/Assets/StreamingAssets/成绩/*.json
+**/Assets/StreamingAssets/成绩/*.json.meta
+
+# Generated .NET test and probe output.
+PortGatewayService/Tools/S7ConnectivityProbe/publish-standalone/
+YardCraneSimulator/Tools/StandaloneHostHarness/bin/
+
+# Reference backup includes IDE chat history and local Unity caches.
+/AnqiaoFangzhenURPV2.9.7z

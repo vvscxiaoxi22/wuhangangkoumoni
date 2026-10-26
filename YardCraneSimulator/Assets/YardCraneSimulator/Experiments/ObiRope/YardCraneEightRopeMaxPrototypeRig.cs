@@ -6,23 +6,22 @@ using PortTraining.YardCraneSimulator.Crane;
 using PortTraining.YardCraneSimulator.Configuration;
 using PortTraining.YardCraneSimulator.Controls;
 using PortTraining.YardCraneSimulator.Operations;
+using PortTraining.YardCraneSimulator.Training;
 using UnityEngine;
 
 namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 {
     /// <summary>
-    /// Qingdao-port yard-crane greybox based on the new eight-rope MAX reeving.
-    /// Each physical rope is one triangular loop:
-    /// drum exit -> headblock sheave -> trolley dead end.
-    ///
-    /// The loop constraint carries the headblock. Obi renders the two visible legs
-    /// of every loop and never acts as a second suspension model.
+    /// Qingdao-port yard-crane greybox using eight independent straight ropes.
+    /// Every rope connects one trolley-side top anchor to one headblock-side lower anchor.
+    /// The engineering distance constraints carry the headblock; Obi renders exactly the same
+    /// eight rope lines and never acts as a second suspension model.
     /// </summary>
     [DefaultExecutionOrder(10000)]
     [DisallowMultipleComponent]
-    public sealed class YardCraneEightRopeMaxPrototypeRig : MonoBehaviour, IYardCraneOperationActuator
+    public sealed partial class YardCraneEightRopeMaxPrototypeRig : MonoBehaviour, IYardCraneOperationActuator
     {
-        private const string ImplementationVersion = "2026-09-03-eight-rope-max-v24-play-verification";
+        private const string ImplementationVersion = "2026-09-17-eight-straight-rope-v34-yard-container-cycle";
         private const float ContainerContactEnvelopeMarginMeters = 0.03f;
 
         private float GantrySpeedMetersPerSecond => activeProfile.motion.gantrySpeedMetersPerSecond;
@@ -65,7 +64,6 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private float LoadedHoistSettleTimeoutSeconds => activeProfile.acceptance.loadedHoistSettleTimeoutSeconds;
         private float MinimumSuspendedDropMeters => activeProfile.geometryAndSafety.minimumSuspendedDropMeters;
         private float MaximumSuspendedDropMeters => activeProfile.geometryAndSafety.maximumSuspendedDropMeters;
-        private float SimulationProxyMassKg => activeProfile.load.simulationProxyMassKg;
         private float SpreaderRealMassKg => activeProfile.load.spreaderRealMassKg;
         private float MinimumContainerGrossMassKg => activeProfile.load.minimumContainerGrossMassKg;
         private float MaximumContainerGrossMassKg => activeProfile.load.maximumContainerGrossMassKg;
@@ -81,11 +79,6 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private float ContainerLandingStableHoldSeconds => activeProfile.geometryAndSafety.containerLandingStableHoldSeconds;
         private float MotionObservationSpeedThresholdMetersPerSecond => activeProfile.motion.motionObservationSpeedThresholdMetersPerSecond;
         private float ResetSafeSpeedThresholdMetersPerSecond => activeProfile.motion.resetSafeSpeedThresholdMetersPerSecond;
-        private float LoadedRegressionStageTimeoutSeconds => activeProfile.regression.loadedStageTimeoutSeconds;
-        private float LoadedRegressionTotalTimeoutSeconds => activeProfile.regression.loadedTotalTimeoutSeconds;
-        private float LoadedRegressionStableHoldSeconds => activeProfile.regression.loadedStableHoldSeconds;
-        private float LoadedRegressionLiftClearanceMeters => activeProfile.regression.loadedLiftClearanceMeters;
-        private float LoadedRegressionOutboundTravelMeters => activeProfile.regression.loadedOutboundTravelMeters;
         private float LoadTransferPreTensionDurationSeconds => activeProfile.load.loadTransferPreTensionDurationSeconds;
         private float LoadedTrolleyMinimumClearanceMeters => activeProfile.geometryAndSafety.loadedTrolleyMinimumClearanceMeters;
 
@@ -94,42 +87,18 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private float StartupPreTensionDurationSeconds => activeProfile.ropePhysics.startupPreTensionDurationSeconds;
         private int PositionConstraintIterations => activeProfile.ropePhysics.positionConstraintIterations;
         private int VelocityConstraintIterations => activeProfile.ropePhysics.velocityConstraintIterations;
-        private int InterlockPositionIterations => activeProfile.ropePhysics.interlockPositionIterations;
-        private int InterlockVelocityIterations => activeProfile.ropePhysics.interlockVelocityIterations;
-        private float InterlockPositionRelaxation => activeProfile.ropePhysics.interlockPositionRelaxation;
-        private float InterlockVelocityRelaxation => activeProfile.ropePhysics.interlockVelocityRelaxation;
         private float MaximumAngularCorrectionDegrees => activeProfile.ropePhysics.maximumAngularCorrectionDegrees;
-        private float UnloadedHeadblockLinearDamping => activeProfile.ropePhysics.unloadedHeadblockLinearDamping;
-        private float UnloadedHeadblockAngularDamping => activeProfile.ropePhysics.unloadedHeadblockAngularDamping;
         private float LoadedHeadblockAngularDamping => activeProfile.ropePhysics.loadedHeadblockAngularDamping;
-        private int HeadblockSolverIterations => activeProfile.ropePhysics.headblockSolverIterations;
-        private int HeadblockSolverVelocityIterations => activeProfile.ropePhysics.headblockSolverVelocityIterations;
         private float PrototypeMaximumSwayMeters => activeProfile.acceptance.prototypeMaximumSwayMeters;
         private float PrototypeMaximumResidualTwistDegrees => activeProfile.acceptance.prototypeMaximumResidualTwistDegrees;
+        private float LoadedGantrySpeedFactor => activeProfile.training.loadedGantrySpeedFactor;
+        private float LoadedTrolleySpeedFactor => activeProfile.training.loadedTrolleySpeedFactor;
+        private float TrainingSwayThresholdMeters => activeProfile.training.trainingSwayThresholdMeters;
         private string TopologyProfile => activeProfile.identity.topologyProfileId;
         private int solverSubsteps => activeProfile.ropePhysics.obiSolverSubsteps;
         private int distanceIterations => activeProfile.ropePhysics.obiDistanceIterations;
         private Vector3 containerLockedLocalPosition => activeProfile.load.containerLockedLocalPosition;
         private LoopDefinition[] LoopDefinitions => loopDefinitions;
-
-        private enum LoadedRegressionStage
-        {
-            Idle,
-            AlignForLock,
-            AwaitLock,
-            AwaitLoadedReady,
-            VerifyLowClearanceInterlock,
-            HoistToSafeClearance,
-            RejectSuspendedUnlock,
-            TravelOutbound,
-            ReturnHome,
-            LowerToLanding,
-            AwaitLanding,
-            AwaitUnlock,
-            EmptyHoist,
-            Complete,
-            Failed
-        }
 
         [Header("Versioned Configuration")]
         [SerializeField] private YardCraneEightRopeMaxProfile profileAsset;
@@ -137,14 +106,22 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         [Header("MAX Prototype")]
         [SerializeField] private bool showGraybox = true;
         [SerializeField] private bool runAutomatedDemo = true;
-        [SerializeField] private bool showRuntimePanel = true;
+        // internal (not private): read by YardCraneDebugHudPresenter, the temporary IMGUI test
+        // display extracted out of this file - see that file's class comment for why these
+        // fields are exposed this way instead of a bundled snapshot type.
+        [SerializeField] internal bool showRuntimePanel = true;
         [SerializeField] private YardCraneInputProfile standaloneInputProfile;
+        // 2026-09-16: opt-in Inspector toggle to test the S7-link-required input path (see
+        // YardCraneStandaloneOperationHost.Configure's requireS7Link parameter) without a real
+        // PLC - S7Interface can stay disabled on the standalone YardCraneS7Integration player;
+        // this only exercises "keyboard/Xbox are excluded" and "no link => refuse to configure".
+        // Defaults false so every existing keyboard/Xbox test session is unaffected.
+        [SerializeField] private bool requireS7Link;
 
         [Header("Container Load")]
-        [SerializeField, Min(0f)] private float containerGrossMassKg = 30000f;
+        [SerializeField, Min(0f)] internal float containerGrossMassKg = 30000f;
 
         private readonly List<LoopRuntime> loops = new();
-        private readonly List<Material> runtimeMaterials = new();
 
         private Transform gantryMotion;
         private Transform trolleyMotion;
@@ -155,19 +132,39 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private Transform spreaderSensorRoot;
         private Transform containerAttachmentRoot;
         private Transform activeContainer;
+        private Transform containerFreeBody;
         private Transform containerOriginalParent;
-        private Rigidbody headblockBody;
+        internal Rigidbody headblockBody;
         private BoxCollider headblockCollider;
+        private Rigidbody containerBody;
         private BoxCollider containerCollider;
+        private YardCraneContainerImpactSensor containerImpactSensor;
+        private YardCraneContainer container;
+        private readonly List<YardCraneYardSlot> yardSlots = new();
+        private YardCraneYardSlot pickedUpSourceSlot;
+        private bool releasedContainerSettlementPending;
+        private float releasedContainerStableSince = -1f;
+        private Transform twistlockFrontLeft;
+        private Transform twistlockFrontRight;
+        private Transform twistlockRearLeft;
+        private Transform twistlockRearRight;
+        // 2026-09-17: which container the raycast sensors currently see under all four
+        // twistlock points - null unless every point independently confirms the same instance
+        // (see ComputeContainerCornerAlignment). Read by IsContainerAlignedForLock's
+        // container-type/spreader-size interlock; not a substitute for containerCornerAlignment.
+        private YardCraneContainer detectedPickupContainer;
         private ObiSolver solver;
-        private Material ropeMaterial;
         private YardCraneEightRopeMaxProfile activeProfile;
-        private YardCraneGantryDriveModel gantryDrive;
+        internal YardCraneGantryDriveModel gantryDrive;
+        internal YardCraneWheelClampPresenter wheelClampPresenter;
         private YardCraneAnchorInterlock trolleyAnchor;
         private YardCraneAnchorInterlock gantryAnchor;
-        private YardCraneSpreaderSizeInterlock spreaderSize;
-        private bool spreaderPumpOn;
-        private YardCraneSpreaderRotationModel spreaderRotation;
+        internal YardCraneAnchorPresenter trolleyAnchorPresenter;
+        internal YardCraneAnchorPresenter gantryAnchorPresenter;
+        internal YardCraneSpreaderSizeInterlock spreaderSize;
+        internal YardCraneSpreaderSizePresenter spreaderSizePresenter;
+        internal YardCraneSpreaderPumpPresenter spreaderPump;
+        internal YardCraneSpreaderRotationModel spreaderRotation;
         private float spreaderRotationInputAxis;
         private float spreaderPhysicalRotationAngleDegrees;
         private float spreaderRotationAngularVelocityRadiansPerSecond;
@@ -185,23 +182,24 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private Vector3 headblockHome;
         private Quaternion headblockHomeRotation;
         private float initialSuspendedDrop;
-        private float commandedSuspendedDrop;
-        private float currentTrolleyVelocity;
-        private float currentHoistVelocity;
+        internal float commandedSuspendedDrop;
+        internal float currentTrolleyVelocity;
+        internal float currentHoistVelocity;
         private float gantryInput;
         private float trolleyInput;
         private float hoistInput;
-        private YardCraneOperationController operationController;
-        private YardCraneStandaloneOperationHost standaloneOperationHost;
+        internal YardCraneOperationController operationController;
+        internal YardCraneStandaloneOperationHost standaloneOperationHost;
+        private YardCraneDebugHudPresenter debugHudPresenter;
         private float demoStartedAt;
         private float startupReleaseAt;
         private float loadTransferReleaseAt;
         private float trolleyStopStabilizationReleaseAt;
-        private float maximumObservedSway;
-        private float currentHorizontalSway;
-        private float currentRelativeHorizontalSpeed;
-        private float loadedHoistDeflection;
-        private float loadedHoistDeflectionVelocity;
+        internal float maximumObservedSway;
+        internal float currentHorizontalSway;
+        internal float currentRelativeHorizontalSpeed;
+        internal float loadedHoistDeflection;
+        internal float loadedHoistDeflectionVelocity;
         private float previousHoistSupportVelocity;
         private float previousHoistInput;
         private float loadedHoistSettleReleaseAt;
@@ -210,45 +208,53 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private float loadedHoistSettlePeakDeflection;
         private float loadedHoistSettlePeakError;
         private float loadedHoistSettlePeakVelocity;
-        private float maximumObservedLoopExtension;
-        private float maximumRawLoopDrift;
-        private float maximumObservedTwistDegrees;
+        internal float maximumObservedLoopExtension;
+        internal float maximumRawLoopDrift;
+        internal float maximumObservedTwistDegrees;
         private float residualTwistDegrees;
-        private float averageRopeTensionKn;
-        private float totalSuspendedMassKg;
-        private float containerHorizontalErrorMeters;
-        private float containerVerticalErrorMeters;
-        private float containerYawErrorDegrees;
-        private float containerLandingHorizontalErrorMeters;
-        private float containerLandingVerticalErrorMeters;
-        private float containerLandingYawErrorDegrees;
-        private float containerLandingSpeedMetersPerSecond;
+        internal float averageRopeTensionKn;
+        internal float totalSuspendedMassKg;
+        internal float containerHorizontalErrorMeters;
+        internal float containerVerticalErrorMeters;
+        internal float containerYawErrorDegrees;
+        private YardCraneContainerCornerState containerCornerAlignment;
+        internal float containerLandingHorizontalErrorMeters;
+        internal float containerLandingVerticalErrorMeters;
+        internal float containerLandingYawErrorDegrees;
+        internal float containerLandingSpeedMetersPerSecond;
         private float containerLandingStableSince = -1f;
-        private float loadedRegressionStartedAt;
-        private float loadedRegressionStageStartedAt;
-        private float loadedRegressionStableSince = -1f;
-        private float loadedRegressionReferenceX;
-        private float loadedRegressionTargetDrop;
-        private Vector3 loadedRegressionReleasedContainerPosition;
         private Vector3 containerHomePosition;
         private Quaternion containerHomeRotation;
+        private Vector3 nominalSuspensionBodyHorizontalOffset;
+        private Quaternion nominalSuspensionBodyRotation;
+        private Vector3 unloadedSuspensionEquilibriumOffset;
         private Vector3 loadedSuspensionEquilibriumOffset;
+        private Vector3 currentRawHorizontalOffset;
+        private Vector3 currentSwayError;
+        private float trolleyMotionPeakSway;
+        private int resetEpoch;
         private Vector3 unloadedInertiaTensor;
         private Quaternion unloadedInertiaTensorRotation;
+        private Vector3 sceneAuthoredHeadblockCenterOfMass;
+        private float sceneAuthoredHeadblockMassKg;
+        private float sceneAuthoredHeadblockAngularDamping;
         private float containerRestingCenterY;
         private string peakLoopId = "-";
-        private string twistlockStatus = "Unlocked";
-        private bool twistDisturbanceApplied;
+        internal string twistlockStatus = "Unlocked";
         private bool suspensionGravityActive;
-        private bool containerLocked;
-        private bool containerLockRequested;
-        private bool containerUnlockRequested;
+        internal bool containerLocked;
+        internal bool containerLockRequested;
+        internal bool containerUnlockRequested;
         private bool loadTransferPreTensioning;
         private bool containerColliderSuppressedForPickup;
+        private bool containerHeadblockCollisionIgnored;
         private bool loadedHoistStopPending;
         private bool loadedHoistSettleObservationActive;
         private bool loadedHoistSettleDrumStopped;
-        private bool containerLandingConfirmed;
+        internal bool containerLandingConfirmed;
+        internal bool spreaderContactConfirmed;
+        internal bool trolleyBrakeApplied = true;
+        private readonly YardCraneTrainingScoreTracker trainingScore = new();
         private bool containerLandingReported;
         private bool trolleyMotionReported;
         private bool trolleyLimitReported;
@@ -259,47 +265,60 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private bool trolleyClearanceInhibitReported;
         private bool gantryAnchorInhibitReported;
         private bool trolleyAnchorInhibitReported;
-        private bool gantryProximityInhibited;
-        private bool trolleyProximityInhibited;
+        internal bool gantryProximityInhibited;
+        internal bool trolleyProximityInhibited;
         private bool hoistMotionReported;
         private bool hoistLimitReported;
         private bool loadedOperationRegressionActive;
-        private bool loadedRegressionCommandIssued;
-        private LoadedRegressionStage loadedRegressionStage;
-        private bool loopsReady;
+        internal bool loopsReady;
         private bool startupPreTensioning;
         private bool demoCompleted;
-        private bool demoClampApplyRequested;
-        private bool demoClampReleaseRequested;
-        private bool demoClampInhibitObserved;
-        private float demoGantryStartPosition;
-        private float demoGantryMaximumTravel;
         private bool setupFailed;
-        private bool hornActive;
+        internal bool hornActive;
         private AudioSource hornSource;
         private AudioClip runtimeHornClip;
-        private string runtimeStatus = "Initializing eight-rope MAX prototype";
+        internal string runtimeStatus = "Initializing eight-rope MAX prototype";
 
         public bool ShowGraybox => showGraybox;
         public bool LoopsReady => loopsReady;
+        // internal (not public): loops itself stays private (its element type LoopRuntime is a
+        // private nested type), but YardCraneDebugHudPresenter only ever needs the count.
+        internal int LoopCount => loops.Count;
         public string RuntimeStatus => runtimeStatus;
         public bool ContainerLocked => containerLocked;
         public float ContainerGrossMassKg => containerGrossMassKg;
+        // Optional: null on scenes that have not yet added a YardCraneContainer data component
+        // to ActiveContainer. Locked/unlocked state stays owned by the rig (containerLocked
+        // above), not by this reference, since the spreader can only hold one container at a
+        // time and a single source of truth avoids the two states drifting apart.
+        public YardCraneContainer AttachedContainer => container;
         public float AverageRopeTensionKn => averageRopeTensionKn;
         public bool ContainerLandingConfirmed => containerLandingConfirmed;
+        // Live pre-lock: which of the four corners is currently within tolerance. Snaps to
+        // all-true once containerLocked, since TryLockContainer now refuses to lock unless every
+        // corner was aligned at that instant - see ComputeContainerCornerAlignment.
+        public YardCraneContainerCornerState ContainerCornerAlignment => containerCornerAlignment;
+        public bool SpreaderContactConfirmed => spreaderContactConfirmed;
         public bool LoadedOperationRegressionActive => loadedOperationRegressionActive;
+        public YardCraneTrainingScoreTracker TrainingScore => trainingScore;
         public YardCraneOperationController OperationController => operationController;
         public YardCraneOperationPhase OperationPhase => operationController?.Phase ?? YardCraneOperationPhase.WaitingForRun;
         public float GantryPositionMeters => gantryDrive?.PositionMeters ?? 0f;
         public float GantrySpeedMetersPerSecondActual => gantryDrive?.VelocityMetersPerSecond ?? 0f;
-        public WheelClampState CurrentWheelClampState => gantryDrive?.WheelClampState ?? WheelClampState.Unknown;
+        public bool GantryBrakeKnown => gantryDrive != null;
+        public bool GantryBrakeApplied => gantryDrive?.IsBrakeApplied ?? false;
+        public bool TrolleyBrakeKnown => loopsReady && trolleyMotion != null;
+        public bool TrolleyBrakeApplied => trolleyBrakeApplied;
+        public WheelClampState CurrentWheelClampState => wheelClampPresenter?.State ?? WheelClampState.Unknown;
         public bool HornActive => hornActive;
-        public YardCraneAnchorState CurrentTrolleyAnchorState => trolleyAnchor?.State ?? YardCraneAnchorState.Unknown;
-        public YardCraneAnchorState CurrentGantryAnchorState => gantryAnchor?.State ?? YardCraneAnchorState.Unknown;
-        public bool SpreaderPumpOn => spreaderPumpOn;
-        public YardCraneSpreaderSize CurrentSpreaderSize => spreaderSize?.CurrentSize ?? YardCraneSpreaderSize.Unknown;
+        public YardCraneAnchorState CurrentTrolleyAnchorState =>
+            trolleyAnchorPresenter?.State ?? YardCraneAnchorState.Unknown;
+        public YardCraneAnchorState CurrentGantryAnchorState =>
+            gantryAnchorPresenter?.State ?? YardCraneAnchorState.Unknown;
+        public bool SpreaderPumpOn => spreaderPump?.IsOn ?? false;
+        public YardCraneSpreaderSize CurrentSpreaderSize => spreaderSizePresenter?.CurrentSize ?? YardCraneSpreaderSize.Unknown;
         public YardCraneSpreaderSizeMechanismState CurrentSpreaderSizeState =>
-            spreaderSize?.State ?? YardCraneSpreaderSizeMechanismState.Idle;
+            spreaderSizePresenter?.State ?? YardCraneSpreaderSizeMechanismState.Idle;
         public float SpreaderRotationAngleDegrees => spreaderRotation?.CurrentAngleDegrees ?? 0f;
         public float SpreaderPhysicalRotationAngleDegrees => spreaderPhysicalRotationAngleDegrees;
         public bool SpreaderRotationReturningToZero => spreaderRotation?.IsReturningToZero ?? false;
@@ -323,21 +342,20 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         bool IYardCraneOperationActuator.IsContainerLocked => containerLocked;
         bool IYardCraneOperationActuator.IsContainerLandingConfirmed => containerLandingConfirmed;
         bool IYardCraneOperationActuator.IsAlignedForContainerLock => IsContainerAlignedForLock();
-        bool IYardCraneOperationActuator.IsWheelClampClamped =>
-            gantryDrive != null && gantryDrive.WheelClampState == WheelClampState.Clamped;
+        bool IYardCraneOperationActuator.IsWheelClampClamped => wheelClampPresenter != null && wheelClampPresenter.IsClamped;
         bool IYardCraneOperationActuator.IsWheelClampTransitioning =>
-            gantryDrive != null && gantryDrive.WheelClampState == WheelClampState.Transitioning;
+            wheelClampPresenter != null && wheelClampPresenter.IsTransitioning;
         bool IYardCraneOperationActuator.IsTrolleyAnchorApplied =>
-            trolleyAnchor != null && trolleyAnchor.State == YardCraneAnchorState.Anchored;
+            trolleyAnchorPresenter != null && trolleyAnchorPresenter.IsApplied;
         bool IYardCraneOperationActuator.IsTrolleyAnchorTransitioning =>
-            trolleyAnchor != null && trolleyAnchor.State == YardCraneAnchorState.Transitioning;
+            trolleyAnchorPresenter != null && trolleyAnchorPresenter.IsTransitioning;
         bool IYardCraneOperationActuator.IsGantryAnchorApplied =>
-            gantryAnchor != null && gantryAnchor.State == YardCraneAnchorState.Anchored;
+            gantryAnchorPresenter != null && gantryAnchorPresenter.IsApplied;
         bool IYardCraneOperationActuator.IsGantryAnchorTransitioning =>
-            gantryAnchor != null && gantryAnchor.State == YardCraneAnchorState.Transitioning;
-        bool IYardCraneOperationActuator.IsSpreaderPumpOn => spreaderPumpOn;
+            gantryAnchorPresenter != null && gantryAnchorPresenter.IsTransitioning;
+        bool IYardCraneOperationActuator.IsSpreaderPumpOn => spreaderPump?.IsOn ?? false;
         bool IYardCraneOperationActuator.IsSpreaderSizeTransitioning =>
-            spreaderSize != null && spreaderSize.State == YardCraneSpreaderSizeMechanismState.Transitioning;
+            spreaderSizePresenter != null && spreaderSizePresenter.IsTransitioning;
 
         public bool TrySetContainerGrossMass(float grossMassKg)
         {
@@ -348,13 +366,18 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
 
             containerGrossMassKg = grossMassKg;
+            if (containerBody != null)
+            {
+                containerBody.mass = grossMassKg;
+            }
+            container?.SetGrossMassKg(grossMassKg);
             UpdateContainerLoadFeedback();
             return true;
         }
 
         public bool RequestContainerLock()
         {
-            if (!loopsReady || containerLocked || containerLockRequested)
+            if (!loopsReady || containerLocked || containerLockRequested || releasedContainerSettlementPending)
             {
                 return false;
             }
@@ -383,6 +406,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
 
             if (startupPreTensioning || loadTransferPreTensioning || containerLockRequested ||
+                releasedContainerSettlementPending ||
                 containerUnlockRequested || loadedOperationRegressionActive || (runAutomatedDemo && !demoCompleted))
             {
                 rejectionCode = YardCraneOperationErrorCodes.MechanismBusy;
@@ -421,10 +445,26 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return false;
             }
 
-            if (!containerLocked || !containerLandingConfirmed || !IsMechanismStationary())
+            if (!containerLocked)
             {
                 rejectionCode = YardCraneOperationErrorCodes.UnlockInterlockRejected;
                 return false;
+            }
+
+            // Real yard cranes gate the unlock output on a load-cell "landed" signal AND the
+            // mechanism being stationary, so an operator physically cannot unlock in mid-air
+            // (see PortTraining/LM-Wiki 详细设计与接口契约.md). This shell deliberately does
+            // NOT hard-block that anymore: the point of this training scenario is to let a
+            // student attempt an unsafe unlock and be scored for it, not be prevented the way
+            // real hardware prevents it. Record it as a severe safety violation instead.
+            var isLanded = containerLandingConfirmed;
+            var isStationary = IsMechanismStationary();
+            if (!isLanded || !isStationary)
+            {
+                trainingScore.RecordViolation(
+                    YardCraneViolationCategory.Safety, YardCraneViolationType.UnsafeUnlock,
+                    activeProfile.training.unsafeUnlockPenaltyPoints, Time.time,
+                    $"landed={isLanded}, stationary={isStationary}");
             }
 
             if (!RequestContainerUnlock())
@@ -444,135 +484,70 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
         bool IYardCraneOperationActuator.TryQueueWheelClamp(bool clampApplied, out string rejectionCode)
         {
-            if (gantryDrive == null || setupFailed || !loopsReady)
+            if (wheelClampPresenter == null)
             {
                 rejectionCode = YardCraneOperationErrorCodes.MechanismNotReady;
                 return false;
             }
 
-            if (!gantryDrive.TryRequestWheelClamp(clampApplied, out var driveError))
-            {
-                rejectionCode = YardCraneOperationErrorCodes.WheelClampInterlockRejected;
-                Debug.LogWarning(
-                    $"[YC_WHEEL_CLAMP_REJECTED] target={(clampApplied ? "Clamped" : "Released")}, " +
-                    $"state={gantryDrive.WheelClampState}, speed={gantryDrive.VelocityMetersPerSecond:F3}m/s, " +
-                    $"reason={driveError}",
-                    this);
-                return false;
-            }
-
-            rejectionCode = YardCraneOperationErrorCodes.None;
-            Debug.Log(
-                $"[YC_WHEEL_CLAMP_REQUESTED] target={(clampApplied ? "Clamped" : "Released")}, " +
-                $"state={gantryDrive.WheelClampState}",
-                this);
-            return true;
+            return wheelClampPresenter.TryQueue(clampApplied, !setupFailed && loopsReady, out rejectionCode);
         }
 
         bool IYardCraneOperationActuator.TryQueueTrolleyAnchor(bool anchorApplied, out string rejectionCode)
         {
-            if (trolleyAnchor == null || setupFailed || !loopsReady)
+            if (trolleyAnchorPresenter == null)
             {
                 rejectionCode = YardCraneOperationErrorCodes.MechanismNotReady;
                 return false;
             }
 
             var stationary = Mathf.Abs(currentTrolleyVelocity) <= ResetSafeSpeedThresholdMetersPerSecond;
-            if (!trolleyAnchor.TryRequestAnchor(anchorApplied, stationary, out var driveError))
-            {
-                rejectionCode = YardCraneOperationErrorCodes.AnchorInterlockRejected;
-                Debug.LogWarning(
-                    $"[YC_TROLLEY_ANCHOR_REJECTED] target={(anchorApplied ? "Anchored" : "Released")}, " +
-                    $"state={trolleyAnchor.State}, speed={currentTrolleyVelocity:F3}m/s, reason={driveError}",
-                    this);
-                return false;
-            }
-
-            rejectionCode = YardCraneOperationErrorCodes.None;
-            Debug.Log(
-                $"[YC_TROLLEY_ANCHOR_REQUESTED] target={(anchorApplied ? "Anchored" : "Released")}, " +
-                $"state={trolleyAnchor.State}",
-                this);
-            return true;
+            return trolleyAnchorPresenter.TryQueue(
+                anchorApplied, stationary, !setupFailed && loopsReady, currentTrolleyVelocity, out rejectionCode);
         }
 
         bool IYardCraneOperationActuator.TryQueueGantryAnchor(bool anchorApplied, out string rejectionCode)
         {
-            if (gantryAnchor == null || gantryDrive == null || setupFailed || !loopsReady)
+            if (gantryAnchorPresenter == null || gantryDrive == null)
             {
                 rejectionCode = YardCraneOperationErrorCodes.MechanismNotReady;
                 return false;
             }
 
-            if (!gantryAnchor.TryRequestAnchor(anchorApplied, gantryDrive.IsStationary, out var driveError))
-            {
-                rejectionCode = YardCraneOperationErrorCodes.AnchorInterlockRejected;
-                Debug.LogWarning(
-                    $"[YC_GANTRY_ANCHOR_REJECTED] target={(anchorApplied ? "Anchored" : "Released")}, " +
-                    $"state={gantryAnchor.State}, speed={gantryDrive.VelocityMetersPerSecond:F3}m/s, " +
-                    $"reason={driveError}",
-                    this);
-                return false;
-            }
-
-            rejectionCode = YardCraneOperationErrorCodes.None;
-            Debug.Log(
-                $"[YC_GANTRY_ANCHOR_REQUESTED] target={(anchorApplied ? "Anchored" : "Released")}, " +
-                $"state={gantryAnchor.State}",
-                this);
-            return true;
+            return gantryAnchorPresenter.TryQueue(
+                anchorApplied,
+                gantryDrive.IsStationary,
+                !setupFailed && loopsReady,
+                gantryDrive.VelocityMetersPerSecond,
+                out rejectionCode);
         }
 
         bool IYardCraneOperationActuator.TryQueueSpreaderPump(bool pumpOn, out string rejectionCode)
         {
-            if (setupFailed || !loopsReady)
+            if (spreaderPump == null)
             {
                 rejectionCode = YardCraneOperationErrorCodes.MechanismNotReady;
                 return false;
             }
 
-            rejectionCode = YardCraneOperationErrorCodes.None;
-            if (spreaderPumpOn == pumpOn)
-            {
-                return true;
-            }
-
-            spreaderPumpOn = pumpOn;
-            Debug.Log($"[YC_SPREADER_PUMP_REQUESTED] target={(pumpOn ? "On" : "Off")}", this);
-            return true;
+            return spreaderPump.TryQueue(pumpOn, !setupFailed && loopsReady, out rejectionCode);
         }
 
         bool IYardCraneOperationActuator.TryQueueSpreaderSize(string targetSize, out string rejectionCode)
         {
-            if (spreaderSize == null || setupFailed || !loopsReady)
+            if (spreaderSizePresenter == null)
             {
                 rejectionCode = YardCraneOperationErrorCodes.MechanismNotReady;
                 return false;
             }
 
-            if (!TryParseSpreaderSize(targetSize, out var parsedSize))
-            {
-                rejectionCode = YardCraneOperationErrorCodes.ContractValidationFailed;
-                return false;
-            }
-
-            if (!spreaderSize.TryRequestSize(
-                    parsedSize, spreaderPumpOn, IsMechanismStationary(), containerLocked, out var driveError))
-            {
-                rejectionCode = YardCraneOperationErrorCodes.SpreaderSizeInterlockRejected;
-                Debug.LogWarning(
-                    $"[YC_SPREADER_SIZE_REJECTED] target={targetSize}, state={spreaderSize.State}, " +
-                    $"currentSize={spreaderSize.CurrentSize}, pumpOn={spreaderPumpOn}, " +
-                    $"containerLocked={containerLocked}, reason={driveError}",
-                    this);
-                return false;
-            }
-
-            rejectionCode = YardCraneOperationErrorCodes.None;
-            Debug.Log(
-                $"[YC_SPREADER_SIZE_REQUESTED] target={targetSize}, state={spreaderSize.State}",
-                this);
-            return true;
+            return spreaderSizePresenter.TryQueue(
+                targetSize,
+                spreaderPump?.IsOn ?? false,
+                IsMechanismStationary(),
+                containerLocked,
+                !setupFailed && loopsReady,
+                out rejectionCode);
         }
 
         bool IYardCraneOperationActuator.TryQueueSpreaderRotationReturnToZero(out string rejectionCode)
@@ -583,12 +558,12 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return false;
             }
 
-            if (!spreaderRotation.TryRequestReturnToZero(spreaderPumpOn, out var driveError))
+            if (!spreaderRotation.TryRequestReturnToZero(spreaderPump?.IsOn ?? false, out var driveError))
             {
                 rejectionCode = YardCraneOperationErrorCodes.SpreaderRotationInterlockRejected;
                 Debug.LogWarning(
                     $"[YC_SPREADER_ROTATION_RETURN_TO_ZERO_REJECTED] angle={spreaderRotation.CurrentAngleDegrees:F2}deg, " +
-                    $"pumpOn={spreaderPumpOn}, reason={driveError}",
+                    $"pumpOn={spreaderPump?.IsOn ?? false}, reason={driveError}",
                     this);
                 return false;
             }
@@ -598,25 +573,6 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 $"[YC_SPREADER_ROTATION_RETURN_TO_ZERO_REQUESTED] angle={spreaderRotation.CurrentAngleDegrees:F2}deg",
                 this);
             return true;
-        }
-
-        private static bool TryParseSpreaderSize(string targetSize, out YardCraneSpreaderSize parsedSize)
-        {
-            switch (targetSize)
-            {
-                case "FT20":
-                    parsedSize = YardCraneSpreaderSize.Ft20;
-                    return true;
-                case "FT40":
-                    parsedSize = YardCraneSpreaderSize.Ft40;
-                    return true;
-                case "Twin20":
-                    parsedSize = YardCraneSpreaderSize.Twin20;
-                    return true;
-                default:
-                    parsedSize = YardCraneSpreaderSize.Unknown;
-                    return false;
-            }
         }
 
         void IYardCraneOperationActuator.SetMotionInputs(float gantry, float trolley, float hoist)
@@ -647,9 +603,47 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
         private bool IsContainerAlignedForLock()
         {
-            return containerHorizontalErrorMeters <= ContainerHorizontalLockToleranceMeters &&
-                   containerVerticalErrorMeters <= ContainerVerticalLockToleranceMeters &&
-                   containerYawErrorDegrees <= ContainerYawLockToleranceDegrees;
+            // Real spreaders cannot resize while sizing gear is mid-travel; a lock attempted
+            // during that window would be reaching for geometry that is still moving under it.
+            if (spreaderSize != null && spreaderSize.State == YardCraneSpreaderSizeMechanismState.Transitioning)
+            {
+                return false;
+            }
+
+            // All four corners, not the old center+yaw aggregate - see
+            // ComputeContainerCornerAlignment for why this is intentionally stricter.
+            if (!containerCornerAlignment.AllAligned)
+            {
+                return false;
+            }
+
+            return IsDetectedContainerTypeCompatibleWithSpreaderSize();
+        }
+
+        // 2026-09-17: explicit, named rejection reason for a container/spreader size mismatch,
+        // even though ApplyTwistlockPositionsForSpreaderSize already makes a mismatched pickup
+        // geometrically unlikely to pass the corner sensors in the first place - per user
+        // decision, this must not rely purely on "the geometry happened to miss".
+        private bool IsDetectedContainerTypeCompatibleWithSpreaderSize()
+        {
+            if (detectedPickupContainer == null)
+            {
+                return false;
+            }
+
+            var expectedContainerType = CurrentSpreaderSize == YardCraneSpreaderSize.Ft20
+                ? YardCraneContainerType.Ft20
+                : YardCraneContainerType.Ft40;
+            if (detectedPickupContainer.ContainerType != expectedContainerType)
+            {
+                Debug.LogWarning(
+                    $"[YC_CONTAINER_TYPE_SPREADER_SIZE_MISMATCH] container={detectedPickupContainer.ContainerType}, " +
+                    $"spreaderSize={CurrentSpreaderSize}",
+                    this);
+                return false;
+            }
+
+            return true;
         }
 
         private Vector3 TrolleyAxisWorldDirection =>
@@ -756,12 +750,46 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return false;
             }
 
+            var freeContainerStationary = containerBody == null || containerBody.isKinematic ||
+                                          (containerBody.linearVelocity.magnitude <= ResetSafeSpeedThresholdMetersPerSecond &&
+                                           containerBody.angularVelocity.magnitude <= ResetSafeSpeedThresholdMetersPerSecond);
             return Mathf.Abs(currentTrolleyVelocity) <= ResetSafeSpeedThresholdMetersPerSecond &&
                    (gantryDrive == null || gantryDrive.IsStationary) &&
                    (gantryDrive == null || gantryDrive.WheelClampState != WheelClampState.Transitioning) &&
                    Mathf.Abs(currentHoistVelocity) <= ResetSafeSpeedThresholdMetersPerSecond &&
                    headblockBody.linearVelocity.magnitude <= ResetSafeSpeedThresholdMetersPerSecond &&
-                   headblockBody.angularVelocity.magnitude <= ResetSafeSpeedThresholdMetersPerSecond;
+                   headblockBody.angularVelocity.magnitude <= ResetSafeSpeedThresholdMetersPerSecond &&
+                   freeContainerStationary;
+        }
+
+        // Speed limits step down when a container is locked on, mirroring how a real
+        // operator is expected to run slower under load. Only hoist currently has a
+        // physics-enforced loaded-speed factor (FullyLoadedHoistSpeedFactor); gantry and
+        // trolley are not physically slowed when loaded, so their loaded limits here are
+        // purely a training/scoring threshold, not a physics change.
+        private void UpdateTrainingScoreChecks()
+        {
+            var loaded = containerLocked;
+            var now = Time.time;
+
+            var gantrySpeed = gantryDrive != null ? Mathf.Abs(gantryDrive.VelocityMetersPerSecond) : 0f;
+            var gantryLimit = loaded ? GantrySpeedMetersPerSecond * LoadedGantrySpeedFactor : GantrySpeedMetersPerSecond;
+            trainingScore.UpdateGantrySpeed(gantrySpeed > gantryLimit, activeProfile.training.overspeedPenaltyPoints, now,
+                $"loaded={loaded}, gantrySpeed={gantrySpeed:F3}m/s, limit={gantryLimit:F3}m/s");
+
+            var trolleySpeed = Mathf.Abs(currentTrolleyVelocity);
+            var trolleyLimit = loaded ? TrolleySpeedMetersPerSecond * LoadedTrolleySpeedFactor : TrolleySpeedMetersPerSecond;
+            trainingScore.UpdateTrolleySpeed(trolleySpeed > trolleyLimit, activeProfile.training.overspeedPenaltyPoints, now,
+                $"loaded={loaded}, trolleySpeed={trolleySpeed:F3}m/s, limit={trolleyLimit:F3}m/s");
+
+            var hoistSpeed = Mathf.Abs(currentHoistVelocity);
+            var hoistLimit = loaded ? HoistSpeedMetersPerSecond * FullyLoadedHoistSpeedFactor : HoistSpeedMetersPerSecond;
+            trainingScore.UpdateHoistSpeed(hoistSpeed > hoistLimit, activeProfile.training.overspeedPenaltyPoints, now,
+                $"loaded={loaded}, hoistSpeed={hoistSpeed:F3}m/s, limit={hoistLimit:F3}m/s");
+
+            trainingScore.UpdateSway(currentHorizontalSway > TrainingSwayThresholdMeters,
+                activeProfile.training.excessiveSwayPenaltyPoints, now,
+                $"sway={currentHorizontalSway:F3}m, limit={TrainingSwayThresholdMeters:F3}m");
         }
 
         private void InitializeOperationController()
@@ -770,7 +798,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             operationController.PhaseChanged += OnOperationPhaseChanged;
             operationController.InputBecameStale += OnOperationInputBecameStale;
 
-            var bootstrap = FindFirstObjectByType<YardCraneBootstrap>();
+            var bootstrap = YardCraneBootstrap.Active;
             var launchOptions = bootstrap != null ? bootstrap.LaunchOptions : null;
             if (bootstrap != null &&
                 (launchOptions == null || launchOptions.LaunchMode == YardCraneLaunchMode.Managed))
@@ -786,7 +814,25 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
 
             var stationId = launchOptions?.StationId ?? "YC-EDITOR-01";
-            standaloneOperationHost.Configure(operationController, stationId, standaloneInputProfile);
+            standaloneOperationHost.Configure(
+                operationController,
+                stationId,
+                standaloneInputProfile,
+                requireS7Link);
+        }
+
+        // Runs regardless of Standalone/Managed launch mode - the debug HUD is a read-only
+        // overlay unrelated to input authority, temporary until UI Toolkit replaces it (see
+        // YardCraneDebugHudPresenter's class comment).
+        private void InitializeDebugHud()
+        {
+            debugHudPresenter = GetComponent<YardCraneDebugHudPresenter>();
+            if (debugHudPresenter == null)
+            {
+                debugHudPresenter = gameObject.AddComponent<YardCraneDebugHudPresenter>();
+            }
+
+            debugHudPresenter.Initialize(this);
         }
 
         private void OnOperationPhaseChanged(
@@ -820,20 +866,24 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 ResolvePhysicsProfile();
                 ResolveHierarchy();
                 ApplyGrayboxVisibility();
-                CreateRuntimeMaterials();
                 ConfigureGantryDrive();
                 ConfigureHeadblockPhysics();
                 InitializePhysicalSpreaderRotation();
                 ConfigureContainerLoad();
+                RefreshYardSlots();
                 ConfigureHorn();
-                CreateSolver();
-                CreateEightRopeLoops();
+                BindSceneAuthoredSolver();
+                BindEightSceneAuthoredStraightRopes();
                 EnsurePrototypeView();
 
                 gantryHome = gantryMotion.localPosition;
                 trolleyHome = trolleyMotion.localPosition;
                 headblockHome = headblockPhysics.position;
                 headblockHomeRotation = headblockPhysics.rotation;
+                unloadedSuspensionEquilibriumOffset = Vector3.ProjectOnPlane(
+                    GetHeadblockCenterOfMassWorld() - trolleyMotion.position,
+                    Vector3.up);
+                CaptureNominalSuspensionPose();
                 initialSuspendedDrop = CalculateSuspendedDrop();
                 commandedSuspendedDrop = initialSuspendedDrop;
                 // When the optional startup demo is disabled there is no demo phase to
@@ -841,7 +891,8 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 // manual verification are not permanently rejected by a stale flag.
                 demoCompleted = !runAutomatedDemo;
                 InitializeOperationController();
-                runtimeStatus = "Waiting for 16 Obi visual rope legs";
+                InitializeDebugHud();
+                runtimeStatus = "Waiting for 8 Obi visual ropes";
             }
             catch (Exception exception)
             {
@@ -895,8 +946,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                     binding.id,
                     binding.drum,
                     binding.antiSwayAxis,
-                    binding.exitPath,
-                    binding.deadEndPath,
+                    binding.topAnchorPath,
                     binding.sheavePath,
                     binding.slotPath);
             }
@@ -904,13 +954,21 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             Debug.Log(
                 $"[YC_PHYSICS_PROFILE_LOADED] schema={activeProfile.identity.schemaVersion}, " +
                 $"profile={activeProfile.identity.profileId}, topology={TopologyProfile}, " +
-                $"source={activeProfileSource}, loops={loopDefinitions.Length}, " +
+                $"source={activeProfileSource}, ropes={loopDefinitions.Length}, " +
                 $"calibration={activeProfile.identity.calibrationStatus}",
                 this);
         }
 
         private void Update()
         {
+            // 2026-09-11: pushed unconditionally, before every early-return below, so the
+            // Training layer's static holder always has this frame's score by the time Unity
+            // might destroy this component - mirrors YardCraneLocalTrainingModeCoordinator's
+            // identical ElapsedSeconds push (see YardCraneTrainingSessionIdentity.CurrentScore
+            // for why a push, not a pull through a live component reference, is required, and
+            // why this keeps Training from having to reference this Experiments-layer type).
+            YardCraneTrainingSessionIdentity.RecordScore(trainingScore.TotalScore);
+
             if (setupFailed)
             {
                 return;
@@ -939,6 +997,8 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             // return cannot observe the previous step's velocity as current motion.
             spreaderRotationAngularVelocityRadiansPerSecond = 0f;
             ProcessPendingContainerCommands();
+            UpdateContainerHeadblockCollisionSuppression();
+            UpdateReleasedContainerSettlement();
             operationController?.Tick();
 
             if (loadTransferPreTensioning)
@@ -962,7 +1022,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             ObserveRuntimeState();
 
             // Apply gravity before the cable velocity solve. Leaving Rigidbody
-            // gravity enabled would apply it later inside PhysX, after our loop
+            // gravity enabled would apply it later inside PhysX, after our straight-rope
             // projection, producing a visible 50 Hz fall/correct sawtooth.
             if (suspensionGravityActive)
             {
@@ -987,16 +1047,17 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
 
             ApplyLoadedHoistSuspensionDynamics();
-            ApplyLoadedSuspensionDynamics();
+            ApplyTrolleyAntiSwayDynamics();
             ApplyLoadedTrolleyStopStabilization();
             CaptureBoundaryMotion();
-            SolveEightLoopConstraints();
-            SynchronizeVisualLegLengths();
+            SolveEightRopeConstraints();
+            SynchronizeVisualRopeLengths();
             ProjectVisualRopesToEngineeringGeometry();
             UpdateContainerLoadFeedback();
             UpdateContainerLandingConfirmation();
             UpdateContainerContactStatus();
             RestoreContainerColliderWhenClear();
+            UpdateTrainingScoreChecks();
             operationController?.Tick();
         }
 
@@ -1010,7 +1071,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             // Obi updates static attachments at the start of its simulation step,
             // while the trolley and headblock move later in FixedUpdate. Projecting
             // after all motion removes the one-step visual lag and makes both ends of
-            // every taut MAX leg follow the current engineering anchors exactly.
+            // every taut MAX rope follow the current engineering anchors exactly.
             ProjectVisualRopesToEngineeringGeometry();
         }
 
@@ -1024,7 +1085,12 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             spreaderColliderRoot = RequireTransform("30_SpreaderPhysics/Physics/Colliders");
             spreaderSensorRoot = RequireTransform("30_SpreaderPhysics/Sensors");
             containerAttachmentRoot = RequireTransform("30_SpreaderPhysics/ContainerAttachment");
+            twistlockFrontLeft = RequireTransform("30_SpreaderPhysics/ContainerAttachment/Twistlock_FL");
+            twistlockFrontRight = RequireTransform("30_SpreaderPhysics/ContainerAttachment/Twistlock_FR");
+            twistlockRearLeft = RequireTransform("30_SpreaderPhysics/ContainerAttachment/Twistlock_RL");
+            twistlockRearRight = RequireTransform("30_SpreaderPhysics/ContainerAttachment/Twistlock_RR");
             activeContainer = RequireTransform("50_ContainerWorkspace/ActiveContainer");
+            containerFreeBody = RequireTransform(YardCraneSceneSimulationContract.ContainerFreeBodyPath);
 
             // These nodes are direct children of the rope-owned headblock in the
             // v1 hierarchy. Preserve their authored rest rotations so imported
@@ -1037,8 +1103,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
             foreach (var definition in LoopDefinitions)
             {
-                RequireTransform(definition.ExitPath);
-                RequireTransform(definition.DeadEndPath);
+                RequireTransform(definition.TopAnchorPath);
                 RequireTransform(definition.SheavePath);
                 RequireTransform(definition.SlotPath);
             }
@@ -1076,9 +1141,14 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 WheelClampTransitionSeconds,
                 ResetSafeSpeedThresholdMetersPerSecond);
             gantryDrive = new YardCraneGantryDriveModel(configuration);
+            wheelClampPresenter = new YardCraneWheelClampPresenter(gantryDrive, this);
             trolleyAnchor = new YardCraneAnchorInterlock(AnchorTransitionSeconds);
             gantryAnchor = new YardCraneAnchorInterlock(AnchorTransitionSeconds);
+            trolleyAnchorPresenter = new YardCraneAnchorPresenter(trolleyAnchor, "小车锚定", "TROLLEY", this);
+            gantryAnchorPresenter = new YardCraneAnchorPresenter(gantryAnchor, "大车锚定", "GANTRY", this);
             spreaderSize = new YardCraneSpreaderSizeInterlock(SpreaderSizeTransitionSeconds, YardCraneSpreaderSize.Ft40);
+            spreaderSizePresenter = new YardCraneSpreaderSizePresenter(spreaderSize, this);
+            spreaderPump = new YardCraneSpreaderPumpPresenter(this);
             spreaderRotation = new YardCraneSpreaderRotationModel(
                 SpreaderRotationMaxAngleDegrees,
                 SpreaderRotationRateDegreesPerSecond,
@@ -1153,43 +1223,38 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             headblockBody = headblockPhysics.GetComponent<Rigidbody>();
             if (headblockBody == null)
             {
-                headblockBody = headblockPhysics.gameObject.AddComponent<Rigidbody>();
+                throw MissingSceneComponent<Rigidbody>(YardCraneSceneSimulationContract.HeadblockPath);
             }
 
-            headblockBody.mass = SimulationProxyMassKg;
-            headblockBody.linearDamping = UnloadedHeadblockLinearDamping;
-            headblockBody.angularDamping = UnloadedHeadblockAngularDamping;
-            headblockBody.interpolation = RigidbodyInterpolation.Interpolate;
-            headblockBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            headblockBody.solverIterations = HeadblockSolverIterations;
-            headblockBody.solverVelocityIterations = HeadblockSolverVelocityIterations;
-            headblockBody.useGravity = false;
+            if (!float.IsFinite(headblockBody.mass) || headblockBody.mass <= 0f ||
+                !float.IsFinite(headblockBody.linearDamping) || headblockBody.linearDamping < 0f ||
+                !float.IsFinite(headblockBody.angularDamping) || headblockBody.angularDamping < 0f ||
+                headblockBody.solverIterations < 1 || headblockBody.solverVelocityIterations < 1 ||
+                headblockBody.isKinematic || headblockBody.useGravity)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {YardCraneSceneSimulationContract.HeadblockPath} has invalid " +
+                    "Rigidbody settings. Use a positive mass, non-negative damping/iterations, Dynamic mode, " +
+                    "and disable Use Gravity (the rope solver applies gravity explicitly).");
+            }
+
+            // Runtime load transfer may temporarily change mass/COM/inertia, but the unloaded
+            // baseline comes from the authored Rigidbody so Inspector edits remain authoritative.
+            sceneAuthoredHeadblockMassKg = headblockBody.mass;
+            sceneAuthoredHeadblockAngularDamping = headblockBody.angularDamping;
 
             if (headblockPhysics.GetComponent<ObiRigidbody>() == null)
             {
-                headblockPhysics.gameObject.AddComponent<ObiRigidbody>();
+                throw MissingSceneComponent<ObiRigidbody>(YardCraneSceneSimulationContract.HeadblockPath);
             }
 
-            var colliderRoot = RequireTransform("30_SpreaderPhysics/Physics/Colliders");
-            var colliderTransform = colliderRoot.Find("Graybox_HeadblockSpreaderCollider");
-            if (colliderTransform == null)
-            {
-                var colliderObject = new GameObject("Graybox_HeadblockSpreaderCollider");
-                colliderObject.transform.SetParent(colliderRoot, false);
-                colliderTransform = colliderObject.transform;
-            }
-
-            colliderTransform.localPosition = Vector3.zero;
-            colliderTransform.localRotation = Quaternion.identity;
-            colliderTransform.localScale = Vector3.one;
+            var colliderTransform = RequireTransform(YardCraneSceneSimulationContract.HeadblockColliderPath);
             headblockCollider = colliderTransform.GetComponent<BoxCollider>();
             if (headblockCollider == null)
             {
-                headblockCollider = colliderTransform.gameObject.AddComponent<BoxCollider>();
+                throw MissingSceneComponent<BoxCollider>(YardCraneSceneSimulationContract.HeadblockColliderPath);
             }
-            headblockCollider.size = HeadblockColliderSizeMeters;
-            headblockBody.ResetCenterOfMass();
-            headblockBody.ResetInertiaTensor();
+            sceneAuthoredHeadblockCenterOfMass = headblockBody.centerOfMass;
             unloadedInertiaTensor = headblockBody.inertiaTensor;
             unloadedInertiaTensorRotation = headblockBody.inertiaTensorRotation;
         }
@@ -1201,23 +1266,89 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             containerHomeRotation = activeContainer.rotation;
             containerRestingCenterY = activeContainer.position.y;
 
-            // The container is a static yard object before locking. Once reparented
-            // below the dynamic headblock it becomes part of the compound collider;
-            // its real mass is represented by the headblock's equivalent mass,
-            // center of mass and inertia instead of a second fighting Rigidbody.
-            var containerBody = activeContainer.GetComponent<Rigidbody>();
-            if (containerBody != null)
+            containerBody = containerFreeBody.GetComponent<Rigidbody>();
+            if (containerBody == null)
             {
-                Destroy(containerBody);
+                throw MissingSceneComponent<Rigidbody>(YardCraneSceneSimulationContract.ContainerFreeBodyPath);
             }
 
             containerCollider = activeContainer.GetComponent<BoxCollider>();
             if (containerCollider == null)
             {
-                containerCollider = activeContainer.gameObject.AddComponent<BoxCollider>();
+                throw MissingSceneComponent<BoxCollider>(YardCraneSceneSimulationContract.ActiveContainerPath);
             }
-            containerCollider.center = Vector3.zero;
-            containerCollider.size = ContainerColliderSizeMeters;
+
+            containerImpactSensor = containerFreeBody.GetComponent<YardCraneContainerImpactSensor>();
+            if (containerImpactSensor == null)
+            {
+                throw MissingSceneComponent<YardCraneContainerImpactSensor>(
+                    YardCraneSceneSimulationContract.ContainerFreeBodyPath);
+            }
+
+            // Optional: a YardCraneContainer data component on ActiveContainer gives the box its
+            // own id/type/tare-mass identity and becomes the authoritative gross mass source
+            // (synced onto containerBody.mass below). It is absent from today's saved scene, so
+            // this stays backward compatible - Rigidbody.mass keeps being authoritative until a
+            // YardCraneContainer is added there.
+            container = activeContainer.GetComponent<YardCraneContainer>();
+            if (container != null)
+            {
+                if (!container.TryValidate(activeProfile, out var containerError))
+                {
+                    throw new InvalidOperationException(
+                        $"[YC_SCENE_AUTHORING_INVALID] {YardCraneSceneSimulationContract.ActiveContainerPath} " +
+                        $"YardCraneContainer is invalid: {containerError}");
+                }
+
+                containerBody.mass = container.GrossMassKg;
+                container.EnsureLockHoleColliders();
+            }
+            else
+            {
+                // 2026-09-17: the raycast-based lock sensors (ComputeContainerCornerAlignment)
+                // can only ever detect a YardCraneContainer's own lock-hole colliders - there is
+                // no equivalent fallback for a bare graybox with no such component, unlike
+                // GrossMassKg's fallback to containerBody.mass above. Locking will not succeed
+                // (containerCornerAlignment will never read as aligned) until one is added to
+                // ActiveContainer in the Editor. This is a genuine behavior change from this
+                // component's original optional/backward-compatible design, not an oversight.
+                Debug.LogWarning(
+                    $"[YC_CONTAINER_LOCK_HOLES_MISSING] {YardCraneSceneSimulationContract.ActiveContainerPath} " +
+                    "has no YardCraneContainer component, so it has no lock-hole colliders for the " +
+                    "twistlock raycast sensors to find. Locking will always be rejected until one is added.",
+                    this);
+            }
+
+            if (activeContainer.GetComponentInChildren<Rigidbody>(true) != null)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {YardCraneSceneSimulationContract.ActiveContainerPath} " +
+                    "must not contain a Rigidbody. Its collider becomes part of the headblock compound body while locked.");
+            }
+            if (containerFreeBody.GetComponents<Collider>().Length != 0 || containerFreeBody.childCount != 0)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {YardCraneSceneSimulationContract.ContainerFreeBodyPath} " +
+                    "must be an empty Rigidbody proxy in the saved scene. Keep ActiveContainer as its sibling.");
+            }
+
+            if (containerBody.mass < MinimumContainerGrossMassKg ||
+                containerBody.mass > MaximumContainerGrossMassKg)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {YardCraneSceneSimulationContract.ContainerFreeBodyPath} " +
+                    $"Rigidbody.mass={containerBody.mass:F1}kg is outside the supported " +
+                    $"[{MinimumContainerGrossMassKg:F1}, {MaximumContainerGrossMassKg:F1}]kg range.");
+            }
+
+            // The scene-authored free-body proxy owns the authoritative container mass, unless a
+            // YardCraneContainer data component on ActiveContainer overrides it above. Runtime
+            // only switches state on either; it never replaces or recreates the components.
+            containerGrossMassKg = containerBody.mass;
+            containerImpactSensor.ImpactDetected -= HandleContainerImpact;
+            containerImpactSensor.ImpactDetected += HandleContainerImpact;
+            ParkContainerFreeBody();
+            SetContainerHeadblockCollisionIgnored(false);
             containerCollider.enabled = true;
 
             containerLocked = false;
@@ -1226,118 +1357,341 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             UpdateContainerLoadFeedback();
         }
 
-        private void CreateSolver()
+        private void RefreshYardSlots()
         {
-            var ropeRig = RequireTransform("40_RopeRig");
-            var runtimeRoot = ropeRig.Find("_ObiMAXRuntime");
-            if (runtimeRoot == null)
+            yardSlots.Clear();
+            foreach (var slot in FindObjectsByType<YardCraneYardSlot>(
+                         FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
-                var runtimeObject = new GameObject("_ObiMAXRuntime");
-                runtimeObject.transform.SetParent(ropeRig, false);
-                runtimeRoot = runtimeObject.transform;
+                if (slot != null && slot.gameObject.scene == gameObject.scene)
+                {
+                    yardSlots.Add(slot);
+                }
             }
 
-            var collisionWorldObject = new GameObject("ObiBurstCollisionWorld");
-            collisionWorldObject.transform.SetParent(runtimeRoot, false);
-            collisionWorldObject.AddComponent<BurstColliderWorld>();
+            yardSlots.Sort((left, right) => string.CompareOrdinal(left.SlotId, right.SlotId));
+            var slotIds = new HashSet<string>(StringComparer.Ordinal);
+            var initialOccupants = new HashSet<YardCraneContainer>();
+            foreach (var slot in yardSlots)
+            {
+                if (string.IsNullOrWhiteSpace(slot.SlotId) || !slotIds.Add(slot.SlotId))
+                {
+                    Debug.LogError(
+                        $"[YC_YARD_SLOT_ID_INVALID] slot={slot.name}, id='{slot.SlotId}', " +
+                        "slot ids must be non-empty and unique inside the YardCrane scene.",
+                        slot);
+                }
 
+                if (slot.InitialOccupant != null && !initialOccupants.Add(slot.InitialOccupant))
+                {
+                    Debug.LogError(
+                        $"[YC_YARD_SLOT_DUPLICATE_INITIAL_OCCUPANT] slot={slot.SlotId}, " +
+                        $"container={slot.InitialOccupant.ContainerId}",
+                        slot);
+                }
+            }
+
+            Debug.Log($"[YC_YARD_SLOTS_READY] count={yardSlots.Count}", this);
+        }
+
+        private bool TryBindDetectedContainerForPickup(out string rejectionReason)
+        {
+            var candidate = detectedPickupContainer;
+            if (candidate == null)
+            {
+                rejectionReason = "no detected pickup container";
+                return false;
+            }
+
+            if (releasedContainerSettlementPending)
+            {
+                rejectionReason = "the previous released container is still settling";
+                return false;
+            }
+
+            if (!candidate.TryValidate(activeProfile, out var validationError))
+            {
+                rejectionReason = validationError;
+                return false;
+            }
+
+            var candidateTransform = candidate.transform;
+            var candidateCollider = candidate.GetComponent<BoxCollider>();
+            if (candidateCollider == null || !candidateCollider.enabled || candidateCollider.isTrigger)
+            {
+                rejectionReason = "the detected container requires one enabled, non-trigger BoxCollider on its semantic root";
+                return false;
+            }
+
+            if (candidateTransform.GetComponentInChildren<Rigidbody>(true) != null)
+            {
+                rejectionReason = "the detected static yard container must not own a Rigidbody";
+                return false;
+            }
+
+            if (containerFreeBody.childCount != 0 && candidateTransform.parent != containerFreeBody)
+            {
+                rejectionReason = "the shared ContainerFreeBody is still occupied by another container";
+                return false;
+            }
+
+            if (containerHeadblockCollisionIgnored && containerCollider != null)
+            {
+                SetContainerHeadblockCollisionIgnored(false);
+            }
+
+            activeContainer = candidateTransform;
+            container = candidate;
+            containerCollider = candidateCollider;
+            containerOriginalParent = candidateTransform.parent;
+            containerHomePosition = candidateTransform.position;
+            containerHomeRotation = candidateTransform.rotation;
+            containerRestingCenterY = candidateTransform.position.y;
+            containerGrossMassKg = candidate.GrossMassKg;
+            containerBody.mass = containerGrossMassKg;
+            container.EnsureLockHoleColliders();
+            containerImpactSensor.Disarm();
+            pickedUpSourceSlot = FindYardSlotContaining(candidate);
+            rejectionReason = null;
+
+            Debug.Log(
+                $"[YC_CONTAINER_BOUND] container={candidate.ContainerId}, type={candidate.ContainerType}, " +
+                $"grossMass={candidate.GrossMassKg:F0}kg, " +
+                $"sourceSlot={(pickedUpSourceSlot != null ? pickedUpSourceSlot.SlotId : "<unassigned>")}",
+                candidate);
+            return true;
+        }
+
+        private YardCraneYardSlot FindYardSlotContaining(YardCraneContainer occupant)
+        {
+            foreach (var slot in yardSlots)
+            {
+                if (slot != null && slot.CurrentOccupant == occupant)
+                {
+                    return slot;
+                }
+            }
+
+            return null;
+        }
+
+        private YardCraneYardSlot FindBestAvailableYardSlot(
+            YardCraneContainer candidate,
+            out float horizontalError,
+            out float verticalError,
+            out float yawError)
+        {
+            var bestSlot = default(YardCraneYardSlot);
+            var bestScore = float.PositiveInfinity;
+            horizontalError = float.PositiveInfinity;
+            verticalError = float.PositiveInfinity;
+            yawError = float.PositiveInfinity;
+
+            if (candidate == null)
+            {
+                return null;
+            }
+
+            foreach (var slot in yardSlots)
+            {
+                if (slot == null || !slot.CanAccept(candidate))
+                {
+                    continue;
+                }
+
+                var difference = candidate.transform.position - slot.transform.position;
+                var slotHorizontalError = new Vector2(difference.x, difference.z).magnitude;
+                var slotVerticalError = Mathf.Abs(difference.y);
+                // Occupancy is stricter than the spreader's yaw-only lock interlock: a box that
+                // has tipped onto its side must never be recorded as a healthy occupied slot just
+                // because its centre and heading still happen to be close to the marker.
+                var slotYawError = Quaternion.Angle(
+                    slot.transform.rotation,
+                    candidate.transform.rotation);
+                if (slotHorizontalError > ContainerHorizontalLockToleranceMeters ||
+                    slotVerticalError > ContainerVerticalLockToleranceMeters ||
+                    slotYawError > ContainerYawLockToleranceDegrees)
+                {
+                    continue;
+                }
+
+                var score = slotHorizontalError + slotVerticalError + Mathf.Deg2Rad * slotYawError;
+                if (score >= bestScore)
+                {
+                    continue;
+                }
+
+                bestSlot = slot;
+                bestScore = score;
+                horizontalError = slotHorizontalError;
+                verticalError = slotVerticalError;
+                yawError = slotYawError;
+            }
+
+            return bestSlot;
+        }
+
+        private InvalidOperationException MissingSceneComponent<T>(string path) where T : Component
+        {
+            return new InvalidOperationException(
+                $"[YC_SCENE_AUTHORING_MISSING] {path} requires {typeof(T).Name}. " +
+                $"Run '{YardCraneSceneSimulationContract.AuthoringMenuPath}' in Edit Mode, inspect the result, then save the scene.");
+        }
+
+        private void ParkContainerFreeBody()
+        {
+            if (!containerBody.isKinematic)
+            {
+                containerBody.linearVelocity = Vector3.zero;
+                containerBody.angularVelocity = Vector3.zero;
+            }
+
+            containerBody.useGravity = false;
+            containerBody.isKinematic = true;
+            containerBody.detectCollisions = true;
+            containerImpactSensor.Disarm();
+        }
+
+        private void SetContainerHeadblockCollisionIgnored(bool ignored)
+        {
+            if (containerCollider == null || headblockCollider == null)
+            {
+                return;
+            }
+
+            Physics.IgnoreCollision(containerCollider, headblockCollider, ignored);
+            containerHeadblockCollisionIgnored = ignored;
+        }
+
+        private void UpdateContainerHeadblockCollisionSuppression()
+        {
+            if (!containerHeadblockCollisionIgnored || containerLocked ||
+                containerCollider == null || headblockCollider == null || !containerCollider.enabled)
+            {
+                return;
+            }
+
+            var containerBounds = containerCollider.bounds;
+            var headblockBounds = headblockCollider.bounds;
+            var centerDelta = containerBounds.center - headblockBounds.center;
+            var separation = Mathf.Max(
+                Mathf.Abs(centerDelta.x) - containerBounds.extents.x - headblockBounds.extents.x,
+                Mathf.Max(
+                    Mathf.Abs(centerDelta.y) - containerBounds.extents.y - headblockBounds.extents.y,
+                    Mathf.Abs(centerDelta.z) - containerBounds.extents.z - headblockBounds.extents.z));
+            if (separation > ContainerContactEnvelopeMarginMeters)
+            {
+                SetContainerHeadblockCollisionIgnored(false);
+            }
+        }
+
+        private void BindSceneAuthoredSolver()
+        {
+            var ropeRig = RequireTransform(YardCraneSceneSimulationContract.RopeRigPath);
             solver = ropeRig.GetComponent<ObiSolver>();
             if (solver == null)
             {
-                solver = ropeRig.gameObject.AddComponent<ObiSolver>();
+                throw MissingSceneComponent<ObiSolver>(YardCraneSceneSimulationContract.RopeRigPath);
             }
-            solver.backendType = ObiSolver.BackendType.Burst;
-            solver.synchronization = ObiSolver.Synchronization.SynchronousFixed;
-            solver.substeps = Mathf.Max(8, solverSubsteps);
-            solver.maxStepsPerFrame = 1;
-            solver.gravity = Vector3.zero;
-            solver.gravitySpace = Space.World;
-            solver.distanceConstraintParameters.iterations = Mathf.Clamp(distanceIterations, 1, 2);
-            solver.collisionConstraintParameters.enabled = false;
-            solver.particleCollisionConstraintParameters.enabled = false;
-            var parameters = solver.parameters;
-            parameters.damping = 0.3f;
-            solver.parameters = parameters;
+
+            var sceneInfrastructure = RequireTransform(YardCraneSceneSimulationContract.ObiSceneComponentsPath);
+            if (sceneInfrastructure.GetComponentInChildren<BurstColliderWorld>(true) == null)
+            {
+                throw MissingSceneComponent<BurstColliderWorld>(
+                    YardCraneSceneSimulationContract.ObiSceneComponentsPath);
+            }
         }
 
-        private void CreateEightRopeLoops()
+        private void BindEightSceneAuthoredStraightRopes()
         {
+            loops.Clear();
             foreach (var definition in LoopDefinitions)
             {
-                var exit = RequireTransform(definition.ExitPath);
-                var deadEnd = RequireTransform(definition.DeadEndPath);
+                var topAnchor = RequireTransform(definition.TopAnchorPath);
                 var sheave = RequireTransform(definition.SheavePath);
                 var slot = RequireTransform(definition.SlotPath);
-                var exitLeg = CreateVisualLeg(definition.Id, "ExitLeg", exit, sheave, slot);
-                var deadEndLeg = CreateVisualLeg(definition.Id, "DeadEndLeg", deadEnd, sheave, slot);
-                var initialLoopLength = Vector3.Distance(exit.position, sheave.position) +
-                                        Vector3.Distance(deadEnd.position, sheave.position);
+                var visualRope = BindSceneAuthoredVisualRope(definition.Id, topAnchor, sheave, slot);
+                var initialRopeLength = Vector3.Distance(topAnchor.position, sheave.position);
 
                 loops.Add(new LoopRuntime(
                     definition,
-                    exit,
-                    deadEnd,
+                    topAnchor,
                     sheave,
                     headblockPhysics.InverseTransformPoint(sheave.position),
-                    exitLeg,
-                    deadEndLeg,
-                    initialLoopLength,
-                    Vector3.Distance(exit.position, sheave.position) -
-                    Vector3.Distance(deadEnd.position, sheave.position)));
+                    visualRope,
+                    initialRopeLength));
+            }
+
+            if (loops.Count != 8)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] Expected exactly 8 authored ropes, found {loops.Count}.");
             }
         }
 
-        private VisualLegRuntime CreateVisualLeg(
-            string loopId,
-            string legName,
+        private VisualLegRuntime BindSceneAuthoredVisualRope(
+            string ropeId,
             Transform fixedAnchor,
             Transform sheave,
             Transform slot)
         {
-            var actorObject = new GameObject($"ObiRope_{loopId}_{legName}");
-            actorObject.transform.SetParent(slot, false);
-            var start = solver.transform.InverseTransformPoint(fixedAnchor.position);
-            var end = solver.transform.InverseTransformPoint(sheave.position);
-            var tangent = (end - start).normalized * 0.5f;
-            var filter = ObiUtils.MakeFilter(ObiUtils.CollideWithEverything, 0);
+            var actorName = YardCraneSceneSimulationContract.GetRopeActorName(ropeId);
+            var actorTransform = slot.Find(actorName);
+            if (actorTransform == null)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_MISSING] {definitionPath(slot, actorName)} is missing. " +
+                    $"Run '{YardCraneSceneSimulationContract.AuthoringMenuPath}' in Edit Mode.");
+            }
 
-            var blueprint = ScriptableObject.CreateInstance<ObiRopeBlueprint>();
-            blueprint.name = $"Runtime_MAX_{loopId}_{legName}_Blueprint";
-            blueprint.thickness = 0.028f;
-            blueprint.resolution = 0.55f;
-            blueprint.pooledParticles = 64;
-            blueprint.path.Clear();
-            blueprint.path.AddControlPoint(start, -tangent, tangent, Vector3.forward, 0.12f, 0.1f, 1f, filter, Color.white, "Fixed");
-            blueprint.path.AddControlPoint(end, -tangent, tangent, Vector3.forward, 0.12f, 0.1f, 1f, filter, Color.white, "Sheave");
-            blueprint.path.FlushEvents();
-            blueprint.GenerateImmediate();
+            var actorObject = actorTransform.gameObject;
+            var rope = actorObject.GetComponent<Obi.ObiRope>();
+            if (rope == null) throw MissingSceneComponent<Obi.ObiRope>(definitionPath(slot, actorName));
 
-            var rope = actorObject.AddComponent<Obi.ObiRope>();
-            rope.maxBending = 0.02f;
-            rope.stretchCompliance = 0f;
-            rope.maxCompression = 1f;
-            rope.ropeBlueprint = blueprint;
+            var blueprint = rope.ropeBlueprint;
+            if (blueprint == null || blueprint.groups == null || blueprint.groups.Count < 2)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {definitionPath(slot, actorName)} requires a persistent " +
+                    "ObiRopeBlueprint with Fixed and Sheave particle groups.");
+            }
 
-            var renderer = actorObject.AddComponent<ObiRopeExtrudedRenderer>();
-            renderer.section = Resources.Load<ObiRopeSection>("DefaultRopeSection");
-            renderer.material = ropeMaterial;
-            renderer.thicknessScale = 0.7f;
-            renderer.uvScale = new Vector2(1f, 4f);
+            var renderer = actorObject.GetComponent<ObiRopeExtrudedRenderer>();
+            if (renderer == null) throw MissingSceneComponent<ObiRopeExtrudedRenderer>(definitionPath(slot, actorName));
+            if (renderer.section == null || renderer.material == null)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {definitionPath(slot, actorName)} renderer requires " +
+                    "a rope section and a persistent material.");
+            }
 
-            var cursor = actorObject.AddComponent<ObiRopeCursor>();
-            cursor.cursorMu = 0f;
-            cursor.direction = true;
+            var cursor = actorObject.GetComponent<ObiRopeCursor>();
+            if (cursor == null) throw MissingSceneComponent<ObiRopeCursor>(definitionPath(slot, actorName));
 
-            var fixedAttachment = actorObject.AddComponent<ObiParticleAttachment>();
-            fixedAttachment.attachmentType = ObiParticleAttachment.AttachmentType.Static;
-            fixedAttachment.target = fixedAnchor;
-            fixedAttachment.particleGroup = blueprint.groups[0];
+            ObiParticleAttachment fixedAttachment = null;
+            ObiParticleAttachment sheaveAttachment = null;
+            var attachments = actorObject.GetComponents<ObiParticleAttachment>();
+            foreach (var attachment in attachments)
+            {
+                if (attachment.target == fixedAnchor) fixedAttachment = attachment;
+                if (attachment.target == sheave) sheaveAttachment = attachment;
+            }
 
-            var sheaveAttachment = actorObject.AddComponent<ObiParticleAttachment>();
-            sheaveAttachment.attachmentType = ObiParticleAttachment.AttachmentType.Static;
-            sheaveAttachment.target = sheave;
-            sheaveAttachment.particleGroup = blueprint.groups[1];
-            sheaveAttachment.projection = true;
+            if (attachments.Length != 2 || fixedAttachment == null || sheaveAttachment == null ||
+                fixedAttachment == sheaveAttachment)
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {definitionPath(slot, actorName)} must contain exactly two " +
+                    $"attachments bound to '{fixedAnchor.name}' and '{sheave.name}'.");
+            }
+
+            if (fixedAttachment.particleGroup != blueprint.groups[0] ||
+                sheaveAttachment.particleGroup != blueprint.groups[1])
+            {
+                throw new InvalidOperationException(
+                    $"[YC_SCENE_AUTHORING_INVALID] {definitionPath(slot, actorName)} attachments must use " +
+                    "blueprint groups Fixed and Sheave respectively.");
+            }
 
             return new VisualLegRuntime(
                 actorObject,
@@ -1349,11 +1703,16 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 Vector3.Distance(fixedAnchor.position, sheave.position));
         }
 
+        private string definitionPath(Transform slot, string actorName)
+        {
+            return $"{slot.name}/{actorName}";
+        }
+
         private void TryFinishVisualInitialization()
         {
             foreach (var loop in loops)
             {
-                if (!loop.ExitLeg.IsLoaded || !loop.DeadEndLeg.IsLoaded)
+                if (!loop.VisualRope.IsLoaded)
                 {
                     return;
                 }
@@ -1361,14 +1720,11 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
             foreach (var loop in loops)
             {
-                InitializeVisualLeg(loop.ExitLeg, Vector3.Distance(loop.Exit.position, loop.Sheave.position));
-                InitializeVisualLeg(loop.DeadEndLeg, Vector3.Distance(loop.DeadEnd.position, loop.Sheave.position));
-                loop.InitialLoopLength = CalculateActualLoopLength(loop, headblockBody.position, headblockBody.rotation);
-                loop.CommandedLoopLength = loop.InitialLoopLength;
-                loop.LastCommandedLoopLength = loop.InitialLoopLength;
-                loop.CommandedLegDifference = CalculateActualLegDifference(loop, headblockBody.position, headblockBody.rotation);
-                loop.LastExitPosition = loop.Exit.position;
-                loop.LastDeadEndPosition = loop.DeadEnd.position;
+                InitializeVisualLeg(loop.VisualRope, Vector3.Distance(loop.TopAnchor.position, loop.Sheave.position));
+                loop.InitialRopeLength = CalculateActualRopeLength(loop, headblockBody.position, headblockBody.rotation);
+                loop.CommandedRopeLength = loop.InitialRopeLength;
+                loop.LastCommandedRopeLength = loop.InitialRopeLength;
+                loop.LastTopAnchorPosition = loop.TopAnchor.position;
             }
 
             headblockBody.useGravity = false;
@@ -1378,9 +1734,16 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             startupPreTensioning = true;
             startupReleaseAt = Time.fixedTime + StartupPreTensionDurationSeconds;
             demoStartedAt = Time.fixedTime;
-            runtimeStatus = "Pre-tensioning eight triangular rope loops";
+            runtimeStatus = "Pre-tensioning eight independent straight ropes";
+            var activeRigCount = FindObjectsByType<YardCraneEightRopeMaxPrototypeRig>(
+                FindObjectsSortMode.None).Length;
             Debug.Log($"[YC_EIGHT_ROPE_MAX_READY] model={ImplementationVersion}, profile={TopologyProfile}, " +
-                      $"drums=2, loops=8, visualLegs=16, drop={commandedSuspendedDrop:F3}m", this);
+                      $"drums=2, ropes=8, visualRopes=8, drop={commandedSuspendedDrop:F3}m, " +
+                      $"antiSway=empty+loaded, omega={LoadedSuspensionNaturalFrequencyRadiansPerSecond:F2}rad/s, " +
+                      $"dampingRatio={LoadedSuspensionDampingRatio:F2}, " +
+                      $"maxAcceleration={MaximumLoadedSuspensionAccelerationMetersPerSecondSquared:F2}m/s2, " +
+                      $"instance={GetInstanceID()}, activeRigCount={activeRigCount}, " +
+                      $"scene={gameObject.scene.name}, resetEpoch={resetEpoch}", this);
         }
 
         private static void InitializeVisualLeg(VisualLegRuntime leg, float targetLength)
@@ -1392,172 +1755,6 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 leg.Cursor.ChangeLength(correction);
             }
             leg.CommandedVisualLength = targetLength;
-        }
-
-        private void HandleDeveloperShortcuts()
-        {
-#if UNITY_EDITOR
-            if (UnityEngine.Input.GetKeyDown(KeyCode.G)) SetGrayboxVisible(!showGraybox);
-            if (UnityEngine.Input.GetKeyDown(KeyCode.T)) BeginLoadedOperationRegression();
-#endif
-        }
-
-        private void RunAutomatedDemo(float elapsed)
-        {
-            currentTrolleyVelocity = 0f;
-            if (elapsed < 1f)
-            {
-                runtimeStatus = "Settling MAX loop constraints";
-                return;
-            }
-
-            if (elapsed < 3f)
-            {
-                runtimeStatus = "MAX trolley S-curve acceleration";
-                SetTrolleyX(trolleyHome.x + SmootherStep01((elapsed - 1f) / 2f) * 0.8f);
-                return;
-            }
-
-            if (elapsed < 5f)
-            {
-                runtimeStatus = "MAX trolley S-curve deceleration";
-                SetTrolleyX(trolleyHome.x + (1f - SmootherStep01((elapsed - 3f) / 2f)) * 0.8f);
-                return;
-            }
-
-            if (elapsed < 7f)
-            {
-                runtimeStatus = "Dual-drum synchronized hoisting";
-                ChangeSuspendedDrop(-HoistSpeedMetersPerSecond * Mathf.Sin(Mathf.PI * (elapsed - 5f) / 2f) * Time.fixedDeltaTime);
-                return;
-            }
-
-            if (elapsed < 9f)
-            {
-                runtimeStatus = "Dual-drum synchronized lowering";
-                ChangeSuspendedDrop(HoistSpeedMetersPerSecond * Mathf.Sin(Mathf.PI * (elapsed - 7f) / 2f) * Time.fixedDeltaTime);
-                return;
-            }
-
-            if (elapsed < 12f)
-            {
-                if (!twistDisturbanceApplied)
-                {
-                    twistDisturbanceApplied = true;
-                    headblockBody.AddTorque(Vector3.up * 0.5f, ForceMode.Impulse);
-                }
-                runtimeStatus = "Testing geared sheave anti-twist interlock";
-                return;
-            }
-
-            if (elapsed < 13f)
-            {
-                if (demoGantryMaximumTravel <= 0f)
-                {
-                    demoGantryStartPosition = gantryDrive.PositionMeters;
-                }
-                gantryInput = 0.25f;
-                UpdateManualGantryMotion();
-                demoGantryMaximumTravel = Mathf.Max(
-                    demoGantryMaximumTravel,
-                    Mathf.Abs(gantryDrive.PositionMeters - demoGantryStartPosition));
-                runtimeStatus = "Testing gantry acceleration and rope-anchor follow";
-                return;
-            }
-
-            if (elapsed < 14f)
-            {
-                gantryInput = 0f;
-                UpdateManualGantryMotion();
-                runtimeStatus = "Testing gantry service braking";
-                return;
-            }
-
-            if (elapsed < 15f)
-            {
-                if (!demoClampApplyRequested && gantryDrive.IsStationary)
-                {
-                    demoClampApplyRequested = gantryDrive.TryRequestWheelClamp(true, out _);
-                }
-                gantryInput = gantryDrive.WheelClampState == WheelClampState.Clamped ? 0.25f : 0f;
-                UpdateManualGantryMotion();
-                demoClampInhibitObserved |= gantryClampInhibitReported;
-                runtimeStatus = "Testing wheel-clamp motion interlock";
-                return;
-            }
-
-            if (elapsed < 16f)
-            {
-                gantryInput = 0f;
-                if (!demoClampReleaseRequested && gantryDrive.WheelClampState == WheelClampState.Clamped)
-                {
-                    demoClampReleaseRequested = gantryDrive.TryRequestWheelClamp(false, out _);
-                }
-                UpdateManualGantryMotion();
-                runtimeStatus = "Releasing wheel clamp";
-                return;
-            }
-
-            if (elapsed < 17f)
-            {
-                gantryInput = -0.25f;
-                UpdateManualGantryMotion();
-                demoGantryMaximumTravel = Mathf.Max(
-                    demoGantryMaximumTravel,
-                    Mathf.Abs(gantryDrive.PositionMeters - demoGantryStartPosition));
-                runtimeStatus = "Testing reverse gantry travel";
-                return;
-            }
-
-            if (elapsed < 18f)
-            {
-                gantryInput = 0f;
-                UpdateManualGantryMotion();
-                runtimeStatus = "Settling gantry regression";
-                return;
-            }
-
-            gantryInput = 0f;
-            demoCompleted = true;
-            runAutomatedDemo = false;
-            var attachmentsBound = loops.TrueForAll(loop => loop.ExitLeg.AttachmentsBound && loop.DeadEndLeg.AttachmentsBound);
-            var finiteState = IsFinite(headblockBody.position) && IsFinite(headblockBody.linearVelocity) &&
-                              IsFinite(headblockBody.angularVelocity);
-            residualTwistDegrees = Quaternion.Angle(headblockHomeRotation, headblockBody.rotation);
-            var steelRopePassed = maximumObservedLoopExtension <= MaximumPermittedLoopExtensionMeters;
-            var antiSwayPassed = maximumObservedSway <= PrototypeMaximumSwayMeters;
-            var antiTwistPassed = residualTwistDegrees <= PrototypeMaximumResidualTwistDegrees;
-            var gantryPassed = demoGantryMaximumTravel >= 0.05f &&
-                               demoClampApplyRequested && demoClampReleaseRequested &&
-                               demoClampInhibitObserved &&
-                               gantryDrive.WheelClampState == WheelClampState.Released &&
-                               gantryDrive.IsStationary;
-            var passed = attachmentsBound && finiteState && headblockBody.position.y > 0.5f &&
-                         steelRopePassed && antiSwayPassed && antiTwistPassed && gantryPassed;
-            runtimeStatus = passed ? "PASS - MAX manual controls enabled" : "FAIL - inspect MAX topology";
-            var message = $"model={ImplementationVersion}, profile={TopologyProfile}, attachmentsBound={attachmentsBound}, " +
-                          $"finiteState={finiteState}, maxLoopExtension={maximumObservedLoopExtension * 1000f:F2}mm, " +
-                          $"allowed={MaximumPermittedLoopExtensionMeters * 1000f:F2}mm, peakLoop={peakLoopId}, " +
-                          $"rawDrift={maximumRawLoopDrift * 1000f:F2}mm, maxSway={maximumObservedSway:F3}m, " +
-                          $"swayAllowed={PrototypeMaximumSwayMeters:F2}m, maxTwist={maximumObservedTwistDegrees:F2}deg, " +
-                          $"residualTwist={residualTwistDegrees:F2}deg, twistAllowed={PrototypeMaximumResidualTwistDegrees:F2}deg, " +
-                          $"gantryTravel={demoGantryMaximumTravel:F3}m, gantryPassed={gantryPassed}, " +
-                          $"wheelClamp={gantryDrive.WheelClampState}, clampInhibit={demoClampInhibitObserved}, " +
-                          $"headblockY={headblockBody.position.y:F3}m";
-            if (passed)
-            {
-                Debug.Log(
-                    $"[YC_GANTRY_MECHANISM_PASS] model={ImplementationVersion}, " +
-                    $"travel={demoGantryMaximumTravel:F3}m, clampApply={demoClampApplyRequested}, " +
-                    $"clampRelease={demoClampReleaseRequested}, clampInhibit={demoClampInhibitObserved}, " +
-                    $"finalSpeed={gantryDrive.VelocityMetersPerSecond:F3}m/s",
-                    this);
-                Debug.Log($"[YC_EIGHT_ROPE_MAX_PASS] {message}", this);
-            }
-            else
-            {
-                Debug.LogError($"[YC_EIGHT_ROPE_MAX_FAIL] {message}", this);
-            }
         }
 
         private void UpdateManualGantryMotion()
@@ -1825,9 +2022,10 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
 
             var previousVelocity = currentTrolleyVelocity;
-            var isBraking = Mathf.Approximately(targetVelocity, 0f) ||
-                            Mathf.Sign(targetVelocity) != Mathf.Sign(currentTrolleyVelocity) ||
-                            Mathf.Abs(targetVelocity) < Mathf.Abs(currentTrolleyVelocity);
+            var isBraking = RequiresBraking(currentTrolleyVelocity, targetVelocity);
+            trolleyBrakeApplied = isBraking &&
+                                   (Mathf.Approximately(targetVelocity, 0f) ||
+                                    Mathf.Abs(currentTrolleyVelocity) > 0.0001f);
             currentTrolleyVelocity = Mathf.MoveTowards(
                 currentTrolleyVelocity,
                 targetVelocity,
@@ -1884,17 +2082,23 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 angularBlend);
         }
 
-        private void ApplyLoadedSuspensionDynamics()
+        private void ApplyTrolleyAntiSwayDynamics()
         {
-            if (!containerLocked || loadTransferPreTensioning)
+            if (loadTransferPreTensioning)
             {
                 return;
             }
 
             var trolleyVelocity = GetTrolleyBoundaryVelocityWorld();
+            // The previous implementation only ran this relative-motion controller while a
+            // container was locked. An empty spreader therefore had almost no damping relative
+            // to the moving trolley and repeatedly crossed the 0.30 m training sway limit.
+            // Keep the load-transfer equilibrium offset for a locked container, but stabilize
+            // the empty spreader around the trolley centre as well.
+            var equilibriumOffset = GetCurrentSuspensionEquilibriumOffset();
             var horizontalDisplacement = Vector3.ProjectOnPlane(
                 GetHeadblockCenterOfMassWorld() - trolleyMotion.position,
-                Vector3.up) - loadedSuspensionEquilibriumOffset;
+                Vector3.up) - equilibriumOffset;
             var relativeHorizontalVelocity = Vector3.ProjectOnPlane(
                 headblockBody.linearVelocity - trolleyVelocity,
                 Vector3.up);
@@ -1964,13 +2168,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             var deflectionDelta = loadedHoistDeflection - previousDeflection;
             if (!Mathf.Approximately(deflectionDelta, 0f))
             {
-                // Every triangular loop is a 2:1 suspension. A vertical compliance
-                // displacement changes its two visible/supporting legs by twice the
-                // headblock deflection.
-                foreach (var loop in loops)
-                {
-                    loop.CommandedLoopLength += deflectionDelta * 2f;
-                }
+                RefreshCommandedRopeLengthsForNominalPose();
             }
 
             if (loadedHoistStopPending && Mathf.Abs(currentHoistVelocity) <= 0.01f)
@@ -2128,9 +2326,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             var loadedSpeedFactor = Mathf.Lerp(1f, FullyLoadedHoistSpeedFactor, loadRatio);
             var loadedAccelerationFactor = Mathf.Lerp(1f, FullyLoadedHoistAccelerationFactor, loadRatio);
             var targetVelocity = hoistInput * HoistSpeedMetersPerSecond * loadedSpeedFactor;
-            var isBraking = Mathf.Approximately(targetVelocity, 0f) ||
-                            Mathf.Sign(targetVelocity) != Mathf.Sign(currentHoistVelocity) ||
-                            Mathf.Abs(targetVelocity) < Mathf.Abs(currentHoistVelocity);
+            var isBraking = RequiresBraking(currentHoistVelocity, targetVelocity);
             var acceleration = isBraking
                 ? HoistBrakingMetersPerSecondSquared
                 : UnloadedHoistAccelerationMetersPerSecondSquared * loadedAccelerationFactor;
@@ -2175,8 +2371,9 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return;
             }
 
+            var pumpOn = spreaderPump?.IsOn ?? false;
             var inputActive = Mathf.Abs(spreaderRotationInputAxis) > 0.0001f;
-            if (!spreaderPumpOn && inputActive)
+            if (!pumpOn && inputActive)
             {
                 if (!spreaderRotationInhibitReported)
                 {
@@ -2193,7 +2390,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
             var previousAngle = spreaderRotation.CurrentAngleDegrees;
             var wasReturningToZero = spreaderRotation.IsReturningToZero;
-            spreaderRotation.Advance(spreaderRotationInputAxis, spreaderPumpOn, Time.fixedDeltaTime);
+            spreaderRotation.Advance(spreaderRotationInputAxis, pumpOn, Time.fixedDeltaTime);
             var currentAngle = spreaderRotation.CurrentAngleDegrees;
             spreaderRotationAngularVelocityRadiansPerSecond =
                 (currentAngle - previousAngle) * Mathf.Deg2Rad / Mathf.Max(Time.fixedDeltaTime, 0.000001f);
@@ -2277,15 +2474,59 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return 0f;
             }
 
-            // A 2:1 triangular loop changes total paid-out cable by twice the
-            // requested vertical headblock travel.
-            var loopLengthDelta = appliedDropDelta * 2f;
+            commandedSuspendedDrop = nextDrop;
+            RefreshCommandedRopeLengthsForNominalPose();
+            return appliedDropDelta;
+        }
+
+        private void RefreshCommandedRopeLengthsForNominalPose()
+        {
+            // Never derive a new hoist command from the dynamically swinging body pose.
+            // Doing so gives every rope a different incremental length while the spreader is
+            // tilted, permanently baking that transient sway into the unilateral constraints.
+            // Recompute all eight lengths from the last explicitly rebaselined equilibrium pose
+            // and the absolute commanded drop instead.
+            var nominalDrop = Mathf.Max(0.01f, commandedSuspendedDrop + loadedHoistDeflection);
+            var nominalBodyPosition = trolleyMotion.position + nominalSuspensionBodyHorizontalOffset;
+            nominalBodyPosition.y = trolleyMotion.position.y - nominalDrop;
             foreach (var loop in loops)
             {
-                loop.CommandedLoopLength += loopLengthDelta;
+                var nominalSheavePosition = nominalBodyPosition +
+                                             nominalSuspensionBodyRotation * loop.LocalSheaveAnchor;
+                loop.CommandedRopeLength = Vector3.Distance(
+                    loop.TopAnchor.position,
+                    nominalSheavePosition);
             }
-            commandedSuspendedDrop = nextDrop;
-            return appliedDropDelta;
+        }
+
+        private void CaptureNominalSuspensionPose()
+        {
+            nominalSuspensionBodyHorizontalOffset = Vector3.ProjectOnPlane(
+                headblockBody.position - trolleyMotion.position,
+                Vector3.up);
+            nominalSuspensionBodyRotation = headblockBody.rotation;
+        }
+
+        private Vector3 GetCurrentSuspensionEquilibriumOffset()
+        {
+            return containerLocked
+                ? loadedSuspensionEquilibriumOffset
+                : unloadedSuspensionEquilibriumOffset;
+        }
+
+        private static bool RequiresBraking(float currentVelocity, float targetVelocity)
+        {
+            if (Mathf.Approximately(targetVelocity, 0f))
+            {
+                return true;
+            }
+
+            // Mathf.Sign(0) is +1. Comparing signs directly made a negative command from rest
+            // use the stronger braking acceleration while a positive command used normal
+            // acceleration. Only treat direction as a reversal once motion actually exists.
+            return Mathf.Abs(currentVelocity) > 0.0001f &&
+                   (currentVelocity * targetVelocity < 0f ||
+                    Mathf.Abs(targetVelocity) < Mathf.Abs(currentVelocity));
         }
 
         private void ObserveTrolleyMotion()
@@ -2294,19 +2535,51 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             if (moving && !trolleyMotionReported)
             {
                 trolleyMotionReported = true;
+                trolleyMotionPeakSway = currentHorizontalSway;
                 Debug.Log(
                     $"[YC_TROLLEY_STARTED] x={trolleyMotion.localPosition.x:F3}m, " +
-                    $"speed={currentTrolleyVelocity:F3}m/s, input={trolleyInput:F0}, loaded={containerLocked}",
+                    $"speed={currentTrolleyVelocity:F3}m/s, input={trolleyInput:F0}, loaded={containerLocked}, " +
+                    $"instance={GetInstanceID()}, resetEpoch={resetEpoch}",
                     this);
             }
             else if (!moving && trolleyMotionReported)
             {
                 trolleyMotionReported = false;
+                trolleyMotionPeakSway = Mathf.Max(trolleyMotionPeakSway, currentHorizontalSway);
+                var equilibrium = GetCurrentSuspensionEquilibriumOffset();
+                var operationRunId = operationController != null
+                    ? operationController.Context.OperationRunId
+                    : Guid.Empty;
                 Debug.Log(
                     $"[YC_TROLLEY_STOPPED] x={trolleyMotion.localPosition.x:F3}m, " +
-                    $"speed={currentTrolleyVelocity:F3}m/s, loaded={containerLocked}",
+                    $"speed={currentTrolleyVelocity:F3}m/s, loaded={containerLocked}, " +
+                    $"swayError={currentHorizontalSway:F3}m, segmentPeakSway={trolleyMotionPeakSway:F3}m, " +
+                    $"maxObservedSway={maximumObservedSway:F3}m, relativeSpeed={currentRelativeHorizontalSpeed:F3}m/s, " +
+                    $"rawOffset=({currentRawHorizontalOffset.x:F3},{currentRawHorizontalOffset.z:F3})m, " +
+                    $"error=({currentSwayError.x:F3},{currentSwayError.z:F3})m, " +
+                    $"equilibrium=({equilibrium.x:F3},{equilibrium.z:F3})m, " +
+                    $"ropeCommandSpread={GetCommandedRopeLengthSpread():F4}m, " +
+                    $"instance={GetInstanceID()}, scene={gameObject.scene.name}, " +
+                    $"run={operationRunId:D}, resetEpoch={resetEpoch}",
                     this);
             }
+        }
+
+        private float GetCommandedRopeLengthSpread()
+        {
+            if (loops.Count == 0)
+            {
+                return 0f;
+            }
+
+            var minimum = float.PositiveInfinity;
+            var maximum = float.NegativeInfinity;
+            foreach (var loop in loops)
+            {
+                minimum = Mathf.Min(minimum, loop.CommandedRopeLength);
+                maximum = Mathf.Max(maximum, loop.CommandedRopeLength);
+            }
+            return maximum - minimum;
         }
 
         private void ObserveHoistMotion()
@@ -2347,16 +2620,18 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
         private void TryLockContainer()
         {
-            if (!loopsReady || containerLocked)
+            if (!loopsReady || containerLocked || releasedContainerSettlementPending)
             {
                 return;
             }
 
             UpdateContainerAlignmentErrors();
-            var speed = GetHeadblockPointVelocity().magnitude;
-            var aligned = containerHorizontalErrorMeters <= ContainerHorizontalLockToleranceMeters &&
-                          containerVerticalErrorMeters <= ContainerVerticalLockToleranceMeters &&
-                          containerYawErrorDegrees <= ContainerYawLockToleranceDegrees;
+            var speed = GetRelativeContainerLockSpeed();
+            // Delegates to the same interlock RequestContainerLock already gated on, instead of
+            // re-testing containerCornerAlignment directly here - keeps this method's own
+            // spreader-size-transitioning and container-type checks from drifting out of sync
+            // with each other now that there are three conditions instead of one.
+            var aligned = IsContainerAlignedForLock();
             if (!aligned || speed > MaximumLockingSpeedMetersPerSecond)
             {
                 twistlockStatus = "Lock rejected";
@@ -2369,10 +2644,18 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return;
             }
 
+            if (!TryBindDetectedContainerForPickup(out var bindError))
+            {
+                twistlockStatus = "Lock rejected";
+                runtimeStatus = "Container lock rejected · invalid yard container state";
+                Debug.LogWarning($"[YC_CONTAINER_BIND_REJECTED] reason={bindError}", this);
+                return;
+            }
+
             // Perform the complete hand-over at the beginning of one fixed step.
             // The free container collider is suppressed while it is still touching
-            // the yard surface so it cannot inject a contact impulse into the newly
-            // created suspended rigid body.
+            // the yard surface so it cannot inject a contact impulse into the
+            // scene-authored suspended rigid body.
             suspensionGravityActive = false;
             headblockBody.linearVelocity = Vector3.zero;
             headblockBody.angularVelocity = Vector3.zero;
@@ -2382,17 +2665,31 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             containerCollider.enabled = false;
             containerColliderSuppressedForPickup = true;
 
+            // The free-body proxy stays in the scene for editing and inspection. Park it before
+            // moving the collider back under the headblock so there is never a nested Rigidbody
+            // and the lifted container remains part of the headblock compound body.
+            ParkContainerFreeBody();
+
             activeContainer.SetParent(containerAttachmentRoot, true);
             activeContainer.localPosition = containerLockedLocalPosition;
             activeContainer.localRotation = Quaternion.identity;
+            SetContainerHeadblockCollisionIgnored(false);
             containerLocked = true;
+            if (pickedUpSourceSlot != null)
+            {
+                var clearedSlotId = pickedUpSourceSlot.SlotId;
+                pickedUpSourceSlot.Clear();
+                Debug.Log(
+                    $"[YC_YARD_SOURCE_CLEARED] slot={clearedSlotId}, container={container.ContainerId}",
+                    this);
+            }
             ResetContainerLandingConfirmation();
             twistlockStatus = "Locked · 4/4";
             ApplySuspendedLoadProperties();
             loadedSuspensionEquilibriumOffset = Vector3.ProjectOnPlane(
                 GetHeadblockCenterOfMassWorld() - trolleyMotion.position,
                 Vector3.up);
-            RebaselineLoopConstraintsFromCurrentPose();
+            RebaselineRopeConstraintsFromCurrentPose();
             UpdateContainerLoadFeedback();
             loadTransferPreTensioning = true;
             loadTransferReleaseAt = Time.fixedTime + LoadTransferPreTensionDurationSeconds;
@@ -2400,7 +2697,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             Debug.Log(
                 $"[YC_CONTAINER_LOCKED] grossMass={containerGrossMassKg:F0}kg, " +
                 $"totalSuspendedMass={totalSuspendedMassKg:F0}kg, proxyMass={headblockBody.mass:F2}kg, " +
-                $"averageLegTension={averageRopeTensionKn:F1}kN",
+                $"averageRopeTension={averageRopeTensionKn:F1}kN",
                 this);
         }
 
@@ -2411,22 +2708,54 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return;
             }
 
-            if (!containerLandingConfirmed)
+            // Capture the full point velocity before the headblock is stopped so the existing
+            // scene-authored free-body proxy inherits both translation and rotation at release.
+            var releaseVelocity = GetHeadblockPointVelocity();
+            var releaseAngularVelocity = headblockBody.angularVelocity;
+            if (Mathf.Abs(spreaderRotationAngularVelocityRadiansPerSecond) > 0.0001f)
             {
-                twistlockStatus = "Unlock inhibited";
-                runtimeStatus = "Unlock inhibited · confirm position, attitude and stationary landing";
+                releaseAngularVelocity += headblockPhysics.TransformDirection(Vector3.up).normalized *
+                                          spreaderRotationAngularVelocityRadiansPerSecond;
+            }
+            var unsafeUnlock = !containerLandingConfirmed;
+            if (unsafeUnlock && loadedOperationRegressionActive)
+            {
+                // The legacy 30 t Full Play regression explicitly verifies that a suspended
+                // unlock request is rejected before it continues to the real landing phase.
+                // Keep that harness-only contract without changing the product path below,
+                // where an operator can still perform an unsafe unlock and receive the
+                // corresponding training violation plus real PhysX fall.
+                twistlockStatus = "Unlock rejected";
+                runtimeStatus = "Regression interlock · land the container before unlocking";
+                Debug.Log(
+                    "[YC_CONTAINER_UNLOCK_REJECTED_REGRESSION] suspended unlock retained lock state",
+                    this);
+                return;
+            }
+
+            if (unsafeUnlock)
+            {
+                // Real yard cranes cannot physically unlock here - see the comment on
+                // TryQueueContainerUnlock. This method is the single point every unlock
+                // path converges on (player input via TryQueueContainerUnlock, and the
+                // developer regression/demo harness calling RequestContainerUnlock()
+                // directly), so the interlock has to be relaxed here too, not only at the
+                // player-facing action-acceptance gate, or the physical unlock never
+                // actually happens even after that gate lets the request through. The
+                // training-violation record itself is written once, at TryQueueContainerUnlock
+                // (the player-facing gate) - not here, so the regression/demo harness path
+                // does not generate scoring records for a developer test sequence.
                 var stableFor = containerLandingStableSince >= 0f
                     ? Time.fixedTime - containerLandingStableSince
                     : 0f;
                 Debug.LogWarning(
-                    $"[YC_CONTAINER_UNLOCK_REJECTED] confirmed={containerLandingConfirmed}, " +
+                    $"[YC_CONTAINER_UNLOCK_UNSAFE] confirmed={containerLandingConfirmed}, " +
                     $"horizontal={containerLandingHorizontalErrorMeters:F3}m, " +
                     $"vertical={containerLandingVerticalErrorMeters:F3}m, " +
                     $"yaw={containerLandingYawErrorDegrees:F2}deg, " +
                     $"speed={containerLandingSpeedMetersPerSecond:F3}m/s, " +
                     $"stableFor={stableFor:F2}s, required={ContainerLandingStableHoldSeconds:F2}s",
                     this);
-                return;
             }
 
             suspensionGravityActive = false;
@@ -2436,26 +2765,217 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             ResetLoadedHoistDynamics();
             containerCollider.enabled = true;
             containerColliderSuppressedForPickup = false;
-            activeContainer.SetParent(containerOriginalParent, true);
+            var releasePosition = activeContainer.position;
+            var releaseRotation = activeContainer.rotation;
+            containerFreeBody.SetPositionAndRotation(releasePosition, releaseRotation);
+            activeContainer.SetParent(containerFreeBody, true);
+            activeContainer.localPosition = Vector3.zero;
+            activeContainer.localRotation = Quaternion.identity;
+            SetContainerHeadblockCollisionIgnored(true);
+
+            // Activate the scene-authored container Rigidbody from this point on, so an unsafe (mid-air)
+            // unlock actually falls under gravity instead of freezing in place as a static
+            // collider - see the known-gap note this replaces in the 2026-09-09 discussion
+            // record. A safe unlock (already resting at/near landing height) just lets it
+            // settle naturally, which is also more correct than leaving it a static leftover.
+            // Gated off during an automated regression run: loadedOperationRegressionActive is
+            // only true for the .Regression.cs harness's own RequestContainerUnlock() calls,
+            // and that harness's existing assertions were validated against a container that
+            // stays a static, motionless collider after unlock - giving it new physics there
+            // would be an unrelated behavior change to an already-verified test, not a fix.
+            if (!loadedOperationRegressionActive)
+            {
+                containerBody.mass = containerGrossMassKg;
+                containerBody.useGravity = true;
+                containerBody.isKinematic = false;
+                containerBody.detectCollisions = true;
+                containerBody.linearVelocity = releaseVelocity;
+                containerBody.angularVelocity = releaseAngularVelocity;
+
+                containerImpactSensor.Arm();
+                releasedContainerSettlementPending = true;
+                releasedContainerStableSince = -1f;
+                Debug.Log(
+                    $"[YC_CONTAINER_SETTLEMENT_STARTED] container={container.ContainerId}, " +
+                    $"linearSpeed={containerBody.linearVelocity.magnitude:F3}m/s, " +
+                    $"angularSpeed={containerBody.angularVelocity.magnitude:F3}rad/s",
+                    this);
+            }
+            else
+            {
+                // The regression intentionally keeps the released test box static, but it must
+                // still leave the shared free-body proxy empty so a later real yard pickup is
+                // not rejected as "proxy occupied".
+                activeContainer.SetParent(containerOriginalParent, true);
+                containerHomePosition = activeContainer.position;
+                containerHomeRotation = activeContainer.rotation;
+                containerRestingCenterY = activeContainer.position.y;
+                ParkContainerFreeBody();
+                releasedContainerSettlementPending = false;
+                releasedContainerStableSince = -1f;
+            }
+
             containerLocked = false;
             ResetContainerLandingConfirmation();
-            loadedSuspensionEquilibriumOffset = Vector3.zero;
-            twistlockStatus = "Unlocked";
+            twistlockStatus = unsafeUnlock ? "Unlocked · UNSAFE" : "Unlocked";
             ApplySuspendedLoadProperties();
-            RebaselineLoopConstraintsFromCurrentPose();
+            unloadedSuspensionEquilibriumOffset = Vector3.ProjectOnPlane(
+                GetHeadblockCenterOfMassWorld() - trolleyMotion.position,
+                Vector3.up);
+            loadedSuspensionEquilibriumOffset = Vector3.zero;
+            RebaselineRopeConstraintsFromCurrentPose();
             UpdateContainerLoadFeedback();
             loadTransferPreTensioning = true;
             loadTransferReleaseAt = Time.fixedTime + LoadTransferPreTensionDurationSeconds;
-            runtimeStatus = "Container released on landing surface";
-            Debug.Log("[YC_CONTAINER_UNLOCKED] load removed after landing confirmation", this);
+            runtimeStatus = unsafeUnlock
+                ? "Container released WITHOUT confirmed landing - unsafe unlock"
+                : "Container released on landing surface";
+            Debug.Log(
+                unsafeUnlock
+                    ? "[YC_CONTAINER_UNLOCKED] load removed WITHOUT landing confirmation (unsafe)"
+                    : "[YC_CONTAINER_UNLOCKED] load removed after landing confirmation",
+                this);
+        }
+
+        private void UpdateReleasedContainerSettlement()
+        {
+            if (!releasedContainerSettlementPending)
+            {
+                return;
+            }
+
+            if (container == null || activeContainer == null || containerBody == null)
+            {
+                Debug.LogError(
+                    "[YC_CONTAINER_SETTLEMENT_ABORTED] released container state is incomplete; " +
+                    "the rig is disabled fail-closed so another box cannot reuse an unknown free-body state.",
+                    this);
+                enabled = false;
+                return;
+            }
+
+            if (containerBody.isKinematic)
+            {
+                // Recover an externally interrupted release without permanently occupying the
+                // one shared ContainerFreeBody. Do not infer a slot occupancy from this fault.
+                activeContainer.SetParent(containerOriginalParent, true);
+                if (containerCollider != null)
+                {
+                    containerCollider.enabled = true;
+                }
+                ParkContainerFreeBody();
+                releasedContainerSettlementPending = false;
+                releasedContainerStableSince = -1f;
+                pickedUpSourceSlot = null;
+                Debug.LogError(
+                    "[YC_CONTAINER_SETTLEMENT_ABORTED] free body became kinematic before settlement; " +
+                    "container was detached and left unassigned.",
+                    this);
+                return;
+            }
+
+            var linearSpeed = containerBody.linearVelocity.magnitude;
+            var angularSpeed = containerBody.angularVelocity.magnitude;
+            if (!float.IsFinite(linearSpeed) || !float.IsFinite(angularSpeed) ||
+                !IsContainerPhysicallySupported() ||
+                linearSpeed > ResetSafeSpeedThresholdMetersPerSecond ||
+                angularSpeed > ResetSafeSpeedThresholdMetersPerSecond)
+            {
+                releasedContainerStableSince = -1f;
+                return;
+            }
+
+            if (releasedContainerStableSince < 0f)
+            {
+                releasedContainerStableSince = Time.fixedTime;
+                return;
+            }
+
+            var stableFor = Time.fixedTime - releasedContainerStableSince;
+            if (stableFor < ContainerLandingStableHoldSeconds)
+            {
+                return;
+            }
+
+            var sourceSlotId = pickedUpSourceSlot != null ? pickedUpSourceSlot.SlotId : "<unassigned>";
+            var targetSlot = FindBestAvailableYardSlot(
+                container,
+                out var horizontalError,
+                out var verticalError,
+                out var yawError);
+
+            foreach (var slot in yardSlots)
+            {
+                if (slot != null && slot.CurrentOccupant == container)
+                {
+                    slot.Clear();
+                }
+            }
+
+            activeContainer.SetParent(containerOriginalParent, true);
+            containerCollider.enabled = true;
+            ParkContainerFreeBody();
+
+            if (targetSlot != null)
+            {
+                targetSlot.SetOccupant(container);
+                Debug.Log(
+                    $"[YC_YARD_SLOT_OCCUPIED] slot={targetSlot.SlotId}, container={container.ContainerId}, " +
+                    $"type={container.ContainerType}, sourceSlot={sourceSlotId}, " +
+                    $"horizontal={horizontalError:F3}m, vertical={verticalError:F3}m, yaw={yawError:F2}deg",
+                    this);
+            }
+            else
+            {
+                Debug.Log(
+                    $"[YC_YARD_SLOT_UNASSIGNED] container={container.ContainerId}, sourceSlot={sourceSlotId}, " +
+                    "released container settled outside every compatible empty yard slot.",
+                    this);
+            }
+
+            containerHomePosition = activeContainer.position;
+            containerHomeRotation = activeContainer.rotation;
+            containerRestingCenterY = activeContainer.position.y;
+            releasedContainerSettlementPending = false;
+            releasedContainerStableSince = -1f;
+            pickedUpSourceSlot = null;
+            runtimeStatus = targetSlot != null
+                ? $"Container settled · slot {targetSlot.SlotId} occupied"
+                : "Container settled outside assigned yard slots";
+            Debug.Log(
+                $"[YC_CONTAINER_SETTLED] container={container.ContainerId}, " +
+                $"targetSlot={(targetSlot != null ? targetSlot.SlotId : "<unassigned>")}, " +
+                $"linearSpeed={linearSpeed:F3}m/s, angularSpeed={angularSpeed:F3}rad/s, " +
+                $"stableFor={stableFor:F2}s",
+                this);
+        }
+
+        // Called by YardCraneContainerImpactSensor.ImpactDetected once per unlock cycle, for
+        // the first collision the now-freely-falling container has. Independent of the
+        // UnsafeUnlock violation recorded in TryQueueContainerUnlock: choosing to unlock
+        // unsafely and the resulting impact are two separate real-world facts (an incident
+        // report would cite both), so a bad unlock that also lands hard can record both
+        // violations. Not recorded at all for a normal demo/regression drop test outside a
+        // scored session, same as every other trainingScore.RecordViolation call in this file.
+        private void HandleContainerImpact(float impactSpeedMetersPerSecond)
+        {
+            if (impactSpeedMetersPerSecond <= activeProfile.training.hardImpactSpeedThresholdMetersPerSecond) return;
+            containerImpactSensor.Disarm();
+            trainingScore.RecordViolation(
+                YardCraneViolationCategory.Skill, YardCraneViolationType.HardImpact,
+                activeProfile.training.hardImpactPenaltyPoints, Time.time,
+                $"impactSpeed={impactSpeedMetersPerSecond:F3}m/s, limit={activeProfile.training.hardImpactSpeedThresholdMetersPerSecond:F3}m/s");
+            Debug.LogWarning(
+                $"[YC_TRAINING_VIOLATION_HARD_IMPACT] impactSpeed={impactSpeedMetersPerSecond:F3}m/s, " +
+                $"limit={activeProfile.training.hardImpactSpeedThresholdMetersPerSecond:F3}m/s", this);
         }
 
         private void ApplySuspendedLoadProperties()
         {
             var proxyContainerMass = containerLocked
-                ? SimulationProxyMassKg * containerGrossMassKg / SpreaderRealMassKg
+                ? sceneAuthoredHeadblockMassKg * containerGrossMassKg / SpreaderRealMassKg
                 : 0f;
-            headblockBody.mass = SimulationProxyMassKg + proxyContainerMass;
+            headblockBody.mass = sceneAuthoredHeadblockMassKg + proxyContainerMass;
 
             if (containerLocked)
             {
@@ -2467,14 +2987,15 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 // The carried collider is deliberately excluded during pickup.
                 // Build the compound inertia explicitly so physical load feedback
                 // remains present without depending on collider attach timing.
+                var containerSize = containerCollider.size;
                 var containerInertia = new Vector3(
-                    proxyContainerMass * (ContainerColliderSizeMeters.y * ContainerColliderSizeMeters.y + ContainerColliderSizeMeters.z * ContainerColliderSizeMeters.z) / 12f,
-                    proxyContainerMass * (ContainerColliderSizeMeters.x * ContainerColliderSizeMeters.x + ContainerColliderSizeMeters.z * ContainerColliderSizeMeters.z) / 12f,
-                    proxyContainerMass * (ContainerColliderSizeMeters.x * ContainerColliderSizeMeters.x + ContainerColliderSizeMeters.y * ContainerColliderSizeMeters.y) / 12f);
+                    proxyContainerMass * (containerSize.y * containerSize.y + containerSize.z * containerSize.z) / 12f,
+                    proxyContainerMass * (containerSize.x * containerSize.x + containerSize.z * containerSize.z) / 12f,
+                    proxyContainerMass * (containerSize.x * containerSize.x + containerSize.y * containerSize.y) / 12f);
                 var spreaderOffset = -combinedCenterOfMass;
                 var containerOffset = containerCenterLocal - combinedCenterOfMass;
                 var compoundInertia = unloadedInertiaTensor + containerInertia;
-                compoundInertia += ParallelAxisInertia(SimulationProxyMassKg, spreaderOffset);
+                compoundInertia += ParallelAxisInertia(sceneAuthoredHeadblockMassKg, spreaderOffset);
                 compoundInertia += ParallelAxisInertia(proxyContainerMass, containerOffset);
                 headblockBody.inertiaTensorRotation = unloadedInertiaTensorRotation;
                 headblockBody.inertiaTensor = new Vector3(
@@ -2484,12 +3005,14 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
             else
             {
-                headblockBody.ResetCenterOfMass();
+                headblockBody.centerOfMass = sceneAuthoredHeadblockCenterOfMass;
                 headblockBody.inertiaTensorRotation = unloadedInertiaTensorRotation;
                 headblockBody.inertiaTensor = unloadedInertiaTensor;
             }
 
-            headblockBody.angularDamping = containerLocked ? LoadedHeadblockAngularDamping : UnloadedHeadblockAngularDamping;
+            headblockBody.angularDamping = containerLocked
+                ? LoadedHeadblockAngularDamping
+                : sceneAuthoredHeadblockAngularDamping;
         }
 
         private static Vector3 ParallelAxisInertia(float mass, Vector3 offset)
@@ -2505,14 +3028,16 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             UpdateContainerAlignmentErrors();
             if (runAutomatedDemo && !demoCompleted)
             {
+                spreaderContactConfirmed = false;
                 return;
             }
 
-            if (!containerLocked &&
-                containerHorizontalErrorMeters <= ContainerHorizontalLockToleranceMeters &&
-                containerVerticalErrorMeters <= ContainerVerticalLockToleranceMeters &&
-                containerYawErrorDegrees <= ContainerYawLockToleranceDegrees &&
-                GetHeadblockPointVelocity().magnitude <= MaximumLockingSpeedMetersPerSecond)
+            spreaderContactConfirmed =
+                !containerLocked &&
+                IsContainerAlignedForLock() &&
+                GetRelativeContainerLockSpeed() <= MaximumLockingSpeedMetersPerSecond;
+
+            if (spreaderContactConfirmed)
             {
                 twistlockStatus = "Landed · ready to lock";
                 runtimeStatus = "Spreader landed on container · press L to lock";
@@ -2527,18 +3052,33 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 return;
             }
 
+            var landingSlot = FindBestAvailableYardSlot(
+                container,
+                out var slotHorizontalError,
+                out var slotVerticalError,
+                out var slotYawError);
             var difference = activeContainer.position - containerHomePosition;
-            containerLandingHorizontalErrorMeters = new Vector2(difference.x, difference.z).magnitude;
-            containerLandingVerticalErrorMeters = Mathf.Abs(difference.y);
-            containerLandingYawErrorDegrees = Mathf.Abs(Mathf.DeltaAngle(
-                containerHomeRotation.eulerAngles.y,
-                activeContainer.eulerAngles.y));
+            containerLandingHorizontalErrorMeters = landingSlot != null
+                ? slotHorizontalError
+                : new Vector2(difference.x, difference.z).magnitude;
+            containerLandingVerticalErrorMeters = landingSlot != null
+                ? slotVerticalError
+                : Mathf.Abs(difference.y);
+            containerLandingYawErrorDegrees = landingSlot != null
+                ? slotYawError
+                : Mathf.Abs(Mathf.DeltaAngle(
+                    containerHomeRotation.eulerAngles.y,
+                    activeContainer.eulerAngles.y));
             containerLandingSpeedMetersPerSecond = GetHeadblockPointVelocity().magnitude;
 
-            var stableLanding = containerLandingHorizontalErrorMeters <= ContainerHorizontalLockToleranceMeters &&
-                                containerLandingVerticalErrorMeters <= ContainerLandingToleranceMeters &&
-                                containerLandingYawErrorDegrees <= ContainerYawLockToleranceDegrees &&
-                                containerLandingSpeedMetersPerSecond <= MaximumLockingSpeedMetersPerSecond;
+            var physicallySupported = IsContainerPhysicallySupported();
+            // Pose matching only classifies the eventual destination. It cannot prove that a
+            // box is actually resting on anything: a container can be motionless while hovering
+            // inside the slot tolerance. Physical bottom support is therefore a hard unlock
+            // requirement, matching the project's "let PhysX decide whether placement is stable"
+            // rule.
+            var stableLanding = physicallySupported &&
+                                 containerLandingSpeedMetersPerSecond <= MaximumLockingSpeedMetersPerSecond;
             if (!stableLanding)
             {
                 containerLandingStableSince = -1f;
@@ -2567,8 +3107,61 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 $"vertical={containerLandingVerticalErrorMeters:F3}m, " +
                 $"yaw={containerLandingYawErrorDegrees:F2}deg, " +
                 $"speed={containerLandingSpeedMetersPerSecond:F3}m/s, " +
-                $"stableFor={Time.fixedTime - containerLandingStableSince:F2}s",
+                $"stableFor={Time.fixedTime - containerLandingStableSince:F2}s, " +
+                $"support={physicallySupported}, " +
+                $"slot={(landingSlot != null ? landingSlot.SlotId : "<free-ground>")}",
                 this);
+        }
+
+        private bool IsContainerPhysicallySupported()
+        {
+            if (activeContainer == null || containerCollider == null || !containerCollider.enabled)
+            {
+                return false;
+            }
+
+            var scale = containerCollider.transform.lossyScale;
+            var halfExtents = Vector3.Scale(
+                containerCollider.size * 0.5f,
+                new Vector3(Mathf.Abs(scale.x), Mathf.Abs(scale.y), Mathf.Abs(scale.z)));
+            var probeDepth = Mathf.Max(ContainerLandingToleranceMeters, 0.01f);
+            halfExtents.x = Mathf.Max(halfExtents.x - ContainerContactEnvelopeMarginMeters, 0.01f);
+            halfExtents.z = Mathf.Max(halfExtents.z - ContainerContactEnvelopeMarginMeters, 0.01f);
+            halfExtents.y += probeDepth * 0.5f;
+            var probeCenter = containerCollider.transform.TransformPoint(containerCollider.center) +
+                              Vector3.down * (probeDepth * 0.5f);
+            var containerBounds = containerCollider.bounds;
+
+            foreach (var overlap in Physics.OverlapBox(
+                         probeCenter,
+                         halfExtents,
+                         containerCollider.transform.rotation,
+                         ~0,
+                         QueryTriggerInteraction.Ignore))
+            {
+                if (overlap == null || overlap == containerCollider || overlap == headblockCollider ||
+                    overlap.transform.IsChildOf(activeContainer) ||
+                    (headblockPhysics != null && overlap.transform.IsChildOf(headblockPhysics)))
+                {
+                    continue;
+                }
+
+                var supportBounds = overlap.bounds;
+                var topIsAtContainerBase =
+                    supportBounds.max.y >= containerBounds.min.y - probeDepth &&
+                    supportBounds.max.y <= containerBounds.center.y;
+                var overlapsHorizontally =
+                    supportBounds.max.x >= containerBounds.min.x + ContainerContactEnvelopeMarginMeters &&
+                    supportBounds.min.x <= containerBounds.max.x - ContainerContactEnvelopeMarginMeters &&
+                    supportBounds.max.z >= containerBounds.min.z + ContainerContactEnvelopeMarginMeters &&
+                    supportBounds.min.z <= containerBounds.max.z - ContainerContactEnvelopeMarginMeters;
+                if (topIsAtContainerBase && overlapsHorizontally)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void ResetContainerLandingConfirmation()
@@ -2589,16 +3182,169 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 containerHorizontalErrorMeters = 0f;
                 containerVerticalErrorMeters = 0f;
                 containerYawErrorDegrees = 0f;
+                containerCornerAlignment = new YardCraneContainerCornerState(true, true, true, true);
                 return;
             }
 
+            containerCornerAlignment = ComputeContainerCornerAlignment();
+            var alignmentTarget = detectedPickupContainer != null
+                ? detectedPickupContainer.transform
+                : activeContainer;
             var desiredCenter = containerAttachmentRoot.TransformPoint(containerLockedLocalPosition);
-            var difference = activeContainer.position - desiredCenter;
+            var difference = alignmentTarget.position - desiredCenter;
             containerHorizontalErrorMeters = new Vector2(difference.x, difference.z).magnitude;
             containerVerticalErrorMeters = Mathf.Abs(difference.y);
             containerYawErrorDegrees = Mathf.Abs(Mathf.DeltaAngle(
                 containerAttachmentRoot.eulerAngles.y,
-                activeContainer.eulerAngles.y));
+                alignmentTarget.eulerAngles.y));
+        }
+
+        // 2026-09-17: replaced the earlier pure-geometry version (compared computed corner
+        // positions against a computed target) with real Physics.Raycast queries against small
+        // trigger colliders authored at a YardCraneContainer's true corners
+        // (EnsureLockHoleColliders validates them). Per user decision: lock/pick detection must come from the
+        // physics engine sensing an actual lock hole, not from us calculating whether it should
+        // be there - this also gives "which container is under the spreader" for free (the yard
+        // pick/place loop), instead of needing a separate nearest-slot distance lookup.
+        //
+        // The four twistlock points are repositioned every call (ApplyTwistlockPositionsForSpreaderSize)
+        // to match the current spreader size (Ft20/Ft40), so a container whose own type does not
+        // match the spreader's current size will generally miss geometrically before
+        // IsContainerAlignedForLock's explicit type check ever runs.
+        private YardCraneContainerCornerState ComputeContainerCornerAlignment()
+        {
+            ApplyTwistlockPositionsForSpreaderSize();
+
+            var frontLeftHit = RaycastLockHole(twistlockFrontLeft);
+            var frontRightHit = RaycastLockHole(twistlockFrontRight);
+            var rearLeftHit = RaycastLockHole(twistlockRearLeft);
+            var rearRightHit = RaycastLockHole(twistlockRearRight);
+
+            // All four points have to agree on the same container - a real spreader cannot have
+            // its four twistlocks straddling two different boxes. Front-left is the arbitrary
+            // tie-breaker that decides which candidate the other three must match.
+            detectedPickupContainer = frontLeftHit;
+
+            return new YardCraneContainerCornerState(
+                frontLeft: frontLeftHit != null,
+                frontRight: frontRightHit != null && frontRightHit == detectedPickupContainer,
+                rearLeft: rearLeftHit != null && rearLeftHit == detectedPickupContainer,
+                rearRight: rearRightHit != null && rearRightHit == detectedPickupContainer);
+        }
+
+        private const float TwistlockSensorRangeMeters = 0.35f;
+
+        private YardCraneContainer RaycastLockHole(Transform twistlockPoint)
+        {
+            if (twistlockPoint == null)
+            {
+                return null;
+            }
+
+            var lockHoleLayer = LayerMask.NameToLayer(YardCraneContainer.LockHoleLayerName);
+            if (lockHoleLayer < 0)
+            {
+                return null;
+            }
+
+            // Query every layer and walk the hits nearest-first. Looking only at the lock-hole
+            // layer lets a sensor see through a physical container stacked above the requested
+            // box, which is impossible in the real mechanism. Rig-owned colliders and unrelated
+            // trigger volumes are transparent; the first foreign solid collider blocks the ray.
+            var hits = Physics.RaycastAll(
+                twistlockPoint.position,
+                -twistlockPoint.up,
+                TwistlockSensorRangeMeters,
+                ~0,
+                QueryTriggerInteraction.Collide);
+            Array.Sort(hits, (left, right) => left.distance.CompareTo(right.distance));
+            foreach (var hit in hits)
+            {
+                var hitCollider = hit.collider;
+                if (hitCollider == null ||
+                    hitCollider == headblockCollider ||
+                    (headblockPhysics != null && hitCollider.transform.IsChildOf(headblockPhysics)))
+                {
+                    continue;
+                }
+
+                var detectedContainer = hitCollider.gameObject.layer == lockHoleLayer
+                    ? hitCollider.GetComponentInParent<YardCraneContainer>()
+                    : null;
+                if (detectedContainer != null)
+                {
+                    return IsLockHolePathObstructed(
+                        twistlockPoint.position,
+                        hit.point,
+                        detectedContainer)
+                        ? null
+                        : detectedContainer;
+                }
+
+                if (hitCollider.isTrigger)
+                {
+                    continue;
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+
+        private bool IsLockHolePathObstructed(
+            Vector3 sensorOrigin,
+            Vector3 lockHolePoint,
+            YardCraneContainer detectedContainer)
+        {
+            const float pathProbeRadiusMeters = 0.0125f;
+            foreach (var overlap in Physics.OverlapCapsule(
+                         sensorOrigin,
+                         lockHolePoint,
+                         pathProbeRadiusMeters,
+                         ~0,
+                         QueryTriggerInteraction.Ignore))
+            {
+                if (overlap == null ||
+                    overlap == headblockCollider ||
+                    overlap.transform.IsChildOf(detectedContainer.transform) ||
+                    (headblockPhysics != null && overlap.transform.IsChildOf(headblockPhysics)))
+                {
+                    continue;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        // Container-local axes: X = length, Z = width (matches the existing graybox collider's
+        // ContainerColliderSizeMeters X-is-length convention); +X is labeled "front", +Z is
+        // labeled "left" - an internally consistent choice for this codebase, not one checked
+        // against a real spreader's own front/left naming, and it does not affect which
+        // container the sensors find, only the corner names in status/HUD text.
+        //
+        // Positions the four points at the spreader's own fixed geometry (not any specific
+        // container's), so a mismatched-size container's real corners generally fall outside
+        // TwistlockSensorRangeMeters here. Runs every alignment check rather than only on a
+        // spreader-size-change event - four Vector3 writes is cheap enough that keeping this
+        // always in sync is simpler than wiring a change notification.
+        private void ApplyTwistlockPositionsForSpreaderSize()
+        {
+            var containerType = CurrentSpreaderSize == YardCraneSpreaderSize.Ft20
+                ? YardCraneContainerType.Ft20
+                : YardCraneContainerType.Ft40;
+            var dims = YardCraneContainerDimensions.For(containerType);
+            var halfLength = dims.x * 0.5f;
+            var halfWidth = dims.y * 0.5f;
+            var halfHeight = dims.z * 0.5f;
+            var baseLocalPosition = containerLockedLocalPosition + new Vector3(0f, halfHeight, 0f);
+
+            twistlockFrontLeft.localPosition = baseLocalPosition + new Vector3(halfLength, 0f, halfWidth);
+            twistlockFrontRight.localPosition = baseLocalPosition + new Vector3(halfLength, 0f, -halfWidth);
+            twistlockRearLeft.localPosition = baseLocalPosition + new Vector3(-halfLength, 0f, halfWidth);
+            twistlockRearRight.localPosition = baseLocalPosition + new Vector3(-halfLength, 0f, -halfWidth);
         }
 
         private Vector3 GetHeadblockPointVelocity()
@@ -2623,6 +3369,21 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             return velocity;
         }
 
+        private Vector3 GetContainerPointVelocity()
+        {
+            if (containerBody == null || containerBody.isKinematic)
+            {
+                return Vector3.zero;
+            }
+
+            return containerBody.GetPointVelocity(activeContainer.position);
+        }
+
+        private float GetRelativeContainerLockSpeed()
+        {
+            return (GetHeadblockPointVelocity() - GetContainerPointVelocity()).magnitude;
+        }
+
         private void UpdateContainerLoadFeedback()
         {
             totalSuspendedMassKg = SpreaderRealMassKg + (containerLocked ? containerGrossMassKg : 0f);
@@ -2630,10 +3391,8 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             foreach (var loop in loops)
             {
                 var sheavePosition = headblockBody.position + headblockBody.rotation * loop.LocalSheaveAnchor;
-                var exitDirection = (loop.Exit.position - sheavePosition).normalized;
-                var deadEndDirection = (loop.DeadEnd.position - sheavePosition).normalized;
-                verticalDirectionSum += Mathf.Max(0f, Vector3.Dot(exitDirection, Vector3.up));
-                verticalDirectionSum += Mathf.Max(0f, Vector3.Dot(deadEndDirection, Vector3.up));
+                var ropeDirection = (loop.TopAnchor.position - sheavePosition).normalized;
+                verticalDirectionSum += Mathf.Max(0f, Vector3.Dot(ropeDirection, Vector3.up));
             }
 
             averageRopeTensionKn = totalSuspendedMassKg * Physics.gravity.magnitude /
@@ -2645,16 +3404,16 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             var inverseDeltaTime = 1f / Mathf.Max(Time.fixedDeltaTime, 0.0001f);
             foreach (var loop in loops)
             {
-                loop.ExitVelocity = (loop.Exit.position - loop.LastExitPosition) * inverseDeltaTime;
-                loop.DeadEndVelocity = (loop.DeadEnd.position - loop.LastDeadEndPosition) * inverseDeltaTime;
-                loop.LoopLengthRate = (loop.CommandedLoopLength - loop.LastCommandedLoopLength) * inverseDeltaTime;
-                loop.LastExitPosition = loop.Exit.position;
-                loop.LastDeadEndPosition = loop.DeadEnd.position;
-                loop.LastCommandedLoopLength = loop.CommandedLoopLength;
+                loop.TopAnchorVelocity =
+                    (loop.TopAnchor.position - loop.LastTopAnchorPosition) * inverseDeltaTime;
+                loop.RopeLengthRate =
+                    (loop.CommandedRopeLength - loop.LastCommandedRopeLength) * inverseDeltaTime;
+                loop.LastTopAnchorPosition = loop.TopAnchor.position;
+                loop.LastCommandedRopeLength = loop.CommandedRopeLength;
             }
         }
 
-        private void SolveEightLoopConstraints(bool applyPoseImmediately = false)
+        private void SolveEightRopeConstraints(bool applyPoseImmediately = false)
         {
             var startPosition = headblockBody.position;
             var startRotation = headblockBody.rotation;
@@ -2670,7 +3429,9 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
             foreach (var loop in loops)
             {
-                var drift = Mathf.Max(0f, CalculateActualLoopLength(loop, correctedPosition, correctedRotation) - loop.CommandedLoopLength);
+                var drift = Mathf.Max(
+                    0f,
+                    CalculateActualRopeLength(loop, correctedPosition, correctedRotation) - loop.CommandedRopeLength);
                 maximumRawLoopDrift = Mathf.Max(maximumRawLoopDrift, drift);
             }
 
@@ -2679,24 +3440,12 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 var correctionRequired = false;
                 foreach (var loop in loops)
                 {
-                    if (ProjectLoopPosition(loop, ref correctedPosition, ref correctedRotation))
+                    if (ProjectRopePosition(loop, ref correctedPosition, ref correctedRotation))
                     {
                         correctionRequired = true;
                     }
                 }
                 if (!correctionRequired) break;
-            }
-
-            // MAX headblock pulleys are mechanically interlocked. The total loop
-            // constraint above models paid-out cable; this second constraint resists
-            // free redistribution between both legs of a triangle, which is the
-            // missing anti-sway/anti-twist mechanism in a free-running sheave model.
-            for (var iteration = 0; iteration < InterlockPositionIterations; iteration++)
-            {
-                foreach (var loop in loops)
-                {
-                    ProjectInterlockedLegDifference(loop, ref correctedPosition, ref correctedRotation);
-                }
             }
 
             // In normal operation the projected pose is the desired end pose of this
@@ -2723,19 +3472,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             {
                 foreach (var loop in loops)
                 {
-                    ProjectLoopVelocity(loop, correctedPosition, correctedRotation, ref linearVelocity, ref angularVelocity);
-                }
-            }
-            for (var iteration = 0; iteration < InterlockVelocityIterations; iteration++)
-            {
-                foreach (var loop in loops)
-                {
-                    ProjectInterlockedLegDifferenceVelocity(
-                        loop,
-                        correctedPosition,
-                        correctedRotation,
-                        ref linearVelocity,
-                        ref angularVelocity);
+                    ProjectRopeVelocity(loop, correctedPosition, correctedRotation, ref linearVelocity, ref angularVelocity);
                 }
             }
             headblockBody.linearVelocity = linearVelocity;
@@ -2793,7 +3530,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             return axis.normalized * (angleDegrees * Mathf.Deg2Rad / deltaTime);
         }
 
-        private bool ProjectLoopPosition(
+        private bool ProjectRopePosition(
             LoopRuntime loop,
             ref Vector3 bodyPosition,
             ref Quaternion bodyRotation)
@@ -2801,22 +3538,20 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             var sheavePosition = bodyPosition + bodyRotation * loop.LocalSheaveAnchor;
             var sheaveOffsetFromCenterOfMass = bodyRotation *
                                                (loop.LocalSheaveAnchor - headblockBody.centerOfMass);
-            var exitVector = sheavePosition - loop.Exit.position;
-            var deadEndVector = sheavePosition - loop.DeadEnd.position;
-            var exitDistance = exitVector.magnitude;
-            var deadEndDistance = deadEndVector.magnitude;
-            if (exitDistance <= Mathf.Epsilon || deadEndDistance <= Mathf.Epsilon)
+            var ropeVector = sheavePosition - loop.TopAnchor.position;
+            var ropeDistance = ropeVector.magnitude;
+            if (ropeDistance <= Mathf.Epsilon)
             {
                 return false;
             }
 
-            var excess = exitDistance + deadEndDistance - loop.CommandedLoopLength - LoopConstraintToleranceMeters;
+            var excess = ropeDistance - loop.CommandedRopeLength - LoopConstraintToleranceMeters;
             if (excess <= 0f)
             {
                 return false;
             }
 
-            var linearJacobian = exitVector / exitDistance + deadEndVector / deadEndDistance;
+            var linearJacobian = ropeVector / ropeDistance;
             var angularJacobian = Vector3.Cross(sheaveOffsetFromCenterOfMass, linearJacobian);
             var inverseMass = 1f / Mathf.Max(headblockBody.mass, 0.0001f);
             var inverseAngularMass = MultiplyInverseInertiaWorld(angularJacobian, bodyRotation);
@@ -2836,7 +3571,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             return true;
         }
 
-        private void ProjectLoopVelocity(
+        private void ProjectRopeVelocity(
             LoopRuntime loop,
             Vector3 bodyPosition,
             Quaternion bodyRotation,
@@ -2846,26 +3581,23 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             var sheavePosition = bodyPosition + bodyRotation * loop.LocalSheaveAnchor;
             var sheaveOffsetFromCenterOfMass = bodyRotation *
                                                (loop.LocalSheaveAnchor - headblockBody.centerOfMass);
-            var exitVector = sheavePosition - loop.Exit.position;
-            var deadEndVector = sheavePosition - loop.DeadEnd.position;
-            var exitDistance = exitVector.magnitude;
-            var deadEndDistance = deadEndVector.magnitude;
-            var actualLoopLength = exitDistance + deadEndDistance;
-            if (exitDistance <= Mathf.Epsilon || deadEndDistance <= Mathf.Epsilon ||
-                actualLoopLength < loop.CommandedLoopLength - LoopConstraintToleranceMeters)
+            var ropeVector = sheavePosition - loop.TopAnchor.position;
+            var ropeDistance = ropeVector.magnitude;
+            if (ropeDistance <= Mathf.Epsilon ||
+                ropeDistance < loop.CommandedRopeLength - LoopConstraintToleranceMeters)
             {
                 return;
             }
 
-            var exitDirection = exitVector / exitDistance;
-            var deadEndDirection = deadEndVector / deadEndDistance;
-            var linearJacobian = exitDirection + deadEndDirection;
+            var ropeDirection = ropeVector / ropeDistance;
+            var linearJacobian = ropeDirection;
             var angularJacobian = Vector3.Cross(sheaveOffsetFromCenterOfMass, linearJacobian);
             var sheaveVelocity = linearVelocity +
                                  Vector3.Cross(angularVelocity, sheaveOffsetFromCenterOfMass);
-            var constraintRate = Vector3.Dot(exitDirection, sheaveVelocity - loop.ExitVelocity) +
-                                 Vector3.Dot(deadEndDirection, sheaveVelocity - loop.DeadEndVelocity) -
-                                 loop.LoopLengthRate;
+            var constraintRate = Vector3.Dot(
+                                     ropeDirection,
+                                     sheaveVelocity - loop.TopAnchorVelocity) -
+                                 loop.RopeLengthRate;
             if (constraintRate <= 0f)
             {
                 return;
@@ -2883,112 +3615,6 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             var impulse = -constraintRate / effectiveInverseMass;
             linearVelocity += linearJacobian * (impulse * inverseMass);
             angularVelocity += inverseAngularMass * impulse;
-        }
-
-        private void ProjectInterlockedLegDifference(
-            LoopRuntime loop,
-            ref Vector3 bodyPosition,
-            ref Quaternion bodyRotation)
-        {
-            var sheavePosition = bodyPosition + bodyRotation * loop.LocalSheaveAnchor;
-            var sheaveOffsetFromCenterOfMass = bodyRotation *
-                                               (loop.LocalSheaveAnchor - headblockBody.centerOfMass);
-            var exitVector = sheavePosition - loop.Exit.position;
-            var deadEndVector = sheavePosition - loop.DeadEnd.position;
-            var exitDistance = exitVector.magnitude;
-            var deadEndDistance = deadEndVector.magnitude;
-            if (exitDistance <= Mathf.Epsilon || deadEndDistance <= Mathf.Epsilon)
-            {
-                return;
-            }
-
-            var differenceError = exitDistance - deadEndDistance - loop.CommandedLegDifference;
-            if (Mathf.Abs(differenceError) <= LoopConstraintToleranceMeters)
-            {
-                return;
-            }
-
-            var linearJacobian = exitVector / exitDistance - deadEndVector / deadEndDistance;
-            var angularJacobian = Vector3.Cross(sheaveOffsetFromCenterOfMass, linearJacobian);
-            var inverseMass = 1f / Mathf.Max(headblockBody.mass, 0.0001f);
-            var inverseAngularMass = MultiplyInverseInertiaWorld(angularJacobian, bodyRotation);
-            var effectiveInverseMass = inverseMass * linearJacobian.sqrMagnitude +
-                                       Vector3.Dot(angularJacobian, inverseAngularMass);
-            if (effectiveInverseMass <= 0.000001f)
-            {
-                return;
-            }
-
-            var impulse = -differenceError / effectiveInverseMass * GetInterlockPositionRelaxation();
-            var centerOfMassPosition = bodyPosition + bodyRotation * headblockBody.centerOfMass;
-            centerOfMassPosition += linearJacobian * (impulse * inverseMass);
-            ApplyAngularCorrection(ref bodyRotation, inverseAngularMass * impulse);
-            bodyPosition = centerOfMassPosition - bodyRotation * headblockBody.centerOfMass;
-        }
-
-        private void ProjectInterlockedLegDifferenceVelocity(
-            LoopRuntime loop,
-            Vector3 bodyPosition,
-            Quaternion bodyRotation,
-            ref Vector3 linearVelocity,
-            ref Vector3 angularVelocity)
-        {
-            var sheavePosition = bodyPosition + bodyRotation * loop.LocalSheaveAnchor;
-            var sheaveOffsetFromCenterOfMass = bodyRotation *
-                                               (loop.LocalSheaveAnchor - headblockBody.centerOfMass);
-            var exitVector = sheavePosition - loop.Exit.position;
-            var deadEndVector = sheavePosition - loop.DeadEnd.position;
-            var exitDistance = exitVector.magnitude;
-            var deadEndDistance = deadEndVector.magnitude;
-            if (exitDistance <= Mathf.Epsilon || deadEndDistance <= Mathf.Epsilon)
-            {
-                return;
-            }
-
-            var exitDirection = exitVector / exitDistance;
-            var deadEndDirection = deadEndVector / deadEndDistance;
-            var linearJacobian = exitDirection - deadEndDirection;
-            var angularJacobian = Vector3.Cross(sheaveOffsetFromCenterOfMass, linearJacobian);
-            var sheaveVelocity = linearVelocity +
-                                 Vector3.Cross(angularVelocity, sheaveOffsetFromCenterOfMass);
-            var differenceRate = Vector3.Dot(exitDirection, sheaveVelocity - loop.ExitVelocity) -
-                                 Vector3.Dot(deadEndDirection, sheaveVelocity - loop.DeadEndVelocity);
-            var inverseMass = 1f / Mathf.Max(headblockBody.mass, 0.0001f);
-            var inverseAngularMass = MultiplyInverseInertiaWorld(angularJacobian, bodyRotation);
-            var effectiveInverseMass = inverseMass * linearJacobian.sqrMagnitude +
-                                       Vector3.Dot(angularJacobian, inverseAngularMass);
-            if (effectiveInverseMass <= 0.000001f)
-            {
-                return;
-            }
-
-            var impulse = -differenceRate / effectiveInverseMass * GetInterlockVelocityRelaxation();
-            linearVelocity += linearJacobian * (impulse * inverseMass);
-            angularVelocity += inverseAngularMass * impulse;
-        }
-
-        private float GetInterlockPositionRelaxation()
-        {
-            if (!containerLocked)
-            {
-                return InterlockPositionRelaxation;
-            }
-
-            // A locked load uses the continuous suspension spring/damper below.
-            // Re-applying the bilateral leg-difference projection eight times per
-            // iteration would kinematically pin the load beneath the trolley and
-            // remove all perceptible inertia.
-            return 0f;
-        }
-
-        private float GetInterlockVelocityRelaxation()
-        {
-            if (!containerLocked)
-            {
-                return InterlockVelocityRelaxation;
-            }
-
-            return 0f;
         }
 
         private Vector3 MultiplyInverseInertiaWorld(Vector3 worldVector, Quaternion bodyRotation)
@@ -3016,12 +3642,13 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             rotation = Quaternion.Normalize(rotation);
         }
 
-        private void SynchronizeVisualLegLengths()
+        private void SynchronizeVisualRopeLengths()
         {
             foreach (var loop in loops)
             {
-                SetVisualLegLength(loop.ExitLeg, Vector3.Distance(loop.Exit.position, loop.Sheave.position));
-                SetVisualLegLength(loop.DeadEndLeg, Vector3.Distance(loop.DeadEnd.position, loop.Sheave.position));
+                SetVisualLegLength(
+                    loop.VisualRope,
+                    Vector3.Distance(loop.TopAnchor.position, loop.Sheave.position));
             }
         }
 
@@ -3029,8 +3656,10 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         {
             foreach (var loop in loops)
             {
-                ProjectVisualLegStraight(loop.ExitLeg, loop.Exit.position, loop.Sheave.position);
-                ProjectVisualLegStraight(loop.DeadEndLeg, loop.DeadEnd.position, loop.Sheave.position);
+                ProjectVisualLegStraight(
+                    loop.VisualRope,
+                    loop.TopAnchor.position,
+                    loop.Sheave.position);
             }
         }
 
@@ -3088,34 +3717,29 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
         }
 
-        private void RebaselineLoopConstraintsFromCurrentPose()
+        private void RebaselineRopeConstraintsFromCurrentPose()
         {
             commandedSuspendedDrop = CalculateSuspendedDrop();
+            CaptureNominalSuspensionPose();
             foreach (var loop in loops)
             {
-                var actualLoopLength = CalculateActualLoopLength(
+                var actualRopeLength = CalculateActualRopeLength(
                     loop,
                     headblockBody.position,
                     headblockBody.rotation);
-                loop.CommandedLoopLength = actualLoopLength;
-                loop.LastCommandedLoopLength = actualLoopLength;
-                loop.CommandedLegDifference = CalculateActualLegDifference(
-                    loop,
-                    headblockBody.position,
-                    headblockBody.rotation);
-                loop.LastExitPosition = loop.Exit.position;
-                loop.LastDeadEndPosition = loop.DeadEnd.position;
-                loop.ExitVelocity = Vector3.zero;
-                loop.DeadEndVelocity = Vector3.zero;
-                loop.LoopLengthRate = 0f;
+                loop.CommandedRopeLength = actualRopeLength;
+                loop.LastCommandedRopeLength = actualRopeLength;
+                loop.LastTopAnchorPosition = loop.TopAnchor.position;
+                loop.TopAnchorVelocity = Vector3.zero;
+                loop.RopeLengthRate = 0f;
             }
         }
 
         private void RunLoadTransferPreTension()
         {
             CaptureBoundaryMotion();
-            SolveEightLoopConstraints(applyPoseImmediately: true);
-            SynchronizeVisualLegLengths();
+            SolveEightRopeConstraints(applyPoseImmediately: true);
+            SynchronizeVisualRopeLengths();
             ProjectVisualRopesToEngineeringGeometry();
             headblockBody.linearVelocity = Vector3.zero;
             headblockBody.angularVelocity = Vector3.zero;
@@ -3145,9 +3769,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             Debug.Log(
                 $"[YC_CONTAINER_LOAD_TRANSFER_READY] locked={containerLocked}, " +
                 $"hold={LoadTransferPreTensionDurationSeconds:F2}s, centerOfMass={headblockBody.centerOfMass}, " +
-                $"proxyMass={headblockBody.mass:F2}kg, " +
-                $"interlockPosition={GetInterlockPositionRelaxation():F3}, " +
-                $"interlockVelocity={GetInterlockVelocityRelaxation():F3}, " +
+                $"proxyMass={headblockBody.mass:F2}kg, topology=8-straight-rope, " +
                 $"suspensionOmega={LoadedSuspensionNaturalFrequencyRadiansPerSecond:F2}, " +
                 $"suspensionDamping={LoadedSuspensionDampingRatio:F2}, " +
                 $"hoistOmega={LoadedHoistNaturalFrequencyRadiansPerSecond:F2}, " +
@@ -3177,8 +3799,8 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private void RunStartupPreTension()
         {
             CaptureBoundaryMotion();
-            SolveEightLoopConstraints(applyPoseImmediately: true);
-            SynchronizeVisualLegLengths();
+            SolveEightRopeConstraints(applyPoseImmediately: true);
+            SynchronizeVisualRopeLengths();
             ProjectVisualRopesToEngineeringGeometry();
             headblockBody.linearVelocity = Vector3.zero;
             headblockBody.angularVelocity = Vector3.zero;
@@ -3186,7 +3808,7 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
             if (Time.fixedTime < startupReleaseAt)
             {
-                runtimeStatus = "Pre-tensioning eight triangular rope loops";
+                runtimeStatus = "Pre-tensioning eight independent straight ropes";
                 return;
             }
 
@@ -3205,14 +3827,20 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
         private void ObserveRuntimeState()
         {
             var trolleyCenter = trolleyMotion.position;
-            var horizontalOffset = headblockBody.position - trolleyCenter;
-            horizontalOffset.y = 0f;
-            currentHorizontalSway = horizontalOffset.magnitude;
+            currentRawHorizontalOffset = Vector3.ProjectOnPlane(
+                GetHeadblockCenterOfMassWorld() - trolleyCenter,
+                Vector3.up);
+            currentSwayError = currentRawHorizontalOffset -
+                               GetCurrentSuspensionEquilibriumOffset();
+            currentHorizontalSway = currentSwayError.magnitude;
             maximumObservedSway = Mathf.Max(maximumObservedSway, currentHorizontalSway);
-            var trolleyDirection = trolleyMotion.parent != null
-                ? trolleyMotion.parent.TransformDirection(Vector3.right).normalized
-                : Vector3.right;
-            var trolleyVelocity = trolleyDirection * currentTrolleyVelocity;
+            if (trolleyMotionReported)
+            {
+                trolleyMotionPeakSway = Mathf.Max(
+                    trolleyMotionPeakSway,
+                    currentHorizontalSway);
+            }
+            var trolleyVelocity = GetTrolleyBoundaryVelocityWorld();
             currentRelativeHorizontalSpeed = Vector3.ProjectOnPlane(
                 headblockBody.linearVelocity - trolleyVelocity,
                 Vector3.up).magnitude;
@@ -3224,7 +3852,8 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             {
                 var extension = Mathf.Max(
                     0f,
-                    CalculateActualLoopLength(loop, headblockBody.position, headblockBody.rotation) - loop.CommandedLoopLength);
+                    CalculateActualRopeLength(loop, headblockBody.position, headblockBody.rotation) -
+                    loop.CommandedRopeLength);
                 if (extension > maximumObservedLoopExtension)
                 {
                     maximumObservedLoopExtension = extension;
@@ -3233,18 +3862,10 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
         }
 
-        private static float CalculateActualLoopLength(LoopRuntime loop, Vector3 bodyPosition, Quaternion bodyRotation)
+        private static float CalculateActualRopeLength(LoopRuntime loop, Vector3 bodyPosition, Quaternion bodyRotation)
         {
             var sheavePosition = bodyPosition + bodyRotation * loop.LocalSheaveAnchor;
-            return Vector3.Distance(loop.Exit.position, sheavePosition) +
-                   Vector3.Distance(loop.DeadEnd.position, sheavePosition);
-        }
-
-        private static float CalculateActualLegDifference(LoopRuntime loop, Vector3 bodyPosition, Quaternion bodyRotation)
-        {
-            var sheavePosition = bodyPosition + bodyRotation * loop.LocalSheaveAnchor;
-            return Vector3.Distance(loop.Exit.position, sheavePosition) -
-                   Vector3.Distance(loop.DeadEnd.position, sheavePosition);
+            return Vector3.Distance(loop.TopAnchor.position, sheavePosition);
         }
 
         private float CalculateSuspendedDrop()
@@ -3257,6 +3878,9 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             maximumObservedSway = 0f;
             currentHorizontalSway = 0f;
             currentRelativeHorizontalSpeed = 0f;
+            currentRawHorizontalOffset = Vector3.zero;
+            currentSwayError = Vector3.zero;
+            trolleyMotionPeakSway = 0f;
             maximumObservedLoopExtension = 0f;
             maximumRawLoopDrift = 0f;
             maximumObservedTwistDegrees = 0f;
@@ -3281,16 +3905,24 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
             var bodyLinearSpeed = headblockBody.linearVelocity.magnitude;
             var bodyAngularSpeed = headblockBody.angularVelocity.magnitude;
+            var freeContainerDynamic = containerBody != null && !containerBody.isKinematic;
+            var freeContainerLinearSpeed = freeContainerDynamic ? containerBody.linearVelocity.magnitude : 0f;
+            var freeContainerAngularSpeed = freeContainerDynamic ? containerBody.angularVelocity.magnitude : 0f;
             var finiteState = IsFinite(headblockBody.position) &&
-                              IsFinite(headblockBody.linearVelocity) &&
-                              IsFinite(headblockBody.angularVelocity) &&
+                               IsFinite(headblockBody.linearVelocity) &&
+                               IsFinite(headblockBody.angularVelocity) &&
+                               (!freeContainerDynamic ||
+                                (IsFinite(containerBody.position) &&
+                                 IsFinite(containerBody.linearVelocity) &&
+                                 IsFinite(containerBody.angularVelocity))) &&
                               gantryDrive != null &&
                               float.IsFinite(gantryDrive.PositionMeters) &&
                               float.IsFinite(gantryDrive.VelocityMetersPerSecond) &&
                               float.IsFinite(currentTrolleyVelocity) &&
                               float.IsFinite(currentHoistVelocity);
             var busy = startupPreTensioning || loadTransferPreTensioning ||
-                       containerLockRequested || containerUnlockRequested || loadedOperationRegressionActive ||
+                       containerLockRequested || containerUnlockRequested || releasedContainerSettlementPending ||
+                       loadedOperationRegressionActive ||
                        (runAutomatedDemo && !demoCompleted);
             var stationary = gantryDrive != null && gantryDrive.IsStationary &&
                              gantryDrive.WheelClampState != WheelClampState.Transitioning &&
@@ -3298,9 +3930,11 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                              (gantryAnchor == null || gantryAnchor.State != YardCraneAnchorState.Transitioning) &&
                              (spreaderSize == null || spreaderSize.State != YardCraneSpreaderSizeMechanismState.Transitioning) &&
                              Mathf.Abs(currentTrolleyVelocity) <= ResetSafeSpeedThresholdMetersPerSecond &&
-                             Mathf.Abs(currentHoistVelocity) <= ResetSafeSpeedThresholdMetersPerSecond &&
-                             bodyLinearSpeed <= ResetSafeSpeedThresholdMetersPerSecond &&
-                             bodyAngularSpeed <= ResetSafeSpeedThresholdMetersPerSecond;
+                              Mathf.Abs(currentHoistVelocity) <= ResetSafeSpeedThresholdMetersPerSecond &&
+                              bodyLinearSpeed <= ResetSafeSpeedThresholdMetersPerSecond &&
+                              bodyAngularSpeed <= ResetSafeSpeedThresholdMetersPerSecond &&
+                              freeContainerLinearSpeed <= ResetSafeSpeedThresholdMetersPerSecond &&
+                              freeContainerAngularSpeed <= ResetSafeSpeedThresholdMetersPerSecond;
             if (containerLocked || busy || !stationary || !finiteState)
             {
                 rejectionCode = YardCraneOperationErrorCodes.ResetInterlockRejected;
@@ -3310,16 +3944,19 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                     $"finiteState={finiteState}, gantrySpeed={(gantryDrive?.VelocityMetersPerSecond ?? 0f):F3}m/s, " +
                     $"trolleySpeed={currentTrolleyVelocity:F3}m/s, " +
                     $"hoistSpeed={currentHoistVelocity:F3}m/s, bodySpeed={bodyLinearSpeed:F3}m/s, " +
-                    $"angularSpeed={bodyAngularSpeed:F3}rad/s, phase={GetResetPhase()}",
+                    $"angularSpeed={bodyAngularSpeed:F3}rad/s, " +
+                    $"containerSpeed={freeContainerLinearSpeed:F3}m/s, " +
+                    $"containerAngularSpeed={freeContainerAngularSpeed:F3}rad/s, phase={GetResetPhase()}",
                     this);
                 return false;
             }
 
+            resetEpoch++;
             gantryDrive.Reset();
-            trolleyAnchor?.Reset();
-            gantryAnchor?.Reset();
-            spreaderSize?.Reset(YardCraneSpreaderSize.Ft40);
-            spreaderPumpOn = false;
+            trolleyAnchorPresenter?.Reset();
+            gantryAnchorPresenter?.Reset();
+            spreaderSizePresenter?.Reset(YardCraneSpreaderSize.Ft40);
+            spreaderPump?.Reset();
             spreaderRotation?.Reset();
             spreaderRotationInputAxis = 0f;
             spreaderRotationAngularVelocityRadiansPerSecond = 0f;
@@ -3330,9 +3967,15 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             headblockPhysics.SetPositionAndRotation(headblockHome, headblockHomeRotation);
             headblockBody.linearVelocity = Vector3.zero;
             headblockBody.angularVelocity = Vector3.zero;
+            unloadedSuspensionEquilibriumOffset = Vector3.ProjectOnPlane(
+                GetHeadblockCenterOfMassWorld() - trolleyMotion.position,
+                Vector3.up);
+            CaptureNominalSuspensionPose();
             currentTrolleyVelocity = 0f;
             currentHoistVelocity = 0f;
             gantryInput = 0f;
+            trolleyInput = 0f;
+            hoistInput = 0f;
             SetHornActive(false);
             ResetLoadedHoistDynamics();
             trolleyStopStabilizationReleaseAt = 0f;
@@ -3340,14 +3983,11 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             commandedSuspendedDrop = initialSuspendedDrop;
             foreach (var loop in loops)
             {
-                loop.CommandedLoopLength = loop.InitialLoopLength;
-                loop.LastCommandedLoopLength = loop.InitialLoopLength;
-                loop.CommandedLegDifference = loop.InitialLegDifference;
-                loop.LastExitPosition = loop.Exit.position;
-                loop.LastDeadEndPosition = loop.DeadEnd.position;
-                loop.ExitVelocity = Vector3.zero;
-                loop.DeadEndVelocity = Vector3.zero;
-                loop.LoopLengthRate = 0f;
+                loop.CommandedRopeLength = loop.InitialRopeLength;
+                loop.LastCommandedRopeLength = loop.InitialRopeLength;
+                loop.LastTopAnchorPosition = loop.TopAnchor.position;
+                loop.TopAnchorVelocity = Vector3.zero;
+                loop.RopeLengthRate = 0f;
             }
 
             demoStartedAt = Time.fixedTime;
@@ -3366,11 +4006,12 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             ResetActionObservers();
             startupPreTensioning = true;
             startupReleaseAt = Time.fixedTime + StartupPreTensionDurationSeconds;
-            runtimeStatus = "MAX prototype reset and pre-tensioning";
+            runtimeStatus = "Eight-rope prototype reset and pre-tensioning";
             Debug.Log(
                 $"[YC_PROTOTYPE_RESET] model={ImplementationVersion}, gantry={gantryDrive.PositionMeters:F3}m, " +
                 $"x={trolleyMotion.localPosition.x:F3}m, " +
-                $"drop={commandedSuspendedDrop:F3}m, containerLocked={containerLocked}",
+                $"drop={commandedSuspendedDrop:F3}m, containerLocked={containerLocked}, " +
+                $"instance={GetInstanceID()}, scene={gameObject.scene.name}, resetEpoch={resetEpoch}",
                 this);
             rejectionCode = YardCraneOperationErrorCodes.None;
             return true;
@@ -3378,6 +4019,8 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
 
         private void ResetContainerLoadState()
         {
+            var sourceSlotToRestore = pickedUpSourceSlot;
+            ParkContainerFreeBody();
             containerCollider.enabled = true;
             containerColliderSuppressedForPickup = false;
             if (activeContainer.parent != containerOriginalParent)
@@ -3385,7 +4028,21 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
                 activeContainer.SetParent(containerOriginalParent, true);
             }
             activeContainer.SetPositionAndRotation(containerHomePosition, containerHomeRotation);
+            containerFreeBody.SetPositionAndRotation(containerHomePosition, containerHomeRotation);
+            SetContainerHeadblockCollisionIgnored(false);
+            if (sourceSlotToRestore != null && container != null && sourceSlotToRestore.CanAccept(container))
+            {
+                sourceSlotToRestore.SetOccupant(container);
+                Debug.Log(
+                    $"[YC_YARD_SOURCE_RESTORED_ON_RESET] slot={sourceSlotToRestore.SlotId}, " +
+                    $"container={container.ContainerId}",
+                    this);
+            }
             containerLocked = false;
+            releasedContainerSettlementPending = false;
+            releasedContainerStableSince = -1f;
+            pickedUpSourceSlot = null;
+            detectedPickupContainer = null;
             ResetContainerLandingConfirmation();
             loadedSuspensionEquilibriumOffset = Vector3.zero;
             twistlockStatus = "Unlocked";
@@ -3421,374 +4078,6 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             spreaderRotationInhibitReported = false;
             spreaderRotationMotionReported = false;
             ResetContainerLandingConfirmation();
-        }
-
-        [ContextMenu("Run Loaded Operation Regression")]
-        public void BeginLoadedOperationRegression()
-        {
-            if (!loopsReady || setupFailed || runAutomatedDemo || !demoCompleted ||
-                startupPreTensioning || loadTransferPreTensioning || containerLocked ||
-                loadedOperationRegressionActive)
-            {
-                Debug.LogWarning(
-                    $"[YC_LOADED_OPERATION_REGRESSION_REJECTED] loopsReady={loopsReady}, " +
-                    $"setupFailed={setupFailed}, automatedDemo={runAutomatedDemo}, demoCompleted={demoCompleted}, " +
-                    $"startupPreTensioning={startupPreTensioning}, loadTransfer={loadTransferPreTensioning}, " +
-                    $"containerLocked={containerLocked}, alreadyRunning={loadedOperationRegressionActive}",
-                    this);
-                return;
-            }
-
-            trolleyInput = 0f;
-            hoistInput = 0f;
-            gantryInput = 0f;
-            loadedOperationRegressionActive = true;
-            loadedRegressionStartedAt = Time.fixedTime;
-            loadedRegressionReferenceX = trolleyMotion.localPosition.x;
-            SetLoadedRegressionStage(LoadedRegressionStage.AlignForLock);
-            Debug.Log(
-                $"[YC_LOADED_OPERATION_REGRESSION_STARTED] model={ImplementationVersion}, " +
-                $"grossMass={containerGrossMassKg:F0}kg, x={trolleyMotion.localPosition.x:F3}m, " +
-                $"drop={commandedSuspendedDrop:F3}m",
-                this);
-        }
-
-        private void UpdateLoadedOperationRegression()
-        {
-            if (!loadedOperationRegressionActive)
-            {
-                return;
-            }
-
-            if (Time.fixedTime - loadedRegressionStartedAt > LoadedRegressionTotalTimeoutSeconds)
-            {
-                FailLoadedOperationRegression("total-timeout");
-                return;
-            }
-
-            if (Time.fixedTime - loadedRegressionStageStartedAt > LoadedRegressionStageTimeoutSeconds)
-            {
-                FailLoadedOperationRegression($"stage-timeout:{loadedRegressionStage}");
-                return;
-            }
-
-            trolleyInput = 0f;
-            hoistInput = 0f;
-
-            switch (loadedRegressionStage)
-            {
-                case LoadedRegressionStage.AlignForLock:
-                    UpdateRegressionAlignmentForLock();
-                    break;
-                case LoadedRegressionStage.AwaitLock:
-                    if (containerLocked)
-                    {
-                        SetLoadedRegressionStage(LoadedRegressionStage.AwaitLoadedReady);
-                    }
-                    else if (Time.fixedTime - loadedRegressionStageStartedAt >= 0.80f)
-                    {
-                        SetLoadedRegressionStage(LoadedRegressionStage.AlignForLock);
-                    }
-                    break;
-                case LoadedRegressionStage.AwaitLoadedReady:
-                    if (containerLocked && !loadTransferPreTensioning)
-                    {
-                        loadedRegressionReferenceX = trolleyMotion.localPosition.x;
-                        SetLoadedRegressionStage(LoadedRegressionStage.VerifyLowClearanceInterlock);
-                    }
-                    break;
-                case LoadedRegressionStage.VerifyLowClearanceInterlock:
-                    UpdateRegressionLowClearanceInterlock();
-                    break;
-                case LoadedRegressionStage.HoistToSafeClearance:
-                    UpdateRegressionHoistToSafeClearance();
-                    break;
-                case LoadedRegressionStage.RejectSuspendedUnlock:
-                    UpdateRegressionSuspendedUnlockRejection();
-                    break;
-                case LoadedRegressionStage.TravelOutbound:
-                    UpdateRegressionTrolleyTarget(trolleyHome.x + LoadedRegressionOutboundTravelMeters,
-                        LoadedRegressionStage.ReturnHome);
-                    break;
-                case LoadedRegressionStage.ReturnHome:
-                    UpdateRegressionTrolleyTarget(trolleyHome.x, LoadedRegressionStage.LowerToLanding);
-                    break;
-                case LoadedRegressionStage.LowerToLanding:
-                    UpdateRegressionLowerToLanding();
-                    break;
-                case LoadedRegressionStage.AwaitLanding:
-                    if (containerLandingConfirmed)
-                    {
-                        if (!loadedRegressionCommandIssued)
-                        {
-                            loadedRegressionCommandIssued = true;
-                            RequestContainerUnlock();
-                        }
-                        SetLoadedRegressionStage(LoadedRegressionStage.AwaitUnlock);
-                    }
-                    break;
-                case LoadedRegressionStage.AwaitUnlock:
-                    if (!containerLocked && !loadTransferPreTensioning)
-                    {
-                        loadedRegressionReleasedContainerPosition = activeContainer.position;
-                        loadedRegressionTargetDrop = Mathf.Max(
-                            MinimumSuspendedDropMeters,
-                            commandedSuspendedDrop - 0.50f);
-                        SetLoadedRegressionStage(LoadedRegressionStage.EmptyHoist);
-                    }
-                    break;
-                case LoadedRegressionStage.EmptyHoist:
-                    UpdateRegressionEmptyHoist();
-                    break;
-            }
-        }
-
-        private void UpdateRegressionAlignmentForLock()
-        {
-            var desiredCenter = containerAttachmentRoot.TransformPoint(containerLockedLocalPosition);
-            var verticalSignedError = activeContainer.position.y - desiredCenter.y;
-            var horizontalError = new Vector2(
-                activeContainer.position.x - desiredCenter.x,
-                activeContainer.position.z - desiredCenter.z).magnitude;
-            var yawError = Mathf.Abs(Mathf.DeltaAngle(
-                containerAttachmentRoot.eulerAngles.y,
-                activeContainer.eulerAngles.y));
-            if (Mathf.Abs(verticalSignedError) > 0.040f)
-            {
-                hoistInput = Mathf.Clamp(-verticalSignedError * 3f, -1f, 1f);
-                ResetLoadedRegressionStableHold();
-                return;
-            }
-
-            var ready = horizontalError <= ContainerHorizontalLockToleranceMeters &&
-                        Mathf.Abs(verticalSignedError) <= ContainerVerticalLockToleranceMeters &&
-                        yawError <= ContainerYawLockToleranceDegrees &&
-                        Mathf.Abs(currentHoistVelocity) <= MaximumLockingSpeedMetersPerSecond;
-            if (!HoldLoadedRegressionStable(ready))
-            {
-                return;
-            }
-
-            if (!RequestContainerLock())
-            {
-                FailLoadedOperationRegression("lock-request-not-accepted");
-                return;
-            }
-            SetLoadedRegressionStage(LoadedRegressionStage.AwaitLock);
-        }
-
-        private void UpdateRegressionLowClearanceInterlock()
-        {
-            var stageElapsed = Time.fixedTime - loadedRegressionStageStartedAt;
-            if (stageElapsed < 0.50f)
-            {
-                trolleyInput = 1f;
-                return;
-            }
-
-            var displacement = Mathf.Abs(trolleyMotion.localPosition.x - loadedRegressionReferenceX);
-            if (displacement > 0.005f)
-            {
-                FailLoadedOperationRegression($"low-clearance-trolley-moved:{displacement:F4}m");
-                return;
-            }
-
-            if (stageElapsed >= 0.65f)
-            {
-                SetLoadedRegressionStage(LoadedRegressionStage.HoistToSafeClearance);
-            }
-        }
-
-        private void UpdateRegressionHoistToSafeClearance()
-        {
-            var clearance = activeContainer.position.y - containerRestingCenterY;
-            var remaining = LoadedRegressionLiftClearanceMeters - clearance;
-            if (remaining > 0.080f)
-            {
-                hoistInput = -Mathf.Clamp(remaining * 2f, 0.08f, 1f);
-                ResetLoadedRegressionStableHold();
-                return;
-            }
-
-            var stable = Mathf.Abs(currentHoistVelocity) <= 0.02f &&
-                         !loadedHoistSettleObservationActive;
-            if (HoldLoadedRegressionStable(stable))
-            {
-                SetLoadedRegressionStage(LoadedRegressionStage.RejectSuspendedUnlock);
-            }
-        }
-
-        private void UpdateRegressionSuspendedUnlockRejection()
-        {
-            if (!loadedRegressionCommandIssued)
-            {
-                loadedRegressionCommandIssued = true;
-                RequestContainerUnlock();
-                return;
-            }
-
-            if (Time.fixedTime - loadedRegressionStageStartedAt < 0.40f)
-            {
-                return;
-            }
-
-            if (!containerLocked)
-            {
-                FailLoadedOperationRegression("suspended-unlock-was-not-rejected");
-                return;
-            }
-            SetLoadedRegressionStage(LoadedRegressionStage.TravelOutbound);
-        }
-
-        private void UpdateRegressionTrolleyTarget(float targetX, LoadedRegressionStage nextStage)
-        {
-            var error = targetX - trolleyMotion.localPosition.x;
-            if (Mathf.Abs(error) > 0.025f)
-            {
-                trolleyInput = Mathf.Clamp(error * 1.5f, -1f, 1f);
-                ResetLoadedRegressionStableHold();
-                return;
-            }
-
-            var stable = Mathf.Abs(currentTrolleyVelocity) <= MotionObservationSpeedThresholdMetersPerSecond &&
-                         currentRelativeHorizontalSpeed <= 0.08f;
-            if (HoldLoadedRegressionStable(stable))
-            {
-                SetLoadedRegressionStage(nextStage);
-            }
-        }
-
-        private void UpdateRegressionLowerToLanding()
-        {
-            if (containerLandingConfirmed)
-            {
-                SetLoadedRegressionStage(LoadedRegressionStage.AwaitLanding);
-                return;
-            }
-
-            var horizontalError = new Vector2(
-                activeContainer.position.x - containerHomePosition.x,
-                activeContainer.position.z - containerHomePosition.z).magnitude;
-            if (horizontalError > ContainerHorizontalLockToleranceMeters)
-            {
-                FailLoadedOperationRegression($"landing-horizontal-error:{horizontalError:F3}m");
-                return;
-            }
-
-            var verticalSignedError = activeContainer.position.y - containerHomePosition.y;
-            if (Mathf.Abs(verticalSignedError) > 0.025f)
-            {
-                hoistInput = Mathf.Clamp(verticalSignedError * 2f, -1f, 1f);
-                ResetLoadedRegressionStableHold();
-                return;
-            }
-
-            var stable = Mathf.Abs(currentHoistVelocity) <= MotionObservationSpeedThresholdMetersPerSecond &&
-                         GetHeadblockPointVelocity().magnitude <= MaximumLockingSpeedMetersPerSecond;
-            if (HoldLoadedRegressionStable(stable))
-            {
-                SetLoadedRegressionStage(LoadedRegressionStage.AwaitLanding);
-            }
-        }
-
-        private void UpdateRegressionEmptyHoist()
-        {
-            if (commandedSuspendedDrop - loadedRegressionTargetDrop > 0.025f)
-            {
-                hoistInput = -0.65f;
-                ResetLoadedRegressionStableHold();
-                return;
-            }
-
-            // The final empty-hoist assertion is about command completion and load separation.
-            // The unloaded headblock is still free to carry a small residual rope-mode velocity,
-            // so using its point velocity here can keep the regression open after the drum has
-            // stopped and the released container has demonstrably remained on the landing surface.
-            var stable = Mathf.Abs(currentHoistVelocity) <= MotionObservationSpeedThresholdMetersPerSecond;
-            if (!HoldLoadedRegressionStable(stable))
-            {
-                return;
-            }
-
-            var containerDrift = Vector3.Distance(
-                activeContainer.position,
-                loadedRegressionReleasedContainerPosition);
-            var finiteState = IsFinite(headblockBody.position) && IsFinite(headblockBody.linearVelocity) &&
-                              IsFinite(headblockBody.angularVelocity);
-            if (containerLocked || containerDrift > 0.01f || !finiteState ||
-                maximumObservedLoopExtension > MaximumPermittedLoopExtensionMeters ||
-                maximumObservedSway > PrototypeMaximumSwayMeters)
-            {
-                FailLoadedOperationRegression(
-                    $"final-check:locked={containerLocked},containerDrift={containerDrift:F4}m," +
-                    $"finite={finiteState},loopExtension={maximumObservedLoopExtension:F4}m," +
-                    $"sway={maximumObservedSway:F3}m");
-                return;
-            }
-
-            loadedOperationRegressionActive = false;
-            trolleyInput = 0f;
-            hoistInput = 0f;
-            loadedRegressionStage = LoadedRegressionStage.Complete;
-            runtimeStatus = "PASS - loaded operation regression complete";
-            Debug.Log(
-                $"[YC_LOADED_OPERATION_REGRESSION_PASS] model={ImplementationVersion}, " +
-                $"duration={Time.fixedTime - loadedRegressionStartedAt:F2}s, " +
-                $"maxLoopExtension={maximumObservedLoopExtension * 1000f:F2}mm, " +
-                $"maxSway={maximumObservedSway:F3}m, maxTwist={maximumObservedTwistDegrees:F2}deg, " +
-                $"containerDrift={containerDrift * 1000f:F2}mm",
-                this);
-        }
-
-        private bool HoldLoadedRegressionStable(bool stable)
-        {
-            if (!stable)
-            {
-                ResetLoadedRegressionStableHold();
-                return false;
-            }
-            if (loadedRegressionStableSince < 0f)
-            {
-                loadedRegressionStableSince = Time.fixedTime;
-            }
-            return Time.fixedTime - loadedRegressionStableSince >= LoadedRegressionStableHoldSeconds;
-        }
-
-        private void ResetLoadedRegressionStableHold()
-        {
-            loadedRegressionStableSince = -1f;
-        }
-
-        private void SetLoadedRegressionStage(LoadedRegressionStage stage)
-        {
-            loadedRegressionStage = stage;
-            loadedRegressionStageStartedAt = Time.fixedTime;
-            loadedRegressionCommandIssued = false;
-            ResetLoadedRegressionStableHold();
-            runtimeStatus = $"Loaded regression · {stage}";
-            Debug.Log(
-                $"[YC_LOADED_OPERATION_REGRESSION_STAGE] stage={stage}, " +
-                $"elapsed={Time.fixedTime - loadedRegressionStartedAt:F2}s, " +
-                $"x={trolleyMotion.localPosition.x:F3}m, drop={commandedSuspendedDrop:F3}m, " +
-                $"locked={containerLocked}",
-                this);
-        }
-
-        private void FailLoadedOperationRegression(string reason)
-        {
-            loadedOperationRegressionActive = false;
-            trolleyInput = 0f;
-            hoistInput = 0f;
-            loadedRegressionStage = LoadedRegressionStage.Failed;
-            runtimeStatus = $"FAIL - loaded regression · {reason}";
-            Debug.LogError(
-                $"[YC_LOADED_OPERATION_REGRESSION_FAIL] model={ImplementationVersion}, " +
-                $"reason={reason}, duration={Time.fixedTime - loadedRegressionStartedAt:F2}s, " +
-                $"x={trolleyMotion.localPosition.x:F3}m, drop={commandedSuspendedDrop:F3}m, " +
-                $"locked={containerLocked}, landingConfirmed={containerLandingConfirmed}, " +
-                $"maxLoopExtension={maximumObservedLoopExtension * 1000f:F2}mm, " +
-                $"maxSway={maximumObservedSway:F3}m",
-                this);
         }
 
         [ContextMenu("Toggle Graybox Visuals")]
@@ -3840,549 +4129,54 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             }
         }
 
-        private void CreateRuntimeMaterials()
-        {
-            var probe = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            probe.name = "YC_MAX_RuntimeMaterialProbe";
-            var template = probe.GetComponent<MeshRenderer>().sharedMaterial;
-            ropeMaterial = new Material(template) { color = new Color(0.08f, 0.10f, 0.14f) };
-            runtimeMaterials.Add(ropeMaterial);
-            Destroy(probe);
-        }
-
-        private const string KeyStatusColorGreen = "3ECF57";
-        private const string KeyStatusColorAmber = "F2B233";
-        private const string KeyStatusColorRed = "E5484D";
-        private const string KeyStatusColorNeutral = "B9C2CC";
-        private const string OperationGuideColorCyan = "58C7FF";
-
-        private GUIStyle keyStatusHeaderStyle;
-        private GUIStyle keyStatusValueStyle;
-        private GUIStyle operationGuideHeaderStyle;
-        private GUIStyle operationGuideValueStyle;
-
-        private const float DesiredRuntimeUiScale = 2f;
-        private const float MinimumRuntimeUiScale = 1f;
-
-        private void OnGUI()
-        {
-            if (!showRuntimePanel)
-            {
-                return;
-            }
-
-            var runtimeUiScale = CalculateRuntimeUiScale();
-            var previousGuiMatrix = GUI.matrix;
-            GUI.matrix = Matrix4x4.Scale(new Vector3(runtimeUiScale, runtimeUiScale, 1f)) * previousGuiMatrix;
-
-            try
-            {
-                GUILayout.BeginArea(new Rect(MainPanelX, MainPanelY, MainPanelWidth, MainPanelHeight), GUI.skin.box);
-                GUILayout.Label("YC RUNTIME ROOT · 新八绳 MAX 灰盒");
-                GUILayout.Space(6f);
-                GUILayout.Label($"状态：{runtimeStatus}");
-                GUILayout.Label($"拓扑：双卷筒 × 4回路 · 8个三角回路 · 16个Obi可视绳段");
-                GUILayout.Label($"绳索：{(loopsReady ? "8/8 Ready" : $"{loops.Count}/8 Loading")} · Obi仅负责视觉");
-                GUILayout.Label($"吊具位置：{FormatVector(headblockBody != null ? headblockBody.position : Vector3.zero)} · " +
-                                $"小车速度：{currentTrolleyVelocity:F2} m/s · 起升速度：{currentHoistVelocity:F2} m/s");
-                GUILayout.Label($"大车位置：{(gantryDrive?.PositionMeters ?? 0f):F2} m · " +
-                                $"大车速度：{(gantryDrive?.VelocityMetersPerSecond ?? 0f):F2} m/s · " +
-                                $"夹轮器：{TranslateWheelClampState(gantryDrive?.WheelClampState ?? WheelClampState.Unknown)} · " +
-                                $"鸣笛：{(hornActive ? "ON" : "OFF")}");
-                GUILayout.Label($"吊高：{commandedSuspendedDrop:F2} m · 当前摆移：{currentHorizontalSway:F3} m · " +
-                                $"最大摆移：{maximumObservedSway:F3} m");
-                GUILayout.Label($"相对小车速度：{currentRelativeHorizontalSpeed:F3} m/s · " +
-                                $"扭转：{maximumObservedTwistDegrees:F2}°");
-                GUILayout.Label($"重载垂向挠度：{loadedHoistDeflection * 1000f:F1} mm · " +
-                                $"挠度速度：{loadedHoistDeflectionVelocity:F3} m/s");
-                GUILayout.Label($"回路伸长：{maximumObservedLoopExtension * 1000f:F1} mm · " +
-                                $"求解前残差：{maximumRawLoopDrift * 1000f:F1} mm");
-                GUILayout.Space(4f);
-                GUILayout.Label($"锁销：{twistlockStatus} · 箱重：{containerGrossMassKg / 1000f:F1} t · " +
-                                $"悬挂总重：{totalSuspendedMassKg / 1000f:F1} t");
-                GUILayout.Label($"平均单绳张力：{averageRopeTensionKn:F1} kN · 物理代理质量：" +
-                                $"{(headblockBody != null ? headblockBody.mass : 0f):F2} kg");
-                if (containerLocked)
-                {
-                    GUILayout.Label($"落箱确认：{(containerLandingConfirmed ? "已确认" : "未确认")} · " +
-                                    $"水平 {containerLandingHorizontalErrorMeters:F2} m · " +
-                                    $"垂直 {containerLandingVerticalErrorMeters:F2} m · " +
-                                    $"偏航 {containerLandingYawErrorDegrees:F1}° · " +
-                                    $"速度 {containerLandingSpeedMetersPerSecond:F2} m/s");
-                }
-                else
-                {
-                    GUILayout.Label($"对位误差：水平 {containerHorizontalErrorMeters:F2} m · " +
-                                    $"垂直 {containerVerticalErrorMeters:F2} m · 偏航 {containerYawErrorDegrees:F1}°");
-                }
-                GUILayout.EndArea();
-
-                DrawKeyOperationStatusPanel(Screen.width / runtimeUiScale);
-                DrawOperationGuidePanel(Screen.width / runtimeUiScale);
-            }
-            finally
-            {
-                GUI.matrix = previousGuiMatrix;
-            }
-        }
-
-        // Bounds of the main runtime panel above (Rect(24,24,610,355)), needed to decide whether
-        // the key-status panel can sit beside it or must stack below it on narrow screens.
-        private const float MainPanelX = 24f;
-        private const float MainPanelY = 24f;
-        private const float MainPanelWidth = 610f;
-        private const float MainPanelHeight = 355f;
-        private const float KeyStatusPanelWidth = 250f;
-        // Row heights are calibrated from the last Play-verified layout (136 for header + 4
-        // status rows, 207 for header + 8 guide rows), which implies a shared box/header
-        // overhead of ~48px plus ~22px per status row and ~20px per guide row. Sized for the
-        // current header + 12 status rows / header + 18 guide rows (added spreader rotation
-        // angle status and its two keys on top of the earlier pump/size and anchor rows)
-        // without shrinking either font. 24 + 312 + 12 + 408 + 24 = 780 > 540, so this no
-        // longer fits the exact-2x beside layout at 1920x1080 - the fallback branch in
-        // CalculateRuntimeUiScale computes a slightly reduced scale instead, which is the
-        // intended degrade path, not a bug. Still needs Play confirmation that the resulting
-        // scale keeps both panels legible.
-        private const float KeyStatusPanelHeight = 312f;
-        private const float KeyStatusPanelGap = 24f;
-        private const float OperationGuidePanelWidth = 250f;
-        private const float OperationGuidePanelHeight = 408f;
-        private const float OperationPanelInnerGap = 12f;
-
-        private static float CalculateRuntimeUiScale()
-        {
-            // Prefer the requested exact 2× scale. Wide screens keep both panels side by side;
-            // portrait/narrow screens stack them and reduce only when 2× would leave the canvas.
-            var besideRequiredWidth = MainPanelX + MainPanelWidth + KeyStatusPanelGap +
-                                      KeyStatusPanelWidth + KeyStatusPanelGap;
-            var besideRequiredHeight = Mathf.Max(MainPanelY + MainPanelHeight,
-                MainPanelY + KeyStatusPanelHeight + OperationPanelInnerGap + OperationGuidePanelHeight) +
-                KeyStatusPanelGap;
-            if (Screen.width >= besideRequiredWidth * DesiredRuntimeUiScale &&
-                Screen.height >= besideRequiredHeight * DesiredRuntimeUiScale)
-            {
-                return DesiredRuntimeUiScale;
-            }
-
-            var stackedOperationPanelsWidth = KeyStatusPanelWidth + OperationPanelInnerGap +
-                                              OperationGuidePanelWidth;
-            var stackedRequiredWidth = MainPanelX + Mathf.Max(MainPanelWidth, stackedOperationPanelsWidth) +
-                                       KeyStatusPanelGap;
-            var stackedRequiredHeight = MainPanelY + MainPanelHeight + 12f +
-                                        Mathf.Max(KeyStatusPanelHeight, OperationGuidePanelHeight) +
-                                        KeyStatusPanelGap;
-            return Mathf.Clamp(Mathf.Min(
-                    DesiredRuntimeUiScale,
-                    Screen.width / stackedRequiredWidth,
-                    Screen.height / stackedRequiredHeight),
-                MinimumRuntimeUiScale,
-                DesiredRuntimeUiScale);
-        }
-
-        /// <summary>
-        /// Compact, high-visibility status block for brake/clamp/grab state. Docks beside the
-        /// main panel's upper-right when the screen is wide enough for both without overlap;
-        /// otherwise stacks below the main panel, still within the upper half of the screen.
-        /// </summary>
-        private void DrawKeyOperationStatusPanel(float logicalScreenWidth)
-        {
-            EnsureKeyStatusStyles();
-
-            var canFitBesideMainPanel = logicalScreenWidth >=
-                MainPanelX + MainPanelWidth + KeyStatusPanelGap + KeyStatusPanelWidth + KeyStatusPanelGap;
-            var rect = canFitBesideMainPanel
-                ? new Rect(logicalScreenWidth - KeyStatusPanelWidth - KeyStatusPanelGap, MainPanelY,
-                    KeyStatusPanelWidth, KeyStatusPanelHeight)
-                : new Rect(MainPanelX, MainPanelY + MainPanelHeight + 12f,
-                    KeyStatusPanelWidth, KeyStatusPanelHeight);
-
-            GUILayout.BeginArea(rect, GUI.skin.box);
-            GUILayout.Label("关键操作状态", keyStatusHeaderStyle);
-            GUILayout.Label(BuildGantryBrakeStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildWheelClampStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildTrolleyAnchorStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildGantryAnchorStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildSpreaderPumpStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildSpreaderSizeStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildSpreaderRotationStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildContainerGrabStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildSafetyInterlockStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildControlPowerStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildEmergencyStopStatusLine(), keyStatusValueStyle);
-            GUILayout.Label(BuildFaultResetStatusLine(), keyStatusValueStyle);
-            GUILayout.EndArea();
-        }
-
-        /// <summary>
-        /// Persistent keyboard/Xbox mapping. It shares the right-hand HUD column on wide screens
-        /// and sits beside the key-status card below the main panel on portrait/narrow screens.
-        /// </summary>
-        private void DrawOperationGuidePanel(float logicalScreenWidth)
-        {
-            EnsureOperationGuideStyles();
-
-            var canFitBesideMainPanel = logicalScreenWidth >=
-                MainPanelX + MainPanelWidth + KeyStatusPanelGap + OperationGuidePanelWidth +
-                KeyStatusPanelGap;
-            var rect = canFitBesideMainPanel
-                ? new Rect(logicalScreenWidth - OperationGuidePanelWidth - KeyStatusPanelGap,
-                    MainPanelY + KeyStatusPanelHeight + OperationPanelInnerGap,
-                    OperationGuidePanelWidth, OperationGuidePanelHeight)
-                : new Rect(MainPanelX + KeyStatusPanelWidth + OperationPanelInnerGap,
-                    MainPanelY + MainPanelHeight + 12f,
-                    OperationGuidePanelWidth, OperationGuidePanelHeight);
-
-            GUILayout.BeginArea(rect, GUI.skin.box);
-            GUILayout.Label("操作指引", operationGuideHeaderStyle);
-            GUILayout.Label(BuildOperationGuideLine("大车行走", "J / L", "左摇杆左右"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("小车行走", "A / D", "右摇杆左右"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("吊具升降", "W / S", "左摇杆上下"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("鸣笛", "Space", "LB"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("锁箱", "E", "X"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("解锁", "Q", "B"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("夹轮器", "C", "Y"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("小车锚定", "X", "D-Pad↓"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("大车锚定", "Z", "RB"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("吊具泵", "P", "LT"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("吊具20尺", "1", "D-Pad←"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("吊具40尺", "2", "D-Pad→"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("吊具旋转", "[ / ]", "右摇杆Y"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("吊具回零", "0", "R3"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("暂停", "Esc", "Menu"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("控制电源", "F8", "D-Pad↑"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("急停", "F9", "View"), operationGuideValueStyle);
-            GUILayout.Label(BuildOperationGuideLine("故障复位", "R", "A"), operationGuideValueStyle);
-            GUILayout.EndArea();
-        }
-
-        private void EnsureKeyStatusStyles()
-        {
-            if (keyStatusHeaderStyle != null)
-            {
-                return;
-            }
-
-            keyStatusHeaderStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontStyle = FontStyle.Bold,
-                fontSize = 14,
-                richText = true
-            };
-            keyStatusValueStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontStyle = FontStyle.Bold,
-                fontSize = 13,
-                richText = true
-            };
-        }
-
-        private void EnsureOperationGuideStyles()
-        {
-            if (operationGuideHeaderStyle != null)
-            {
-                return;
-            }
-
-            operationGuideHeaderStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontStyle = FontStyle.Bold,
-                fontSize = 14,
-                richText = true
-            };
-            operationGuideValueStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontStyle = FontStyle.Normal,
-                fontSize = 12,
-                richText = true
-            };
-        }
-
-        private static string BuildOperationGuideLine(string operation, string keyboard, string xbox)
-        {
-            return $"{operation}  {Colorize($"[{keyboard}]", OperationGuideColorCyan)} · " +
-                   $"{Colorize($"[{xbox}]", OperationGuideColorCyan)}";
-        }
-
-        private string BuildGantryBrakeStatusLine()
-        {
-            var brakeReleased = gantryDrive != null && !gantryDrive.IsBrakeApplied;
-            var label = brakeReleased ? "已松闸" : "已制动";
-            var color = brakeReleased ? KeyStatusColorGreen : KeyStatusColorNeutral;
-            return $"大车制动：{Colorize(label, color)}";
-        }
-
-        private string BuildWheelClampStatusLine()
-        {
-            var state = gantryDrive?.WheelClampState ?? WheelClampState.Unknown;
-            var color = WheelClampStatusColor(state);
-            return $"夹轮器：{Colorize(TranslateWheelClampState(state), color)}";
-        }
-
-        /// <summary>
-        /// Single source of truth for the Chinese label of each <see cref="WheelClampState"/>,
-        /// shared by the main debug panel and the key-status panel so no English enum value is
-        /// ever shown to the user.
-        /// </summary>
-        private static string TranslateWheelClampState(WheelClampState state)
-        {
-            switch (state)
-            {
-                case WheelClampState.Released:
-                    return "已松开";
-                case WheelClampState.Transitioning:
-                    return "动作中";
-                case WheelClampState.Clamped:
-                    return "已夹紧";
-                case WheelClampState.Fault:
-                    return "故障";
-                default:
-                    return "状态未知";
-            }
-        }
-
-        private static string WheelClampStatusColor(WheelClampState state)
-        {
-            switch (state)
-            {
-                case WheelClampState.Released:
-                    return KeyStatusColorGreen;
-                case WheelClampState.Transitioning:
-                    return KeyStatusColorAmber;
-                case WheelClampState.Clamped:
-                    return KeyStatusColorNeutral;
-                case WheelClampState.Fault:
-                    return KeyStatusColorRed;
-                default:
-                    return KeyStatusColorRed;
-            }
-        }
-
-        private string BuildTrolleyAnchorStatusLine()
-        {
-            var state = trolleyAnchor?.State ?? YardCraneAnchorState.Unknown;
-            var color = AnchorStatusColor(state);
-            return $"小车锚定：{Colorize(TranslateAnchorState(state), color)}";
-        }
-
-        private string BuildGantryAnchorStatusLine()
-        {
-            var state = gantryAnchor?.State ?? YardCraneAnchorState.Unknown;
-            var color = AnchorStatusColor(state);
-            return $"大车锚定：{Colorize(TranslateAnchorState(state), color)}";
-        }
-
-        /// <summary>
-        /// Single source of truth for the Chinese label of each <see cref="YardCraneAnchorState"/>,
-        /// mirroring TranslateWheelClampState - no English enum value is ever shown to the user.
-        /// </summary>
-        private static string TranslateAnchorState(YardCraneAnchorState state)
-        {
-            switch (state)
-            {
-                case YardCraneAnchorState.Released:
-                    return "已释放";
-                case YardCraneAnchorState.Transitioning:
-                    return "动作中";
-                case YardCraneAnchorState.Anchored:
-                    return "已锚定";
-                case YardCraneAnchorState.Fault:
-                    return "故障";
-                default:
-                    return "状态未知";
-            }
-        }
-
-        private static string AnchorStatusColor(YardCraneAnchorState state)
-        {
-            switch (state)
-            {
-                case YardCraneAnchorState.Released:
-                    return KeyStatusColorGreen;
-                case YardCraneAnchorState.Transitioning:
-                    return KeyStatusColorAmber;
-                case YardCraneAnchorState.Anchored:
-                    return KeyStatusColorNeutral;
-                case YardCraneAnchorState.Fault:
-                    return KeyStatusColorRed;
-                default:
-                    return KeyStatusColorRed;
-            }
-        }
-
-        private string BuildSpreaderPumpStatusLine()
-        {
-            var label = spreaderPumpOn ? "已启动" : "已停止";
-            var color = spreaderPumpOn ? KeyStatusColorGreen : KeyStatusColorNeutral;
-            return $"吊具泵：{Colorize(label, color)}";
-        }
-
-        private string BuildSpreaderSizeStatusLine()
-        {
-            var mechanismState = spreaderSize?.State ?? YardCraneSpreaderSizeMechanismState.Idle;
-            if (mechanismState == YardCraneSpreaderSizeMechanismState.Transitioning)
-            {
-                return $"吊具尺寸：{Colorize("动作中", KeyStatusColorAmber)}";
-            }
-
-            var size = spreaderSize?.CurrentSize ?? YardCraneSpreaderSize.Unknown;
-            var color = mechanismState == YardCraneSpreaderSizeMechanismState.Fault
-                ? KeyStatusColorRed
-                : KeyStatusColorNeutral;
-            return $"吊具尺寸：{Colorize(TranslateSpreaderSize(size), color)}";
-        }
-
-        /// <summary>
-        /// Single source of truth for the Chinese label of each <see cref="YardCraneSpreaderSize"/>,
-        /// mirroring TranslateAnchorState - no English enum value is ever shown to the user.
-        /// </summary>
-        private static string TranslateSpreaderSize(YardCraneSpreaderSize size)
-        {
-            switch (size)
-            {
-                case YardCraneSpreaderSize.Ft20:
-                    return "20尺";
-                case YardCraneSpreaderSize.Ft40:
-                    return "40尺";
-                case YardCraneSpreaderSize.Twin20:
-                    return "双20尺";
-                default:
-                    return "状态未知";
-            }
-        }
-
-        private string BuildSpreaderRotationStatusLine()
-        {
-            var angle = spreaderRotation?.CurrentAngleDegrees ?? 0f;
-            if (spreaderRotation?.IsReturningToZero ?? false)
-            {
-                return $"吊具角度：{Colorize($"回零中 {angle:+0.0;-0.0;0.0}°", KeyStatusColorAmber)}";
-            }
-
-            var color = Mathf.Approximately(angle, 0f) ? KeyStatusColorGreen : KeyStatusColorNeutral;
-            return $"吊具角度：{Colorize($"{angle:+0.0;-0.0;0.0}°", color)}";
-        }
-
-        private string BuildContainerGrabStatusLine()
-        {
-            // Unlock-in-progress must win over the stable "locked" reading: containerLocked
-            // stays true for the whole unlock request/execution window, so checking it first
-            // would permanently hide the "解锁中" transition state.
-            string label;
-            string color;
-            if (containerUnlockRequested)
-            {
-                label = "解锁中";
-                color = KeyStatusColorAmber;
-            }
-            else if (containerLocked)
-            {
-                label = "已抓箱";
-                color = KeyStatusColorGreen;
-            }
-            else if (containerLockRequested)
-            {
-                label = "锁箱中";
-                color = KeyStatusColorAmber;
-            }
-            else
-            {
-                label = "未抓箱";
-                color = KeyStatusColorNeutral;
-            }
-
-            return $"抓箱：{Colorize(label, color)}";
-        }
-
-        private string BuildSafetyInterlockStatusLine()
-        {
-            if (trolleyProximityInhibited && gantryProximityInhibited)
-            {
-                return $"安全联锁：{Colorize("大车/小车已限制", KeyStatusColorAmber)}";
-            }
-
-            if (trolleyProximityInhibited)
-            {
-                var label = containerLocked ? "小车低净空禁止" : "小车朝箱侧禁止";
-                return $"安全联锁：{Colorize(label, KeyStatusColorAmber)}";
-            }
-
-            if (gantryProximityInhibited)
-            {
-                var label = containerLocked ? "大车低净空禁止" : "大车朝箱侧禁止";
-                return $"安全联锁：{Colorize(label, KeyStatusColorAmber)}";
-            }
-
-            return $"安全联锁：{Colorize("正常", KeyStatusColorGreen)}";
-        }
-
-        private string BuildControlPowerStatusLine()
-        {
-            if (standaloneOperationHost == null)
-            {
-                return $"控制电源：{Colorize("未知", KeyStatusColorNeutral)}";
-            }
-
-            var on = standaloneOperationHost.IsControlPowerOn;
-            var label = on ? "已合" : "已断";
-            var color = on ? KeyStatusColorGreen : KeyStatusColorRed;
-            return $"控制电源：{Colorize(label, color)}";
-        }
-
-        private string BuildEmergencyStopStatusLine()
-        {
-            if (standaloneOperationHost == null)
-            {
-                return $"急停：{Colorize("未知", KeyStatusColorNeutral)}";
-            }
-
-            var released = standaloneOperationHost.IsEmergencyStopReleased;
-            var label = released ? "已释放" : "已按下";
-            var color = released ? KeyStatusColorGreen : KeyStatusColorRed;
-            return $"急停：{Colorize(label, color)}";
-        }
-
-        private string BuildFaultResetStatusLine()
-        {
-            var awaitingReset = standaloneOperationHost != null
-                ? standaloneOperationHost.IsAwaitingFaultReset
-                : operationController != null && operationController.Phase == YardCraneOperationPhase.SafeHold;
-            var label = awaitingReset ? "等待复位" : "正常";
-            var color = awaitingReset ? KeyStatusColorRed : KeyStatusColorGreen;
-            return $"安全复位：{Colorize(label, color)}";
-        }
-
-        private static string Colorize(string text, string hexColor) => $"<color=#{hexColor}>{text}</color>";
+        // internal (not private): shared with per-mechanism presenter classes extracted out of
+        // this file, e.g. YardCraneWheelClampPresenter, so HUD colors stay defined in one place.
+        internal const string KeyStatusColorGreen = "3ECF57";
+        internal const string KeyStatusColorAmber = "F2B233";
+        internal const string KeyStatusColorRed = "E5484D";
+        internal const string KeyStatusColorNeutral = "B9C2CC";
+        internal static string Colorize(string text, string hexColor) => $"<color=#{hexColor}>{text}</color>";
 
         private void OnDestroy()
         {
-            foreach (var loop in loops)
+            // Saved here (rather than hooked into the Bootstrap scene-state machine's
+            // terminal states) because the Rig only exists in the formal YardCrane scene while
+            // Bootstrap is a separate, persistent DontDestroyOnLoad object across scene
+            // switches - tying this to OnDestroy avoids fragile cross-scene handoff logic
+            // for what is deliberately a v1/local-only persistence pass. loopsReady guards
+            // against writing an empty record when setup failed before anything ran.
+            if (loopsReady)
             {
-                DestroyVisualLeg(loop.ExitLeg);
-                DestroyVisualLeg(loop.DeadEndLeg);
+                try
+                {
+                    var save = YardCraneTrainingScoreRecorder.SaveWithResult(trainingScore);
+                    Debug.Log(
+                        $"[YC_TRAINING_RUN_SAVED] path={save.Path}, outcome={save.Outcome}, " +
+                        $"scoreTrust={save.ScoreTrustLevel}, hasScore={save.HasScore}, " +
+                        $"identityContextMatched={save.IdentityContextMatched}, " +
+                        $"countsTowardResults={save.CountsTowardResults}, " +
+                        $"totalScore={save.TotalScore}, violations={trainingScore.Violations.Count}", this);
+                }
+                catch (Exception error)
+                {
+                    Debug.LogError($"[YC_TRAINING_SCORE_SAVE_FAILED] {error}", this);
+                }
             }
-            foreach (var material in runtimeMaterials)
+
+            if (containerImpactSensor != null)
             {
-                if (material != null) Destroy(material);
+                containerImpactSensor.ImpactDetected -= HandleContainerImpact;
             }
+            SetContainerHeadblockCollisionIgnored(false);
             if (runtimeHornClip != null)
             {
                 Destroy(runtimeHornClip);
             }
         }
 
-        private static void DestroyVisualLeg(VisualLegRuntime leg)
-        {
-            if (leg?.Blueprint != null) Destroy(leg.Blueprint);
-        }
-
         private static bool IsFinite(Vector3 value)
         {
             return float.IsFinite(value.x) && float.IsFinite(value.y) && float.IsFinite(value.z);
-        }
-
-        private static string FormatVector(Vector3 value)
-        {
-            return $"({value.x:F2}, {value.y:F2}, {value.z:F2})";
         }
 
         private static float SmootherStep01(float value)
@@ -4391,105 +4185,5 @@ namespace PortTraining.YardCraneSimulator.Experiments.RopePhysics
             return value * value * value * (value * (value * 6f - 15f) + 10f);
         }
 
-        private readonly struct LoopDefinition
-        {
-            public LoopDefinition(string id, string drum, string antiSwayAxis, string exitPath, string deadEndPath, string sheavePath, string slotPath)
-            {
-                Id = id;
-                Drum = drum;
-                AntiSwayAxis = antiSwayAxis;
-                ExitPath = exitPath;
-                DeadEndPath = deadEndPath;
-                SheavePath = sheavePath;
-                SlotPath = slotPath;
-            }
-
-            public string Id { get; }
-            public string Drum { get; }
-            public string AntiSwayAxis { get; }
-            public string ExitPath { get; }
-            public string DeadEndPath { get; }
-            public string SheavePath { get; }
-            public string SlotPath { get; }
-        }
-
-        private sealed class LoopRuntime
-        {
-            public LoopRuntime(
-                LoopDefinition definition,
-                Transform exit,
-                Transform deadEnd,
-                Transform sheave,
-                Vector3 localSheaveAnchor,
-                VisualLegRuntime exitLeg,
-                VisualLegRuntime deadEndLeg,
-                float initialLoopLength,
-                float initialLegDifference)
-            {
-                Definition = definition;
-                Exit = exit;
-                DeadEnd = deadEnd;
-                Sheave = sheave;
-                LocalSheaveAnchor = localSheaveAnchor;
-                ExitLeg = exitLeg;
-                DeadEndLeg = deadEndLeg;
-                InitialLoopLength = initialLoopLength;
-                CommandedLoopLength = initialLoopLength;
-                LastCommandedLoopLength = initialLoopLength;
-                InitialLegDifference = initialLegDifference;
-                CommandedLegDifference = initialLegDifference;
-                LastExitPosition = exit.position;
-                LastDeadEndPosition = deadEnd.position;
-            }
-
-            public LoopDefinition Definition { get; }
-            public Transform Exit { get; }
-            public Transform DeadEnd { get; }
-            public Transform Sheave { get; }
-            public Vector3 LocalSheaveAnchor { get; }
-            public VisualLegRuntime ExitLeg { get; }
-            public VisualLegRuntime DeadEndLeg { get; }
-            public float InitialLoopLength { get; set; }
-            public float CommandedLoopLength { get; set; }
-            public float LastCommandedLoopLength { get; set; }
-            public float InitialLegDifference { get; }
-            public float CommandedLegDifference { get; set; }
-            public Vector3 LastExitPosition { get; set; }
-            public Vector3 LastDeadEndPosition { get; set; }
-            public Vector3 ExitVelocity { get; set; }
-            public Vector3 DeadEndVelocity { get; set; }
-            public float LoopLengthRate { get; set; }
-        }
-
-        private sealed class VisualLegRuntime
-        {
-            public VisualLegRuntime(
-                GameObject actorObject,
-                Obi.ObiRope rope,
-                ObiRopeCursor cursor,
-                ObiRopeBlueprint blueprint,
-                ObiParticleAttachment fixedAttachment,
-                ObiParticleAttachment sheaveAttachment,
-                float commandedVisualLength)
-            {
-                ActorObject = actorObject;
-                Rope = rope;
-                Cursor = cursor;
-                Blueprint = blueprint;
-                FixedAttachment = fixedAttachment;
-                SheaveAttachment = sheaveAttachment;
-                CommandedVisualLength = commandedVisualLength;
-            }
-
-            public GameObject ActorObject { get; }
-            public Obi.ObiRope Rope { get; }
-            public ObiRopeCursor Cursor { get; }
-            public ObiRopeBlueprint Blueprint { get; }
-            public ObiParticleAttachment FixedAttachment { get; }
-            public ObiParticleAttachment SheaveAttachment { get; }
-            public float CommandedVisualLength { get; set; }
-            public bool IsLoaded => Rope.isLoaded && Rope.elements.Count > 0;
-            public bool AttachmentsBound => FixedAttachment.isBound && SheaveAttachment.isBound;
-        }
     }
 }

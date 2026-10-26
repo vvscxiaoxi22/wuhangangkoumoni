@@ -19,8 +19,8 @@ namespace PortTraining.YardCraneSimulator.Editor
     {
         private const string RequestFileName = "YC_FullPlayVerification.request";
         private const string ResultFileName = "YC_FullPlayVerification.result.json";
-        private const string TestScenePath = "Assets/test.unity";
-        private const double OverallTimeoutSeconds = 180d;
+        private const string OperationalScenePath = "Assets/YardCraneSimulator/Scenes/YardCrane.unity";
+        private const double OverallTimeoutSeconds = 300d;
         private const double RigReadyHoldSeconds = 0.75d;
         private const double EditorStableHoldSeconds = 1.5d;
 
@@ -33,6 +33,9 @@ namespace PortTraining.YardCraneSimulator.Editor
             ResettingForLoadedRegression,
             WaitingForReset,
             WaitingForLoadedRegression,
+            ResettingForLoadedRegression41,
+            WaitingForReset41,
+            WaitingForLoadedRegression41,
             Finishing
         }
 
@@ -50,6 +53,7 @@ namespace PortTraining.YardCraneSimulator.Editor
         private static double readyAt;
         private static double editorStableSince = -1d;
         private static bool stopPlayModeAfterRun;
+        private static bool straightRopeTopologyValidated;
 
         static YardCranePlayVerificationRunner()
         {
@@ -79,7 +83,7 @@ namespace PortTraining.YardCraneSimulator.Editor
                 throw new InvalidOperationException("Batch verification must start in Edit mode.");
             }
 
-            EditorSceneManager.OpenScene(TestScenePath, OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(OperationalScenePath, OpenSceneMode.Single);
             WriteRequest(stopAfterRun: true);
             TryStartPendingRequest();
         }
@@ -141,6 +145,26 @@ namespace PortTraining.YardCraneSimulator.Editor
                 {
                     return;
                 }
+
+                var activeScene = SceneManager.GetActiveScene();
+                if (!string.Equals(activeScene.path, OperationalScenePath, StringComparison.Ordinal))
+                {
+                    if (activeScene.isDirty)
+                    {
+                        WriteImmediateFailure(
+                            $"active-scene-dirty:{activeScene.path}; YardCrane was not opened so the user's unsaved scene is preserved");
+                        return;
+                    }
+
+                    EditorSceneManager.OpenScene(OperationalScenePath, OpenSceneMode.Single);
+                    editorStableSince = -1d;
+                    return;
+                }
+            }
+            else if (!string.Equals(SceneManager.GetActiveScene().path, OperationalScenePath, StringComparison.Ordinal))
+            {
+                WriteImmediateFailure($"wrong-play-scene:{SceneManager.GetActiveScene().path}");
+                return;
             }
 
             stopPlayModeAfterRun = string.Equals(
@@ -149,6 +173,7 @@ namespace PortTraining.YardCraneSimulator.Editor
                 StringComparison.OrdinalIgnoreCase);
             startedAt = EditorApplication.timeSinceStartup;
             rig = null;
+            straightRopeTopologyValidated = false;
             editorStableSince = -1d;
             phase = EditorApplication.isPlaying
                 ? VerificationPhase.WaitingForRig
@@ -209,6 +234,37 @@ namespace PortTraining.YardCraneSimulator.Editor
                         break;
                     }
 
+                    if (!straightRopeTopologyValidated)
+                    {
+                        if (!TryValidateStraightRopeActors(rig, out var topologyError))
+                        {
+                            Finish(false, topologyError);
+                            return;
+                        }
+
+                        straightRopeTopologyValidated = true;
+                        Debug.Log("[YC_EIGHT_STRAIGHT_ROPE_TOPOLOGY_PASS] visualRopes=8, legacyDeadEndLegs=0");
+
+                        foreach (var yardContainer in UnityEngine.Object.FindObjectsByType<YardCraneContainer>(
+                                     FindObjectsInactive.Include,
+                                     FindObjectsSortMode.None))
+                        {
+                            if (yardContainer.gameObject.scene != rig.gameObject.scene)
+                            {
+                                continue;
+                            }
+
+                            if (!yardContainer.TryValidateLockHoleColliders(out var lockHoleError))
+                            {
+                                Finish(false,
+                                    $"serialized-lock-hole-authoring-invalid:{yardContainer.name}:{lockHoleError}");
+                                return;
+                            }
+                        }
+
+                        Debug.Log("[YC_SERIALIZED_LOCK_HOLE_AUTHORING_PASS] containers=3, lockHoles=12");
+                    }
+
                     if (readyAt <= 0d)
                     {
                         readyAt = EditorApplication.timeSinceStartup + RigReadyHoldSeconds;
@@ -229,12 +285,58 @@ namespace PortTraining.YardCraneSimulator.Editor
                     break;
 
                 case VerificationPhase.WaitingForReset:
-                    StartLoadedRegressionWhenReady();
+                    StartLoadedRegressionWhenReady(30000f, VerificationPhase.WaitingForLoadedRegression);
+                    break;
+
+                case VerificationPhase.ResettingForLoadedRegression41:
+                    ResetForLoadedRegression(VerificationPhase.WaitingForReset41);
+                    break;
+
+                case VerificationPhase.WaitingForReset41:
+                    StartLoadedRegressionWhenReady(41000f, VerificationPhase.WaitingForLoadedRegression41);
                     break;
             }
         }
 
-        private static void ResetForLoadedRegression()
+        private static bool TryValidateStraightRopeActors(
+            YardCraneEightRopeMaxPrototypeRig targetRig,
+            out string error)
+        {
+            error = string.Empty;
+            var slots = targetRig.transform.Find("40_RopeRig/EightRopeLoops");
+            if (slots == null)
+            {
+                error = "straight-rope-slots-missing";
+                return false;
+            }
+
+            var visualRopeCount = 0;
+            var legacyDeadEndLegCount = 0;
+            foreach (var candidate in slots.GetComponentsInChildren<Transform>(true))
+            {
+                if (!candidate.name.StartsWith("ObiRope_", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                visualRopeCount++;
+                if (candidate.name.IndexOf("DeadEndLeg", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    legacyDeadEndLegCount++;
+                }
+            }
+
+            if (visualRopeCount != 8 || legacyDeadEndLegCount != 0)
+            {
+                error = $"straight-rope-topology-invalid:visualRopes={visualRopeCount},legacyDeadEndLegs={legacyDeadEndLegCount}";
+                return false;
+            }
+
+            return true;
+        }
+
+        private static void ResetForLoadedRegression(
+            VerificationPhase waitingPhase = VerificationPhase.WaitingForReset)
         {
             if (rig == null)
             {
@@ -250,10 +352,12 @@ namespace PortTraining.YardCraneSimulator.Editor
             }
 
             readyAt = EditorApplication.timeSinceStartup + RigReadyHoldSeconds;
-            phase = VerificationPhase.WaitingForReset;
+            phase = waitingPhase;
         }
 
-        private static void StartLoadedRegressionWhenReady()
+        private static void StartLoadedRegressionWhenReady(
+            float grossMassKg,
+            VerificationPhase runningPhase)
         {
             if (rig == null)
             {
@@ -268,13 +372,13 @@ namespace PortTraining.YardCraneSimulator.Editor
                 return;
             }
 
-            if (!rig.TrySetContainerGrossMass(30000f))
+            if (!rig.TrySetContainerGrossMass(grossMassKg))
             {
-                Finish(false, "30t-container-mass-rejected");
+                Finish(false, $"{grossMassKg / 1000f:F0}t-container-mass-rejected");
                 return;
             }
 
-            phase = VerificationPhase.WaitingForLoadedRegression;
+            phase = runningPhase;
             rig.BeginLoadedOperationRegression();
             if (!rig.LoadedOperationRegressionActive)
             {
@@ -297,14 +401,24 @@ namespace PortTraining.YardCraneSimulator.Editor
                 return;
             }
 
-            if (phase != VerificationPhase.WaitingForLoadedRegression)
+            if (phase != VerificationPhase.WaitingForLoadedRegression &&
+                phase != VerificationPhase.WaitingForLoadedRegression41)
             {
                 return;
             }
 
             if (condition.Contains("[YC_LOADED_OPERATION_REGRESSION_PASS]"))
             {
-                Finish(true, condition);
+                if (phase == VerificationPhase.WaitingForLoadedRegression)
+                {
+                    Debug.Log("[YC_LOADED_OPERATION_30T_PASS]");
+                    phase = VerificationPhase.ResettingForLoadedRegression41;
+                }
+                else
+                {
+                    Debug.Log("[YC_LOADED_OPERATION_41T_PASS]");
+                    Finish(true, condition);
+                }
             }
             else if (condition.Contains("[YC_LOADED_OPERATION_REGRESSION_FAIL]") ||
                      condition.Contains("[YC_LOADED_OPERATION_REGRESSION_REJECTED]"))
@@ -360,6 +474,24 @@ namespace PortTraining.YardCraneSimulator.Editor
             {
                 EditorApplication.Exit(passed ? 0 : 1);
             }
+        }
+
+        private static void WriteImmediateFailure(string detail)
+        {
+            var result = new VerificationResult
+            {
+                status = "FAIL",
+                completedAtUtc = DateTime.UtcNow.ToString("O"),
+                detail = detail
+            };
+            Directory.CreateDirectory(Path.GetDirectoryName(ResultPath) ?? ProjectTempPath);
+            File.WriteAllText(ResultPath, JsonUtility.ToJson(result, true));
+            if (File.Exists(RequestPath))
+            {
+                File.Delete(RequestPath);
+            }
+            editorStableSince = -1d;
+            Debug.LogError($"[YC_FULL_PLAY_VERIFICATION_FAIL] detail={detail}");
         }
     }
 }

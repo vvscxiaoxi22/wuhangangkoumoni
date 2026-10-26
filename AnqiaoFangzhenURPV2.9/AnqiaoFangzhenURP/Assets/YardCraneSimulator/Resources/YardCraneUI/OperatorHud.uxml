@@ -1,0 +1,337 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="OperatorHudStyles.uss" />
+    <ui:VisualElement name="operator-hud" class="hud">
+        <ui:VisualElement name="timer-box" class="glass timer-box">
+            <ui:VisualElement name="timer-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:VisualElement name="timer-icon" picking-mode="Ignore" class="timer-icon hud-vector-icon" />
+            <ui:Label name="timer-caption" text="用时" class="timer-caption" />
+            <ui:Label name="elapsed" text="--:--" class="timer-value" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="task-capsule" class="glass task-capsule">
+            <ui:VisualElement name="task-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:VisualElement picking-mode="Ignore" class="capsule-edge capsule-edge-left" />
+            <ui:VisualElement picking-mode="Ignore" class="capsule-edge capsule-edge-right" />
+            <ui:VisualElement name="task-crane-icon" picking-mode="Ignore" class="task-crane-icon hud-vector-icon" />
+            <ui:VisualElement name="task-title-divider" picking-mode="Ignore" class="task-title-divider" />
+            <ui:Label name="stage" text="等待数据" class="task-capsule-text" />
+        </ui:VisualElement>
+
+        <ui:Label name="alert-strip" text="状态数据中断 · 等待恢复" class="alert-strip" />
+
+        <ui:VisualElement name="lamp-strip" class="glass lamp-strip">
+            <ui:VisualElement name="lamp-strip-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:VisualElement picking-mode="Ignore" class="capsule-edge capsule-edge-left" />
+            <ui:VisualElement picking-mode="Ignore" class="capsule-edge capsule-edge-right" />
+            <ui:VisualElement name="lamp-touchdown-cell" class="lamp-cell">
+                <ui:Label name="lamp-touchdown-caption" text="着箱" class="lamp-caption" />
+                <ui:VisualElement name="lamp-touchdown-dot" class="lamp-dot lamp-touchdown">
+                    <ui:VisualElement picking-mode="Ignore" class="lamp-halo" />
+                    <ui:VisualElement name="lamp-touchdown-glint" picking-mode="Ignore" class="lamp-glint" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="lamp-lock-cell" class="lamp-cell">
+                <ui:Label name="lamp-lock-caption" text="锁定" class="lamp-caption" />
+                <ui:VisualElement name="lamp-anchor-dot" class="lamp-dot lamp-anchor">
+                    <ui:VisualElement picking-mode="Ignore" class="lamp-halo" />
+                    <ui:VisualElement name="lamp-anchor-glint" picking-mode="Ignore" class="lamp-glint" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="lamp-unlock-cell" class="lamp-cell">
+                <ui:Label name="lamp-unlock-caption" text="开锁" class="lamp-caption" />
+                <ui:VisualElement name="lamp-unlock-dot" class="lamp-dot lamp-unlock">
+                    <ui:VisualElement picking-mode="Ignore" class="lamp-halo" />
+                    <ui:VisualElement name="lamp-unlock-glint" picking-mode="Ignore" class="lamp-glint" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="lamp-single-cell" class="lamp-cell">
+                <ui:Label name="lamp-single-caption" text="单箱" class="lamp-caption" />
+                <ui:VisualElement name="lamp-single-dot" class="lamp-dot lamp-single">
+                    <ui:VisualElement picking-mode="Ignore" class="lamp-halo" />
+                    <ui:VisualElement name="lamp-single-glint" picking-mode="Ignore" class="lamp-glint" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="lamp-double-cell" class="lamp-cell last-lamp-cell">
+                <ui:Label name="lamp-double-caption" text="双箱" class="lamp-caption" />
+                <ui:VisualElement name="lamp-double-dot" class="lamp-dot lamp-double">
+                    <ui:VisualElement picking-mode="Ignore" class="lamp-halo" />
+                    <ui:VisualElement name="lamp-double-glint" picking-mode="Ignore" class="lamp-glint" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="left-column" class="left-column">
+            <ui:VisualElement name="left-telemetry" class="glass left-telemetry">
+                <ui:VisualElement name="telemetry-highlight" picking-mode="Ignore" class="glass-highlight" />
+                <ui:VisualElement name="gantry-position-row" class="telemetry-row">
+                    <ui:VisualElement name="gantry-position-dot" class="info-dot" />
+                    <ui:Label name="gantry-position-label" text="大车位置" class="telemetry-label" />
+                    <ui:Label name="gantry-position" text="—" class="telemetry-value" />
+                    <ui:Label name="gantry-position-unit" text="m" class="telemetry-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement name="gantry-speed-row" class="telemetry-row">
+                    <ui:VisualElement name="gantry-speed-dot" class="info-dot" />
+                    <ui:Label name="gantry-speed-label" text="大车速度" class="telemetry-label" />
+                    <ui:Label name="gantry-speed" text="—" class="telemetry-value" />
+                    <ui:Label name="gantry-speed-unit" text="m/s" class="telemetry-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement name="trolley-position-row" class="telemetry-row">
+                    <ui:VisualElement name="trolley-position-dot" class="info-dot" />
+                    <ui:Label name="trolley-position-label" text="小车位置" class="telemetry-label" />
+                    <ui:Label name="trolley-position" text="—" class="telemetry-value" />
+                    <ui:Label name="trolley-position-unit" text="m" class="telemetry-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement name="trolley-speed-row" class="telemetry-row">
+                    <ui:VisualElement name="trolley-speed-dot" class="info-dot" />
+                    <ui:Label name="trolley-speed-label" text="小车速度" class="telemetry-label" />
+                    <ui:Label name="trolley-speed" text="—" class="telemetry-value" />
+                    <ui:Label name="trolley-speed-unit" text="m/s" class="telemetry-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement name="spreader-height-row" class="telemetry-row">
+                    <ui:VisualElement name="spreader-height-dot" class="info-dot" />
+                    <ui:Label name="spreader-height-label" text="吊具高度" class="telemetry-label" />
+                    <ui:Label name="spreader-height" text="—" class="telemetry-value" />
+                    <ui:Label name="spreader-height-unit" text="m" class="telemetry-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement name="spreader-speed-row" class="telemetry-row telemetry-row-last">
+                    <ui:VisualElement name="spreader-speed-dot" class="info-dot" />
+                    <ui:Label name="spreader-speed-label" text="吊具速度" class="telemetry-label" />
+                    <ui:Label name="spreader-speed" text="—" class="telemetry-value" />
+                    <ui:Label name="spreader-speed-unit" text="m/s" class="telemetry-unit" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="guide-card" class="glass guide-card">
+                <ui:VisualElement name="guide-highlight" picking-mode="Ignore" class="glass-highlight" />
+                <ui:Label name="guide-title" text="操作指引" class="guide-title" />
+                <ui:VisualElement name="guide-lines" class="guide-lines" />
+                <ui:Label name="guide-note" text="按键仅用于当前本机映射" class="guide-note" />
+            </ui:VisualElement>
+            <ui:Button name="guide-toggle" text="i" tooltip="操作指引" class="guide-toggle" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="right-task-panel" class="glass right-panel right-task-panel">
+            <ui:VisualElement name="right-task-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:VisualElement name="current-task-row" class="info-row">
+                <ui:VisualElement name="current-task-icon" picking-mode="Ignore" class="info-icon hud-vector-icon" />
+                <ui:Label name="current-task-label" text="当前任务：" class="info-label" />
+                <ui:Label name="task-title" text="等待任务" class="info-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="target-container-row" class="info-row">
+                <ui:VisualElement name="target-container-icon" picking-mode="Ignore" class="info-icon hud-vector-icon" />
+                <ui:Label name="target-container-label" text="目标箱号：" class="info-label" />
+                <ui:Label name="task-container" text="—" class="info-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="target-slot-row" class="info-row info-row-last">
+                <ui:VisualElement name="target-slot-icon" picking-mode="Ignore" class="info-icon hud-vector-icon" />
+                <ui:Label name="target-slot-label" text="放箱地址：" class="info-label" />
+                <ui:Label name="task-slot" text="—" class="info-value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="right-pose-panel" class="glass right-panel right-pose-panel">
+            <ui:VisualElement name="right-pose-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:VisualElement name="trim-left-right-row" class="info-row">
+                <ui:VisualElement name="trim-left-right-dot" class="info-dot" />
+                <ui:Label name="trim-left-right-label" text="吊具左右倾转" class="pose-label" />
+                <ui:Label name="trim-left-right" text="—" class="pose-value" />
+                <ui:Label name="trim-left-right-unit" text="°" class="pose-unit" />
+            </ui:VisualElement>
+            <ui:VisualElement name="trim-front-back-row" class="info-row">
+                <ui:VisualElement name="trim-front-back-dot" class="info-dot" />
+                <ui:Label name="trim-front-back-label" text="吊具前后倾转" class="pose-label" />
+                <ui:Label name="trim-front-back" text="—" class="pose-value" />
+                <ui:Label name="trim-front-back-unit" text="°" class="pose-unit" />
+            </ui:VisualElement>
+            <ui:VisualElement name="rotation-row" class="info-row info-row-last">
+                <ui:VisualElement name="rotation-dot" class="info-dot" />
+                <ui:Label name="rotation-label" text="吊具水平回转" class="pose-label" />
+                <ui:Label name="rotation" text="—" class="pose-value" />
+                <ui:Label name="rotation-unit" text="°" class="pose-unit" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="right-lock-panel" class="glass right-panel right-lock-panel">
+            <ui:VisualElement name="right-lock-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:VisualElement name="lock-row" class="lock-row">
+                <ui:VisualElement name="lock-pin-on-item" class="lock-pin-item">
+                    <ui:VisualElement name="lock-pin-on-dot" class="lamp-dot lock-pin-lamp lock-pin-on-dot">
+                        <ui:VisualElement picking-mode="Ignore" class="lamp-halo lock-pin-halo" />
+                        <ui:VisualElement name="lock-pin-on-glint" picking-mode="Ignore" class="lamp-glint lock-pin-glint" />
+                    </ui:VisualElement>
+                    <ui:Label name="lock-pin-on-label" text="大车制动" class="lock-pin-label" />
+                </ui:VisualElement>
+                <ui:VisualElement name="lock-pin-off-item" class="lock-pin-item lock-pin-item-last">
+                    <ui:VisualElement name="lock-pin-off-dot" class="lamp-dot lock-pin-lamp lock-pin-on-dot">
+                        <ui:VisualElement picking-mode="Ignore" class="lamp-halo lock-pin-halo" />
+                        <ui:VisualElement name="lock-pin-off-glint" picking-mode="Ignore" class="lamp-glint lock-pin-glint" />
+                    </ui:VisualElement>
+                    <ui:Label name="lock-pin-off-label" text="小车制动" class="lock-pin-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="nav-buttons" class="nav-buttons">
+            <ui:Button name="back-button" text="←" tooltip="返回" class="nav-button nav-back-button" />
+            <ui:Button name="exit-button" text="×" tooltip="退出" class="nav-button" />
+            <ui:Label name="navigation-note" text="此启动方式未接入返回/退出流程" class="navigation-note" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="result-card" class="glass result-card">
+            <ui:VisualElement name="result-highlight" picking-mode="Ignore" class="glass-highlight" />
+            <ui:Label name="result-code" text="TRAINING RESULT" class="result-code" />
+            <ui:Label name="result-title" text="正在生成训练结果" class="result-title" />
+            <ui:Label name="result-detail" text="正在收口运行状态，请保持程序开启。" class="result-detail" />
+            <ui:VisualElement name="result-divider" class="result-divider" />
+            <ui:Label name="result-trust" text="本地状态摘要 · 未接入 NodeService 评分 · 不显示虚假分数" class="result-trust" />
+        </ui:VisualElement>
+
+        <!-- Seven mutually-exclusive, externally triggered training prompts. They are all hidden
+             until YardCraneOperatorHud.Show...Prompt receives authoritative caller data. -->
+        <ui:VisualElement name="prompt-layer" class="prompt-layer">
+            <ui:VisualElement name="prompt-scrim" picking-mode="Ignore" class="prompt-scrim" />
+
+            <ui:VisualElement name="task-prompt" class="prompt-panel prompt-task">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light" />
+                <ui:VisualElement class="prompt-header">
+                    <ui:VisualElement name="task-prompt-icon" picking-mode="Ignore" class="prompt-header-icon" />
+                    <ui:Label name="task-prompt-title" text="任务提示" class="prompt-title" />
+                    <ui:Button name="task-prompt-close" text="×" tooltip="关闭任务提示" class="prompt-close" />
+                </ui:VisualElement>
+                <ui:VisualElement class="task-prompt-content">
+                    <ui:VisualElement class="task-map-area">
+                        <ui:VisualElement class="task-map-head">
+                            <ui:Label name="task-source-bay" text="—" class="task-bay-title" />
+                            <ui:Label text="作业路径" class="task-route-chip" />
+                            <ui:Label name="task-destination-bay" text="—" class="task-bay-title task-bay-title-right" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="task-grid-row">
+                            <ui:VisualElement name="task-source-grid" class="bay-grid" />
+                            <ui:VisualElement class="task-route-line">
+                                <ui:VisualElement class="task-route-dot" />
+                                <ui:VisualElement class="task-route-stem" />
+                                <ui:VisualElement class="task-route-dot" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="task-destination-grid" class="bay-grid" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="task-brief-card">
+                        <ui:Label text="任务说明" class="prompt-section-title" />
+                        <ui:Label name="task-instruction" text="—" class="task-instruction" />
+                        <ui:VisualElement class="prompt-divider" />
+                        <ui:Label text="目标箱号" class="task-meta-label" />
+                        <ui:Label name="prompt-task-container" text="—" class="task-meta-value" />
+                        <ui:Label text="放箱地址" class="task-meta-label task-meta-spacer" />
+                        <ui:Label name="prompt-task-slot" text="—" class="task-meta-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="countdown-prompt" class="prompt-panel prompt-countdown">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light" />
+                <ui:VisualElement class="prompt-header prompt-header-compact">
+                    <ui:VisualElement name="countdown-prompt-icon" picking-mode="Ignore" class="prompt-header-icon" />
+                    <ui:Label name="countdown-prompt-title" text="倒计时" class="prompt-title" />
+                </ui:VisualElement>
+                <ui:VisualElement name="countdown-ring" class="countdown-ring">
+                    <ui:VisualElement name="countdown-ring-progress" picking-mode="Ignore" class="countdown-ring-progress" />
+                    <ui:Label name="countdown-value" text="0" class="countdown-value" />
+                    <ui:Label text="秒" class="countdown-unit" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="confirmation-prompt" class="prompt-panel prompt-confirmation">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light" />
+                <ui:VisualElement class="prompt-header">
+                    <ui:VisualElement name="confirmation-prompt-icon" picking-mode="Ignore" class="prompt-header-icon" />
+                    <ui:Label name="confirmation-prompt-title" text="提示信息" class="prompt-title" />
+                    <ui:Button name="confirmation-prompt-close" text="×" tooltip="关闭提示" class="prompt-close" />
+                </ui:VisualElement>
+                <ui:Label name="confirmation-message" text="—" class="prompt-message" />
+                <ui:VisualElement class="prompt-actions">
+                    <ui:Button name="confirmation-confirm" text="确定" class="prompt-action prompt-action-primary" />
+                    <ui:Button name="confirmation-cancel" text="取消" class="prompt-action prompt-action-secondary" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="error-prompt" class="prompt-panel prompt-error">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light prompt-edge-danger" />
+                <ui:VisualElement class="prompt-header">
+                    <ui:VisualElement name="error-prompt-icon" picking-mode="Ignore" class="prompt-header-icon prompt-header-icon-danger" />
+                    <ui:Label name="error-prompt-title" text="错误提示" class="prompt-title" />
+                    <ui:Button name="error-prompt-close" text="×" tooltip="关闭错误提示" class="prompt-close" />
+                </ui:VisualElement>
+                <ui:Label name="error-message" text="—" class="prompt-message prompt-error-message" />
+                <ui:Button name="error-acknowledge" text="我知道了" class="prompt-action prompt-danger-action" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="completion-prompt" class="prompt-panel prompt-completion">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light" />
+                <ui:VisualElement class="prompt-header">
+                    <ui:VisualElement name="completion-prompt-icon" picking-mode="Ignore" class="prompt-header-icon" />
+                    <ui:Label name="completion-prompt-title" text="任务完成" class="prompt-title" />
+                    <ui:Button name="completion-prompt-close" text="×" tooltip="关闭任务完成提示" class="prompt-close" />
+                </ui:VisualElement>
+                <ui:VisualElement class="completion-metrics">
+                    <ui:VisualElement class="completion-metric">
+                        <ui:Label text="用时" class="completion-caption" />
+                        <ui:Label name="completion-duration" text="—" class="completion-value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="completion-metric completion-metric-score">
+                        <ui:Label text="得分" class="completion-caption" />
+                        <ui:Label name="completion-score" text="—" class="completion-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="prompt-actions">
+                    <ui:Button name="completion-details" text="查看错误详情" class="prompt-action prompt-action-primary" />
+                    <ui:Button name="completion-retry" text="重新操作" class="prompt-action prompt-action-secondary" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="assessment-prompt" class="prompt-panel prompt-assessment">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light" />
+                <ui:VisualElement class="prompt-header">
+                    <ui:VisualElement name="assessment-prompt-icon" picking-mode="Ignore" class="prompt-header-icon" />
+                    <ui:Label name="assessment-prompt-title" text="考核详情" class="prompt-title" />
+                    <ui:Button name="assessment-prompt-close" text="×" tooltip="关闭考核详情" class="prompt-close" />
+                </ui:VisualElement>
+                <ui:VisualElement class="assessment-summary">
+                    <ui:VisualElement class="assessment-summary-item assessment-project-item">
+                        <ui:Label text="项目" class="assessment-caption" />
+                        <ui:Label name="assessment-project" text="—" class="assessment-value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="assessment-summary-item">
+                        <ui:Label text="用时" class="assessment-caption" />
+                        <ui:Label name="assessment-duration" text="—" class="assessment-value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="assessment-summary-item">
+                        <ui:Label text="总分" class="assessment-caption" />
+                        <ui:Label name="assessment-score" text="—" class="assessment-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="assessment-table-header">
+                    <ui:Label text="扣分项" class="assessment-cell assessment-item-cell" />
+                    <ui:Label text="扣分值" class="assessment-cell assessment-points-cell" />
+                    <ui:Label text="备注" class="assessment-cell assessment-note-cell" />
+                </ui:VisualElement>
+                <ui:ScrollView name="assessment-table-body" mode="Vertical" class="assessment-table-body" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="submission-prompt" class="prompt-panel prompt-submission">
+                <ui:VisualElement picking-mode="Ignore" class="prompt-edge-light" />
+                <ui:VisualElement class="prompt-header">
+                    <ui:VisualElement name="submission-prompt-icon" picking-mode="Ignore" class="prompt-header-icon" />
+                    <ui:Label name="submission-prompt-title" text="成绩提交" class="prompt-title" />
+                    <ui:Button name="submission-prompt-close" text="×" tooltip="关闭成绩提交" class="prompt-close" />
+                </ui:VisualElement>
+                <ui:VisualElement class="submission-fields">
+                    <ui:TextField name="submission-name" label="姓名" class="submission-field" />
+                    <ui:TextField name="submission-student-number" label="学号" class="submission-field" />
+                    <ui:TextField name="submission-major" label="专业" class="submission-field" />
+                    <ui:TextField name="submission-class" label="班级" class="submission-field" />
+                </ui:VisualElement>
+                <ui:Button name="submission-submit" text="确认提交" class="prompt-action prompt-action-primary submission-submit" />
+                <ui:Label name="submission-note" text="本界面仅发出提交请求，正式成绩由教学平台确认" class="submission-note" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

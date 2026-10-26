@@ -1,0 +1,37 @@
+{
+  "package": "YardCrane.CraneHud.DesignPackage",
+  "version": "1.0.0",
+  "designResolution": { "width": 1920, "height": 1080 },
+  "safeInset": 24,
+  "assetFormat": "svg",
+  "runtimeText": true,
+  "assets": {
+    "reference": [
+      "Reference/crane-hud-ui-reference-v1.png",
+      "Reference/cockpit-background-reference.png"
+    ],
+    "layout": [
+      "Layout/hud-timer-frame.svg",
+      "Layout/hud-task-capsule.svg",
+      "Layout/hud-panel-left.svg",
+      "Layout/hud-panel-task.svg",
+      "Layout/hud-panel-pose.svg",
+      "Layout/hud-panel-lock.svg",
+      "Layout/hud-divider.svg"
+    ],
+    "icons": [
+      "Icons/icon-back.svg",
+      "Icons/icon-close.svg",
+      "Icons/icon-cyan-dot.svg",
+      "Icons/icon-lock-pin-on.svg",
+      "Icons/icon-lock-pin-off.svg"
+    ],
+    "statusLamps": [
+      "StatusLamps/brake-on.svg", "StatusLamps/brake-off.svg",
+      "StatusLamps/anchor-on.svg", "StatusLamps/anchor-off.svg",
+      "StatusLamps/unlock-on.svg", "StatusLamps/unlock-off.svg",
+      "StatusLamps/single-on.svg", "StatusLamps/single-off.svg",
+      "StatusLamps/double-on.svg", "StatusLamps/double-off.svg"
+    ]
+  }
+}

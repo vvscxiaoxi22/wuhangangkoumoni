@@ -2,7 +2,7 @@
 
 港口实训平台学生端 Unity 工程。
 
-> 港口实训平台全部软件的当前开发基线见[项目开发基线](LM-Wiki/02-知识层-编译层/项目开发基线-2026-08-28.md)。本README只描述当前学生端工程。
+> 港口实训平台全部软件的2026-08-28历史基线见[项目开发基线](LM-Wiki/02-知识层-编译层/项目开发基线-2026-08-28.md)。当前开发状态以工作区`CURRENT_STATUS.md`和[项目开发现状与待开发清单](LM-Wiki/02-知识层-编译层/项目开发现状与待开发清单.md)为准；当前场桥S7边界以[场桥S7直连接入架构决策](LM-Wiki/02-知识层-编译层/场桥S7直连接入架构决策-2026-09-15.md)为准。本README只描述当前学生端工程。
 
 > 截止当前的真实实现状态、未完成项和开发优先级见[项目开发现状与待开发清单](LM-Wiki/02-知识层-编译层/项目开发现状与待开发清单.md)。
 
@@ -28,11 +28,11 @@
 - 岸桥：`machineType = QC`
 - 场桥：`machineType = YC`
 
-当前`Control/EmbeddedGateway`只用于模拟输入和接口原型。正式架构采用独立本机后台进程`PortGatewayService`独占S7连接；学生端和外部驾驶场景只读取标准设备语义，不直接引用PLC地址。
+当前`Control/EmbeddedGateway`只用于模拟输入和接口原型。自2026-09-15起，场桥不再依赖`PortGatewayService`：只有`YardCraneSimulator`的独立`YardCraneS7Integration`场景可以使用game4automation组件直连S7；学生端以及场桥其他场景仍只读取标准设备语义，不直接引用PLC地址。
 
 同一个 `PortTraining.exe` 支持两种部署模式：
 
 - `DesktopSimulation`：电脑开发和教学演示，使用键鼠/虚拟输入与模拟 Gateway。
-- `SimulatorCabin`：实体模拟机，使用岸桥或场桥操控台、PLC、S7 Gateway 与多屏显示配置。
+- `SimulatorCabin`：实体模拟机，使用岸桥或场桥操控台、PLC、设备接入适配器与多屏显示配置；当前场桥的S7接入适配器位于独立`YardCraneS7Integration`场景。
 
-三维设备、工单、评分和场景脚本只能读取 `ControlInputRouter` 输出的统一操作语义，不得直接判断键盘、手柄型号或 PLC 地址。部署切换只修改 `station.json`，不重新制作客户端。
+除专用`YardCraneS7Integration`接入场景外，三维设备、工单、评分和场景脚本只能读取 `ControlInputRouter` 输出的统一操作语义，不得直接判断键盘、手柄型号或 PLC 地址。部署切换只修改 `station.json`，不重新制作客户端。

@@ -4,6 +4,10 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+# 2026-09-17: runtime-generated local data (teacher-published tasks, student training run
+# scores) - see YardCraneLocalDataPaths. Lives at the project root (sibling to Assets/), not
+# under Application.persistentDataPath.
+LocalTrainingData/
 [Uu]ser[Ss]ettings/
 [Mm]emoryCaptures/
 [Rr]ecordings/
@@ -12,6 +16,12 @@
 .vscode/
 *.csproj
 !Tools/OperationStateMachineHarness/OperationStateMachineHarness.csproj
+!Tools/HudPresentationHarness/HudPresentationHarness.csproj
+!Tools/StudentShellHarness/StudentShellHarness.csproj
+!Tools/GatewayDebugClientHarness/GatewayDebugClientHarness.csproj
+!Tools/GatewayRealtimeManualClient/GatewayRealtimeManualClient.csproj
+!Tools/S7LinkHarness/S7LinkHarness.csproj
+!Tools/StandaloneHostHarness/StandaloneHostHarness.csproj
 *.sln
 *.suo
 *.user

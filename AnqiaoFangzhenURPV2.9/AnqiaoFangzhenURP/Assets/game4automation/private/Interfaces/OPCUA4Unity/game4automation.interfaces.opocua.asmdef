@@ -1,0 +1,27 @@
+{
+    "name": "game4automation.interfaces.opocua",
+    "rootNamespace": "",
+    "references": [
+        "game4automation.base",
+        "NaughtyAttributes.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Opc.UaFx.Client.dll",
+        "System.Private.ServiceModel.dll",
+        "System.Reflection.DispatchProxy.dll",
+        "System.Buffers.dll",
+        "System.Memory.dll",
+        "BouncyCastle.Crypto.dll",
+        "System.Runtime.CompilerServices.Unsafe.dll",
+        "System.ServiceModel.Primitives.dll",
+        "OPCUA4Unity.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

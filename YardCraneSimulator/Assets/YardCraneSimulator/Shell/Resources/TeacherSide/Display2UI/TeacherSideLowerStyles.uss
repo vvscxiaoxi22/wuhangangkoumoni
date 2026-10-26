@@ -1,0 +1,17 @@
+.teacher-lower-shell { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: rgb(244, 250, 255); background-color: rgb(7, 50, 104); }
+.teacher-lower-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-image: url('../../YardCraneShell/StudentSide/Display1UI/StudentHomeSkin_v1.png'); -unity-background-scale-mode: scale-and-crop; }
+.teacher-lower-tone { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(3, 43, 96, 0.30); }
+.teacher-lower-glow { position: absolute; left: -360px; top: -420px; width: 1320px; height: 1320px; border-radius: 660px; background-color: rgba(43, 168, 241, 0.16); }
+.teacher-lower-brand { position: absolute; left: 84px; top: 70px; flex-direction: row; align-items: center; }
+.teacher-lower-logo { width: 222px; height: 74px; margin-right: 28px; background-image: url('../Display1UI/logo.png'); -unity-background-scale-mode: scale-to-fit; }
+.teacher-lower-code { color: rgba(211, 239, 252, 0.70); font-size: 14px; letter-spacing: 5px; }
+.teacher-lower-copy { position: absolute; left: 104px; top: 270px; width: 770px; }
+.teacher-lower-title { height: 94px; color: rgb(247, 251, 255); font-size: 70px; -unity-font-style: bold; }
+.teacher-lower-accent { color: rgb(105, 230, 245); }
+.teacher-lower-subtitle { height: 38px; margin-top: 28px; color: rgba(225, 239, 252, 0.72); font-size: 24px; }
+.teacher-lower-rule { width: 132px; height: 4px; margin-top: 46px; background-color: rgb(105, 230, 245); }
+.teacher-lower-caption { margin-top: 22px; color: rgba(217, 236, 250, 0.60); font-size: 14px; letter-spacing: 4px; }
+.teacher-lower-right-note { position: absolute; right: 92px; top: 78px; align-items: flex-end; }
+.teacher-lower-right-cn { color: rgba(236, 247, 255, 0.76); font-size: 17px; line-height: 26px; -unity-text-align: upper-right; }
+.teacher-lower-right-rule { width: 28px; height: 2px; margin-top: 22px; margin-bottom: 18px; background-color: rgba(215, 242, 255, 0.60); }
+.teacher-lower-right-en { color: rgba(221, 238, 250, 0.56); font-size: 12px; letter-spacing: 2px; -unity-text-align: upper-right; }

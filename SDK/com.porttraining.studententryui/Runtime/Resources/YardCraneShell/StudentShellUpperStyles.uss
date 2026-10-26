@@ -1,0 +1,180 @@
+.shell {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: rgb(231, 240, 244);
+    background-color: rgb(3, 43, 96);
+    font-size: 18px;
+    overflow: hidden;
+}
+
+Label { margin: 0; padding: 0; -unity-font-style: normal; }
+.shell Button { background-image: none; }
+.page { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.glass-card { background-color: rgba(7, 57, 105, 0.84); border-width: 1px; border-color: rgba(171, 220, 255, 0.24); border-top-color: rgba(212, 242, 255, 0.48); border-radius: 28px; }
+.ambient { position: absolute; border-radius: 50%; }
+.ambient-one { width: 920px; height: 920px; left: -260px; bottom: -500px; background-color: rgba(9, 142, 205, 0.22); }
+.ambient-two { width: 620px; height: 620px; right: -180px; top: -260px; background-color: rgba(37, 198, 255, 0.12); }
+.port-grid { position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background-color: rgba(34, 72, 87, 0.28); border-top-width: 1px; border-top-color: rgba(146, 196, 211, 0.14); }
+.crane-mark { position: absolute; background-color: rgba(112, 171, 191, 0.10); }
+.crane-leg-left { left: 210px; bottom: 145px; width: 24px; height: 450px; }
+.crane-leg-right { left: 750px; bottom: 145px; width: 24px; height: 450px; }
+.crane-beam { left: 165px; bottom: 570px; width: 720px; height: 26px; }
+.crane-trolley { left: 465px; bottom: 535px; width: 92px; height: 34px; }
+.crane-rope { left: 506px; bottom: 310px; width: 8px; height: 225px; }
+.crane-spreader { left: 438px; bottom: 286px; width: 144px; height: 22px; }
+
+.brand-code, .section-code { color: rgb(156, 220, 244); font-size: 14px; letter-spacing: 3px; }
+.login-page { flex-direction: row; padding-left: 120px; padding-right: 120px; align-items: center; justify-content: space-between; }
+.login-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.login-blue-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(3, 44, 91, 0.66); }
+.prototype-login-brand { position: absolute; left: 120px; top: 66px; flex-direction: row; align-items: center; }
+.brand-monogram { width: 58px; height: 58px; margin-right: 16px; border-width: 1px; border-color: rgba(182, 239, 255, 0.55); border-radius: 17px; color: rgb(182, 239, 255); font-size: 32px; -unity-text-align: middle-center; }
+.prototype-brand-title { color: rgb(244, 250, 255); font-size: 18px; letter-spacing: 3px; -unity-font-style: bold; }
+.prototype-brand-subtitle { margin-top: 5px; color: rgb(179, 206, 228); font-size: 14px; letter-spacing: 2px; }
+.brand-block { width: 880px; margin-top: 12px; }
+.hero-title { margin-top: 28px; font-size: 72px; -unity-font-style: normal; color: rgb(244, 250, 255); }
+.hero-caption { margin-top: 28px; font-size: 21px; color: rgb(189, 223, 241); }
+.machine-switch { width: 390px; height: 66px; margin-top: 38px; padding: 6px; flex-direction: row; border-width: 1px; border-color: rgba(171, 220, 255, 0.24); border-radius: 18px; background-color: rgba(0, 30, 68, 0.26); }
+.machine-option { width: 50%; align-items: center; justify-content: center; border-radius: 13px; color: rgb(179, 206, 228); font-size: 18px; }
+.machine-option.selected { color: rgb(244, 250, 255); background-color: rgba(82, 178, 235, 0.38); border-width: 1px; border-color: rgba(196, 235, 255, 0.18); }
+.unavailable-machine { opacity: 0.68; }
+.login-card { width: 630px; padding: 54px; background-color: rgba(7, 57, 105, 0.80); }
+.role-switch { height: 64px; margin-top: 36px; margin-bottom: 28px; padding: 6px; flex-direction: row; border-radius: 18px; background-color: rgba(0, 30, 68, 0.26); border-width: 1px; border-color: rgba(171, 220, 255, 0.20); }
+.role-button { width: 50%; height: 50px; margin: 0; padding: 0; border-width: 0; border-radius: 13px; background-image: none; background-color: rgba(0, 0, 0, 0); color: rgb(179, 206, 228); font-size: 17px; -unity-text-align: middle-center; }
+.role-button:hover { color: rgb(244, 250, 255); background-color: rgba(82, 178, 235, 0.18); }
+.role-button.selected { color: rgb(244, 250, 255); background-color: rgba(82, 178, 235, 0.38); -unity-font-style: bold; }
+.login-title { margin-top: 12px; font-size: 38px; -unity-font-style: normal; }
+.section-code { margin-top: 0; }
+.login-note { margin-top: 12px; color: rgb(179, 206, 228); font-size: 17px; white-space: normal; }
+.field-group { margin-top: 25px; }
+.hidden-field { display: none; }
+.field-label { color: rgb(213, 232, 246); font-size: 16px; margin-bottom: 10px; }
+.shell-input { height: 62px; font-size: 20px; color: rgb(244, 250, 255); }
+.shell-input .unity-base-text-field__input { background-image: none; background-color: rgba(0, 32, 73, 0.38); border-width: 1px; border-color: rgba(150, 214, 254, 0.34); border-radius: 14px; padding-left: 18px; padding-right: 18px; }
+.shell-input .unity-text-input { background-image: none; background-color: rgba(0, 32, 73, 0.38); border-width: 1px; border-color: rgba(150, 214, 254, 0.34); border-radius: 14px; padding-left: 18px; padding-right: 18px; }
+.shell-input .unity-base-text-field__input:focus { border-color: rgb(75, 222, 255); background-color: rgba(0, 32, 73, 0.68); }
+.form-error { display: none; min-height: 24px; margin-top: 10px; color: rgb(255, 145, 145); font-size: 14px; white-space: normal; }
+.primary-button { height: 66px; margin: 22px 0 0 0; padding: 0 20px; border-width: 1px; border-color: rgba(161, 239, 255, 0.65); border-radius: 16px; background-image: none; background-color: rgb(50, 210, 255); color: rgb(1, 44, 81); font-size: 19px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.primary-button:hover { background-color: rgb(75, 222, 255); }
+.primary-button:active { background-color: rgb(27, 181, 240); }
+.primary-button:disabled { opacity: 0.55; }
+.offline-row { margin-top: 26px; flex-direction: row; align-items: center; color: rgb(179, 206, 228); font-size: 13px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 10px; }
+.good-dot { background-color: rgb(99, 224, 174); }
+.offline-detail { margin-left: auto; color: rgb(140, 181, 213); }
+.prototype-login-footer { position: absolute; left: 120px; right: 120px; bottom: 46px; flex-direction: row; justify-content: space-between; color: rgb(128, 181, 213); font-size: 13px; letter-spacing: 2px; }
+
+.home-page { display: none; flex-direction: row; padding: 28px; background-color: rgb(5, 80, 145); }
+.home-sidebar { width: 300px; height: 1024px; flex-shrink: 0; padding: 26px 18px 20px 18px; border-radius: 30px; background-color: rgba(17, 91, 148, 0.74); }
+.shell-brand-row { height: 88px; padding: 0 10px 24px 10px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(171, 220, 255, 0.18); }
+.sidebar-monogram { width: 52px; height: 52px; margin-right: 14px; border-width: 1px; border-color: rgba(182, 239, 255, 0.48); border-radius: 16px; color: rgb(182, 239, 255); font-size: 28px; -unity-text-align: middle-center; }
+.sidebar-brand-title { font-size: 18px; -unity-font-style: bold; }
+.sidebar-brand-code { margin-top: 4px; color: rgb(134, 199, 232); font-size: 11px; letter-spacing: 3px; }
+.station-label { height: 64px; padding: 21px 12px; border-bottom-width: 1px; border-bottom-color: rgba(171, 220, 255, 0.18); font-size: 14px; }
+.sidebar-nav { margin-top: 18px; }
+.nav-item { height: 58px; margin-bottom: 5px; padding: 0 15px; flex-direction: row; align-items: center; border-width: 1px; border-color: rgba(0, 0, 0, 0); border-radius: 14px; color: rgb(189, 215, 237); font-size: 16px; }
+.nav-item.active { color: rgb(244, 250, 255); background-color: rgba(55, 189, 250, 0.23); border-color: rgba(135, 220, 255, 0.28); }
+.nav-icon { width: 31px; color: rgb(181, 232, 250); font-size: 18px; }
+.nav-tail { margin-left: auto; color: rgb(128, 181, 213); font-size: 11px; }
+.sidebar-spacer { flex-grow: 1; }
+.sidebar-nav-bottom { margin-top: 0; padding-top: 12px; border-top-width: 1px; border-top-color: rgba(171, 220, 255, 0.18); }
+.profile-panel { min-height: 96px; margin-top: 12px; padding: 15px 8px 0 8px; flex-direction: row; align-items: center; border-top-width: 1px; border-top-color: rgba(171, 220, 255, 0.18); }
+.profile-avatar { width: 42px; height: 42px; margin-right: 10px; border-radius: 50%; background-color: rgb(72, 177, 221); color: rgb(1, 44, 81); font-size: 13px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.profile-copy { flex-grow: 1; min-width: 0; }
+.profile-name { color: rgb(244, 250, 255); font-size: 12px; white-space: normal; }
+.profile-caption { margin-top: 4px; color: rgb(163, 199, 224); font-size: 10px; }
+.sidebar-button { width: 45px; height: 34px; margin: 0 0 0 5px; padding: 0; border-width: 1px; border-color: rgba(171, 220, 255, 0.18); border-radius: 11px; background-color: rgba(0, 32, 73, 0.20); color: rgb(213, 232, 246); font-size: 11px; }
+.quiet-button { color: rgb(143, 181, 208); }
+.workspace-body { flex-grow: 1; min-width: 0; height: 1024px; margin-left: 28px; }
+.topbar { height: 88px; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.workspace-path { color: rgb(167, 209, 232); font-size: 14px; }
+.home-title { margin-top: 7px; font-size: 36px; -unity-font-style: normal; }
+.home-subtitle { margin-top: 7px; color: rgb(179, 206, 228); font-size: 16px; }
+.top-actions { flex-direction: row; align-items: center; }
+.machine-chip { min-width: 70px; height: 44px; padding: 12px 18px; border-width: 1px; border-color: rgba(171, 220, 255, 0.14); color: rgb(179, 206, 228); font-size: 14px; -unity-text-align: middle-center; }
+.muted-chip { border-top-left-radius: 15px; border-bottom-left-radius: 15px; }
+.selected-chip { border-radius: 15px; background-color: rgba(82, 178, 235, 0.34); color: rgb(244, 250, 255); }
+.local-badge { height: 42px; margin-left: 16px; padding: 11px 16px; border-radius: 18px; color: rgb(185, 229, 246); background-color: rgba(106, 182, 235, 0.12); border-width: 1px; border-color: rgba(171, 220, 255, 0.22); font-size: 13px; }
+.welcome-panel { height: 228px; padding: 30px 38px; flex-direction: row; background-color: rgba(21, 116, 180, 0.64); }
+.welcome-copy { flex-grow: 1; justify-content: center; }
+.welcome-title { margin-top: 12px; color: rgb(244, 250, 255); font-size: 31px; white-space: normal; }
+.welcome-caption { margin-top: 12px; color: rgb(184, 217, 237); font-size: 15px; }
+.welcome-copy .launch-button { width: 260px; height: 52px; margin-top: 20px; font-size: 16px; }
+.launch-status { position: absolute; left: 320px; bottom: 41px; color: rgb(154, 204, 228); font-size: 12px; }
+.welcome-mark { width: 250px; margin-left: 28px; align-items: center; justify-content: center; border-left-width: 1px; border-left-color: rgba(171, 220, 255, 0.20); }
+.welcome-mark-title { color: rgb(181, 232, 255); font-size: 72px; }
+.welcome-mark-caption { margin-top: 5px; color: rgb(144, 205, 234); font-size: 14px; }
+.stats-row { height: 148px; margin-top: 20px; flex-direction: row; }
+.metric-card { flex-grow: 1; width: 33%; margin-right: 18px; padding: 23px 28px; border-radius: 22px; }
+.metric-card:last-child { margin-right: 0; }
+.metric-label { color: rgb(195, 224, 240); font-size: 14px; }
+.metric-value { margin-top: 5px; color: rgb(244, 250, 255); font-size: 44px; }
+.metric-caption { margin-top: 2px; color: rgb(156, 199, 226); font-size: 12px; }
+.home-content { flex-grow: 1; flex-direction: row; padding-top: 20px; min-height: 0; }
+.main-column { flex-grow: 1; margin-right: 20px; }
+.side-column { width: 390px; flex-shrink: 0; }
+.section-card { padding: 24px; }
+.section-heading { height: 64px; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.section-title { font-size: 23px; -unity-font-style: bold; }
+.section-caption { margin-top: 6px; color: rgb(163, 199, 224); font-size: 13px; }
+.count-pill { padding: 7px 13px; border-radius: 15px; background-color: rgba(75, 222, 255, 0.13); color: rgb(156, 220, 244); font-size: 12px; }
+.task-card { flex-direction: row; align-items: center; min-height: 118px; padding: 20px; border-radius: 19px; background-color: rgba(4, 55, 109, 0.42); border-width: 1px; border-color: rgba(171, 220, 255, 0.17); }
+.selected-task { border-color: rgba(75, 222, 255, 0.48); border-left-width: 3px; background-color: rgba(17, 101, 157, 0.48); }
+.task-index { width: 46px; height: 46px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 15px; background-color: rgba(75, 222, 255, 0.13); color: rgb(126, 220, 244); font-size: 14px; }
+.task-copy { flex-grow: 1; margin-left: 18px; margin-right: 16px; }
+.task-title { font-size: 22px; -unity-font-style: bold; }
+.task-description { margin-top: 7px; color: rgb(174, 207, 227); font-size: 13px; white-space: normal; }
+.task-tags { margin-top: 9px; color: rgb(126, 204, 232); font-size: 12px; }
+.availability { padding: 7px 12px; border-radius: 13px; background-color: rgba(116, 143, 151, 0.13); color: rgb(145, 181, 204); font-size: 12px; }
+.planned-row { flex-grow: 1; flex-direction: row; margin-top: 14px; }
+.compact-task { width: 50%; min-height: 145px; margin-right: 7px; align-items: flex-start; }
+.second-compact { margin-left: 7px; margin-right: 0; }
+.compact-task .task-title { font-size: 18px; }
+.compact-task .task-description { font-size: 12px; }
+.compact-task .task-index { width: 38px; height: 38px; border-radius: 12px; }
+.compact-task .availability { position: absolute; right: 14px; bottom: 14px; }
+.unavailable { opacity: 0.48; }
+.readiness-card { padding: 24px; }
+.focus-title { margin-top: 9px; margin-bottom: 8px; }
+.device-row { height: 76px; flex-direction: row; align-items: center; border-bottom-width: 1px; border-bottom-color: rgba(171, 220, 255, 0.13); }
+.device-symbol { width: 40px; height: 40px; margin-right: 13px; border-radius: 12px; align-items: center; justify-content: center; background-color: rgba(75, 222, 255, 0.11); color: rgb(142, 211, 235); font-size: 11px; -unity-font-style: bold; }
+.device-copy { flex-grow: 1; }
+.device-title { font-size: 14px; -unity-font-style: bold; }
+.device-caption { margin-top: 3px; color: rgb(143, 181, 208); font-size: 11px; }
+.device-status { font-size: 12px; }
+.disabled-device { border-bottom-width: 0; }
+.mode-notice { margin-top: 15px; padding: 15px; border-radius: 15px; background-color: rgba(106, 182, 235, 0.10); }
+.mode-title { color: rgb(213, 232, 246); font-size: 13px; -unity-font-style: bold; }
+.mode-copy { margin-top: 5px; color: rgb(156, 199, 226); font-size: 11px; white-space: normal; }
+.teacher-content { flex-grow: 1; padding-top: 8px; }
+.teacher-heading { height: 88px; }
+.teacher-grid { flex-direction: row; flex-wrap: wrap; }
+.teacher-module { width: 49%; height: 310px; margin-right: 1%; margin-bottom: 20px; padding: 28px; border-radius: 24px; background-color: rgba(17, 91, 148, 0.58); }
+.teacher-module-title { font-size: 25px; -unity-font-style: bold; }
+.teacher-module-copy { margin-top: 18px; max-width: 650px; min-height: 72px; color: rgb(174, 207, 227); font-size: 15px; white-space: normal; }
+.teacher-module .availability { align-self: flex-start; margin-top: 16px; }
+.disabled-module { opacity: 0.50; }
+.teacher-notice { margin-top: 0; }
+.good { color: rgb(99, 224, 174); }
+.muted { color: rgb(113, 141, 151); }
+.danger { color: rgb(255, 142, 142); }
+
+.shell.portrait .login-page { flex-direction: column; padding: 130px 72px 110px 72px; justify-content: flex-start; }
+.shell.portrait .brand-block { width: 100%; margin-top: 0; }
+.shell.portrait .hero-title { font-size: 48px; }
+.shell.portrait .login-card { width: 100%; margin-top: 96px; }
+.shell.portrait .crane-leg-left { left: 90px; }
+.shell.portrait .crane-leg-right { left: 690px; }
+.shell.portrait .crane-beam { left: 60px; width: 780px; }
+.shell.portrait .home-page { padding: 64px 52px 48px 52px; }
+.shell.portrait .topbar { height: 190px; flex-direction: column; }
+.shell.portrait .top-actions { margin-top: 20px; }
+.shell.portrait .home-content { flex-direction: column; }
+.shell.portrait .main-column { margin-right: 0; }
+.shell.portrait .side-column { width: 100%; margin-top: 28px; flex-direction: row; align-items: flex-start; }
+.shell.portrait .readiness-card { flex-grow: 1; margin-right: 24px; }
+.shell.portrait .launch-button { width: 300px; margin-top: 0; }
+.shell.portrait .launch-status { position: absolute; right: 0; top: 72px; width: 300px; }

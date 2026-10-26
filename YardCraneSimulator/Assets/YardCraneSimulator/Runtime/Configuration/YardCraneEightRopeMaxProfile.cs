@@ -9,18 +9,18 @@ namespace PortTraining.YardCraneSimulator.Configuration
         menuName = "PortTraining/Yard Crane/Eight Rope MAX Profile")]
     public sealed class YardCraneEightRopeMaxProfile : ScriptableObject
     {
-        public const string SupportedSchemaVersion = "1.0.0";
+        public const string SupportedSchemaVersion = "1.1.0";
         public const string DefaultResourcePath = "Configuration/YC-EightRopeMAX-Greybox-v1";
 
         [Serializable]
         public sealed class IdentitySection
         {
             public string schemaVersion = SupportedSchemaVersion;
-            public string profileId = "YC-PHYSICS-QD-EIGHT-ROPE-GREYBOX-1.0.0";
-            public string topologyProfileId = "QingdaoPort-NewEightRopeMAX-Greybox-v1";
-            public string equipmentModel = "QingdaoPort-NewEightRopeMAX-Greybox";
+            public string profileId = "YC-PHYSICS-QD-EIGHT-STRAIGHT-ROPE-GREYBOX-1.1.0";
+            public string topologyProfileId = "QingdaoPort-EightStraightRope-Greybox-v2";
+            public string equipmentModel = "QingdaoPort-EightStraightRope-Greybox";
             public string calibrationStatus = "Greybox";
-            [TextArea] public string calibrationSource = "2026-08-31 v12-v14 verified greybox baseline; not real-device acceptance data.";
+            [TextArea] public string calibrationSource = "2026-09-14 real-model visual topology review: eight independent straight ropes; Play recalibration pending.";
         }
 
         [Serializable]
@@ -29,7 +29,12 @@ namespace PortTraining.YardCraneSimulator.Configuration
             [Min(0.01f)] public float gantrySpeedMetersPerSecond = 1.5f;
             [Min(0.01f)] public float gantryAccelerationMetersPerSecondSquared = 0.45f;
             [Min(0.01f)] public float gantryBrakingMetersPerSecondSquared = 0.65f;
-            [Min(0.1f)] public float gantryTravelFromHomeMeters = 8f;
+            // 2026-09-11 real-scale recalibration: user-specified 425m rail run for this yard
+            // block. The reachability model (YardCraneLocalTrainingModeCoordinator) assumes home
+            // sits at the travel midpoint (symmetric [-limit, +limit]), so 425m total becomes
+            // ±212.5m from home. If the real gantry's actual home/parking position turns out to be
+            // at one end of the rail rather than centered, this assumption needs revisiting.
+            [Min(0.1f)] public float gantryTravelFromHomeMeters = 212.5f;
             [Min(0f)] public float gantryLimitSafetyMarginMeters = 0.10f;
             [Min(0f)] public float wheelClampTransitionSeconds = 0.40f;
             [Min(0f)] public float anchorTransitionSeconds = 0.60f;
@@ -47,7 +52,12 @@ namespace PortTraining.YardCraneSimulator.Configuration
             [Range(0.01f, 1f)] public float fullyLoadedTrolleyBrakingFactor = 0.78f;
             [Range(0.01f, 1f)] public float fullyLoadedHoistSpeedFactor = 0.65f;
             [Range(0.01f, 1f)] public float fullyLoadedHoistAccelerationFactor = 0.45f;
-            [Min(0.1f)] public float trolleyTravelFromHomeMeters = 4.5f;
+            // 2026-09-11 real-scale recalibration: user-specified 30m cross-span. Real cranes
+            // reserve roughly 1-1.5m at each rail for structure/clearance (industry reference
+            // cites 5-7.5m cantilevers on top of the working span), so usable trolley travel is
+            // estimated at ~28m, symmetric ±14m from home. This is a reasoned starting estimate,
+            // not a measured figure - replace with the real usable-travel number if/when known.
+            [Min(0.1f)] public float trolleyTravelFromHomeMeters = 14f;
             [Min(0f)] public float trolleyLimitSafetyMarginMeters = 0.03f;
             [Min(0f)] public float loadedTrolleyStopStabilizationSeconds = 1.0f;
             [Min(0f)] public float loadedTrolleyStopLinearDampingPerSecond = 0f;
@@ -62,7 +72,9 @@ namespace PortTraining.YardCraneSimulator.Configuration
             [Min(0.01f)] public float simulationProxyMassKg = 2f;
             [Min(0f)] public float spreaderRealMassKg = 12500f;
             [Min(0f)] public float minimumContainerGrossMassKg = 2200f;
-            [Min(0f)] public float maximumContainerGrossMassKg = 40500f;
+            // 2026-09-11: formally set to the real rated capacity under spreader (41t), per
+            // user decision. Supersedes the earlier 40500kg greybox ceiling.
+            [Min(0f)] public float maximumContainerGrossMassKg = 41000f;
             public Vector3 containerLockedLocalPosition = new(0f, -1.45f, 0f);
             [Min(0f)] public float loadTransferPreTensionDurationSeconds = 0.25f;
         }
@@ -70,8 +82,17 @@ namespace PortTraining.YardCraneSimulator.Configuration
         [Serializable]
         public sealed class GeometryAndSafetySection
         {
-            [Min(0.01f)] public float minimumSuspendedDropMeters = 2.8f;
-            [Min(0.01f)] public float maximumSuspendedDropMeters = 8.5f;
+            // 2026-09-11 real-scale recalibration, derived from user's 24m structure height:
+            // spreaderMaximum (highest reachable) = trolleyWorldY - minimumSuspendedDropMeters,
+            // spreaderMinimum (lowest reachable) = trolleyWorldY - maximumSuspendedDropMeters
+            // (see YardCraneLocalTrainingModeCoordinator). With the new trolley height ~24m
+            // (ApplyDefaultMaxPrototypePose's "20_TrolleyMotion" Y), 3.0/24.0 puts the reachable
+            // spreader range at [0m, 21m] - ground level up to the manual's own "21m吊具高度"
+            // reference and matching the industry "起升高度12.2-21m" figure almost exactly.
+            // 3.0m at the top is a placeholder mechanical clearance estimate (headblock/spreader
+            // hardware stack), not a measured number.
+            [Min(0.01f)] public float minimumSuspendedDropMeters = 3.0f;
+            [Min(0.01f)] public float maximumSuspendedDropMeters = 24.0f;
             [Min(0.01f)] public float containerHeightMeters = 2.4f;
             public Vector3 containerColliderSizeMeters = new(4.8f, 2.4f, 2.4f);
             public Vector3 headblockColliderSizeMeters = new(4f, 0.5f, 2.2f);
@@ -95,22 +116,29 @@ namespace PortTraining.YardCraneSimulator.Configuration
             [Min(0f)] public float loadedHeadblockAngularDamping = 0.55f;
             [Min(1)] public int headblockSolverIterations = 32;
             [Min(1)] public int headblockSolverVelocityIterations = 16;
-            [Min(0.01f)] public float loadedSuspensionNaturalFrequencyRadiansPerSecond = 2.35f;
-            [Min(0f)] public float loadedSuspensionDampingRatio = 0.38f;
-            [Min(0f)] public float maximumLoadedSuspensionAccelerationMetersPerSecondSquared = 1.8f;
-            [Min(0.01f)] public float loadedHoistNaturalFrequencyRadiansPerSecond = 9.0f;
+            // v31: these three serialized names are retained for profile compatibility, but the
+            // controller now stabilizes both empty and loaded spreaders relative to the moving
+            // trolley. This is an active anti-sway target response, not the passive pendulum's
+            // natural frequency. The near-critical damping keeps some visible compliance while
+            // preventing repeated 0.30-0.40 m oscillation after trolley acceleration/braking.
+            [Min(0.01f)] public float loadedSuspensionNaturalFrequencyRadiansPerSecond = 2.0f;
+            [Min(0f)] public float loadedSuspensionDampingRatio = 0.90f;
+            [Min(0f)] public float maximumLoadedSuspensionAccelerationMetersPerSecondSquared = 2.5f;
+            [Min(0.01f)] public float loadedHoistNaturalFrequencyRadiansPerSecond = 4.69f;
             [Min(0f)] public float loadedHoistDampingRatio = 0.55f;
-            [Min(0f)] public float lightLoadedStaticRopeDeflectionMeters = 0.006f;
-            [Min(0f)] public float fullyLoadedStaticRopeDeflectionMeters = 0.018f;
-            [Min(0f)] public float maximumLoadedHoistDeflectionMeters = 0.040f;
+            [Min(0f)] public float lightLoadedStaticRopeDeflectionMeters = 0.022f;
+            [Min(0f)] public float fullyLoadedStaticRopeDeflectionMeters = 0.066f;
+            [Min(0f)] public float maximumLoadedHoistDeflectionMeters = 0.147f;
             [Min(0f)] public float loopConstraintToleranceMeters = 0.00025f;
             [Min(0f)] public float startupPreTensionDurationSeconds = 0.4f;
             [Min(1)] public int positionConstraintIterations = 32;
             [Min(1)] public int velocityConstraintIterations = 8;
-            [Min(1)] public int interlockPositionIterations = 4;
-            [Min(1)] public int interlockVelocityIterations = 2;
-            [Range(0f, 1f)] public float interlockPositionRelaxation = 0.18f;
-            [Range(0f, 1f)] public float interlockVelocityRelaxation = 0.45f;
+            // Legacy v1 triangular-loop values. Retained only so existing assets deserialize
+            // without data loss; the v2 straight-rope solver never reads these fields.
+            [HideInInspector] public int interlockPositionIterations = 4;
+            [HideInInspector] public int interlockVelocityIterations = 2;
+            [HideInInspector] public float interlockPositionRelaxation = 0.18f;
+            [HideInInspector] public float interlockVelocityRelaxation = 0.45f;
             [Min(0f)] public float maximumAngularCorrectionDegrees = 1.5f;
         }
 
@@ -124,6 +152,23 @@ namespace PortTraining.YardCraneSimulator.Configuration
             [Min(0f)] public float maximumPermittedLoopExtensionMeters = 0.008f;
             [Min(0f)] public float prototypeMaximumSwayMeters = 0.35f;
             [Min(0f)] public float prototypeMaximumResidualTwistDegrees = 1.5f;
+        }
+
+        [Serializable]
+        public sealed class TrainingSection
+        {
+            [Range(0.01f, 1f)] public float loadedGantrySpeedFactor = 0.7f;
+            [Range(0.01f, 1f)] public float loadedTrolleySpeedFactor = 0.7f;
+            [Min(0f)] public float trainingSwayThresholdMeters = 0.30f;
+            [Min(0)] public int unsafeUnlockPenaltyPoints = 40;
+            [Min(0)] public int overspeedPenaltyPoints = 10;
+            [Min(0)] public int excessiveSwayPenaltyPoints = 15;
+            // Impact speed of the container against whatever it lands/collides on after being
+            // released with a real Rigidbody (see YardCraneEightRopeMaxPrototypeRig.
+            // TryUnlockContainer). Not a real device parameter - a starting point pending
+            // real Play tuning, same as the other fields in this section.
+            [Min(0f)] public float hardImpactSpeedThresholdMetersPerSecond = 2.0f;
+            [Min(0)] public int hardImpactPenaltyPoints = 20;
         }
 
         [Serializable]
@@ -142,17 +187,21 @@ namespace PortTraining.YardCraneSimulator.Configuration
             public string id;
             public string drum;
             public string antiSwayAxis;
+            public string topAnchorPath;
+            [Tooltip("Legacy triangular-loop candidate retained for existing scenes; not used by the straight-rope runtime.")]
             public string exitPath;
+            [Tooltip("Legacy triangular-loop candidate retained for existing scenes; not used by the straight-rope runtime.")]
             public string deadEndPath;
             public string sheavePath;
             public string slotPath;
 
-            public LoopBinding(string id, string drum, string antiSwayAxis, string exitPath,
-                string deadEndPath, string sheavePath, string slotPath)
+            public LoopBinding(string id, string drum, string antiSwayAxis, string topAnchorPath,
+                string exitPath, string deadEndPath, string sheavePath, string slotPath)
             {
                 this.id = id;
                 this.drum = drum;
                 this.antiSwayAxis = antiSwayAxis;
+                this.topAnchorPath = topAnchorPath;
                 this.exitPath = exitPath;
                 this.deadEndPath = deadEndPath;
                 this.sheavePath = sheavePath;
@@ -166,6 +215,7 @@ namespace PortTraining.YardCraneSimulator.Configuration
         public GeometryAndSafetySection geometryAndSafety = new();
         public RopePhysicsSection ropePhysics = new();
         public AcceptanceSection acceptance = new();
+        public TrainingSection training = new();
         public RegressionSection regression = new();
         public LoopBinding[] loopBindings = CreateDefaultLoopBindings();
 
@@ -173,7 +223,7 @@ namespace PortTraining.YardCraneSimulator.Configuration
         {
             error = string.Empty;
             if (identity == null || motion == null || load == null || geometryAndSafety == null ||
-                ropePhysics == null || acceptance == null || regression == null)
+                ropePhysics == null || acceptance == null || training == null || regression == null)
             {
                 error = "Profile contains a missing configuration section.";
                 return false;
@@ -322,8 +372,6 @@ namespace PortTraining.YardCraneSimulator.Configuration
                     ropePhysics.maximumLoadedHoistDeflectionMeters,
                     ropePhysics.loopConstraintToleranceMeters,
                     ropePhysics.startupPreTensionDurationSeconds,
-                    ropePhysics.interlockPositionRelaxation,
-                    ropePhysics.interlockVelocityRelaxation,
                     ropePhysics.maximumAngularCorrectionDegrees) ||
                 ropePhysics.obiSolverSubsteps < 1 || ropePhysics.obiSolverSubsteps > 12 ||
                 ropePhysics.obiDistanceIterations < 1 || ropePhysics.obiDistanceIterations > 4 ||
@@ -344,10 +392,6 @@ namespace PortTraining.YardCraneSimulator.Configuration
                 ropePhysics.startupPreTensionDurationSeconds < 0f ||
                 ropePhysics.positionConstraintIterations < 1 ||
                 ropePhysics.velocityConstraintIterations < 1 ||
-                ropePhysics.interlockPositionIterations < 1 ||
-                ropePhysics.interlockVelocityIterations < 1 ||
-                ropePhysics.interlockPositionRelaxation < 0f || ropePhysics.interlockPositionRelaxation > 1f ||
-                ropePhysics.interlockVelocityRelaxation < 0f || ropePhysics.interlockVelocityRelaxation > 1f ||
                 ropePhysics.maximumAngularCorrectionDegrees < 0f)
             {
                 error = "Rope physics settings contain a non-finite or out-of-range value.";
@@ -375,6 +419,24 @@ namespace PortTraining.YardCraneSimulator.Configuration
             }
 
             if (!AllFinite(
+                    training.loadedGantrySpeedFactor,
+                    training.loadedTrolleySpeedFactor,
+                    training.trainingSwayThresholdMeters,
+                    training.hardImpactSpeedThresholdMetersPerSecond) ||
+                training.loadedGantrySpeedFactor <= 0f || training.loadedGantrySpeedFactor > 1f ||
+                training.loadedTrolleySpeedFactor <= 0f || training.loadedTrolleySpeedFactor > 1f ||
+                training.trainingSwayThresholdMeters <= 0f ||
+                training.hardImpactSpeedThresholdMetersPerSecond <= 0f ||
+                training.unsafeUnlockPenaltyPoints < 0 ||
+                training.overspeedPenaltyPoints < 0 ||
+                training.excessiveSwayPenaltyPoints < 0 ||
+                training.hardImpactPenaltyPoints < 0)
+            {
+                error = "Training scoring settings contain a non-finite, non-positive or out-of-range value.";
+                return false;
+            }
+
+            if (!AllFinite(
                     regression.loadedStageTimeoutSeconds,
                     regression.loadedTotalTimeoutSeconds,
                     regression.loadedStableHoldSeconds,
@@ -397,22 +459,31 @@ namespace PortTraining.YardCraneSimulator.Configuration
             }
 
             var ids = new HashSet<string>(StringComparer.Ordinal);
+            var topAnchorPaths = new HashSet<string>(StringComparer.Ordinal);
             var drums = new Dictionary<string, int>(StringComparer.Ordinal);
             var axes = new Dictionary<string, int>(StringComparer.Ordinal);
             foreach (var binding in loopBindings)
             {
                 if (binding == null || string.IsNullOrWhiteSpace(binding.id) ||
                     string.IsNullOrWhiteSpace(binding.drum) || string.IsNullOrWhiteSpace(binding.antiSwayAxis) ||
-                    !IsSafeRelativePath(binding.exitPath) || !IsSafeRelativePath(binding.deadEndPath) ||
+                    !IsSafeRelativePath(binding.topAnchorPath) ||
+                    (!string.IsNullOrWhiteSpace(binding.exitPath) && !IsSafeRelativePath(binding.exitPath)) ||
+                    (!string.IsNullOrWhiteSpace(binding.deadEndPath) && !IsSafeRelativePath(binding.deadEndPath)) ||
                     !IsSafeRelativePath(binding.sheavePath) || !IsSafeRelativePath(binding.slotPath))
                 {
-                    error = "A loop binding is incomplete or contains an unsafe path.";
+                    error = "A straight-rope binding is incomplete or contains an unsafe path.";
                     return false;
                 }
 
                 if (!ids.Add(binding.id))
                 {
                     error = $"Duplicate loop binding ID '{binding.id}'.";
+                    return false;
+                }
+
+                if (!topAnchorPaths.Add(binding.topAnchorPath))
+                {
+                    error = $"Duplicate straight-rope top anchor path '{binding.topAnchorPath}'.";
                     return false;
                 }
 
@@ -442,14 +513,14 @@ namespace PortTraining.YardCraneSimulator.Configuration
         {
             return new[]
             {
-                new LoopBinding("L01_X_FL", "A", "X", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop01_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop01_Sheave", "40_RopeRig/EightRopeLoops/Loop01_X_FL"),
-                new LoopBinding("L02_X_FR", "A", "X", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop02_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop02_Sheave", "40_RopeRig/EightRopeLoops/Loop02_X_FR"),
-                new LoopBinding("L03_X_RL", "A", "X", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop03_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop03_Sheave", "40_RopeRig/EightRopeLoops/Loop03_X_RL"),
-                new LoopBinding("L04_X_RR", "A", "X", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop04_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop04_Sheave", "40_RopeRig/EightRopeLoops/Loop04_X_RR"),
-                new LoopBinding("L05_Z_FL", "B", "Z", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop05_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop05_Sheave", "40_RopeRig/EightRopeLoops/Loop05_Z_FL"),
-                new LoopBinding("L06_Z_FR", "B", "Z", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop06_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop06_Sheave", "40_RopeRig/EightRopeLoops/Loop06_Z_FR"),
-                new LoopBinding("L07_Z_RL", "B", "Z", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop07_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop07_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop07_Sheave", "40_RopeRig/EightRopeLoops/Loop07_Z_RL"),
-                new LoopBinding("L08_Z_RR", "B", "Z", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop08_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop08_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop08_Sheave", "40_RopeRig/EightRopeLoops/Loop08_Z_RR")
+                new LoopBinding("L01_X_FL", "A", "X", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop01_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop01_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop01_Sheave", "40_RopeRig/EightRopeLoops/Loop01_X_FL"),
+                new LoopBinding("L02_X_FR", "A", "X", "20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop02_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop02_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop02_Sheave", "40_RopeRig/EightRopeLoops/Loop02_X_FR"),
+                new LoopBinding("L03_X_RL", "A", "X", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop03_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop03_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop03_Sheave", "40_RopeRig/EightRopeLoops/Loop03_X_RL"),
+                new LoopBinding("L04_X_RR", "A", "X", "20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd", "20_TrolleyMotion/Hoist/Drum_A/RopeExits/Loop04_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop04_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop04_Sheave", "40_RopeRig/EightRopeLoops/Loop04_X_RR"),
+                new LoopBinding("L05_Z_FL", "B", "Z", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop05_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop05_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop05_Sheave", "40_RopeRig/EightRopeLoops/Loop05_Z_FL"),
+                new LoopBinding("L06_Z_FR", "B", "Z", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop06_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop06_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop06_Sheave", "40_RopeRig/EightRopeLoops/Loop06_Z_FR"),
+                new LoopBinding("L07_Z_RL", "B", "Z", "20_TrolleyMotion/RopeDeadEnds/Loop07_DeadEnd", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop07_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop07_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop07_Sheave", "40_RopeRig/EightRopeLoops/Loop07_Z_RL"),
+                new LoopBinding("L08_Z_RR", "B", "Z", "20_TrolleyMotion/RopeDeadEnds/Loop08_DeadEnd", "20_TrolleyMotion/Hoist/Drum_B/RopeExits/Loop08_Exit", "20_TrolleyMotion/RopeDeadEnds/Loop08_DeadEnd", "30_SpreaderPhysics/RopeSheaves/Loop08_Sheave", "40_RopeRig/EightRopeLoops/Loop08_Z_RR")
             };
         }
 

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <OutputPath>../../Temp/StudentShellHarness/bin/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Assets/YardCraneSimulator/Shell/YardCraneStudentShellModel.cs" Link="YardCraneStudentShellModel.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneLocalTrainingSession.cs" Link="YardCraneLocalTrainingSession.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneTrainingSessionIdentity.cs" Link="YardCraneTrainingSessionIdentity.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneTrainingScoreTracker.cs" Link="YardCraneTrainingScoreTracker.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Training/YardCraneTrainingViolation.cs" Link="YardCraneTrainingViolation.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/Runtime/Presentation/YardCraneDisplayProfile.cs" Link="YardCraneDisplayProfile.cs" />
+  </ItemGroup>
+</Project>

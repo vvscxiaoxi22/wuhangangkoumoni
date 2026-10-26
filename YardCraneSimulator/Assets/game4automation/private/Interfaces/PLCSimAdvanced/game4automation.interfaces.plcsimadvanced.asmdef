@@ -1,0 +1,15 @@
+{
+    "name": "game4automation.interfaces.plcsimadvanced",
+    "references": [
+        "game4automation.base",
+        "game4automation.interfaces.sharedmemory"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

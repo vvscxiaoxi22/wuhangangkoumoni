@@ -11,7 +11,7 @@
   "deploymentMode": "DesktopSimulation",
   "gatewayTransport": "Simulated",
   "inputProfileId": "QC-DESKTOP-KEYBOARD-V1",
-  "displayProfileId": "DESKTOP-16X9-V1",
+  "displayProfileId": "SIMULATOR-DUAL-STACK-1920X2160-V1",
   "allowSimulationFallback": true,
   "supportedControlModes": ["Local", "Remote"],
   "supportedTaskTypes": ["FreePractice", "Standalone", "Collaborative", "Exam", "Fault"]

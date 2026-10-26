@@ -1,0 +1,33 @@
+{
+  "package": "YardCrane.StudentHome.DesignPackage",
+  "version": "1.0.0",
+  "targetScene": "StudentHome",
+  "targetDisplay": "Display1",
+  "designResolution": { "width": 1920, "height": 1080 },
+  "safeInset": 52,
+  "assets": {
+    "background": "Background/student-home-background-v1.png",
+    "reference": "Reference/student-home-reference-v1.png",
+    "modeIcons": {
+      "learning": "ModeIcons/mode-learning-training-v1.png",
+      "freePractice": "ModeIcons/mode-free-practice-v1.png",
+      "assessment": "ModeIcons/mode-task-assessment-v1.png"
+    },
+    "layout": [
+      "Layout/background-vignette.svg",
+      "Layout/top-navigation.svg",
+      "Layout/brand-pill.svg",
+      "Layout/mode-card-normal.svg",
+      "Layout/mode-card-selected.svg",
+      "Layout/card-accent-line.svg",
+      "Layout/footer-line.svg"
+    ],
+    "icons": [
+      "Icons/icon-arrow-normal.svg",
+      "Icons/icon-arrow-selected.svg",
+      "Icons/icon-back.svg",
+      "Icons/icon-close.svg"
+    ]
+  }
+}
+

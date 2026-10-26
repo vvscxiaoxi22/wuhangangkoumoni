@@ -68,20 +68,8 @@ namespace PortTraining.YardCraneSimulator.Controls
                     active.TrolleyAxis,
                     active.HoistAxis,
                     active.HornHeld,
-                    active.LockPressed,
-                    active.UnlockPressed,
-                    active.PausePressed,
-                    active.WheelClampTogglePressed,
-                    active.ControlPowerTogglePressed,
-                    active.EmergencyStopTogglePressed,
-                    active.FaultResetPressed,
-                    active.TrolleyAnchorTogglePressed,
-                    active.GantryAnchorTogglePressed,
-                    active.SpreaderPumpTogglePressed,
-                    active.SpreaderSizeFt20Pressed,
-                    active.SpreaderSizeFt40Pressed,
                     active.SpreaderRotationAxis,
-                    active.SpreaderReturnToZeroPressed),
+                    active.ActiveIntents),
                 false);
         }
 

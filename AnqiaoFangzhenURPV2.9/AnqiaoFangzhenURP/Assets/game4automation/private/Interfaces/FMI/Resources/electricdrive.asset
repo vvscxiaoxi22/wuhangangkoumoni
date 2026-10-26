@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: electricdrive
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 64003800340039003400310032003200390032003900300036006500340036006200660037003100300036003900390063003900320033003400610036003200
+  modelName: electricdrive
+  coSimulation:
+    modelIdentifier: electricdrive
+  modelVariables:
+  - name: enable
+    valueReference: 0
+    description: 
+    causality: input
+    variability: discrete
+    initial: 
+    type: 3
+    start: false
+  - name: target_position
+    valueReference: 0
+    description: 
+    causality: input
+    variability: 
+    initial: 
+    type: 0
+    start: 0.0
+  - name: v_max
+    valueReference: 1
+    description: 
+    causality: input
+    variability: 
+    initial: 
+    type: 0
+    start: 0.0
+  - name: real_position
+    valueReference: 2
+    description: 
+    causality: output
+    variability: 
+    initial: 
+    type: 0
+    start: 
+  - name: real_velocity
+    valueReference: 3
+    description: 
+    causality: output
+    variability: 
+    initial: 
+    type: 0
+    start: 
+  - name: motion_complete
+    valueReference: 1
+    description: 
+    causality: output
+    variability: discrete
+    initial: 
+    type: 3
+    start: 

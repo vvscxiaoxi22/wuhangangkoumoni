@@ -1,0 +1,17 @@
+{
+    "name": "game4automation.interfaces.plcsimadvanced.editor",
+    "references": [
+        "game4automation.interfaces.plcsimadvanced",
+        "game4automation.base"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

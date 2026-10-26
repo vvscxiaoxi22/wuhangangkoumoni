@@ -12,11 +12,15 @@ namespace PortTraining.YardCraneSimulator.Editor
     public static class ProjectScaffolder
     {
         private const string BootstrapScenePath = "Assets/YardCraneSimulator/Scenes/Bootstrap.unity";
-        private const string OperationalScenePath = "Assets/test.unity";
+        private const string StudentEntryScenePath = "Assets/YardCraneSimulator/Scenes/StudentEntry.unity";
+        private const string OperationalScenePath = "Assets/YardCraneSimulator/Scenes/YardCrane.unity";
+        private const string StudentHomeScenePath = "Assets/YardCraneSimulator/Scenes/StudentHome.unity";
+        private const string TeacherHomeScenePath = "Assets/YardCraneSimulator/Scenes/TeacherHome.unity";
 
         public static void ConfigureProject()
         {
             ConfigurePlayerSettings();
+            CreateStudentEntryScene();
             CreateBootstrapScene();
             ValidateProject();
             AssetDatabase.SaveAssets();
@@ -48,7 +52,7 @@ namespace PortTraining.YardCraneSimulator.Editor
                 "--coordinator-pipe", $"pt.operation.yc-lab-01.{operationRunId:D}",
                 "--gateway-pipe", "pt.gateway.realtime.yc-lab-01",
                 "--gateway-lease-id", leaseId.ToString("D"),
-                "--display-profile", "DESKTOP-16X9-V1",
+                "--display-profile", Presentation.YardCraneDisplayProfile.NativeDualDisplayProfileId,
                 "--scene-profile", config.sceneProfileId,
                 "--protocol-version", config.protocolVersion
             };
@@ -70,6 +74,26 @@ namespace PortTraining.YardCraneSimulator.Editor
             if (!File.Exists(BootstrapScenePath))
             {
                 throw new FileNotFoundException("Bootstrap scene was not created.", BootstrapScenePath);
+            }
+
+            if (!File.Exists(StudentEntryScenePath))
+            {
+                throw new FileNotFoundException("Student entry scene was not created.", StudentEntryScenePath);
+            }
+
+            if (!File.Exists(OperationalScenePath))
+            {
+                throw new FileNotFoundException("The dedicated yard-crane operational scene is missing.", OperationalScenePath);
+            }
+
+            if (!File.Exists(StudentHomeScenePath))
+            {
+                throw new FileNotFoundException("Student home scene is missing.", StudentHomeScenePath);
+            }
+
+            if (!File.Exists(TeacherHomeScenePath))
+            {
+                throw new FileNotFoundException("Teacher home scene is missing.", TeacherHomeScenePath);
             }
 
             Debug.Log("YardCraneSimulator startup contract and local configuration validation passed.");
@@ -133,9 +157,22 @@ namespace PortTraining.YardCraneSimulator.Editor
 
             EditorBuildSettings.scenes = new[]
             {
+                new EditorBuildSettingsScene(StudentEntryScenePath, true),
                 new EditorBuildSettingsScene(BootstrapScenePath, true),
-                new EditorBuildSettingsScene(OperationalScenePath, true)
+                new EditorBuildSettingsScene(OperationalScenePath, true),
+                new EditorBuildSettingsScene(StudentHomeScenePath, true),
+                new EditorBuildSettingsScene(TeacherHomeScenePath, true)
             };
+        }
+
+        private static void CreateStudentEntryScene()
+        {
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            new GameObject("YardCraneStudentEntry").AddComponent<Shell.YardCraneStudentShell>();
+            if (!EditorSceneManager.SaveScene(scene, StudentEntryScenePath))
+            {
+                throw new InvalidOperationException($"Failed to save student entry scene to {StudentEntryScenePath}.");
+            }
         }
     }
 }

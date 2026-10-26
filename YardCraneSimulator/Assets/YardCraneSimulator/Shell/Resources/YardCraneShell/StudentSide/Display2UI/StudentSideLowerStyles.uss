@@ -1,0 +1,42 @@
+.side-lower {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgb(4, 45, 97);
+    overflow: hidden;
+    color: rgb(231, 240, 244);
+}
+
+Label { margin: 0; padding: 0; -unity-font-style: normal; }
+
+/* Background photo is declarative-only (USS url(), not a C#-loaded Image) so a
+   missing file cannot fail the whole document to build - see the 2026-09-08 discussion
+   record. StudentSidePoster_v1 is the actual supplied file (a parallel session added it
+   and swapped the UXML to a leaner two-layer poster+scrim structure; this rule is updated
+   to match rather than left pointing at the old StudentSideCraneLift_v1 name, which was
+   never supplied and is not coming). */
+.side-lower-poster { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-image: url('StudentSidePoster_v1.png'); -unity-background-scale-mode: scale-and-crop; }
+.side-lower-scrim { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(2, 16, 38, 0.40); }
+
+.side-lower-editorial { position: absolute; left: 96px; top: 90px; width: 920px; }
+.side-lower-kicker { color: rgb(156, 220, 244); font-size: 13px; letter-spacing: 4px; }
+.side-lower-headline-block { margin-top: 34px; }
+.side-lower-headline-row { flex-direction: row; }
+.side-lower-headline { color: rgb(248, 251, 255); font-size: 58px; -unity-font-style: normal; white-space: normal; }
+.side-lower-headline-accent { color: rgb(80, 226, 255); }
+.side-lower-subtitle { margin-top: 24px; color: rgb(216, 232, 246); font-size: 20px; }
+.side-lower-rule { width: 220px; height: 2px; margin-top: 42px; background-color: rgba(255, 255, 255, 0.50); }
+.side-lower-caption { margin-top: 26px; color: rgb(200, 222, 240); font-size: 14px; letter-spacing: 2px; }
+.side-lower-quote-mark { margin-top: 30px; color: rgba(255, 255, 255, 0.28); font-size: 40px; -unity-font-style: bold; }
+.side-lower-footer-stack { position: absolute; left: 96px; bottom: 70px; }
+.side-lower-footer-line { color: rgba(226, 240, 250, 0.62); font-size: 12px; letter-spacing: 3px; }
+
+.side-lower-top-right { position: absolute; right: 96px; top: 90px; align-items: flex-end; }
+.side-lower-top-right-line { color: rgb(238, 246, 252); font-size: 15px; }
+.side-lower-top-right-rule { width: 60px; height: 1px; margin-top: 14px; background-color: rgba(255, 255, 255, 0.40); }
+.side-lower-top-right-code { margin-top: 12px; color: rgba(226, 240, 250, 0.70); font-size: 11px; letter-spacing: 2px; }
+
+.side-lower-bottom-right { position: absolute; right: 96px; bottom: 70px; align-items: flex-end; }
+.side-lower-bottom-right-line { color: rgba(226, 240, 250, 0.62); font-size: 11px; letter-spacing: 2px; }

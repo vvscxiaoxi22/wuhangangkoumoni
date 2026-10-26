@@ -1,0 +1,21 @@
+{
+    "name": "game4automation.cadlink",
+    "rootNamespace": "",
+    "references": [
+        "game4automation.base",
+        "NaughtyAttributes.Core",
+        ""
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "CMCKiesel.UnityNativeImporter.dll",
+        "Ionic.Zip.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

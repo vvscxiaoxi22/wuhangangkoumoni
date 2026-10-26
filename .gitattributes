@@ -51,3 +51,7 @@
 *.docx filter=lfs diff=lfs merge=lfs -text
 *.pptx filter=lfs diff=lfs merge=lfs -text
 *.xlsx filter=lfs diff=lfs merge=lfs -text
+
+# These two authored Unity scenes are too large for regular GitHub blobs.
+YardCraneSimulator/Assets/Scenes/港口场景.unity filter=lfs diff=lfs merge=lfs -text
+YardCraneSimulator/Assets/Scenes/港口场景_数字孪生.unity filter=lfs diff=lfs merge=lfs -text

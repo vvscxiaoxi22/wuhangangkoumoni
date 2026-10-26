@@ -7,14 +7,14 @@
 ## 前置条件
 
 1. 本机已安装Claude Code并完成登录。
-2. 从工作区`F:\wuhanxiangmu`范围内使用任务契约。
+2. 从工作区`D:\wuhanxiangmu`范围内使用任务契约。
 3. 同一时间只运行一个受控Claude任务。
 
 ## 只读审查
 
 ```powershell
-& "F:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
-  -TaskFile "F:\wuhanxiangmu\PortTraining\Docs\Claude任务\2026-09-01\YC-P0-02-低空防碰逻辑只读审查.md" `
+& "D:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
+  -TaskFile "D:\wuhanxiangmu\PortTraining\Docs\Claude任务\2026-09-01\YC-P0-02-低空防碰逻辑只读审查.md" `
   -Mode Review
 ```
 
@@ -23,7 +23,7 @@
 ## 限定开发
 
 ```powershell
-& "F:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
+& "D:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
   -TaskFile "<任务契约绝对路径>" `
   -Mode Implement
 ```
@@ -33,7 +33,7 @@
 ## 继续同一会话
 
 ```powershell
-& "F:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
+& "D:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
   -TaskFile "<修正任务契约绝对路径>" `
   -Mode Implement `
   -ResumeSessionId "<前一次结果中的session_id>"
@@ -44,7 +44,7 @@
 由定时或后台任务调用时，可以在Claude完成后向指定Codex任务排队回调：
 
 ```powershell
-& "F:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
+& "D:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Invoke-ClaudeTask.ps1" `
   -TaskFile "<任务契约绝对路径>" `
   -Mode Implement `
   -WakeCodexThreadId "<Codex任务UUID>"
@@ -55,7 +55,7 @@
 ## 用量检查
 
 ```powershell
-& "F:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Get-ClaudeUsageStatus.ps1"
+& "D:\wuhanxiangmu\PortTraining\Tools\ClaudeCollaboration\Get-ClaudeUsageStatus.ps1"
 ```
 
 `/usage`结果是Claude官方提供的计划用量估算。解析失败、认证失败或达到阈值时采用保守策略：不启动Claude，交回Codex。

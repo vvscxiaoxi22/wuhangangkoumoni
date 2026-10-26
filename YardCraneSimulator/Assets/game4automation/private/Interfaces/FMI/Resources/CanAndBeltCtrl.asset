@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: CanAndBeltCtrl
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 7b00310037006400620038003600350035002d0033003500340063002d0038006100640033002d0032006400370037002d003300360063006100350065003800370066006100320031007d00
+  modelName: CanAndBeltCtrl
+  coSimulation:
+    modelIdentifier: CanAndBeltCtrl
+  modelVariables:
+  - name: CanConveyorSensor
+    valueReference: 0
+    description: CanConveyorSensor
+    causality: input
+    variability: continuous
+    initial: 
+    type: 3
+    start: 0
+  - name: YAxisPosition
+    valueReference: 0
+    description: YAxisPosition
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: YAxisPositon
+    valueReference: 1
+    description: YAxisPositon
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: CanConveyorStart
+    valueReference: 1
+    description: CanConveyorStart
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 3
+    start: 
+  - name: YAxisStart
+    valueReference: 2
+    description: YAxisStart
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 3
+    start: 
+  - name: YAxisDestination
+    valueReference: 2
+    description: YAxisDestination
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: ZAxisDestination
+    valueReference: 3
+    description: ZAxisDestination
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: ZAxisStart
+    valueReference: 4
+    description: ZAxisStart
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 5
+    description: time
+    causality: independent
+    variability: continuous
+    initial: 
+    type: 0
+    start: 

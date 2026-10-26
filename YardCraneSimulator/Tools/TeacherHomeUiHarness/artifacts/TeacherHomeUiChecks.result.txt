@@ -1,0 +1,395 @@
+UTC 2026-10-11T13:43:33.8340505Z
+PROJECT D:\wuhanxiangmu\YardCraneSimulator
+SCOPE static TeacherHome scene/UI contract only; Unity Editor was not launched
+PASS TeacherHome scene exists
+PASS TeacherHome scene has a meta file
+PASS TeacherHome scene has a valid Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml exists
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml has a meta file
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss exists
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss has a meta file
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellPanel.asset exists
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellPanel.asset has a meta file
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellPanel.asset has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml exists
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml has a meta file
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss exists
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss has a meta file
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerPanel.asset exists
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerPanel.asset has a meta file
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerPanel.asset has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs exists
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs has a meta file
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs has one valid 32-character Unity GUID
+PASS Teacher Display1/Display2 UXML, USS, Panel and shell use independent GUIDs
+PASS Assets/YardCraneSimulator/Runtime/Training/YardCraneAssessmentQuestionBank.cs exists
+PASS Assets/YardCraneSimulator/Runtime/Training/YardCraneAssessmentQuestionBank.cs has a meta file
+PASS Assets/YardCraneSimulator/Runtime/Training/YardCraneAssessmentQuestionBank.cs has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml has unique named elements
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml has unique named elements
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml declares exactly one stylesheet
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml relative reference resolves to its own TeacherSide stylesheet
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml relative stylesheet exists with valid Unity metadata
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss relative image exists: ../../YardCraneShell/StudentSide/Display1UI/StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss relative image has Unity metadata: ../../YardCraneShell/StudentSide/Display1UI/StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml declares exactly one stylesheet
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml relative reference resolves to its own TeacherSide stylesheet
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml relative stylesheet exists with valid Unity metadata
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss relative image exists: ../../YardCraneShell/StudentSide/Display1UI/StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss relative image has Unity metadata: ../../YardCraneShell/StudentSide/Display1UI/StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss relative image exists: ../Display1UI/logo.png
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss relative image has Unity metadata: ../Display1UI/logo.png
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss has balanced rule braces
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShellStyles.uss avoids unsupported structural pseudo-classes
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss has balanced rule braces
+PASS Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLowerStyles.uss avoids unsupported structural pseudo-classes
+PASS Teacher Display1 UXML exposes its dedicated root
+PASS teacher-assessment-page is independent of hidden task-management pages
+PASS teacher-assessment-detail-overlay is independent of hidden task-management pages
+PASS teacher-assessment-calendar-overlay is independent of hidden task-management pages
+PASS Calendar starts hidden until the date button is clicked
+PASS Calendar is the last shell child so page content cannot cover its popup
+PASS Teacher statistics imports the real calendar control through its runtime UXML namespace
+PASS Calendar provides its scrim control inside the overlay
+PASS Calendar provides its close control inside the overlay
+PASS Calendar provides its all control inside the overlay
+PASS Calendar provides its today control inside the overlay
+PASS Calendar provides its cancel control inside the overlay
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/DatePicker.cs exists
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/DatePicker.cs has a meta file
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/DatePicker.cs has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/GridDayInfo.cs exists
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/GridDayInfo.cs has a meta file
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/GridDayInfo.cs has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/MonthLabelFormat.cs exists
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/MonthLabelFormat.cs has a meta file
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/MonthLabelFormat.cs has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/LICENSE.txt exists
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/LICENSE.txt has a meta file
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/LICENSE.txt has one valid 32-character Unity GUID
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/README.md exists
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/README.md has a meta file
+PASS Assets/YardCraneSimulator/Shell/ThirdParty/UIToolkitDatePicker/README.md has one valid 32-character Unity GUID
+PASS Calendar vendor files have independent Unity GUIDs
+PASS Calendar distribution retains its upstream MIT license
+PASS Teacher Display2 UXML exposes its dedicated root
+PASS Teacher home no longer exposes a standalone fault-publishing card (entry moved into task management's 故障排除 category)
+PASS Teacher Display1 UXML exposes the fault-publishing page
+PASS Fault-publishing page exposes a back button
+PASS Fault selection adds the selected fault group to the shared question list
+PASS Fault publishing hides the publication-scope controls
+PASS Fault publishing hides the training-entry controls
+PASS Fault publishing states the fixed all-students task-assessment destination
+PASS Fault-publishing page has no manual quay-crane catalog button
+PASS Fault-publishing page has no manual yard-crane catalog button
+PASS Fault-publishing page exposes the runtime category-list container
+PASS Teacher home contains two management cards
+PASS Task management exposes a dynamic scroll container for question rows
+PASS Task management no longer hard-codes fixed task rows in UXML
+PASS Task management exposes a grouped-fault detail overlay
+PASS Grouped-fault detail overlay exposes a close button
+PASS Grouped-fault detail overlay exposes a vertical fault-list scroller
+PASS Task editor exposes its single-selection state
+PASS Task editor exposes in-modal add/error feedback
+PASS Task editor has no separate single-task publish button
+PASS Task editor adds one selected training project to the shared question list
+PASS Fault catalog explicitly supports cross-category multi-selection
+PASS Training-project editor remains single-selection
+PASS Task list explains that each row checkbox controls assessment inclusion
+PASS Student fault catalog exists
+PASS Quay-crane student catalog exposes the eleven categories in UI order
+PASS Yard-crane student catalog exposes the eleven categories in UI order
+PASS Quay-crane student catalog classifies all 64 faults
+PASS Quay-crane student catalog has no unclassified faults
+PASS Yard-crane student catalog classifies all 100 faults
+PASS Yard-crane student catalog has no unclassified faults
+PASS Assets/Data/Creat/故障信息.cs exists
+PASS Assets/Data/Creat/故障信息.cs has a meta file
+PASS Assets/Data/Creat/故障信息.cs has one valid 32-character Unity GUID
+PASS Assets/Data/岸桥故障信息.asset exists
+PASS Assets/Data/岸桥故障信息.asset has a meta file
+PASS Assets/Data/岸桥故障信息.asset has one valid 32-character Unity GUID
+PASS Assets/Data/场桥故障信息.asset exists
+PASS Assets/Data/场桥故障信息.asset has a meta file
+PASS Assets/Data/场桥故障信息.asset has one valid 32-character Unity GUID
+PASS Quay-crane fault asset uses the expected ScriptableObject type
+PASS Yard-crane fault asset uses the expected ScriptableObject type
+PASS Quay-crane fault asset contains 64 records
+FAIL Yard-crane fault asset contains 100 records
+PASS Quay-crane fault asset IDs are unique and complete from 1 to 64
+FAIL Yard-crane fault asset IDs are unique and complete from 1 to 100
+PASS Quay-crane fault asset uses all eleven categories
+PASS Yard-crane fault asset uses all eleven categories
+PASS Quay-crane student JSON and teacher ScriptableObject records match exactly
+FAIL Yard-crane student JSON and teacher ScriptableObject records match exactly
+PASS Teacher shell never creates a UIDocument dynamically
+PASS Teacher shell reads fault data through the runtime catalog contract
+PASS Teacher shell no longer reads its fault rows from the student JSON resource
+PASS Teacher fault catalog follows the Build Profile-selected crane kind
+PASS Teacher fault list stores a cross-category set of selected fault ids
+PASS Teacher adds one training project or one grouped fault task to the local bank
+PASS Task rows show grouped-fault type/count and expose the selected-fault detail action
+PASS Teacher rows expose a visible inclusion checkbox that immediately rebuilds the current paper JSON
+PASS Task table labels and styles clearly distinguish current-assessment selection
+PASS Teacher task editor replaces the previous project and saves exactly one selection
+PASS Training-project multi-select checkbox is removed
+PASS Question bank store persists crane-specific local bank and paper JSON files
+PASS Question-bank model persists one grouped fault task with backward-compatible fault access
+PASS Student paper deep-copies grouped faults and strips every answer field
+PASS Question bank accepts JsonUtility empty cross-kind objects while rejecting populated cross-kind data
+PASS Publishing a checkbox writes one ordered paper snapshot from all included questions
+PASS Current paper supports multiple independently ordered questions
+PASS Student assessment page reads the current multi-question paper
+PASS Student projection carries every fault in the selected grouped task into the launch assignment
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-management-button
+PASS teacher-task-management-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-back-button
+PASS teacher-task-back-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-publish-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-publish-back-button
+PASS teacher-fault-publish-back-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-back-button
+PASS teacher-assessment-back-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-picker
+PASS teacher-assessment-calendar-picker is a DatePicker element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-overlay
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-close
+PASS teacher-assessment-detail-close is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-management-button
+PASS teacher-task-management-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-identity
+PASS teacher-identity is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-greeting
+PASS teacher-greeting is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-module-status
+PASS teacher-module-status is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-current-section
+PASS teacher-current-section is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-console-label
+PASS teacher-console-label is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-page-status
+PASS teacher-task-page-status is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-publish-page-status
+PASS teacher-fault-publish-page-status is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-source-state-label
+PASS teacher-fault-source-state-label is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-summary-category-value
+PASS teacher-fault-summary-category-value is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-summary-total-value
+PASS teacher-fault-summary-total-value is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-summary-unclassified-value
+PASS teacher-fault-summary-unclassified-value is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-list-title
+PASS teacher-fault-list-title is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-list-overline
+PASS teacher-fault-list-overline is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-selected-count
+PASS teacher-fault-selected-count is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-selected-category
+PASS teacher-fault-selected-category is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-selected-title
+PASS teacher-fault-selected-title is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-selected-meta
+PASS teacher-fault-selected-meta is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-category-caption
+PASS teacher-task-editor-category-caption is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-title
+PASS teacher-task-editor-title is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-task-detail-title
+PASS teacher-fault-task-detail-title is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-task-detail-count
+PASS teacher-fault-task-detail-count is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-page-status
+PASS teacher-assessment-page-status is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-record
+PASS teacher-assessment-detail-record is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-name
+PASS teacher-assessment-detail-name is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-student
+PASS teacher-assessment-detail-student is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-class
+PASS teacher-assessment-detail-class is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-major
+PASS teacher-assessment-detail-major is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-project
+PASS teacher-assessment-detail-project is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-summary
+PASS teacher-assessment-detail-summary is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-duration
+PASS teacher-assessment-detail-duration is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-score
+PASS teacher-assessment-detail-score is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-status
+PASS teacher-assessment-detail-status is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-target
+PASS teacher-task-editor-target is a DropdownField element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-date-field
+PASS teacher-assessment-date-field is a TextField element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-search-field
+PASS teacher-assessment-search-field is a TextField element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-list-scroll
+PASS teacher-assessment-list-scroll is a ScrollView element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-deduction-scroll
+PASS teacher-assessment-deduction-scroll is a ScrollView element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-overlay
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-picker
+PASS teacher-assessment-calendar-picker is a DatePicker element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-scrim
+PASS teacher-assessment-calendar-scrim is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-close
+PASS teacher-assessment-calendar-close is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-all
+PASS teacher-assessment-calendar-all is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-today
+PASS teacher-assessment-calendar-today is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-calendar-cancel
+PASS teacher-assessment-calendar-cancel is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-home-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-publish-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-category-list
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-list-scroll
+PASS teacher-fault-list-scroll is a ScrollView element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-list-scroll
+PASS teacher-task-list-scroll is a ScrollView element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-task-detail-list
+PASS teacher-fault-task-detail-list is a ScrollView element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-overlay
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-task-detail-overlay
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-drawer
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-management-button
+PASS teacher-task-management-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-statistics-button
+PASS teacher-assessment-statistics-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-publish-back-button
+PASS teacher-fault-publish-back-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-publish-button
+PASS teacher-fault-publish-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-back-button
+PASS teacher-task-back-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-create-button
+PASS teacher-task-create-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-filter-all
+PASS teacher-task-filter-all is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-filter-practice
+PASS teacher-task-filter-practice is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-filter-assessment
+PASS teacher-task-filter-assessment is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-cancel
+PASS teacher-task-editor-cancel is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-save
+PASS teacher-task-editor-save is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-fault-task-detail-close
+PASS teacher-fault-task-detail-close is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-selection-count
+PASS teacher-task-editor-selection-count is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-task-editor-status
+PASS teacher-task-editor-status is a Label element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-back-button
+PASS teacher-assessment-back-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-date-button
+PASS teacher-assessment-date-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-filter-all
+PASS teacher-assessment-filter-all is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-filter-excellent
+PASS teacher-assessment-filter-excellent is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-filter-review
+PASS teacher-assessment-filter-review is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-search-button
+PASS teacher-assessment-search-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-assessment-detail-close
+PASS teacher-assessment-detail-close is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-logout-button
+PASS teacher-logout-button is a Button element
+PASS Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs query resolves in its own UXML: teacher-quit-button
+PASS teacher-quit-button is a Button element
+PASS Teacher Display1 PanelSettings reference resolution is 1920 x 1080
+PASS Teacher Display1 PanelSettings targets display 0
+PASS Teacher Display2 PanelSettings reference resolution is 1920 x 1080
+PASS Teacher Display2 PanelSettings targets display 1
+PASS Teacher Display2 UXML contains no interactive UI Toolkit controls
+PASS Teacher shell disables picking on the Display2 root
+PASS Teacher shell disables picking throughout Display2
+PASS TeacherHome scene YAML has parseable Unity object blocks
+PASS TeacherHome contains exactly two UIDocument components
+PASS TeacherHome Display1 UIDocument references only the dedicated TeacherSide Display1 UXML and PanelSettings
+PASS TeacherHome Display2 UIDocument references only the dedicated TeacherSide Display2 UXML and PanelSettings
+PASS TeacherHome contains exactly one YardCraneTeacherSideShell
+PASS YardCraneTeacherSideShell and Display1 UIDocument are on the same GameObject
+PASS YardCraneTeacherSideShell.lowerDocument points to the Display2 UIDocument component
+PASS Display2 is a different UIDocument on a different GameObject
+PASS Teacher shell serializes its dedicated Display1 PanelSettings template
+PASS Teacher shell serializes its dedicated Display2 PanelSettings template
+PASS Teacher shell references the quay-crane fault ScriptableObject
+PASS Teacher shell references the yard-crane fault ScriptableObject
+PASS Teacher Display1 UIDocument has no parent UI document
+PASS Teacher Display1 UIDocument GameObject is a scene root
+PASS Teacher Display1 UIDocument is enabled in the saved scene
+PASS Teacher Display2 UIDocument has no parent UI document
+PASS Teacher Display2 UIDocument GameObject is a scene root
+PASS Teacher Display2 UIDocument is enabled in the saved scene
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs GUID is available for the exclusion check
+PASS TeacherHome contains no YardCraneStudentShell component
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs GUID is available for the exclusion check
+PASS TeacherHome contains no YardCraneStudentSideShell component
+PASS StudentSide and StudentEntry UXML/Panel assets were discovered for exclusion checks
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpper.uxml GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpper.uxml
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperPanel.asset GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperPanel.asset
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display2UI/StudentShellLower.uxml GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display2UI/StudentShellLower.uxml
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display2UI/StudentShellLowerPanel.asset GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display2UI/StudentShellLowerPanel.asset
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShell.uxml GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShell.uxml
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellPanel.asset GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellPanel.asset
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLower.uxml GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLower.uxml
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerPanel.asset GUID is available for the exclusion check
+PASS TeacherHome does not reference student/entry UI asset: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerPanel.asset
+PASS Teacher UXML, USS, Panel and shell GUIDs do not collide with student/entry UI GUIDs
+PASS TeacherHome contains exactly two Camera components
+PASS TeacherHome cameras target Display 1 and Display 2 exactly once each
+PASS Both TeacherHome cameras are enabled
+PASS Build Settings contains exactly five scenes
+PASS Build Settings scene order is StudentEntry, Bootstrap, YardCrane, StudentHome, TeacherHome
+PASS All five required Build Settings scenes are enabled
+PASS Build Settings GUID resolves for Assets/YardCraneSimulator/Scenes/StudentEntry.unity
+PASS Build Settings GUID resolves for Assets/YardCraneSimulator/Scenes/Bootstrap.unity
+PASS Build Settings GUID resolves for Assets/YardCraneSimulator/Scenes/YardCrane.unity
+PASS Build Settings GUID resolves for Assets/YardCraneSimulator/Scenes/StudentHome.unity
+PASS Build Settings GUID resolves for Assets/YardCraneSimulator/Scenes/TeacherHome.unity
+PASS Build Settings TeacherHome entry uses the actual scene GUID
+PASS Assets/YardCraneSimulator/Editor/YardCraneBuildAutomation.cs exists
+PASS Assets/YardCraneSimulator/Editor/YardCraneBuildAutomation.cs maintains the TeacherHome build-scene contract
+PASS Assets/YardCraneSimulator/Editor/ProjectScaffolder.cs exists
+PASS Assets/YardCraneSimulator/Editor/ProjectScaffolder.cs maintains the TeacherHome build-scene contract
+PASS Assets/YardCraneSimulator/Editor/YardCraneOperationalSceneBuilder.cs exists
+PASS Assets/YardCraneSimulator/Editor/YardCraneOperationalSceneBuilder.cs maintains the TeacherHome build-scene contract
+PASS Package scene registration updates only the global Scene List and does not run on every domain reload
+PASS UnityPackage export explicitly excludes Build Profile assets
+PASS Package postprocessor handles scene imports and performs only one fallback check per Editor session after domain reload
+PASS StudentEntry Display1 UXML exists
+PASS StudentEntry UXML no longer embeds teacher-home-page
+PASS StudentEntry UXML contains no embedded teacher card marker: teacher-task-management-button
+PASS StudentEntry UXML contains no embedded teacher card marker: teacher-assessment-statistics-button
+PASS StudentEntry UXML contains no embedded teacher card marker: teacher-fault-publish-management-button
+PASS StudentEntry UXML contains no embedded teacher card marker: teacher-management-grid
+PASS StudentEntry UXML contains no embedded teacher card marker: teacher-core-card
+SOURCE_SHA256 Assets/YardCraneSimulator/Scenes/TeacherHome.unity 34E004603BFD2DA882A24BB6B5A3F2CDC0A0514D976DB21058160A27B0A9B363
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/YardCraneTeacherSideShell.cs 6BF08052A82EA47277C880CA3734C717D6F27A52FF67C661D3F80A6BAFC7736C
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display1UI/TeacherSideShell.uxml 33949ADE2957621267AA5605E8488EBDAA3CFF666B23A5E6F1C7FB482F4102FF
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/Resources/TeacherSide/Display2UI/TeacherSideLower.uxml 1F12FEBB2F436395FDAAC6F8803B9C1016BE2BB9BBF314565AB2B05C7434AE48
+[YC_TEACHER_HOME_UI_STATIC_FAIL] checks=384 failures=3
+FAILED_CHECK Yard-crane fault asset contains 100 records
+FAILED_CHECK Yard-crane fault asset IDs are unique and complete from 1 to 100
+FAILED_CHECK Yard-crane student JSON and teacher ScriptableObject records match exactly

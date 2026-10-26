@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <title>gam4automation DOC - CADLink</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700" rel="stylesheet" type="text/css">
+  <link href="style/docsopcua.css" rel="stylesheet">
+</head>
+<body>
+ 
+  <div class="page">
+   
+    <div class="page-content">
+	<p>This is the offline version of the documentation. We recommend you to use the <a href="https://game4automation.com/documentation/current/index.html">online documentation.</a></p>
+ <h1 id="CADLink"><a href="#CADLink" class="headerlink" title="CADLink"></a>CADLink</h1><p>Game4Automation professional is including CADLink, a 3MF File Format based importer. Please check section <a href="cadlink.html">CADLink</a>. With CADLink you can import CAD files from any CAD system which is able to export 3MF files.</p>
+<p>Please check also the Youtube video, which demonstrates CADLink: <a href="https://youtu.be/yXwn6m8ilHE" target="_blank" rel="noopener">https://youtu.be/yXwn6m8ilHE</a></p>
+<p>For example CAD Systems like Solidworks, Solidedge, ProE / Creo and NX are able to write 3MF Files. Please check your CAD System documentation to see if your system is also able to write 3MF Files.</p>
+<p>The advantages of 3MF files are:</p>
+<ul>
+<li>It is command standard in a lot of CAD Systems (see <a href="https://3mf.io/" target="_blank" rel="noopener">https://3mf.io/</a>) </li>
+<li>The tessellation is done by the CAD System which provides usually a very good quality</li>
+<li>It is the modern tessellation 3D-printing standard - which fits perfect to Unity</li>
+<li>Assembly structure is included</li>
+<li>Color and material information is included</li>
+<li>It is zipped and low sized</li>
+<li>It includes multiple occurrences only one time - which reduces the file sized</li>
+</ul>
+<p>CADLink is available as separate asset in the Unity Asset Store and it is included in the Game4Automation Professional package.</p>
+<h2 id="Known-Limitations"><a href="#Known-Limitations" class="headerlink" title="Known Limitations"></a>Known Limitations</h2><h3 id="Solidworks-Dassault"><a href="#Solidworks-Dassault" class="headerlink" title="Solidworks (Dassault)"></a>Solidworks (Dassault)</h3><p>No known limitations. Solidworks exports everything correct (assembly structure, colors and materials).</p>
+<h3 id="Solidedge-Siemens-PLM"><a href="#Solidedge-Siemens-PLM" class="headerlink" title="Solidedge (Siemens PLM)"></a>Solidedge (Siemens PLM)</h3><p>No known limitations. Solidedge exports everything correct (assembly structure, colors and materials).</p>
+<p>Please use this export options:<br><img src="images\cadlink-solidedge.png"></p>
+<h3 id="Fusion360-Autodesk"><a href="#Fusion360-Autodesk" class="headerlink" title="Fusion360 (Autodesk)"></a>Fusion360 (Autodesk)</h3><p>You can use this solution to write 3mf files:<br><a href="https://apps.autodesk.com/FUSION/en/Detail/Index?id=9199586017740700165&amp;appLang=en&amp;os=Win64" target="_blank" rel="noopener">https://apps.autodesk.com/FUSION/en/Detail/Index?id=9199586017740700165&amp;appLang=en&amp;os=Win64</a></p>
+<p>Colors and assembly structure is not exported correct (flat structure without colors).</p>
+<h3 id="ProE-Creo"><a href="#ProE-Creo" class="headerlink" title="ProE / Creo"></a>ProE / Creo</h3><p>No known limitations</p>
+<h3 id="NX-Siemens-PLM"><a href="#NX-Siemens-PLM" class="headerlink" title="NX (Siemens PLM)"></a>NX (Siemens PLM)</h3><p>NX is exporting currently no assembly structure. Colors are exported. We will provide a work around in a NX macro which we are going to release soon.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>After installation you will find CADLink under <em>Assets&gt;CADLink</em> if you are using it as a stand alone asset or you will find it under <em>game4automation&gt;private&gt;CADLink</em></p>
+<p>The folder structure looks like this:<br><img src="images\cadlink-folder.png"></p>
+<p>In Samples you find a sample scene which is importing the ToyCar example 3MF file.</p>
+<p>To import 3D data into your scene you need to drag and drop the CADLink prefab into your scene or you can use in Game4Automation Professional the Menu <em>game4automation &gt; Add CADLink (Pro)</em>.</p>
+<p>You are now able to import your CAD assembly as a sub hierarchy into the CADLink top node. It is possible to include into one scene multiple CADLink interfaces if needed.</p>
+<h2 id="CADLink-Settings"><a href="#CADLink-Settings" class="headerlink" title="CADLink Settings"></a>CADLink Settings</h2><p>In the Inspector you can check and change the CADLink settings:<br><img src="images\cadlink-ui.png"></p>
+<h3 id="Import-CAD"><a href="#Import-CAD" class="headerlink" title="Import CAD"></a>Import CAD</h3><h4 id="File"><a href="#File" class="headerlink" title="File"></a>File</h4><p>You can type in the relative or absolute File path or you can select the file path by pushing on the button <em>Select CAD Import File</em></p>
+<h4 id="Delete-before-importing"><a href="#Delete-before-importing" class="headerlink" title="Delete before importing"></a>Delete before importing</h4><p>This deletes the old imported data automatically when importing once again.</p>
+<h4 id="Remove-top-assembly-node"><a href="#Remove-top-assembly-node" class="headerlink" title="Remove top assembly node"></a>Remove top assembly node</h4><p>Removes the top assembly node when importing the CAD data. This means that CADLink object is acting like the top assembly node.</p>
+<h4 id="Name-Clones-Identical"><a href="#Name-Clones-Identical" class="headerlink" title="Name Clones Identical"></a>Name Clones Identical</h4><p>If clones (multiple occurrences of an identical part in the assembly structure) you can name all of the same or you can let the importer add a number in brackets to the imported name.</p>
+<h4 id="Import-scale-factor"><a href="#Import-scale-factor" class="headerlink" title="Import scale factor"></a>Import scale factor</h4><p>The scale factor for the import. Normally, if one unit in Unity means for you 1 meter and you are exporting the 3mf file in millimeters this should be 0.001.</p>
+<h3 id="Advanced-Settings"><a href="#Advanced-Settings" class="headerlink" title="Advanced Settings"></a>Advanced Settings</h3><h4 id="This-should-be-normally-turned-on-Even-if-the-exporter-is-combining-vertices-at-the-same-position-into-one-vertex-CADLink-is-separating-them-This-makes-usually-the-rendering-much-nicer-if-this-is-combined-with-Advanced-recalculate-normals"><a href="#This-should-be-normally-turned-on-Even-if-the-exporter-is-combining-vertices-at-the-same-position-into-one-vertex-CADLink-is-separating-them-This-makes-usually-the-rendering-much-nicer-if-this-is-combined-with-Advanced-recalculate-normals" class="headerlink" title="This should be normally turned on. Even if the exporter is combining vertices at the same position into one vertex, CADLink is separating them. This makes usually the rendering much nicer if this is combined with Advanced recalculate normals."></a>This should be normally turned on. Even if the exporter is combining vertices at the same position into one vertex, CADLink is separating them. This makes usually the rendering much nicer if this is combined with <em>Advanced recalculate normals</em>.</h4><h4 id="Unity-recalculate-normals"><a href="#Unity-recalculate-normals" class="headerlink" title="Unity recalculate normals"></a>Unity recalculate normals</h4><p>Defines that Unity should recalculate the normals. We recommend to turn that off.</p>
+<h4 id="Advanced-recalculate-normals"><a href="#Advanced-recalculate-normals" class="headerlink" title="Advanced recalculate normals"></a>Advanced recalculate normals</h4><p>Lets the importer to recalculate the normals and - if needed - to combine the separated vertices again to one. The calculation is done based on the angel between the triangle surfaces. If the angle is above the defined angle (in Degrees) an edge is created (with separated vertices). This gives a sharp edge shading. If the angle is below the vertices are combined and a normal is calculated which gives a smooth edge.</p>
+<p>See the difference in this pictures.<br>With recalculated normals:<br><img src="images\cadlink-normalsrecalculated.png"></p>
+<p>Without recalculated normals:<br><img src="images\cadlink-normalsunrecalculated.png"></p>
+<h4 id="Calculate-UVs"><a href="#Calculate-UVs" class="headerlink" title="Calculate UVs"></a>Calculate UVs</h4><p>This option takes some time when importing. So please just turn it on when needed.</p>
+<p>You can calculate UVs automatically for mapping material textures on the surface. You can change the UV scale factor.</p>
+<p>With scale factor 0.01:<br><img src="images\cadlink-uvrough.png"><br>With scale factor 1:<br><img src="images\cadlink-uvsmooth.png"></p>
+<h3 id="Materials"><a href="#Materials" class="headerlink" title="Materials"></a>Materials</h3><p>Usually during the import new materials are created - if not existing - based on the naming of the imported color. You can change these materials if needed. </p>
+<p>Another option is to define a Material Mapping. This will map a given material to a certain imported material and color name combination.</p>
+<p>You can start the material assignment independent from the import by pushing the button “Update Materials”. In the import process the materials are automatically updated.</p>
+<h4 id="Set-and-Create-Materials"><a href="#Set-and-Create-Materials" class="headerlink" title="Set and Create Materials"></a>Set and Create Materials</h4><p>If turned of no materials are created during import.</p>
+<h4 id="Overwrite-Existing-Materials"><a href="#Overwrite-Existing-Materials" class="headerlink" title="Overwrite Existing Materials"></a>Overwrite Existing Materials</h4><p>If a material which is currently imported already exists it will be overwritten.</p>
+<h4 id="New-Material-Path"><a href="#New-Material-Path" class="headerlink" title="New Material Path"></a>New Material Path</h4><p>Defines the path where the new imported materials should be created.</p>
+<h4 id="Material-Mapping"><a href="#Material-Mapping" class="headerlink" title="Material Mapping"></a>Material Mapping</h4><p>Defines the Material mapping table. You can have in your project multiple material mapping tables. To create a new one and to automatically assign the new one to the CADLink object just press the button <em>Create New Material Mapping</em></p>
+<p>In the Material Mapping settings you can define a color and/or a material name and assign this to a Unity material.</p>
+<p>CADLink checks the assignment in the following order:</p>
+<ul>
+<li>First, assign materials if the Material name and Color name are defined in the table (and if they are not empty).</li>
+<li>Second, assign materials if the Material name is in the table and the Color name is empty.</li>
+<li>Third , assign if the Color name is in the table and the Material name is empty.</li>
+</ul>
+<h2 id="Import-during-runtime"><a href="#Import-during-runtime" class="headerlink" title="Import during runtime"></a>Import during runtime</h2><p>You can import 3MF files also during runtime. During runtime import materials are not created in the Material Assets. For changing materials you must provide before importing during runtime all materials with a corresponding Material Mapping.</p>
+<figure class="highlight plain"><figcaption><span>Import during runtime :c#</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class DemoImportRuntime : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    // Start is called before the first frame update</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        GetComponent&lt;CADLink&gt;().ImportCad();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Update is called once per frame</span><br><span class="line">    void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+	  <br>
+
+	  <p><font size="1">&copy; 2019 in2Sight GmbH <a href="https://game4automation.com"> https://game4automation.com </a> - All rights reserved. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including printing, saving, photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher.</font></p>
+    </div>
+	
+  </div>
+  <div class="switch-page">
+    
+    
+  </div>
+</body>
+</html>

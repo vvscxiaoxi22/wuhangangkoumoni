@@ -1,0 +1,338 @@
+UTC 2026-10-15T02:32:37.8949905Z
+PROJECT D:\wuhanxiangmu\YardCraneSimulator
+PASS project remains Unity 6000.0.42f1
+FAIL real compilation dependency available: D:\App\6000.0.42f1\Editor\Data\DotNetSdkRoslyn\csc.dll
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpper.uxml has unique names (20)
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpper.uxml relative stylesheet exists: StudentShellUpperStyles.uss
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShell.uxml has unique names (120)
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShell.uxml relative stylesheet exists: StudentSideShellStyles.uss
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLower.uxml has unique names (3)
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLower.uxml relative stylesheet exists: StudentSideLowerStyles.uss
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-button
+PASS login-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: student-number
+PASS student-number expected TextField, actual TextField
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: display-name
+PASS display-name expected TextField, actual TextField
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: teacher-password
+PASS teacher-password expected TextField, actual TextField
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: student-name-group
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: teacher-password-group
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-mode-note
+PASS login-mode-note expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-error
+PASS login-error expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-title
+PASS login-title expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-context
+PASS login-context expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-note
+PASS login-note expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: account-label
+PASS account-label expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: system-title
+PASS system-title expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: role-student
+PASS role-student expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: role-teacher
+PASS role-teacher expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-background
+PASS login-background expected Image, actual Image
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: login-brand-logo
+PASS login-brand-logo expected Image, actual Image
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs root query resolves: student-shell
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/YardCraneStudentShell.cs 257B8B8623E196C80491DB8D4CDA0729D4608F85544720521101CB19F3C637E9
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: logout-button
+PASS logout-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: student-home-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: student-assessment-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: student-learning-page
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: greeting
+PASS greeting expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: identity
+PASS identity expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-identity
+PASS learning-identity expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: launch-status
+PASS launch-status expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: launch-button
+PASS launch-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: quit-button
+PASS quit-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-mode-button
+PASS learning-mode-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: assessment-mode-button
+PASS assessment-mode-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: assessment-back-button
+PASS assessment-back-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: assessment-paper-title
+PASS assessment-paper-title expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: assessment-paper-count
+PASS assessment-paper-count expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: assessment-paper-status
+PASS assessment-paper-status expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: assessment-question-list
+PASS assessment-question-list expected ScrollView, actual ScrollView
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-back-button
+PASS learning-back-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-back-crumb
+PASS learning-back-crumb expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-close-button
+PASS learning-close-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-gantry-start
+PASS drill-gantry-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-trolley-start
+PASS drill-trolley-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-hoist-start
+PASS drill-hoist-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-tilt-start
+PASS drill-tilt-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-pitch-start
+PASS drill-pitch-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-launch-status
+PASS learning-launch-status expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-nav-single
+PASS learning-nav-single expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-nav-link
+PASS learning-nav-link expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-nav-work
+PASS learning-nav-work expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-nav-skill
+PASS learning-nav-skill expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-nav-fault
+PASS learning-nav-fault expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-scope-local
+PASS learning-scope-local expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: learning-scope-remote
+PASS learning-scope-remote expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: single-drill-row
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: linked-drill-row
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: skill-drill-row
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-drill-row
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-category-heading
+PASS fault-category-heading expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-category-grid
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-detail-view
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-detail-back-button
+PASS fault-detail-back-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-detail-title
+PASS fault-detail-title expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-detail-count
+PASS fault-detail-count expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-detail-notice
+PASS fault-detail-notice expected Label, actual Label
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-detail-list
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: fault-simulation-button
+PASS fault-simulation-button expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-gantry-trolley-start
+PASS drill-linked-gantry-trolley-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-gantry-hoist-start
+PASS drill-linked-gantry-hoist-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-trolley-hoist-start
+PASS drill-linked-trolley-hoist-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-gantry-trolley-hoist-start
+PASS drill-linked-gantry-trolley-hoist-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-skill-gantry-straight-start
+PASS drill-skill-gantry-straight-start expected Button, actual Button
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-gantry-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-trolley-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-hoist-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-tilt-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-gantry-trolley-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-gantry-hoist-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-trolley-hoist-options
+PASS Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs root query resolves: drill-linked-gantry-trolley-hoist-options
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/YardCraneStudentSideShell.cs 72D299F08E3116D55C251C882EF58F0F060EFCB7ED8D39F5C58F0E29835B7496
+PASS Build Profile defines select the shore or yard crane kind and reject an ambiguous profile
+PASS Login shell no longer exposes the manual IsQuayCrane Inspector checkbox
+PASS StudentEntry no longer serializes the obsolete manual crane checkbox
+PASS Multi-question assessment bank runtime source exists
+PASS Multi-question assessment bank runtime source has a Unity meta GUID
+PASS StudentHome implements all three explicit local training context factories
+PASS StudentHome direct scene routing keeps a return bridge without requiring Bootstrap
+PASS StudentHome finalizes a returned training session before accepting another launch
+PASS Student task catalogue ignores task types outside the five learning/free-practice categories
+PASS Learning fault simulation ignores teacher publications, writes the complete selected-category IDs, and launches the configured scene
+PASS Fault simulation uses an open learning session and returns to learning selection instead of free-practice semantics
+PASS Every operational-scene handoff requires exactly one task-state payload
+PASS Learning starts and local assessment are no longer placeholder callbacks
+PASS Student fault catalog follows the Build Profile-selected crane kind and does not depend on JSON Resources loading
+PASS All three training modes load the crane-specific scene directly from StudentHome without Bootstrap routing
+PASS Student assessment entry loads and renders every question in the current paper
+PASS Selecting one assessment question writes only that question directly to task state after launch preflight
+PASS Assessment paper JSON supports multiple training and fault questions
+PASS Student question-list metadata exposes only the grouped-fault count, never fault-point or line-tag answers
+PASS Student-facing paper JSON strips every grouped-fault answer and safely upgrades legacy paper snapshots
+PASS Learning page contains exactly five single-item drill cards
+PASS Learning page contains exactly five single-item thumbnail elements
+PASS Single-item cards use the five Yard Crane operation titles in order
+PASS Learning page contains exactly four linked drill cards
+PASS Linked cards use the four manual §5.2.5-8 operation titles in order
+PASS Learning page contains exactly one skill drill card
+PASS Skill card uses the manual §5.2.9 operation title
+PASS Learning page contains exactly eleven fault-selection cards
+PASS Fault cards match the eleven quay-crane reference types in order
+PASS Fault navigation is presented as an available category
+PASS Fault detail starts hidden behind the category grid
+PASS Fault detail exposes only the four requested table columns in order
+PASS Fault detail shows the vertical scrollbar only on overflow and hides horizontal scrolling
+PASS Fault detail contains fault-detail-back-button
+PASS Fault detail contains fault-detail-title
+PASS Fault detail contains fault-detail-count
+PASS Fault detail contains fault-detail-notice
+PASS Fault detail contains fault-detail-list
+PASS Fault detail contains fault-simulation-button
+PASS Quay Crane fault ScriptableObject exists: Assets/Data/岸桥故障信息.asset
+PASS Quay Crane asset uses the existing 故障信息 script
+PASS Quay Crane fault asset contains all 64 records
+PASS Quay Crane fault asset classifies every record into the eleven UI categories
+PASS Quay Crane fault asset has no unsupported or unclassified category
+PASS Quay Crane fault IDs are unique and contiguous
+PASS YardCraneStudentSideShell exposes eleven distinct Quay Crane fault categories
+PASS YardCraneStudentSideShell Quay Crane category order matches the fault asset and UI
+PASS YardCraneStudentSideShell accepts every Quay Crane asset record without an unsupported category
+PASS YardCraneTeacherSideShell exposes eleven distinct Quay Crane fault categories
+PASS YardCraneTeacherSideShell Quay Crane category order matches the fault asset and UI
+PASS YardCraneTeacherSideShell accepts every Quay Crane asset record without an unsupported category
+SOURCE_SHA256 Assets/Data/岸桥故障信息.asset 3C78D36A0CCEAF96FD456A1BF34541E63FD9F57A7D8D34D02E28ACC2E7BE056E
+PASS Yard Crane fault ScriptableObject exists: Assets/Data/场桥故障信息.asset
+PASS Yard Crane asset uses the existing 故障信息 script
+PASS Yard Crane fault asset contains all 64 records
+PASS Yard Crane fault asset classifies every record into the eleven UI categories
+PASS Yard Crane fault asset has no unsupported or unclassified category
+PASS Yard Crane fault IDs are unique and contiguous
+PASS YardCraneStudentSideShell exposes eleven distinct Yard Crane fault categories
+PASS YardCraneStudentSideShell Yard Crane category order matches the fault asset and UI
+PASS YardCraneStudentSideShell accepts every Yard Crane asset record without an unsupported category
+PASS YardCraneTeacherSideShell exposes eleven distinct Yard Crane fault categories
+PASS YardCraneTeacherSideShell Yard Crane category order matches the fault asset and UI
+PASS YardCraneTeacherSideShell accepts every Yard Crane asset record without an unsupported category
+SOURCE_SHA256 Assets/Data/场桥故障信息.asset 0DE80D9444FF1A8AD169F4B5FF79A5D8F614DBC60B10EADDE456225AE940BDAE
+PASS Learning page contains no Quay Crane-only terminology
+PASS Learning thumbnail ignores pointer picking
+PASS Learning thumbnail relative image resolves once: LearningThumbnails/DrillGantry.png
+PASS Learning thumbnail has a Unity GUID: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillGantry.png
+PASS Learning thumbnail has high-resolution 16:9 landscape composition: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillGantry.png (1672x941)
+PASS Learning thumbnail ignores pointer picking
+PASS Learning thumbnail relative image resolves once: LearningThumbnails/DrillTrolley.png
+PASS Learning thumbnail has a Unity GUID: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillTrolley.png
+PASS Learning thumbnail has high-resolution 16:9 landscape composition: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillTrolley.png (1672x941)
+PASS Learning thumbnail ignores pointer picking
+PASS Learning thumbnail relative image resolves once: LearningThumbnails/DrillHoist.png
+PASS Learning thumbnail has a Unity GUID: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillHoist.png
+PASS Learning thumbnail has high-resolution 16:9 landscape composition: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillHoist.png (1672x941)
+PASS Learning thumbnail ignores pointer picking
+PASS Learning thumbnail relative image resolves once: LearningThumbnails/DrillSpreaderRotation.png
+PASS Learning thumbnail has a Unity GUID: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillSpreaderRotation.png
+PASS Learning thumbnail has high-resolution 16:9 landscape composition: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillSpreaderRotation.png (1672x941)
+PASS Learning thumbnail ignores pointer picking
+PASS Learning thumbnail relative image resolves once: LearningThumbnails/DrillSpreaderZeroing.png
+PASS Learning thumbnail has a Unity GUID: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillSpreaderZeroing.png
+PASS Learning thumbnail has high-resolution 16:9 landscape composition: Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/LearningThumbnails/DrillSpreaderZeroing.png (1672x941)
+PASS Learning thumbnails use semantic relative image paths in card order
+PASS Learning thumbnails are five distinct images
+PASS drill-gantry-options exposes at least two target choices
+PASS drill-gantry-options has exactly one default choice
+PASS drill-gantry-options uses reachable, explicit target semantics
+PASS drill-trolley-options exposes at least two target choices
+PASS drill-trolley-options has exactly one default choice
+PASS drill-trolley-options uses reachable, explicit target semantics
+PASS drill-hoist-options exposes at least two target choices
+PASS drill-hoist-options has exactly one default choice
+PASS drill-hoist-options uses reachable, explicit target semantics
+PASS drill-tilt-options exposes at least two target choices
+PASS drill-tilt-options has exactly one default choice
+PASS drill-tilt-options uses reachable, explicit target semantics
+PASS drill-pitch-options exposes at least two target choices
+PASS drill-pitch-options has exactly one default choice
+PASS drill-pitch-options uses reachable, explicit target semantics
+PASS drill-linked-gantry-trolley-options exposes at least two target choices
+PASS drill-linked-gantry-trolley-options has exactly one default choice
+PASS drill-linked-gantry-trolley-options uses reachable, explicit target semantics
+PASS drill-linked-gantry-hoist-options exposes at least two target choices
+PASS drill-linked-gantry-hoist-options has exactly one default choice
+PASS drill-linked-gantry-hoist-options uses reachable, explicit target semantics
+PASS drill-linked-trolley-hoist-options exposes at least two target choices
+PASS drill-linked-trolley-hoist-options has exactly one default choice
+PASS drill-linked-trolley-hoist-options uses reachable, explicit target semantics
+PASS drill-linked-gantry-trolley-hoist-options exposes at least two target choices
+PASS drill-linked-gantry-trolley-hoist-options has exactly one default choice
+PASS drill-linked-gantry-trolley-hoist-options uses reachable, explicit target semantics
+PASS Learning page exposes exactly ten start buttons
+PASS StudentSide owns learning-mode-button
+PASS Login shell does not duplicate learning-mode-button
+PASS StudentSide owns launch-button
+PASS Login shell does not duplicate launch-button
+PASS StudentSide owns assessment-mode-button
+PASS Login shell does not duplicate assessment-mode-button
+PASS StudentSide owns student-learning-page
+PASS Login shell does not duplicate student-learning-page
+PASS StudentSide owns the dedicated assessment-question page
+PASS Student assessment page exposes assessment-back-button
+PASS Login shell does not duplicate assessment-back-button
+PASS Student assessment page exposes assessment-paper-title
+PASS Login shell does not duplicate assessment-paper-title
+PASS Student assessment page exposes assessment-paper-count
+PASS Login shell does not duplicate assessment-paper-count
+PASS Student assessment page exposes assessment-paper-status
+PASS Login shell does not duplicate assessment-paper-status
+PASS Student assessment page exposes assessment-question-list
+PASS Login shell does not duplicate assessment-question-list
+PASS Student assessment-question page contains no fault-answer labels
+PASS StudentSide contains no login/teacher page login-page
+PASS StudentSide contains no login/teacher page teacher-home-page
+PASS Display2 is a noninteractive companion display
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperStyles.uss brace balance
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperStyles.uss avoids known unsupported structural pseudo-classes
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperStyles.uss relative image exists: ../StudentSide/Display1UI/StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperStyles.uss relative image has Unity metadata: ../StudentSide/Display1UI/StudentHomeSkin_v1.png
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/Display1UI/StudentShellUpperStyles.uss 778B310ACF63601C4B18BBE04CF17D728B1091BF6EC3F0506C1FAE8D2B6F3801
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss brace balance
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss avoids known unsupported structural pseudo-classes
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image exists: StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image has Unity metadata: StudentHomeSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image exists: StudentLearningSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image has Unity metadata: StudentLearningSkin_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image exists: ModeIcons/ModeLearning.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image has Unity metadata: ModeIcons/ModeLearning.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image exists: ModeIcons/ModeFreePractice.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image has Unity metadata: ModeIcons/ModeFreePractice.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image exists: ModeIcons/ModeTaskAssessment.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image has Unity metadata: ModeIcons/ModeTaskAssessment.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image exists: ModeIcons/ModeLearning.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss relative image has Unity metadata: ModeIcons/ModeLearning.png
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display1UI/StudentSideShellStyles.uss 0ED065B229DA2D7CCAA5BBA62A8800B43DDD05C3655DE7527850CE03354B7625
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerStyles.uss brace balance
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerStyles.uss avoids known unsupported structural pseudo-classes
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerStyles.uss relative image exists: StudentSidePoster_v1.png
+PASS Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerStyles.uss relative image has Unity metadata: StudentSidePoster_v1.png
+SOURCE_SHA256 Assets/YardCraneSimulator/Shell/Resources/YardCraneShell/StudentSide/Display2UI/StudentSideLowerStyles.uss 2AE35D3D336366E10E5AA5EADAE4704355B9FE1F214C1D163D271262C1FDB77B
+PASS StudentHome scene exists
+PASS StudentHome contains exactly one actual StudentSide script reference
+PASS StudentHome serializes the Yard Crane operational scene name
+FAIL StudentHome serializes the Quay Crane operational scene name
+PASS StudentHome explicitly references 岸桥故障信息.asset
+PASS StudentHome explicitly references 场桥故障信息.asset
+PASS StudentHome contains two actual UIDocument components
+PASS StudentSide script and upper UIDocument share the same scene object
+PASS StudentSide lowerDocument references an existing scene component
+PASS Lower points at an independent UIDocument object
+PASS Display 1 references its actual panel asset
+PASS Display 1 references its actual UXML asset
+PASS Display 1 UIDocument enabled in saved scene
+PASS Display 1 panel targets correct display index
+PASS Display 1 reference canvas is 1920 x 1080 (stacked pair 1920 x 2160)
+PASS Display 2 references its actual panel asset
+PASS Display 2 references its actual UXML asset
+PASS Display 2 UIDocument enabled in saved scene
+PASS Display 2 panel targets correct display index
+PASS Display 2 reference canvas is 1920 x 1080 (stacked pair 1920 x 2160)
+PASS UI object 1275254359 is a separate root (no nested shared panel)
+PASS UI object 944848287 is a separate root (no nested shared panel)
+PASS StudentHome is enabled in Build Settings with matching scene GUID
+PASS StudentEntry remains the first enabled scene
+SOURCE_SHA256 Assets/YardCraneSimulator/Scenes/StudentHome.unity 12CA3B2B78768C3DB8F643F13F9F9F2FE563671C34DE4592E2773D5FC47C1C00
+WARN This is real Unity-reference C# compilation plus static asset/scene validation. It does not execute Unity, import USS through Unity, render UI, or verify clicks/scene transitions.
+WARN Static checks cannot prove visual device identity or replace the Unity StudentHome Play verification and screenshot review.
+FINAL FAIL checks=325 failures=2 warnings=2

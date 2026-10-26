@@ -1,0 +1,1779 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{0780D9B7-3B66-77F5-54B8-4AB8E710864C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>.</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>UNITY_6000_0_16;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;GAME4AUTOMATION;GAME4AUTOMATION_PROFESSIONAL;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169;USG0001</NoWarn>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169;USG0001</NoWarn>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UnityProjectGenerator>Package</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityVersion>6000.0.16f1</UnityVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\APP\Editor\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
+    <Analyzer Include="D:\APP\Editor\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
+    <Analyzer Include="D:\APP\Editor\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ColorFromPhase.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\VineClimbController.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\Wrappable.cs" />
+    <Compile Include="Assets\Script\任务\任务_障碍物定点操作.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\CableCarController.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\SlowmoToggler.cs" />
+    <Compile Include="Assets\Data\Creat\岸桥StateCreat.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Bodies\CablePoint.cs" />
+    <Compile Include="Assets\Data\Creat\故障信息.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\DebugParticleFrames.cs" />
+    <Compile Include="Assets\Component\VisionTimer\EasyTimer.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\SpiralCurve.cs" />
+    <Compile Include="Assets\Script\任务\任务_吊具倾斜.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\WorldSpaceGravity.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\CableJoint.cs" />
+    <Compile Include="Assets\Component\Unity-Logs-Viewer\Reporter\Reporter.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\AddRandomVelocity.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\HighlightCollidingRopes.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\CharacterControl2D.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ActorActorCollisionDetector.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTweenPro\DOTweenTk2d.cs" />
+    <Compile Include="Assets\Component\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ObjectDragger.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
+    <Compile Include="Assets\Input\AnqiaoDeviceState.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RopeNet.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Bodies\CableShape.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RopeBetweenTwoPoints.cs" />
+    <Compile Include="Assets\Script\任务\任务_吊具旋转.cs" />
+    <Compile Include="Assets\Script\集卡管理.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTweenPro\DOTweenProShortcuts.cs" />
+    <Compile Include="Assets\UITookit\登录\登录UI.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\CableRenderer.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ActorBlinker.cs" />
+    <Compile Include="Assets\UITookit\CraneSpeedToColorConverter.cs" />
+    <Compile Include="Assets\Component\Unity-Logs-Viewer\Reporter\ReporterMessageReceiver.cs" />
+    <Compile Include="Assets\Script\任务\任务_大车起升联动.cs" />
+    <Compile Include="Assets\Data\Creat\任务信息.cs" />
+    <Compile Include="Assets\FiloCables\SampleScenes\Scripts\PlatformController.cs" />
+    <Compile Include="Assets\Script\计时器.cs" />
+    <Compile Include="Assets\Script\任务\任务_过桩操作.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RatchetController.cs" />
+    <Compile Include="Assets\Script\声音管理.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Bodies\CableBody.cs" />
+    <Compile Include="Assets\Script\任务\任务_吊具起升.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\HosePump.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RopeSweepCut.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\CharacterController\SampleCharacterController.cs" />
+    <Compile Include="Assets\Script\吊具控制.cs" />
+    <Compile Include="Assets\Script\任务\任务_小车移动.cs" />
+    <Compile Include="Assets\FiloCables\SampleScenes\Scripts\SpoolController.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\MoveAndRotate.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RopeTenser.cs" />
+    <Compile Include="Assets\Script\双屏显示.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\WrapRopePlayerController.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\CableSolver.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RenderLineBetweenTransforms.cs" />
+    <Compile Include="Assets\Input\岸桥Control.cs" />
+    <Compile Include="Assets\Script\TrolleyFollowHook.cs" />
+    <Compile Include="Assets\Component\Unity-Logs-Viewer\Reporter\Test\TestReporter.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\LookAroundCamera.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ColliderHighlighter.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ObjectLimit.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ObiParticleCounter.cs" />
+    <Compile Include="Assets\Component\Unity-Logs-Viewer\Reporter\Test\Rotate.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Utils.cs" />
+    <Compile Include="Assets\Script\集装箱State.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\RopeTensionColorizer.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\RigidbodyMaxAngularVel.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Script\任务\任务_小车起升联动.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\TangledPegSlot.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\Blinker.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ColorRandomizer.cs" />
+    <Compile Include="Assets\Script\任务\任务_岸桥装船作业.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ObiActorTeleport.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\CableSection.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Input\岸桥设备Binding.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\FPSDisplay.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\CraneController.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Bodies\CableDisc.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\ExtendableGrapplingHook.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ActorSpawner.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ExtrapolationCamera.cs" />
+    <Compile Include="Assets\Script\任务\任务_大车小车联动.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\CraneHoistControl.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Bodies\ConvexHull2D.cs" />
+    <Compile Include="Assets\Data\Creat\任务StateCreat.cs" />
+    <Compile Include="Assets\Component\Unity-Logs-Viewer\Reporter\ReporterGUI.cs" />
+    <Compile Include="Assets\Script\大车控制.cs" />
+    <Compile Include="Assets\Component\VisionTimer\TimerHandle.cs" />
+    <Compile Include="Assets\Script\任务\任务_综合连续操作.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\CharacterController\ObiCharacter.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\SnakeController.cs" />
+    <Compile Include="Assets\Script\船贝管理.cs" />
+    <Compile Include="Assets\Script\任务\任务Base.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\TangledPeg.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ColorFromVelocity.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\ActorCOMTransform.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\TangledRopesGameController.cs" />
+    <Compile Include="Assets\Obi\Samples\Common\SampleResources\Scripts\CollisionEventHandler.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\GrapplingHook.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\WrapRopeGameController.cs" />
+    <Compile Include="Assets\Script\任务\任务Manager.cs" />
+    <Compile Include="Assets\Script\任务\任务_岸桥卸船作业.cs" />
+    <Compile Include="Assets\Script\岸桥StateData.cs" />
+    <Compile Include="Assets\Script\任务\任务_定点操作.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTweenPro\DOTweenTextMeshPro.cs" />
+    <Compile Include="Assets\Script\任务\任务_大车小车起升联动.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\PinholeRatchet.cs" />
+    <Compile Include="Assets\Script\小车控制.cs" />
+    <Compile Include="Assets\Component\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Data\Creat\试卷类型Creat.cs" />
+    <Compile Include="Assets\Script\任务\任务_大车移动.cs" />
+    <Compile Include="Assets\Data\Creat\控制字段.cs" />
+    <Compile Include="Assets\FiloCables\SampleScenes\Scripts\RuntimeCableGenerator.cs" />
+    <Compile Include="Assets\FiloCables\Scripts\Cable.cs" />
+    <Compile Include="Assets\Script\着箱碰撞判定.cs" />
+    <Compile Include="Assets\Obi\Samples\RopeAndRod\SampleResources\Scripts\CursorController.cs" />
+    <Compile Include="Assets\FiloCables\SampleScenes\Scripts\TensionProbe.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Obi\Resources\Compute\PathFrame.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\Underwater\UnderwaterMeniscus.shader" />
+    <None Include="Assets\YardCraneSimulator\Resources\YardCraneUI 1\OperatorHud.uxml" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\BoxShapeQuery.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanFoam.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\DensityConstraints.compute" />
+    <None Include="Assets\Obi\Resources\Compute\SoftbodyRendering.compute" />
+    <None Include="Assets\Obi\Resources\Compute\Matrix.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\AnimWavesRemoveGeometry.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeLightWaterVolume.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\NormalCompression.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\UpdateDynWaves.compute" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\GerstnerShared.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\Scan.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\Misc\OceanProxy.shader" />
+    <None Include="Assets\Obi\Resources\Compute\PathSmoothing.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\UpdateShadow.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeFoam.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\FoamAddFromTex.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\AnimWavesAddFromTex.shader" />
+    <None Include="Assets\___www.unityassetcollection.com___.txt" />
+    <None Include="Assets\Crest\Crest\Shaders\TestInclude.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\Optimization.cginc" />
+    <None Include="Assets\UITookit\登录\登录UI.uss" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Obi\Resources\Compute\EdgeMeshShape.compute" />
+    <None Include="Assets\Obi\Resources\Compute\Bounds.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\FluidFoamCollisions.compute" />
+    <None Include="Assets\Obi\Resources\Compute\MathUtils.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\BendConstraints.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\AnimWavesGerstnerBatch.shader" />
+    <None Include="Assets\Obi\Resources\Compute\PinholeConstraints.compute" />
+    <None Include="Assets\Obi\Resources\Compute\InstancedParticleRendering.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeLightData.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\CollisionMaterial.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\DistanceFieldShape.compute" />
+    <None Include="Assets\Obi\Resources\Compute\FluidFoamDensity.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\DynWavesSphereWaterInteraction.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\AnimWavesSetHeightToGeometry.shader" />
+    <None Include="Assets\Obi\Resources\Compute\FluidKernels.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\FlowAddFlowMap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\UITookit\登录\登录UI.uxml" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Component\Demigiant\readme_DOTweenPro.txt" />
+    <None Include="Assets\Obi\Resources\Compute\DeformableTriangles.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\Underwater\UnderwaterShared.hlsl" />
+    <None Include="Assets\Component\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Component\Demigiant\DemiLib\Core\DemiLib.dll" />
+    <None Include="Assets\Obi\Resources\Compute\RopeChainRendering.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeFoamBubbles.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\FluidMeshChunks.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\ShadowOverride.shader" />
+    <None Include="Assets\Obi\Resources\ObiMaterials\DistanceFields\DistanceFieldSlice.shader" />
+    <None Include="Assets\YardCraneSimulator\Resources\YardCraneUI 1\OperatorHudStyles.uss" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanHelpersNew.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\GridUtils.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\AnimWavesWaveParticle.shader" />
+    <None Include="Assets\Obi\Resources\Compute\Integration.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\OceanNormalMapping.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\GPUNoise\GPUNoise.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\Rigidbody.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeOcclusion.hlsl" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Obi\Resources\Compute\TriangleMeshShape.compute" />
+    <None Include="Assets\Obi\Resources\Compute\ParticleMeshBuilding.compute" />
+    <None Include="Assets\Obi\Resources\Compute\SurfacePoint.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\Quaternion.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\BendTwistConstraints.compute" />
+    <None Include="Assets\YardCraneSimulator\Resources\YardCraneUI\OperatorHud.uxml" />
+    <None Include="Assets\Obi\Resources\Compute\ClothRendering.compute" />
+    <None Include="Assets\Obi\Resources\ObiMaterials\BuiltInStandardBackfaces\StandardVertexColors.shader" />
+    <None Include="Assets\Obi\Resources\Compute\Phases.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\FoamOverride.shader" />
+    <None Include="Assets\Obi\Resources\Compute\PinConstraints.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeVolumeEmission.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\OceanDepthsCache.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\AnimWavesGerstnerBatchGeometry.shader" />
+    <None Include="Assets\Obi\Resources\Compute\SolverParameters.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanSurfaceAlpha.shader" />
+    <None Include="Assets\Obi\Resources\Compute\FluidSurfaceMeshBuilding.compute" />
+    <None Include="Assets\Obi\Resources\Compute\ParticleCollisionConstraints.compute" />
+    <None Include="Assets\Crest\Crest\Textures\WaveNormals\SOURCE.TXT" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Obi\Resources\ObiMaterials\Common\ObiEllipsoids.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeSampleClipSurfaceData.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\ShapeMatchingConstraints.compute" />
+    <None Include="Assets\Component\VisionTimer\readme.txt" />
+    <None Include="Assets\Obi\Resources\Compute\ContactHandling.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\ParticleGrid.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\ClipSurfaceIncludeArea.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\Obi\Resources\Compute\DistanceConstraints.compute" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\CopyDepthIntoCache.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\FlowFixedDirection.shader" />
+    <None Include="Assets\Obi\Resources\Compute\RopeMeshRendering.compute" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\OceanDepths.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\Ocean.shader" />
+    <None Include="Assets\Component\Demigiant\DOTween\DOTween.dll" />
+    <None Include="Assets\Obi\Resources\Compute\FluidFoam.compute" />
+    <None Include="Assets\Obi\Resources\Compute\AerodynamicConstraints.compute" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Obi\Resources\Compute\Simplex.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\StretchShearConstraints.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\Debug\TextureArray.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\AnimWavesAddHeightFromGeometry.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeApplyFresnel.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeOceanGlobals.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanConstants.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanNormalMapping.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeGeoMorph.hlsl" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\RopeLineRendering.compute" />
+    <None Include="Assets\Obi\Resources\Compute\HeightfieldShape.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\ClipSurfaceRemoveArea.shader" />
+    <None Include="Assets\Obi\Resources\Compute\AtomicDeltas.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanVertHelpers.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\ChainConstraints.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\ShapeCombine.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\GPUNoise\SOURCE.txt" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeComputeSamplingData.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\QueryDefinitions.cginc" />
+    <None Include="Assets\Component\Demigiant\DOTweenPro\DOTweenPro.dll" />
+    <None Include="Assets\Component\Demigiant\DOTweenPro\readme.txt" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\ClipSurfaceRemoveAreaTexture.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeDrivenInputs.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\QueryDisplacements.compute" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanGlobals.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\SphereShapeQuery.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\OceanEmission.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\SkinConstraints.compute" />
+    <None Include="Assets\YardCraneSimulator\Resources\YardCraneUI\OperatorHudStyles.uss" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanHelpersDriven.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\DistanceFunctions.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\SphereShape.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\Underwater\UnderwaterCurtain.shader" />
+    <None Include="Assets\Component\Demigiant\DemiLib\Core\DemiLib.xml" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeAmbientLight.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\InterlockedUtils.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\QueryFlow.compute" />
+    <None Include="Assets\Obi\Resources\Compute\SpatialQueries.compute" />
+    <None Include="Assets\Component\Demigiant\DOTweenPro\DOTweenPro.XML" />
+    <None Include="Assets\Crest\Crest\Textures\Caustics\SOURCE.txt" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\DynWavesAddBump.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestVaryingsURP_10.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\DynWavesObjectInteraction.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeApplyCaustics.hlsl" />
+    <None Include="Assets\FiloCables\CHANGELOG.txt" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeNormalMapping.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\ShapeCombine.shader" />
+    <None Include="Assets\Obi\Resources\Compute\SortParticleData.compute" />
+    <None Include="Assets\Obi\Resources\ObiMaterials\Common\ObiEllipsoidsHDRP.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\ClipSurfaceConvexHull.shader" />
+    <None Include="Assets\Obi\Resources\Compute\FluidChunkDefs.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Obi\Resources\Compute\RayShapeQuery.compute" />
+    <None Include="Assets\Obi\Resources\Compute\TetherConstraints.compute" />
+    <None Include="Assets\Obi\Resources\Compute\ColliderFrictionConstraints.compute" />
+    <None Include="Assets\Component\Demigiant\DOTween\readme.txt" />
+    <None Include="Assets\Obi\Resources\Compute\RopeExtrudedRendering.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestNodeSampleOceanData.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\InertialFrame.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\Resources\DynWavesDampenCircle.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\ClearToBlack.compute" />
+    <None Include="Assets\Obi\CHANGELOG_rope.txt" />
+    <None Include="Assets\Obi\Resources\Compute\BoxShape.compute" />
+    <None Include="Assets\Obi\Resources\ObiMaterials\Common\Instanced\Compute\ProceduralInstancing.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\StitchConstraints.compute" />
+    <None Include="Assets\Obi\Resources\Compute\CapsuleShape.compute" />
+    <None Include="Assets\Obi\Resources\Compute\ParticleFrictionConstraints.compute" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Obi\Resources\Compute\BoundsReduction.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\CrestVaryingsURP.hlsl" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Obi\Resources\Compute\Transform.cginc" />
+    <None Include="Assets\Obi\Resources\Compute\BitonicSort.compute" />
+    <None Include="Assets\Obi\Resources\Compute\VolumeConstraints.compute" />
+    <None Include="Assets\Obi\Resources\Compute\ColliderDefinitions.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Obi\Resources\ObiMaterials\Common\ObiUtils.cginc" />
+    <None Include="Assets\Crest\Crest\Shaders\Resources\UpdateFoam.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputsDriven.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanReflection.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\ShadergraphFramework\OceanFramework_Generated.shader" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInput.hlsl" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanEmission.hlsl" />
+    <None Include="Assets\Obi\Resources\Compute\Solver.compute" />
+    <None Include="Assets\Crest\Crest\Shaders\OceanInputs\FoamAddFromVertCol.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\Obi\Resources\Compute\ColliderGrid.compute" />
+    <None Include="Assets\Obi\Resources\Compute\ColliderCollisionConstraints.compute" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.AIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ARModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ContentLoadModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ContentLoadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.CrashReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.DSPGraphModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.DirectorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.GameCenterModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GraphicsStateCollectionSerializerModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.GraphicsStateCollectionSerializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HierarchyCoreModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.HierarchyCoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.HotReloadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputForUIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.InputForUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.LocalizationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.MarshallingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.MarshallingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.MultiplayerModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.MultiplayerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PropertiesModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ShaderVariantAnalyticsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.ShaderVariantAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.StreamingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.SubsystemsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TLSModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityCurlModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.VehiclesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VirtualTexturingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEngine.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AccessibilityModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AdaptivePerformanceModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.AdaptivePerformanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.BuildProfileModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.BuildProfileModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreBusinessMetricsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.CoreBusinessMetricsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DeviceSimulatorModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.DeviceSimulatorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DiagnosticsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.DiagnosticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EditorToolbarModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.EditorToolbarModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EmbreeModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.EmbreeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphViewModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.GraphViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphicsStateCollectionSerializerModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.GraphicsStateCollectionSerializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GridAndSnapModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.GridAndSnapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GridModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.MultiplayerModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.MultiplayerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Physics2DModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PhysicsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PresetsUIModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.PresetsUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PropertiesModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.QuickSearchModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.QuickSearchModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SafeModeModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SafeModeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneTemplateModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SceneTemplateModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneViewModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SceneViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ShaderFoundryModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.ShaderFoundryModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SketchUpModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SketchUpModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SpriteMaskModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SpriteShapeModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SubstanceModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TerrainModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreFontEngineModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreTextEngineModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextRenderingModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TilemapModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TreeModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.TreeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIAutomationModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.UIAutomationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIBuilderModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.UIBuilderModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsSamplesModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsSamplesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UmbraModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UnityConnectModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VFXModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VideoModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.XRModule">
+      <HintPath>D:\APP\Editor\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N">
+      <HintPath>Assets\game4automation\private\Tools\ZIP\I18N.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>Assets\game4automation\private\Tools\ZIP\Ionic.Zip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>Assets\Component\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TDx.TDxInput">
+      <HintPath>Assets\game4automation\private\RuntimeUI\SpaceNavigator\Plugins\TDx.TDxInput.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>Assets\game4automation\private\MathNet\MathNet.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CMCKiesel.UnityNativeImporter">
+      <HintPath>Assets\game4automation\CADLink\private\CMC-Kiesel\Plugins\CMCKiesel.UnityNativeImporter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Component\Demigiant\DOTween\DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sharp7">
+      <HintPath>Assets\game4automation\private\Interfaces\S7TCPIP\Sharp7.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N.West">
+      <HintPath>Assets\game4automation\private\Tools\ZIP\I18N.West.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DOTweenPro">
+      <HintPath>Assets\Component\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EasyModbus">
+      <HintPath>Assets\game4automation\private\Interfaces\Modbus\private\EasyModbus.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ikcalculator">
+      <HintPath>Assets\game4automation\Professional\IK\private\ikcalculator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TwinCAT.Ads">
+      <HintPath>Assets\game4automation\private\Interfaces\TwinCAT\TwinCAT.Ads.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.AppContext">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.AppContext.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.Concurrent.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.NonGeneric">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.NonGeneric.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Specialized">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.Specialized.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.EventBasedAsync">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.EventBasedAsync.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.TypeConverter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Console.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Common">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Data.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Contracts">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Contracts.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Debug.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Process.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Tools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Drawing.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Dynamic.Runtime">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Dynamic.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.Calendars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Compression.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.DriveInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.Watcher.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.IsolatedStorage.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.MemoryMappedFiles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipes">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Pipes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.UnmanagedMemoryStream.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Expressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Parallel">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Queryable">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Queryable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NameResolution">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.NameResolution.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.NetworkInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Ping">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Ping.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Requests">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Requests.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Security.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Sockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebHeaderCollection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebSockets.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebSockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ObjectModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.DispatchProxy">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.DispatchProxy.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.ILGeneration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.Lightweight.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Reader">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.Reader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.ResourceManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Writer">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.Writer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.CompilerServices.VisualC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Handles">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Handles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.InteropServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Numerics">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Formatters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Json">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Claims">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Claims.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Csp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Principal.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.SecureString.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding.Extensions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.Encoding.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.RegularExpressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Overlapped">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Overlapped.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Parallel">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Thread.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.ThreadPool.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Timer">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Timer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ValueTuple.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XDocument">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XmlDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XmlSerializer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XPath.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\Extensions\2.0.0\System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ComponentModel.Composition.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Drawing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.IO.Compression.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Runtime.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ServiceModel.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Transactions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>D:\APP\Editor\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Jobs">
+      <HintPath>Library\ScriptAssemblies\Unity.Jobs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor.Assistant">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.Assistant.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{A2B63DB2-49B7-88E6-F751-FC6D654F6C35}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.abbrobotstudio.csproj">
+      <Project>{BB2B5162-030A-A864-44BC-94B0438F2BE8}</Project>
+      <Name>game4automation.interfaces.abbrobotstudio</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.sharedmemory.csproj">
+      <Project>{E41B0B9C-67F2-ACF3-D6BA-11A7DA528003}</Project>
+      <Name>game4automation.interfaces.sharedmemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.ik.editor.csproj">
+      <Project>{5A61AEA9-B8E5-A0F1-197E-1BDF286FB949}</Project>
+      <Name>game4automation.ik.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NaughtyAttributes.Editor.csproj">
+      <Project>{54C1EEDA-2722-B975-343B-AA6C6620F30A}</Project>
+      <Name>NaughtyAttributes.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Crest.csproj">
+      <Project>{4B479BD2-2C48-D45A-CC40-691E463552BC}</Project>
+      <Name>Crest</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.base.csproj">
+      <Project>{637FF2F3-0AB7-D945-BD4E-6B0BD3F21C31}</Project>
+      <Name>game4automation.base</Name>
+    </ProjectReference>
+    <ProjectReference Include="Obi.csproj">
+      <Project>{BE66A0A4-9B0E-F934-F82C-B194F002091C}</Project>
+      <Name>Obi</Name>
+    </ProjectReference>
+    <ProjectReference Include="Obi.Editor.csproj">
+      <Project>{972DCDD7-FF4F-6652-0067-9929446621AD}</Project>
+      <Name>Obi.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Crest.Examples.csproj">
+      <Project>{E21F21AF-8373-8E8F-23A2-529497D10E8E}</Project>
+      <Name>Crest.Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.sharedmemory.editor.csproj">
+      <Project>{E0CB174C-BCFC-AD1E-32B2-F2B8FDDDF0E3}</Project>
+      <Name>game4automation.sharedmemory.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="YardCraneSimulator.SharedNet.csproj">
+      <Project>{7FB716F2-C885-3136-050D-EE7506AB3645}</Project>
+      <Name>YardCraneSimulator.SharedNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.cadlink.csproj">
+      <Project>{72B3B824-0FBC-074E-AE9B-819252CB8B73}</Project>
+      <Name>game4automation.cadlink</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.parts4cad.editor.csproj">
+      <Project>{DDB18C25-0907-AEE7-6688-4D2A1A43F2C4}</Project>
+      <Name>game4automation.parts4cad.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.spacenavigator.editor.csproj">
+      <Project>{9AC307B8-CFF1-5F61-216C-DBE367F6A7C9}</Project>
+      <Name>game4automation.spacenavigator.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="YardCraneSimulator.Runtime.csproj">
+      <Project>{F7E90E4A-A327-5324-43A0-538F86C3286C}</Project>
+      <Name>YardCraneSimulator.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="YardCraneSimulator.S7Integration.csproj">
+      <Project>{AC26E6EF-5DA0-C366-E2E5-28151AEDD18E}</Project>
+      <Name>YardCraneSimulator.S7Integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.productivetools.editor.csproj">
+      <Project>{70E77BCE-7D1A-091C-F976-FBC4FBBA21E5}</Project>
+      <Name>game4automation.productivetools.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="YardCraneSimulator.Shell.csproj">
+      <Project>{801ECB9E-B11A-2D6A-89EE-FCDF6BAE4CE1}</Project>
+      <Name>YardCraneSimulator.Shell</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.visualscripting.csproj">
+      <Project>{048A57B0-B451-6FAB-DAC5-2AD7D1E7C032}</Project>
+      <Name>game4automation.visualscripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.s7tcpip.csproj">
+      <Project>{61D430AB-241F-403C-0149-93EF6AE7F3ED}</Project>
+      <Name>game4automation.interfaces.s7tcpip</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.parts4cad.csproj">
+      <Project>{14AAA222-ECA6-71EA-430D-0E61AF747A04}</Project>
+      <Name>game4automation.parts4cad</Name>
+    </ProjectReference>
+    <ProjectReference Include="YardCraneSimulator.ObiRopeTest.csproj">
+      <Project>{3BDFF57F-3C2E-277F-85E4-6BA336182849}</Project>
+      <Name>YardCraneSimulator.ObiRopeTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.opcua.editor.csproj">
+      <Project>{171A1E00-FA26-EF9F-F1DF-CDA21F3C5E3F}</Project>
+      <Name>game4automation.interfaces.opcua.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="endel.nativewebsocket.csproj">
+      <Project>{CEDCD5B0-12CF-D72A-7CFB-EAF5757682E6}</Project>
+      <Name>endel.nativewebsocket</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.opocua.csproj">
+      <Project>{9864A8D6-9039-0EE4-17A6-407A3E2A5408}</Project>
+      <Name>game4automation.interfaces.opocua</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.spacenavigator.csproj">
+      <Project>{0FEB1DBD-BC83-B642-F07B-012AB1A7B3EC}</Project>
+      <Name>game4automation.spacenavigator</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.plcsimadvanced.editor.csproj">
+      <Project>{77A4831F-6F03-566A-9AEA-2C5AAA5052D2}</Project>
+      <Name>game4automation.interfaces.plcsimadvanced.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Crest.Helpers.Editor.csproj">
+      <Project>{A8FF57EA-6D86-8F31-2189-B7DA77792C83}</Project>
+      <Name>Crest.Helpers.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.ik.csproj">
+      <Project>{0A5A404E-E690-B0A0-F1C3-A068DAD5E3F7}</Project>
+      <Name>game4automation.ik</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.mqtt.csproj">
+      <Project>{E02E461D-D5C9-7DD1-4709-B2B2E8E57681}</Project>
+      <Name>game4automation.interfaces.mqtt</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.plcsimadvanced.csproj">
+      <Project>{C153FE44-2D90-1FA9-5295-9007D644354F}</Project>
+      <Name>game4automation.interfaces.plcsimadvanced</Name>
+    </ProjectReference>
+    <ProjectReference Include="NaughtyAttributes.Core.csproj">
+      <Project>{DF20329B-D783-625D-C647-C17F901BA19F}</Project>
+      <Name>NaughtyAttributes.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="AYellowpaper.SerializedCollections.csproj">
+      <Project>{F8828DE4-4D6D-A563-55F1-86ED09AF372B}</Project>
+      <Name>AYellowpaper.SerializedCollections</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.interfaces.twincatads.csproj">
+      <Project>{372DD79E-A1C8-342E-B5F4-6771EFCFC78D}</Project>
+      <Name>game4automation.interfaces.twincatads</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.editor.csproj">
+      <Project>{0186E5FB-42CA-51B7-6E90-BA45B0FD5109}</Project>
+      <Name>game4automation.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="game4automation.TwinCATHMIClient.csproj">
+      <Project>{0A0A5D45-E83B-D551-17CB-6AD4D1AE7E65}</Project>
+      <Name>game4automation.TwinCATHMIClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="AYellowpaper.SerializedCollections.Editor.csproj">
+      <Project>{9C1E985D-F599-C2A8-F1F0-BAAAF25F0FAE}</Project>
+      <Name>AYellowpaper.SerializedCollections.Editor</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

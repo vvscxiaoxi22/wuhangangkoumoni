@@ -2,7 +2,8 @@
   "name": "YardCraneSimulator.Runtime",
   "rootNamespace": "PortTraining.YardCraneSimulator",
   "references": [
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "YardCraneSimulator.SharedNet"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

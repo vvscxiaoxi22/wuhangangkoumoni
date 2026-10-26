@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using PortTraining.YardCraneSimulator.Operations;
+using PortTraining.YardCraneSimulator.SharedNet;
+using PortTraining.YardCraneSimulator.Training;
 using UnityEngine;
 
 namespace PortTraining.YardCraneSimulator.Controls
@@ -17,6 +20,8 @@ namespace PortTraining.YardCraneSimulator.Controls
         private readonly YardCraneInputRouter router = new();
         private readonly IYardCraneInputSource keyboard = new YardCraneKeyboardInputSource();
         private readonly IYardCraneInputSource xbox = new YardCraneXboxInputSource();
+        private YardCraneS7InputSource s7;
+        private bool s7Exclusive;
 
         private YardCraneOperationController controller;
         private YardCraneInputProfile profile;
@@ -29,27 +34,64 @@ namespace PortTraining.YardCraneSimulator.Controls
         private long actionSequence;
         private bool configured;
         private bool ownsRuntimeProfile;
-        private bool pendingLock;
-        private bool pendingUnlock;
-        private bool pendingWheelClampToggle;
-        private bool pendingFaultReset;
-        private bool pendingTrolleyAnchorToggle;
-        private bool pendingGantryAnchorToggle;
-        private bool pendingSpreaderPumpToggle;
-        private bool pendingSpreaderSizeFt20;
-        private bool pendingSpreaderSizeFt40;
-        private bool pendingSpreaderReturnToZero;
+
+        // Every discrete action that queues through FixedUpdate's mutual-exclusion dispatch.
+        // FaultReset is deliberately excluded from SafetyTripClearedIntents: it must survive a
+        // control-power/e-stop trip so the operator can still press reset afterward, matching
+        // the original per-field behavior exactly (see the dedicated SafeHold branch below,
+        // which also special-cases FaultReset).
+        private static readonly YardCraneOperatorIntent[] QueuedIntents =
+        {
+            YardCraneOperatorIntent.ContainerLock,
+            YardCraneOperatorIntent.ContainerUnlock,
+            YardCraneOperatorIntent.WheelClampToggle,
+            YardCraneOperatorIntent.TrolleyAnchorToggle,
+            YardCraneOperatorIntent.GantryAnchorToggle,
+            YardCraneOperatorIntent.SpreaderPumpToggle,
+            YardCraneOperatorIntent.SpreaderSizeFt20,
+            YardCraneOperatorIntent.SpreaderSizeFt40,
+            YardCraneOperatorIntent.SpreaderReturnToZero,
+            YardCraneOperatorIntent.FaultReset
+        };
+
+        private static readonly YardCraneOperatorIntent[] SafetyTripClearedIntents =
+        {
+            YardCraneOperatorIntent.ContainerLock,
+            YardCraneOperatorIntent.ContainerUnlock,
+            YardCraneOperatorIntent.WheelClampToggle,
+            YardCraneOperatorIntent.TrolleyAnchorToggle,
+            YardCraneOperatorIntent.GantryAnchorToggle,
+            YardCraneOperatorIntent.SpreaderPumpToggle,
+            YardCraneOperatorIntent.SpreaderSizeFt20,
+            YardCraneOperatorIntent.SpreaderSizeFt40,
+            YardCraneOperatorIntent.SpreaderReturnToZero
+        };
+
+        // A brief, real focus blip (e.g. clicking the Console to read a log line, an OS/remote
+        // desktop notification momentarily stealing focus) should not force a full SafeHold that
+        // then requires an explicit fault reset to leave - that turned every short glance away
+        // from the Game view into a "keyboard stopped working" dead end. Motion is still zeroed
+        // immediately on any focus loss (see OnApplicationFocus); only the point at which a
+        // sustained loss escalates into NotifyInputUnavailable/SafeHold is delayed by this
+        // window. A device actually disconnecting (sourceLost) or an explicit pause still trips
+        // immediately - only the focus-loss condition gets this tolerance.
+        private const long FocusLossGraceMs = 400;
+        private long focusLostAtMs = -1;
+
+        private readonly HashSet<YardCraneOperatorIntent> pendingIntents = new();
         private bool paused;
         private bool focusAvailable = true;
         private bool sourceLost;
         private bool hasFreshDeviceSample;
         private bool controlPowerOn = true;
         private bool emergencyStopReleased = true;
+        private bool trainingInputEnabled = true;
 
         public string ActiveSourceId => router.ActiveSourceId;
         public YardCraneOperatorCommand LatestCommand => latestCommand;
         public bool IsPaused => paused;
         public bool IsHornActive => latestCommand.HornHeld;
+        public bool IsTrainingInputEnabled => trainingInputEnabled;
 
         /// <summary>
         /// Standalone-simulated panel state. These are keyboard/Xbox adapter states, not a
@@ -60,10 +102,40 @@ namespace PortTraining.YardCraneSimulator.Controls
         public bool IsAwaitingFaultReset =>
             configured && controller != null && controller.Phase == YardCraneOperationPhase.SafeHold;
 
+        /// <summary>
+        /// Gates business input during a real training countdown or after local evaluation
+        /// finishes. Heartbeats and zero realtime samples continue, while control-power,
+        /// emergency-stop and fault-reset safety paths remain available. Closing a visual
+        /// prompt alone is never treated as an input interlock.
+        /// </summary>
+        public void SetTrainingInputEnabled(bool enabled)
+        {
+            if (trainingInputEnabled == enabled) return;
+            trainingInputEnabled = enabled;
+            pendingIntents.Clear();
+            hasFreshDeviceSample = false;
+            sourceLost = false;
+            var nowMs = MonotonicMilliseconds();
+            latestCommand = YardCraneOperatorCommand.Zero(latestCommand.Sequence + 1, nowMs);
+            router.Reset();
+            Debug.Log($"[YC_STANDALONE_TRAINING_INPUT] enabled={enabled}", this);
+        }
+
+        /// <summary>
+        /// requireS7Link=true switches this host to the production PLC-only configuration: the
+        /// keyboard/Xbox adapters (test-only, per the operator's own instruction) are not
+        /// sampled at all, and a failed link to the independent YardCraneS7Integration player is
+        /// fatal to Configure - the operator's explicit choice was to refuse training entry
+        /// rather than silently fall back to a device that could mask a real PLC-link outage.
+        /// </summary>
         public void Configure(
             YardCraneOperationController operationController,
             string stationId,
-            YardCraneInputProfile inputProfile = null)
+            YardCraneInputProfile inputProfile = null,
+            bool requireS7Link = false,
+            string s7LinkHost = "127.0.0.1",
+            int s7LinkPort = YardCraneS7LinkProtocol.DefaultPort,
+            int s7LinkConnectTimeoutMs = 3000)
         {
             if (configured)
             {
@@ -78,12 +150,17 @@ namespace PortTraining.YardCraneSimulator.Controls
                 ownsRuntimeProfile = true;
             }
 
-            runId = Guid.NewGuid();
+            // A StudentHome-launched local run already owns a frozen SessionId. Reuse it as
+            // the operation run id so input authority, HUD, lifecycle and the persisted audit
+            // record can be correlated without an informal second identifier. Direct editor/
+            // standalone boots have no local context and keep their independent generated id.
+            var trainingContext = YardCraneLocalTrainingSession.CurrentContext;
+            runId = trainingContext?.SessionId ?? Guid.NewGuid();
             leaseId = Guid.NewGuid();
             sceneInstanceId = Guid.NewGuid();
             streamId = Guid.NewGuid();
             var nowMs = MonotonicMilliseconds();
-            var context = new YardCraneOperationContext(
+            var operationContext = new YardCraneOperationContext(
                 runId,
                 leaseId,
                 1,
@@ -92,7 +169,7 @@ namespace PortTraining.YardCraneSimulator.Controls
                 YardCraneControlMode.Local,
                 false);
 
-            var activated = controller.TryActivateRun(context, nowMs, out var activationError);
+            var activated = controller.TryActivateRun(operationContext, nowMs, out var activationError);
             var streamOpened = false;
             var streamError = YardCraneOperationErrorCodes.None;
             if (activated)
@@ -106,12 +183,30 @@ namespace PortTraining.YardCraneSimulator.Controls
                     $"Unable to start standalone input authority: activation={activationError}, stream={streamError}");
             }
 
+            if (requireS7Link)
+            {
+                var link = new YardCraneS7InputSource();
+                if (!link.TryConnect(s7LinkHost, s7LinkPort, s7LinkConnectTimeoutMs, out var linkError))
+                {
+                    if (controller.IsActive)
+                    {
+                        controller.ReleaseRun();
+                    }
+
+                    throw new InvalidOperationException(
+                        $"S7 link required but unavailable at {s7LinkHost}:{s7LinkPort} - {linkError}");
+                }
+
+                s7 = link;
+                s7Exclusive = true;
+            }
+
             latestCommand = YardCraneOperatorCommand.Zero(0, nowMs);
             focusAvailable = Application.isFocused;
             configured = true;
             Debug.Log(
-                $"[YC_STANDALONE_INPUT_READY] run={runId:D}, station={context.StationId}, " +
-                "keyboard=true, xbox=true, authoritative=false",
+                $"[YC_STANDALONE_INPUT_READY] run={runId:D}, station={operationContext.StationId}, " +
+                $"keyboard={!s7Exclusive}, xbox={!s7Exclusive}, s7Link={s7Exclusive}, authoritative=false",
                 this);
         }
 
@@ -123,36 +218,72 @@ namespace PortTraining.YardCraneSimulator.Controls
             }
 
             snapshots.Clear();
-            snapshots.Add(keyboard.Sample(profile));
-            snapshots.Add(xbox.Sample(profile));
-            var route = router.Route(snapshots, MonotonicMilliseconds());
-            latestCommand = route.Command;
+            if (s7Exclusive)
+            {
+                snapshots.Add(s7.Sample(profile));
+            }
+            else
+            {
+                snapshots.Add(keyboard.Sample(profile));
+                snapshots.Add(xbox.Sample(profile));
+            }
+
+            var nowMs = MonotonicMilliseconds();
+            var route = router.Route(snapshots, nowMs);
+            var sampledCommand = route.Command;
+            latestCommand = trainingInputEnabled
+                ? sampledCommand
+                : new YardCraneOperatorCommand(
+                    sampledCommand.SourceId,
+                    sampledCommand.Sequence,
+                    nowMs,
+                    0f,
+                    0f,
+                    0f,
+                    false,
+                    0f,
+                    sampledCommand.Has(YardCraneOperatorIntent.FaultReset)
+                        ? new[] { YardCraneOperatorIntent.FaultReset }
+                        : null);
             hasFreshDeviceSample = true;
             sourceLost |= route.ActiveSourceLost;
-            pendingLock |= latestCommand.LockPressed;
-            pendingUnlock |= latestCommand.UnlockPressed;
-            pendingWheelClampToggle |= latestCommand.WheelClampTogglePressed;
-            pendingFaultReset |= latestCommand.FaultResetPressed;
-            pendingTrolleyAnchorToggle |= latestCommand.TrolleyAnchorTogglePressed;
-            pendingGantryAnchorToggle |= latestCommand.GantryAnchorTogglePressed;
-            pendingSpreaderPumpToggle |= latestCommand.SpreaderPumpTogglePressed;
-            pendingSpreaderSizeFt20 |= latestCommand.SpreaderSizeFt20Pressed;
-            pendingSpreaderSizeFt40 |= latestCommand.SpreaderSizeFt40Pressed;
-            pendingSpreaderReturnToZero |= latestCommand.SpreaderReturnToZeroPressed;
+            foreach (var intent in QueuedIntents)
+            {
+                if (latestCommand.Has(intent))
+                {
+                    pendingIntents.Add(intent);
+                }
+            }
 
-            if (latestCommand.ControlPowerTogglePressed)
+            if (sampledCommand.Has(YardCraneOperatorIntent.ControlPowerToggle))
             {
                 controlPowerOn = !controlPowerOn;
                 Debug.Log($"[YC_STANDALONE_CONTROL_POWER] on={controlPowerOn}", this);
             }
 
-            if (latestCommand.EmergencyStopTogglePressed)
+            if (s7Exclusive)
+            {
+                // Emergency stop over the S7 link is a maintained level, not a button - it is
+                // read fresh every Update() and directly overrides emergencyStopReleased,
+                // rather than going through the toggle-on-press path below (which S7 never
+                // produces an intent for anyway; YardCraneS7InputSource keeps
+                // EmergencyStopToggle out of its momentary signal set on purpose). This also
+                // means a dropped WebSocket frame or link loss cannot leave a stale "released"
+                // state - YardCraneS7InputSource.EmergencyStopEngaged itself fails toward true.
+                var s7EmergencyStopReleased = !s7.EmergencyStopEngaged;
+                if (emergencyStopReleased != s7EmergencyStopReleased)
+                {
+                    emergencyStopReleased = s7EmergencyStopReleased;
+                    Debug.Log($"[YC_STANDALONE_EMERGENCY_STOP] released={emergencyStopReleased}, source=s7Link", this);
+                }
+            }
+            else if (sampledCommand.Has(YardCraneOperatorIntent.EmergencyStopToggle))
             {
                 emergencyStopReleased = !emergencyStopReleased;
-                Debug.Log($"[YC_STANDALONE_EMERGENCY_STOP] released={emergencyStopReleased}", this);
+                Debug.Log($"[YC_STANDALONE_EMERGENCY_STOP] released={emergencyStopReleased}, source=toggle", this);
             }
 
-            if (latestCommand.PausePressed)
+            if (trainingInputEnabled && sampledCommand.Has(YardCraneOperatorIntent.Pause))
             {
                 paused = !paused;
                 Debug.Log($"[YC_STANDALONE_PAUSE] paused={paused}", this);
@@ -171,25 +302,19 @@ namespace PortTraining.YardCraneSimulator.Controls
             controller.RecordOwnerHeartbeat(nowMs);
             controller.RecordCoordinatorHeartbeat(nowMs);
 
-            var mustHold = paused || !focusAvailable || sourceLost;
+            var focusLossWithinGrace = !focusAvailable && focusLostAtMs >= 0 &&
+                                       nowMs - focusLostAtMs < FocusLossGraceMs;
+            var focusLossPastGrace = !focusAvailable && !focusLossWithinGrace;
+            var mustHold = paused || focusLossPastGrace || sourceLost;
             if (mustHold)
             {
                 controller.NotifyInputUnavailable(
                     runId,
                     leaseId,
                     1,
-                    paused ? "standalone-paused" : !focusAvailable ? "application-focus-lost" : "active-device-disconnected",
+                    paused ? "standalone-paused" : focusLossPastGrace ? "application-focus-lost" : "active-device-disconnected",
                     out _);
-                pendingLock = false;
-                pendingUnlock = false;
-                pendingWheelClampToggle = false;
-                pendingFaultReset = false;
-                pendingTrolleyAnchorToggle = false;
-                pendingGantryAnchorToggle = false;
-                pendingSpreaderPumpToggle = false;
-                pendingSpreaderSizeFt20 = false;
-                pendingSpreaderSizeFt40 = false;
-                pendingSpreaderReturnToZero = false;
+                pendingIntents.Clear();
                 sourceLost = false;
                 return;
             }
@@ -199,25 +324,27 @@ namespace PortTraining.YardCraneSimulator.Controls
             // this exact frame, not just rely on the controller rejecting them once SafeHold is entered.
             if (!controlPowerOn || !emergencyStopReleased)
             {
-                pendingLock = false;
-                pendingUnlock = false;
-                pendingWheelClampToggle = false;
-                pendingTrolleyAnchorToggle = false;
-                pendingGantryAnchorToggle = false;
-                pendingSpreaderPumpToggle = false;
-                pendingSpreaderSizeFt20 = false;
-                pendingSpreaderSizeFt40 = false;
-                pendingSpreaderReturnToZero = false;
+                pendingIntents.ExceptWith(SafetyTripClearedIntents);
             }
 
             if (controller.Phase == YardCraneOperationPhase.SafeHold)
             {
-                if (!pendingFaultReset)
+                if (!pendingIntents.Contains(YardCraneOperatorIntent.FaultReset))
                 {
                     return;
                 }
 
-                pendingFaultReset = false;
+                if (!hasFreshDeviceSample)
+                {
+                    // latestCommand.HandlesCentered below would read true off a focus-loss
+                    // synthetic zero command even if the real stick is still deflected, letting
+                    // SafeHold clear invisibly and then jump into motion once focus returns and
+                    // sampling resumes. Leave FaultReset pending - it's re-evaluated once a
+                    // genuine post-focus sample lands, not dropped. (YC-P0-FOCUS-01)
+                    return;
+                }
+
+                pendingIntents.Remove(YardCraneOperatorIntent.FaultReset);
 
                 if (!controller.TryClearSafeHold(
                         runId,
@@ -244,20 +371,18 @@ namespace PortTraining.YardCraneSimulator.Controls
 
             var mechanismStarting = controller.Phase == YardCraneOperationPhase.Initializing ||
                                     controller.Phase == YardCraneOperationPhase.PreTensioning;
-            var commandForStep = !hasFreshDeviceSample || mechanismStarting
+            // Re-stamped with nowMs (not the original loss time) so the controller's own
+            // independent input-staleness check never trips while still inside the grace window.
+            var commandForStep = !trainingInputEnabled || !hasFreshDeviceSample || mechanismStarting || focusLossWithinGrace
                 ? YardCraneOperatorCommand.Zero(latestCommand.Sequence, nowMs)
                 : latestCommand;
             if (mechanismStarting)
             {
-                pendingLock = false;
-                pendingUnlock = false;
-                pendingWheelClampToggle = false;
-                pendingTrolleyAnchorToggle = false;
-                pendingGantryAnchorToggle = false;
-                pendingSpreaderPumpToggle = false;
-                pendingSpreaderSizeFt20 = false;
-                pendingSpreaderSizeFt40 = false;
-                pendingSpreaderReturnToZero = false;
+                // Matches the original per-field behavior exactly: FaultReset is intentionally
+                // NOT cleared here (unlike mustHold), since a fault reset requested while the
+                // mechanism is still initializing/pre-tensioning must still be honored once it
+                // finishes, not silently dropped.
+                pendingIntents.ExceptWith(SafetyTripClearedIntents);
             }
 
             var dataAge = (int)Math.Max(0, Math.Min(int.MaxValue, nowMs - commandForStep.CapturedAtMs));
@@ -290,101 +415,95 @@ namespace PortTraining.YardCraneSimulator.Controls
                 return;
             }
 
-            var pendingActionCount = (pendingLock ? 1 : 0) +
-                                     (pendingUnlock ? 1 : 0) +
-                                     (pendingWheelClampToggle ? 1 : 0) +
-                                     (pendingFaultReset ? 1 : 0) +
-                                     (pendingTrolleyAnchorToggle ? 1 : 0) +
-                                     (pendingGantryAnchorToggle ? 1 : 0) +
-                                     (pendingSpreaderPumpToggle ? 1 : 0) +
-                                     (pendingSpreaderSizeFt20 ? 1 : 0) +
-                                     (pendingSpreaderSizeFt40 ? 1 : 0) +
-                                     (pendingSpreaderReturnToZero ? 1 : 0);
-            if (pendingActionCount > 1)
+            if (pendingIntents.Count > 1)
             {
-                pendingLock = false;
-                pendingUnlock = false;
-                pendingWheelClampToggle = false;
-                pendingFaultReset = false;
-                pendingTrolleyAnchorToggle = false;
-                pendingGantryAnchorToggle = false;
-                pendingSpreaderPumpToggle = false;
-                pendingSpreaderSizeFt20 = false;
-                pendingSpreaderSizeFt40 = false;
-                pendingSpreaderReturnToZero = false;
+                pendingIntents.Clear();
                 Debug.LogWarning("[YC_STANDALONE_ACTION_REJECTED] reason=conflicting-discrete-actions", this);
             }
-            else if (pendingLock)
+            else if (pendingIntents.Count == 1)
             {
-                SubmitAction(YardCraneOperationActionType.SpreaderLock, "Locked");
-                pendingLock = false;
-            }
-            else if (pendingUnlock)
-            {
-                SubmitAction(YardCraneOperationActionType.SpreaderUnlock, "Unlocked");
-                pendingUnlock = false;
-            }
-            else if (pendingWheelClampToggle)
-            {
-                SubmitAction(
-                    YardCraneOperationActionType.WheelClampChange,
-                    controller.IsWheelClampClamped ? "Released" : "Clamped");
-                pendingWheelClampToggle = false;
-            }
-            else if (pendingTrolleyAnchorToggle)
-            {
-                SubmitAction(
-                    YardCraneOperationActionType.TrolleyAnchorChange,
-                    controller.IsTrolleyAnchorApplied ? "Released" : "Anchored");
-                pendingTrolleyAnchorToggle = false;
-            }
-            else if (pendingGantryAnchorToggle)
-            {
-                SubmitAction(
-                    YardCraneOperationActionType.GantryAnchorChange,
-                    controller.IsGantryAnchorApplied ? "Released" : "Anchored");
-                pendingGantryAnchorToggle = false;
-            }
-            else if (pendingSpreaderPumpToggle)
-            {
-                SubmitAction(
-                    YardCraneOperationActionType.SpreaderPumpChange,
-                    controller.IsSpreaderPumpOn ? "Off" : "On");
-                pendingSpreaderPumpToggle = false;
-            }
-            else if (pendingSpreaderSizeFt20)
-            {
-                SubmitAction(YardCraneOperationActionType.SpreaderSizeChange, "FT20");
-                pendingSpreaderSizeFt20 = false;
-            }
-            else if (pendingSpreaderSizeFt40)
-            {
-                SubmitAction(YardCraneOperationActionType.SpreaderSizeChange, "FT40");
-                pendingSpreaderSizeFt40 = false;
-            }
-            else if (pendingSpreaderReturnToZero)
-            {
-                SubmitAction(YardCraneOperationActionType.SpreaderRotationReturnToZero, string.Empty);
-                pendingSpreaderReturnToZero = false;
-            }
-            else if (pendingFaultReset)
-            {
-                // Reached only when Phase != SafeHold: routes through the existing physical
-                // reset interlock (motion-centered + actuator.TryReset) instead of the
-                // SafeHold-clear path handled above.
-                SubmitAction(YardCraneOperationActionType.Reset, string.Empty);
-                pendingFaultReset = false;
+                var intent = pendingIntents.First();
+                pendingIntents.Remove(intent);
+                DispatchIntent(intent);
             }
 
             controller.EvaluateWatchdogs(nowMs, out _);
         }
 
+        /// <summary>
+        /// Turns exactly one pending discrete intent into the matching controller action. The
+        /// dispatch order that used to be encoded by an if/else-if chain no longer matters: by
+        /// the time this runs, the pendingIntents.Count == 1 check above already guarantees at
+        /// most one intent is pending, so which case a switch checks first is irrelevant - only
+        /// the one actually pending intent can ever match.
+        /// </summary>
+        private void DispatchIntent(YardCraneOperatorIntent intent)
+        {
+            switch (intent)
+            {
+                case YardCraneOperatorIntent.ContainerLock:
+                    SubmitAction(YardCraneOperationActionType.SpreaderLock, "Locked");
+                    break;
+                case YardCraneOperatorIntent.ContainerUnlock:
+                    SubmitAction(YardCraneOperationActionType.SpreaderUnlock, "Unlocked");
+                    break;
+                case YardCraneOperatorIntent.WheelClampToggle:
+                    SubmitAction(
+                        YardCraneOperationActionType.WheelClampChange,
+                        controller.IsWheelClampClamped ? "Released" : "Clamped");
+                    break;
+                case YardCraneOperatorIntent.TrolleyAnchorToggle:
+                    SubmitAction(
+                        YardCraneOperationActionType.TrolleyAnchorChange,
+                        controller.IsTrolleyAnchorApplied ? "Released" : "Anchored");
+                    break;
+                case YardCraneOperatorIntent.GantryAnchorToggle:
+                    SubmitAction(
+                        YardCraneOperationActionType.GantryAnchorChange,
+                        controller.IsGantryAnchorApplied ? "Released" : "Anchored");
+                    break;
+                case YardCraneOperatorIntent.SpreaderPumpToggle:
+                    SubmitAction(
+                        YardCraneOperationActionType.SpreaderPumpChange,
+                        controller.IsSpreaderPumpOn ? "Off" : "On");
+                    break;
+                case YardCraneOperatorIntent.SpreaderSizeFt20:
+                    SubmitAction(YardCraneOperationActionType.SpreaderSizeChange, "FT20");
+                    break;
+                case YardCraneOperatorIntent.SpreaderSizeFt40:
+                    SubmitAction(YardCraneOperationActionType.SpreaderSizeChange, "FT40");
+                    break;
+                case YardCraneOperatorIntent.SpreaderReturnToZero:
+                    SubmitAction(YardCraneOperationActionType.SpreaderRotationReturnToZero, string.Empty);
+                    break;
+                case YardCraneOperatorIntent.FaultReset:
+                    // Reached only when Phase != SafeHold: routes through the existing physical
+                    // reset interlock (motion-centered + actuator.TryReset) instead of the
+                    // SafeHold-clear path handled above.
+                    SubmitAction(YardCraneOperationActionType.Reset, string.Empty);
+                    break;
+            }
+        }
+
         private void OnApplicationFocus(bool hasFocus)
         {
             focusAvailable = hasFocus;
-            if (!hasFocus)
+            if (hasFocus)
             {
+                focusLostAtMs = -1;
+            }
+            else
+            {
+                focusLostAtMs = MonotonicMilliseconds();
                 latestCommand = YardCraneOperatorCommand.Zero(latestCommand.Sequence + 1, MonotonicMilliseconds());
+                // Queued discrete actions (lock/unlock/wheel-clamp/anchor/pump/size) are
+                // deliberately NOT cancelled here: each re-validates real physical state
+                // (alignment, stationary, etc.) at dispatch time, so a brief focus blip doesn't
+                // need to punish an action the operator genuinely requested. Only the
+                // sample-freshness flag is invalidated - see the FixedUpdate SafeHold branch,
+                // which uses it to stop a pending FaultReset from reading this call's synthetic
+                // zero command as a genuine "handles centered" confirmation. (YC-P0-FOCUS-01)
+                hasFreshDeviceSample = false;
                 router.Reset();
             }
         }
@@ -400,6 +519,9 @@ namespace PortTraining.YardCraneSimulator.Controls
             {
                 Destroy(profile);
             }
+
+            s7?.Dispose();
+            s7 = null;
         }
 
         private void SubmitAction(YardCraneOperationActionType actionType, string targetState)

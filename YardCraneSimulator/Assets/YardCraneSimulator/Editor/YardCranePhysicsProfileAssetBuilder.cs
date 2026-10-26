@@ -45,7 +45,7 @@ namespace PortTraining.YardCraneSimulator.Editor
             Debug.Log(
                 $"[YC_PHYSICS_PROFILE_ASSET_READY] path={AssetPath}, " +
                 $"schema={profile.identity.schemaVersion}, profile={profile.identity.profileId}, " +
-                $"topology={profile.identity.topologyProfileId}, loops={profile.loopBindings.Length}",
+                $"topology={profile.identity.topologyProfileId}, ropes={profile.loopBindings.Length}",
                 profile);
             Selection.activeObject = profile;
         }
@@ -69,7 +69,7 @@ namespace PortTraining.YardCraneSimulator.Editor
             Debug.Log(
                 $"[YC_PHYSICS_PROFILE_PASS] path={AssetPath}, schema={profile.identity.schemaVersion}, " +
                 $"profile={profile.identity.profileId}, topology={profile.identity.topologyProfileId}, " +
-                $"loops={profile.loopBindings.Length}",
+                $"ropes={profile.loopBindings.Length}",
                 profile);
         }
 
@@ -90,17 +90,25 @@ namespace PortTraining.YardCraneSimulator.Editor
             var duplicateLoopRejected = !duplicateLoop.TryValidate(out _);
             Object.DestroyImmediate(duplicateLoop);
 
-            if (!validAccepted || !badSchemaRejected || !duplicateLoopRejected)
+            var duplicateTopAnchor = YardCraneEightRopeMaxProfile.CreateRuntimeDefaults();
+            duplicateTopAnchor.loopBindings[1].topAnchorPath =
+                duplicateTopAnchor.loopBindings[0].topAnchorPath;
+            var duplicateTopAnchorRejected = !duplicateTopAnchor.TryValidate(out _);
+            Object.DestroyImmediate(duplicateTopAnchor);
+
+            if (!validAccepted || !badSchemaRejected || !duplicateLoopRejected || !duplicateTopAnchorRejected)
             {
                 Debug.LogError(
                     $"[YC_PHYSICS_PROFILE_CONTRACT_FAIL] validAccepted={validAccepted}, " +
-                    $"badSchemaRejected={badSchemaRejected}, duplicateLoopRejected={duplicateLoopRejected}");
+                    $"badSchemaRejected={badSchemaRejected}, duplicateLoopRejected={duplicateLoopRejected}, " +
+                    $"duplicateTopAnchorRejected={duplicateTopAnchorRejected}");
                 return;
             }
 
             Debug.Log(
                 $"[YC_PHYSICS_PROFILE_CONTRACT_PASS] validAccepted={validAccepted}, " +
-                $"badSchemaRejected={badSchemaRejected}, duplicateLoopRejected={duplicateLoopRejected}");
+                $"badSchemaRejected={badSchemaRejected}, duplicateLoopRejected={duplicateLoopRejected}, " +
+                $"duplicateTopAnchorRejected={duplicateTopAnchorRejected}");
         }
 
         private static void EnsureFolder(string folder)

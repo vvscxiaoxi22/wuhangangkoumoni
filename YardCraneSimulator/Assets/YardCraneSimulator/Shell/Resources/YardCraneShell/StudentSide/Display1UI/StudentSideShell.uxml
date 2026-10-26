@@ -1,0 +1,643 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="StudentSideShellStyles.uss" />
+    <ui:VisualElement name="student-side-shell" class="shell" style="top: -1px; bottom: 2px; right: 0; left: 0; background-image: none; background-color: rgb(0, 82, 157); display: flex;">
+        <ui:VisualElement class="ambient ambient-one" style="display: none;" />
+        <ui:VisualElement name="VisualElement" class="ambient ambient-two" style="top: -260px; right: -181px; display: none;" />
+        <ui:VisualElement class="port-grid" />
+        <ui:VisualElement class="crane-mark crane-leg-left" />
+        <ui:VisualElement class="crane-mark crane-leg-right" />
+        <ui:VisualElement class="crane-mark crane-beam" />
+        <ui:VisualElement class="crane-mark crane-trolley" />
+        <ui:VisualElement class="crane-mark crane-rope" />
+        <ui:VisualElement class="crane-mark crane-spreader" />
+        <ui:VisualElement name="student-home-page" class="page home-page" style="display: flex;">
+            <ui:VisualElement name="student-home-background" picking-mode="Ignore" class="login-background student-home-skin" />
+            <ui:VisualElement picking-mode="Ignore" class="student-home-tone" />
+            <ui:VisualElement picking-mode="Ignore" class="student-home-vignette-left" style="display: flex;" />
+            <ui:VisualElement picking-mode="Ignore" class="student-home-vignette-bottom" />
+            <ui:VisualElement name="student-mode-content" class="student-mode-content" style="display: flex; top: -3px;">
+                <ui:VisualElement class="mode-topbar">
+                    <ui:VisualElement picking-mode="Ignore" class="mode-badge-glow mode-badge-glow-outer" style="display: none;" />
+                    <ui:VisualElement picking-mode="Ignore" class="mode-badge-glow mode-badge-glow-inner" style="width: 116px; display: none;" />
+                    <ui:Label text="数字双生" class="mode-badge" />
+                    <ui:VisualElement class="mode-navigation-glass">
+                        <ui:VisualElement class="mode-breadcrumb">
+                            <ui:Label name="identity" text="预览学员" class="mode-crumb-identity" />
+                            <ui:Label text="·" class="mode-crumb-dot" />
+                            <ui:Label text="场桥司机" class="mode-crumb-role" />
+                            <ui:Label text="·" class="mode-crumb-dot" />
+                            <ui:Label text="模式选择" class="mode-crumb-current" />
+                        </ui:VisualElement>
+                        <ui:Label text="YARD CRANE  /  TRAINING MODE" class="mode-top-label" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="mode-top-right">
+                        <ui:Button name="logout-button" text="←" tooltip="返回登录" class="mode-icon-button mode-back-button" />
+                        <ui:Button name="quit-button" text="×" tooltip="退出程序" class="mode-icon-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="mode-title-block">
+                    <ui:Label text="YARD CRANE  /  TRAINING MODE" class="mode-overline" />
+                    <ui:Label text="模式选择" class="mode-heading" />
+                    <ui:Label name="greeting" text="预览学员，准备开始新一次作业？" class="mode-subheading" />
+                </ui:VisualElement>
+                <ui:VisualElement class="mode-grid">
+                    <ui:Button name="learning-mode-button" class="mode-card">
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-glow mode-card-glow-outer" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-glow mode-card-glow-inner" />
+                        <ui:Label text="01" picking-mode="Ignore" class="mode-card-index" />
+                        <ui:Label text="LEARNING TRAINING" picking-mode="Ignore" class="mode-card-eyebrow" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-art mode-art-learning" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-rule" />
+                        <ui:Label text="学习训练" picking-mode="Ignore" class="mode-card-title" />
+                        <ui:Label text="系统化学习作业流程&#10;掌握场桥操作技能" picking-mode="Ignore" class="mode-card-desc" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-arrow-glow" />
+                        <ui:Label text="→" picking-mode="Ignore" class="mode-card-arrow" />
+                    </ui:Button>
+                    <ui:Button name="launch-button" class="mode-card">
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-glow mode-card-glow-outer" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-glow mode-card-glow-inner" />
+                        <ui:Label text="02" picking-mode="Ignore" class="mode-card-index" />
+                        <ui:Label text="FREE PRACTICE" picking-mode="Ignore" class="mode-card-eyebrow" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-art mode-art-free" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-rule" />
+                        <ui:Label text="自由练习" picking-mode="Ignore" class="mode-card-title" />
+                        <ui:Label text="自主选择作业场景&#10;自由进行操作练习" picking-mode="Ignore" class="mode-card-desc" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-arrow-glow" />
+                        <ui:Label text="→" picking-mode="Ignore" class="mode-card-arrow" />
+                    </ui:Button>
+                    <ui:Button name="assessment-mode-button" class="mode-card">
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-glow mode-card-glow-outer" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-glow mode-card-glow-inner" />
+                        <ui:Label text="03" picking-mode="Ignore" class="mode-card-index" />
+                        <ui:Label text="TASK ASSESSMENT" picking-mode="Ignore" class="mode-card-eyebrow" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-art mode-art-assessment" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-rule" />
+                        <ui:Label text="任务考核" picking-mode="Ignore" class="mode-card-title" />
+                        <ui:Label text="完成指定作业任务&#10;进行技能水平评估" picking-mode="Ignore" class="mode-card-desc" />
+                        <ui:VisualElement picking-mode="Ignore" class="mode-card-arrow-glow" />
+                        <ui:Label text="→" picking-mode="Ignore" class="mode-card-arrow" />
+                    </ui:Button>
+                </ui:VisualElement>
+                <ui:Label name="launch-status" class="mode-launch-status" />
+                <ui:VisualElement picking-mode="Ignore" class="mode-footer-strip">
+                    <ui:VisualElement class="mode-footer-rule" />
+                    <ui:Label text="PRACTICE   EXPLORE   IMPROVE   TO BE A BETTER OPERATOR" class="mode-footer-caption" />
+                </ui:VisualElement>
+                <ui:VisualElement picking-mode="Ignore" class="mode-footer-right">
+                    <ui:Label text="DIGITAL TWIN&#10;SMART PORT&#10;BETTER TOMORROW" class="mode-footer-right-copy" />
+                    <ui:VisualElement class="mode-footer-right-rule" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="home-sidebar glass-card">
+                <ui:VisualElement class="shell-brand-row">
+                    <ui:Label text="P." class="sidebar-monogram" />
+                    <ui:VisualElement>
+                        <ui:Label text="港口实训平台" class="sidebar-brand-title" />
+                        <ui:Label text="PORT TRAINING" class="sidebar-brand-code" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label text="●  场桥 · 学生端" class="station-label good" />
+                <ui:VisualElement class="sidebar-nav">
+                    <ui:VisualElement class="nav-item active">
+                        <ui:Label text="▣" class="nav-icon" />
+                        <ui:Label text="工作台" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="nav-item">
+                        <ui:Label text="▤" class="nav-icon" />
+                        <ui:Label text="任务中心" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="nav-item">
+                        <ui:Label text="▥" class="nav-icon" />
+                        <ui:Label text="成绩档案" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="nav-item">
+                        <ui:Label text="◇" class="nav-icon" />
+                        <ui:Label text="数字孪生" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="nav-item disabled-module">
+                        <ui:Label text="▦" class="nav-icon" />
+                        <ui:Label text="考核中心" />
+                        <ui:Label text="后续" class="nav-tail" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="sidebar-spacer" />
+                <ui:VisualElement class="sidebar-nav sidebar-nav-bottom">
+                    <ui:VisualElement class="nav-item">
+                        <ui:Label text="⚙" class="nav-icon" />
+                        <ui:Label text="设备设置" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="nav-item">
+                        <ui:Label text="☷" class="nav-icon" />
+                        <ui:Label text="使用指南" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="profile-panel">
+                    <ui:Label text="YC" class="profile-avatar" />
+                    <ui:VisualElement class="profile-copy">
+                        <ui:Label name="identity-legacy" text="场桥司机 · 本地单机" class="profile-name" />
+                        <ui:Label text="本地身份 · 非平台认证" class="profile-caption" />
+                    </ui:VisualElement>
+                    <ui:Button name="logout-button-legacy" text="退出" class="sidebar-button" />
+                    <ui:Button name="quit-button-legacy" text="关闭" class="sidebar-button quiet-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="workspace-body">
+                <ui:VisualElement class="topbar workspace-topbar">
+                    <ui:VisualElement>
+                        <ui:Label text="实训空间 / 我的训练" class="workspace-path" />
+                        <ui:Label text="工作台" class="home-title" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="top-actions">
+                        <ui:Label text="场桥" class="machine-chip selected-chip" />
+                        <ui:Label text="本机原型" class="local-badge" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="welcome-panel glass-card">
+                    <ui:VisualElement class="welcome-copy">
+                        <ui:Label text="MY TRAINING" class="section-code" />
+                        <ui:Label name="greeting-legacy" text="准备开始新一次作业？" class="welcome-title" />
+                        <ui:Label text="直接进入自由练习；教师工单与正式成绩接入后再开放。" class="welcome-caption" />
+                        <ui:Button name="launch-button-legacy" text="进入自由练习  →" class="primary-button launch-button" />
+                        <ui:Label name="launch-status-legacy" text="将启动独立全屏驾驶场景" class="launch-status" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="welcome-mark">
+                        <ui:Label text="YC" class="welcome-mark-title" />
+                        <ui:Label text="场桥司机训练" class="welcome-mark-caption" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="stats-row">
+                    <ui:VisualElement class="metric-card glass-card">
+                        <ui:Label text="完成率" class="metric-label" />
+                        <ui:Label text="—" class="metric-value" />
+                        <ui:Label text="0 次完成 / 0 次已保存运行" class="metric-caption" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="metric-card glass-card">
+                        <ui:Label text="练习时长" class="metric-label" />
+                        <ui:Label text="0.0" class="metric-value" />
+                        <ui:Label text="分钟 · 本机演示记录" class="metric-caption" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="metric-card metric-last glass-card">
+                        <ui:Label text="可用任务" class="metric-label" />
+                        <ui:Label text="1" class="metric-value" />
+                        <ui:Label text="场桥 · 当前原型" class="metric-caption" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="home-content">
+                    <ui:VisualElement class="main-column section-card glass-card">
+                        <ui:VisualElement class="section-heading">
+                            <ui:VisualElement>
+                                <ui:Label text="我的工单" class="section-title" />
+                                <ui:Label text="本地可用项目与后续平台工单" class="section-caption" />
+                            </ui:VisualElement>
+                            <ui:Label text="1 项可用" class="count-pill" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="task-free" class="task-card selected-task">
+                            <ui:VisualElement class="task-index">
+                                <ui:Label text="01" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="task-copy">
+                                <ui:Label name="task-free-title" text="自由练习" class="task-title" />
+                                <ui:Label name="task-free-description" class="task-description" />
+                                <ui:Label text="键盘 / Xbox · 本地驾驶室" class="task-tags" />
+                            </ui:VisualElement>
+                            <ui:Label name="task-free-availability" text="当前可用" class="availability good" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="planned-row">
+                            <ui:VisualElement name="task-pickup" class="task-card compact-task">
+                                <ui:VisualElement class="task-index">
+                                    <ui:Label text="02" />
+                                </ui:VisualElement>
+                                <ui:VisualElement class="task-copy">
+                                    <ui:Label name="task-pickup-title" text="标准提箱工单" class="task-title" />
+                                    <ui:Label name="task-pickup-description" class="task-description" />
+                                </ui:VisualElement>
+                                <ui:Label name="task-pickup-availability" text="待接入" class="availability" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="task-dropoff" class="task-card compact-task second-compact">
+                                <ui:VisualElement class="task-index">
+                                    <ui:Label text="03" />
+                                </ui:VisualElement>
+                                <ui:VisualElement class="task-copy">
+                                    <ui:Label name="task-dropoff-title" text="标准收箱工单" class="task-title" />
+                                    <ui:Label name="task-dropoff-description" class="task-description" />
+                                </ui:VisualElement>
+                                <ui:Label name="task-dropoff-availability" text="待接入" class="availability" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="side-column glass-card readiness-card">
+                        <ui:Label text="TRAINING FOCUS" class="section-code" />
+                        <ui:Label text="把基础动作练扎实" class="section-title focus-title" />
+                        <ui:VisualElement class="device-row">
+                            <ui:VisualElement class="device-symbol">
+                                <ui:Label text="KB" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="device-copy">
+                                <ui:Label text="键盘" class="device-title" />
+                                <ui:Label text="本机操作输入" class="device-caption" />
+                            </ui:VisualElement>
+                            <ui:Label name="keyboard-status-legacy" text="检测中" class="device-status" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="device-row">
+                            <ui:VisualElement class="device-symbol">
+                                <ui:Label text="XB" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="device-copy">
+                                <ui:Label text="Xbox 手柄" class="device-title" />
+                                <ui:Label text="可选操作输入" class="device-caption" />
+                            </ui:VisualElement>
+                            <ui:Label name="gamepad-status-legacy" text="检测中" class="device-status" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="device-row disabled-device">
+                            <ui:VisualElement class="device-symbol">
+                                <ui:Label text="S7" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="device-copy">
+                                <ui:Label text="PLC / 模拟机" class="device-title" />
+                                <ui:Label text="由 PortGatewayService 接入" class="device-caption" />
+                            </ui:VisualElement>
+                            <ui:Label text="未接入" class="device-status muted" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="mode-notice">
+                            <ui:Label text="本地兜底模式" class="mode-title" />
+                            <ui:Label text="不会读取教师任务、TOS或正式成绩。" class="mode-copy" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="student-assessment-page" class="page student-assessment-page" style="display: none;">
+            <ui:VisualElement name="student-assessment-background" picking-mode="Ignore" class="login-background student-learning-skin" />
+            <ui:VisualElement picking-mode="Ignore" class="login-blue-overlay assessment-blue-overlay" />
+            <ui:VisualElement class="assessment-topbar">
+                <ui:VisualElement class="assessment-breadcrumb">
+                    <ui:Label text="任务考核" class="mode-crumb-current" />
+                    <ui:Label text="›" class="mode-crumb-chevron" />
+                    <ui:Label text="已发布试卷" class="assessment-crumb-label" />
+                </ui:VisualElement>
+                <ui:VisualElement class="mode-top-right">
+                    <ui:Label text="TASK ASSESSMENT  /  LOCAL PAPER" class="mode-top-label" />
+                    <ui:Button name="assessment-back-button" text="‹  返回模式选择" tooltip="返回学生端首页" class="assessment-back-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="assessment-workspace">
+                <ui:VisualElement class="assessment-heading-row">
+                    <ui:VisualElement class="assessment-heading-copy">
+                        <ui:Label text="TASK ASSESSMENT" class="assessment-overline" />
+                        <ui:Label name="assessment-paper-title" text="当前考核试卷" class="assessment-paper-title" />
+                        <ui:Label text="选择一道考核题目进入实训场景，完成后返回首页，可再次进入继续作答" class="assessment-paper-subtitle" />
+                    </ui:VisualElement>
+                    <ui:Label name="assessment-paper-count" text="0 道题" class="assessment-paper-count" />
+                </ui:VisualElement>
+                <ui:Label name="assessment-paper-status" text="正在读取教师发布的考核试卷…" class="assessment-paper-status" />
+                <ui:VisualElement class="assessment-list-shell glass-card">
+                    <ui:VisualElement class="assessment-list-header">
+                        <ui:Label text="类型" class="assessment-header-kind" />
+                        <ui:Label text="考核题目" class="assessment-header-title" />
+                        <ui:Label text="任务信息" class="assessment-header-meta" />
+                        <ui:Label text="操作" class="assessment-header-action" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="assessment-question-list" mode="Vertical" vertical-scroller-visibility="Auto" class="assessment-question-list" />
+                </ui:VisualElement>
+                <ui:VisualElement picking-mode="Ignore" class="assessment-footer-note">
+                    <ui:VisualElement class="assessment-footer-rule" />
+                    <ui:Label text="试卷保存在本机 · 开始题目前会写入当前任务状态" class="assessment-footer-copy" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="student-learning-page" class="page student-learning-page" style="display: none;">
+            <ui:VisualElement name="student-learning-background" picking-mode="Ignore" class="login-background student-learning-skin" style="background-color: rgba(107, 98, 98, 0);" />
+            <ui:VisualElement picking-mode="Ignore" class="login-blue-overlay" style="top: -1px; bottom: 2px; right: -1px; left: 2px;" />
+            <ui:VisualElement class="learning-topbar">
+                <ui:VisualElement class="learning-breadcrumb">
+                    <ui:Label name="learning-identity" text="预览学员" class="mode-crumb-identity" />
+                    <ui:Label text="·" class="mode-crumb-dot" />
+                    <ui:Label text="学习训练" class="mode-crumb-current" />
+                    <ui:Label text="›" class="mode-crumb-chevron" />
+                    <ui:Button name="learning-back-crumb" text="模式选择" class="mode-crumb-back" />
+                </ui:VisualElement>
+                <ui:VisualElement class="mode-top-right">
+                    <ui:Label text="YARD CRANE  /  TRAINING MODE" class="mode-top-label" />
+                    <ui:Button name="learning-back-button" text="‹" class="mode-icon-button" />
+                    <ui:Button name="learning-close-button" text="×" class="mode-icon-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="learning-body">
+                <ui:VisualElement class="learning-left-rail">
+                    <ui:VisualElement class="learning-sidebar glass-card">
+                        <ui:Button name="learning-nav-single" class="drill-nav-item active">
+                            <ui:Label text="▣" class="drill-nav-icon" />
+                            <ui:Label text="单项操作" />
+                        </ui:Button>
+                        <ui:Button name="learning-nav-link" class="drill-nav-item">
+                            <ui:Label text="◇" class="drill-nav-icon" />
+                            <ui:Label text="联动操作" />
+                        </ui:Button>
+                        <ui:Button name="learning-nav-work" class="drill-nav-item disabled-module">
+                            <ui:Label text="▤" class="drill-nav-icon" />
+                            <ui:Label text="作业采样" />
+                        </ui:Button>
+                        <ui:Button name="learning-nav-skill" class="drill-nav-item">
+                            <ui:Label text="▥" class="drill-nav-icon" />
+                            <ui:Label text="能力提升" />
+                        </ui:Button>
+                        <ui:Button name="learning-nav-fault" class="drill-nav-item">
+                            <ui:Label text="⚠" class="drill-nav-icon" />
+                            <ui:Label text="故障排除" />
+                        </ui:Button>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="learning-sidebar-footer">
+                        <ui:VisualElement class="learning-sidebar-footer-rule" />
+                        <ui:Label text="PRACTICE" class="drill-sidebar-footer-line" />
+                        <ui:Label text="EXPLORE" class="drill-sidebar-footer-line" />
+                        <ui:Label text="IMPROVE" class="drill-sidebar-footer-line" />
+                        <ui:Label text="TO BE A BETTER OPERATOR" class="drill-sidebar-footer-line" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="learning-main">
+                    <ui:VisualElement class="learning-head-row">
+                        <ui:VisualElement class="learning-title-wrap">
+                            <ui:VisualElement picking-mode="Ignore" class="learning-title-icon" />
+                            <ui:VisualElement class="learning-title-copy">
+                                <ui:Label text="学习训练模式" class="mode-heading learning-heading" />
+                                <ui:Label text="选择训练项目，设置参数，开始你的操作训练" class="mode-subheading learning-subheading" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="learning-scope-toggle">
+                            <ui:Button name="learning-scope-local" class="learning-scope-chip learning-scope-chip-active">
+                                <ui:Label text="✓" class="learning-scope-icon" />
+                                <ui:Label text="本地模式" />
+                            </ui:Button>
+                            <ui:Button name="learning-scope-remote" class="learning-scope-chip">
+                                <ui:Label text="○" class="learning-scope-icon" />
+                                <ui:Label text="远程模式" />
+                            </ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="single-drill-row" class="learning-drill-row">
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="01" class="drill-card-index" />
+                                <ui:Label text="GANTRY MOVEMENT" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="大车移动" class="drill-card-title" />
+                            <ui:VisualElement class="drill-card-media">
+                                <ui:VisualElement picking-mode="Ignore" class="drill-card-photo drill-card-photo-gantry" style="background-image: url(&apos;LearningThumbnails/DrillGantry.png&apos;);" />
+                                <ui:Label text="↔" picking-mode="Ignore" class="drill-card-motion-glyph" />
+                            </ui:VisualElement>
+                            <ui:Label text="相对原点" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-gantry-options" class="drill-options">
+                                <ui:Toggle name="drill-gantry-option-0" text="-50m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-gantry-option-1" text="-30m" class="drill-option" />
+                                <ui:Toggle name="drill-gantry-option-2" text="30m" class="drill-option" />
+                                <ui:Toggle name="drill-gantry-option-3" text="50m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-gantry-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="02" class="drill-card-index" />
+                                <ui:Label text="TROLLEY MOVEMENT" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="小车移动" class="drill-card-title" />
+                            <ui:VisualElement class="drill-card-media">
+                                <ui:VisualElement picking-mode="Ignore" class="drill-card-photo drill-card-photo-trolley" style="background-image: url(&apos;LearningThumbnails/DrillTrolley.png&apos;);" />
+                                <ui:Label text="↔" picking-mode="Ignore" class="drill-card-motion-glyph" />
+                            </ui:VisualElement>
+                            <ui:Label text="本地坐标" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-trolley-options" class="drill-options">
+                                <ui:Toggle name="drill-trolley-option-0" text="-10m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-trolley-option-1" text="5m" class="drill-option" />
+                                <ui:Toggle name="drill-trolley-option-2" text="10m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-trolley-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="03" class="drill-card-index" />
+                                <ui:Label text="SPREADER HOISTING" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="吊具起升" class="drill-card-title" />
+                            <ui:VisualElement class="drill-card-media">
+                                <ui:VisualElement picking-mode="Ignore" class="drill-card-photo drill-card-photo-hoist" style="background-image: url(&apos;LearningThumbnails/DrillHoist.png&apos;);" />
+                                <ui:Label text="↕" picking-mode="Ignore" class="drill-card-motion-glyph" />
+                            </ui:VisualElement>
+                            <ui:Label text="相对起始高度" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-hoist-options" class="drill-options">
+                                <ui:Toggle name="drill-hoist-option-0" text="上升5m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-hoist-option-1" text="下降5m" class="drill-option" />
+                                <ui:Toggle name="drill-hoist-option-2" text="下降10m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-hoist-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="04" class="drill-card-index" />
+                                <ui:Label text="SPREADER ROTATION" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="吊具回旋" class="drill-card-title" />
+                            <ui:VisualElement class="drill-card-media">
+                                <ui:VisualElement picking-mode="Ignore" class="drill-card-photo drill-card-photo-rotation" style="background-image: url(&apos;LearningThumbnails/DrillSpreaderRotation.png&apos;);" />
+                                <ui:Label text="↻" picking-mode="Ignore" class="drill-card-motion-glyph" />
+                            </ui:VisualElement>
+                            <ui:Label text="目标角度" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-tilt-options" class="drill-options">
+                                <ui:Toggle name="drill-tilt-option-0" text="左旋3°" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-tilt-option-1" text="右旋3°" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-tilt-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card drill-card-last">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="05" class="drill-card-index" />
+                                <ui:Label text="SPREADER ZEROING" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="吊具回零" class="drill-card-title" />
+                            <ui:VisualElement class="drill-card-media">
+                                <ui:VisualElement picking-mode="Ignore" class="drill-card-photo drill-card-photo-zeroing" style="background-image: url(&apos;LearningThumbnails/DrillSpreaderZeroing.png&apos;);" />
+                                <ui:Label text="◎" picking-mode="Ignore" class="drill-card-motion-glyph" />
+                            </ui:VisualElement>
+                            <ui:Label text="回零方式" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-pitch-options" class="drill-options">
+                                <ui:Toggle name="drill-pitch-option-0" text="自动回零" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-pitch-option-1" text="回零后保持" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-pitch-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="linked-drill-row" class="learning-drill-row" style="display: none;">
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="06" class="drill-card-index" />
+                                <ui:Label text="LINKED GANTRY + TROLLEY" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="大车小车联动" class="drill-card-title" />
+                            <ui:Label text="预设组合" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-linked-gantry-trolley-options" class="drill-options">
+                                <ui:Toggle name="drill-linked-gantry-trolley-option-0" text="大车+20m / 小车+5m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-linked-gantry-trolley-option-1" text="大车-20m / 小车-5m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-linked-gantry-trolley-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="07" class="drill-card-index" />
+                                <ui:Label text="LINKED GANTRY + HOIST" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="大车起升" class="drill-card-title" />
+                            <ui:Label text="预设组合" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-linked-gantry-hoist-options" class="drill-options">
+                                <ui:Toggle name="drill-linked-gantry-hoist-option-0" text="大车+20m / 上升5m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-linked-gantry-hoist-option-1" text="大车-20m / 下降5m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-linked-gantry-hoist-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="08" class="drill-card-index" />
+                                <ui:Label text="LINKED TROLLEY + HOIST" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="小车起升" class="drill-card-title" />
+                            <ui:Label text="预设组合" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-linked-trolley-hoist-options" class="drill-options">
+                                <ui:Toggle name="drill-linked-trolley-hoist-option-0" text="小车+5m / 上升5m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-linked-trolley-hoist-option-1" text="小车-5m / 下降5m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-linked-trolley-hoist-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="drill-card drill-card-last">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="09" class="drill-card-index" />
+                                <ui:Label text="LINKED GANTRY + TROLLEY + HOIST" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="大车小车起升" class="drill-card-title" />
+                            <ui:Label text="预设组合" class="drill-card-field-label" />
+                            <ui:VisualElement name="drill-linked-gantry-trolley-hoist-options" class="drill-options">
+                                <ui:Toggle name="drill-linked-gantry-trolley-hoist-option-0" text="大车+20m / 小车+5m / 上升5m" value="true" class="drill-option" />
+                                <ui:Toggle name="drill-linked-gantry-trolley-hoist-option-1" text="大车-20m / 小车-5m / 下降5m" class="drill-option" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-linked-gantry-trolley-hoist-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="skill-drill-row" class="learning-drill-row" style="display: none;">
+                        <ui:VisualElement class="drill-card drill-card-last">
+                            <ui:VisualElement class="drill-card-head">
+                                <ui:Label text="01" class="drill-card-index" />
+                                <ui:Label text="GANTRY STRAIGHT LINE" class="drill-card-eyebrow" />
+                            </ui:VisualElement>
+                            <ui:Label text="大车直线行走" class="drill-card-title" />
+                            <ui:Label text="固定目标：大车 0m（容差 ±0.5m）" class="drill-card-field-label" />
+                            <ui:VisualElement class="drill-card-spacer" />
+                            <ui:Button name="drill-skill-gantry-straight-start" text="开始  →" class="drill-start-button" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fault-drill-row" class="learning-drill-row fault-drill-view" style="display: none;">
+                        <ui:Label name="fault-category-heading" text="故障类型列表" class="fault-list-heading" />
+                        <ui:VisualElement name="fault-category-grid" class="fault-card-grid glass-card">
+                            <ui:Button name="fault-card-power" class="fault-card">
+                                <ui:Label text="01  /  POWER" class="fault-card-eyebrow" />
+                                <ui:Label text="⚡" class="fault-card-glyph" />
+                                <ui:Label text="电源故障" class="fault-card-title" />
+                                <ui:Label text="电源回路与供电异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-hoist" class="fault-card">
+                                <ui:Label text="02  /  HOIST" class="fault-card-eyebrow" />
+                                <ui:Label text="↕" class="fault-card-glyph" />
+                                <ui:Label text="起升机构" class="fault-card-title" />
+                                <ui:Label text="起升动作与限位异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-gantry" class="fault-card">
+                                <ui:Label text="03  /  GANTRY" class="fault-card-eyebrow" />
+                                <ui:Label text="⇆" class="fault-card-glyph" />
+                                <ui:Label text="大车机构" class="fault-card-title" />
+                                <ui:Label text="大车行走与限位异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-trolley" class="fault-card fault-card-row-end">
+                                <ui:Label text="04  /  TROLLEY" class="fault-card-eyebrow" />
+                                <ui:Label text="⇄" class="fault-card-glyph" />
+                                <ui:Label text="小车机构" class="fault-card-title" />
+                                <ui:Label text="小车行走与限位异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-guide-or-pitch" class="fault-card">
+                                <ui:Label text="05  /  GUIDE BOARD" class="fault-card-eyebrow" />
+                                <ui:Label text="▤" class="fault-card-glyph" />
+                                <ui:Label text="导板机构" class="fault-card-title" />
+                                <ui:Label text="导板动作与限位异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-fore-aft-tilt" class="fault-card">
+                                <ui:Label text="06  /  FORE-AFT TILT" class="fault-card-eyebrow" />
+                                <ui:Label text="↕" class="fault-card-glyph" />
+                                <ui:Label text="前后倾机构" class="fault-card-title" />
+                                <ui:Label text="吊具前后倾动作异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-plane-rotation" class="fault-card">
+                                <ui:Label text="07  /  ROTATION" class="fault-card-eyebrow" />
+                                <ui:Label text="↻" class="fault-card-glyph" />
+                                <ui:Label text="平面回转机构" class="fault-card-title" />
+                                <ui:Label text="吊具平面回转异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-side-tilt" class="fault-card fault-card-row-end">
+                                <ui:Label text="08  /  SIDE TILT" class="fault-card-eyebrow" />
+                                <ui:Label text="↔" class="fault-card-glyph" />
+                                <ui:Label text="左右倾机构" class="fault-card-title" />
+                                <ui:Label text="吊具左右倾动作异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-wheel-clamp" class="fault-card fault-card-bottom">
+                                <ui:Label text="09  /  WHEEL CLAMP" class="fault-card-eyebrow" />
+                                <ui:Label text="⊣" class="fault-card-glyph" />
+                                <ui:Label text="夹轮器" class="fault-card-title" />
+                                <ui:Label text="夹轮器动作异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-spreader-pump" class="fault-card fault-card-bottom">
+                                <ui:Label text="10  /  SPREADER PUMP" class="fault-card-eyebrow" />
+                                <ui:Label text="◉" class="fault-card-glyph" />
+                                <ui:Label text="吊具泵" class="fault-card-title" />
+                                <ui:Label text="吊具泵及液压动作异常" class="fault-card-note" />
+                            </ui:Button>
+                            <ui:Button name="fault-card-component" class="fault-card fault-card-row-end fault-card-bottom">
+                                <ui:Label text="11  /  COMPONENT" class="fault-card-eyebrow" />
+                                <ui:Label text="⚙" class="fault-card-glyph" />
+                                <ui:Label text="元器件损坏" class="fault-card-title" />
+                                <ui:Label text="控制与限位元器件损坏" class="fault-card-note" />
+                            </ui:Button>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="fault-detail-view" class="fault-detail-view" style="display: none;">
+                            <ui:VisualElement class="fault-detail-toolbar">
+                                <ui:Button name="fault-detail-back-button" text="‹  返回故障类型" class="fault-detail-back-button" />
+                                <ui:Label name="fault-detail-title" text="电源故障" class="fault-detail-title" />
+                                <ui:Label name="fault-detail-count" text="0 项" class="fault-detail-count" />
+                            </ui:VisualElement>
+                            <ui:Label name="fault-detail-notice" text="按序号查看故障点、故障现象和分类，可上下滚动浏览。" class="fault-detail-notice" />
+                            <ui:VisualElement class="fault-table-shell glass-card">
+                                <ui:VisualElement class="fault-table-header">
+                                    <ui:Label text="序号" class="fault-table-header-cell fault-col-number" />
+                                    <ui:Label text="故障点" class="fault-table-header-cell fault-col-point" />
+                                    <ui:Label text="故障现象" class="fault-table-header-cell fault-col-symptom" />
+                                    <ui:Label text="分类" class="fault-table-header-cell fault-col-category" />
+                                </ui:VisualElement>
+                                <ui:ScrollView name="fault-detail-scroll" mode="Vertical" vertical-scroller-visibility="Auto" horizontal-scroller-visibility="Hidden" class="fault-table-scroll">
+                                    <ui:VisualElement name="fault-detail-list" class="fault-detail-list" />
+                                </ui:ScrollView>
+                            </ui:VisualElement>
+                            <ui:Button name="fault-simulation-button" text="模拟故障练习" class="fault-simulation-button" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:Label name="learning-launch-status" text=" " class="learning-launch-status" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="learning-footer-right">
+                <ui:VisualElement class="learning-footer-right-rule" />
+                <ui:Label text="智慧港口  ·  专业训练  ·  安全高效" class="learning-footer-right-copy" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

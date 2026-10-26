@@ -1,0 +1,177 @@
+.shell {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: rgb(231, 240, 244);
+    background-color: rgb(3, 43, 96);
+    font-size: 18px;
+    overflow: hidden;
+}
+
+Label { margin: 0; padding: 0; -unity-font-style: normal; }
+.shell Button { background-image: none; }
+.page { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.glass-card { background-color: rgba(7, 57, 105, 0.84); border-width: 1px; border-color: rgba(171, 220, 255, 0.24); border-top-color: rgba(212, 242, 255, 0.48); border-radius: 28px; }
+.ambient { position: absolute; border-radius: 50%; }
+.ambient-one { width: 920px; height: 920px; left: -260px; bottom: -500px; background-color: rgba(9, 142, 205, 0.22); }
+.ambient-two { width: 620px; height: 620px; right: -180px; top: -260px; background-color: rgba(37, 198, 255, 0.12); }
+.port-grid { position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background-color: rgba(34, 72, 87, 0.28); border-top-width: 1px; border-top-color: rgba(146, 196, 211, 0.14); }
+.crane-mark { position: absolute; background-color: rgba(112, 171, 191, 0.10); }
+.crane-leg-left { left: 210px; bottom: 145px; width: 24px; height: 450px; }
+.crane-leg-right { left: 750px; bottom: 145px; width: 24px; height: 450px; }
+.crane-beam { left: 165px; bottom: 570px; width: 720px; height: 26px; }
+.crane-trolley { left: 465px; bottom: 535px; width: 92px; height: 34px; }
+.crane-rope { left: 506px; bottom: 310px; width: 8px; height: 225px; }
+.crane-spreader { left: 438px; bottom: 286px; width: 144px; height: 22px; }
+
+.brand-code, .section-code { color: rgb(156, 220, 244); font-size: 14px; letter-spacing: 3px; }
+.login-page { flex-direction: row; padding-left: 120px; padding-right: 120px; align-items: center; justify-content: space-between; }
+.login-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.login-blue-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(3, 44, 91, 0.66); }
+.prototype-login-brand { position: absolute; left: 24px; top: 24px; margin: 0; padding: 0; flex-direction: row; align-items: center; background-color: rgba(0, 0, 0, 0); border-width: 0; border-radius: 0; }
+.brand-logo {
+    width: 180px;
+    height: 54px;
+    background-color: rgba(0, 0, 0, 0);
+}
+.brand-block { width: 880px; margin-top: 12px; }
+.hero-title { margin-top: 28px; font-size: 72px; -unity-font-style: normal; color: rgb(244, 250, 255); }
+.hero-caption { margin-top: 28px; font-size: 42px; -unity-font-style: bold; color: rgb(189, 223, 241); }
+.login-card { width: 630px; padding: 54px; background-color: rgba(7, 57, 105, 0.80); }
+.role-switch { height: 64px; margin-top: 36px; margin-bottom: 28px; padding: 6px; flex-direction: row; border-radius: 18px; background-color: rgba(0, 30, 68, 0.26); border-width: 1px; border-color: rgba(171, 220, 255, 0.20); }
+.role-button { width: 50%; height: 50px; margin: 0; padding: 0; border-width: 0; border-radius: 13px; background-image: none; background-color: rgba(0, 0, 0, 0); color: rgb(179, 206, 228); font-size: 17px; -unity-text-align: middle-center; }
+.role-button:hover { color: rgb(244, 250, 255); background-color: rgba(82, 178, 235, 0.18); }
+.role-button.selected { color: rgb(244, 250, 255); background-color: rgba(82, 178, 235, 0.38); -unity-font-style: bold; }
+.login-title { margin-top: 12px; font-size: 38px; -unity-font-style: normal; }
+.section-code { margin-top: 0; }
+.login-note { margin-top: 12px; color: rgb(179, 206, 228); font-size: 17px; white-space: normal; }
+.field-group { margin-top: 25px; }
+.hidden-field { display: none; }
+.field-label { color: rgb(213, 232, 246); font-size: 16px; margin-bottom: 10px; }
+.shell-input { height: 62px; font-size: 20px; color: rgb(244, 250, 255); }
+.shell-input .unity-base-text-field__input { background-image: none; background-color: rgba(0, 32, 73, 0.38); border-width: 1px; border-color: rgba(150, 214, 254, 0.34); border-radius: 14px; padding-left: 18px; padding-right: 18px; }
+.shell-input .unity-text-input { background-image: none; background-color: rgba(0, 32, 73, 0.38); border-width: 1px; border-color: rgba(150, 214, 254, 0.34); border-radius: 14px; padding-left: 18px; padding-right: 18px; }
+.shell-input .unity-base-text-field__input:focus { border-color: rgb(75, 222, 255); background-color: rgba(0, 32, 73, 0.68); }
+.form-error { display: none; min-height: 24px; margin-top: 10px; color: rgb(255, 145, 145); font-size: 14px; white-space: normal; }
+.primary-button { height: 66px; margin: 22px 0 0 0; padding: 0 20px; border-width: 1px; border-color: rgba(161, 239, 255, 0.65); border-radius: 16px; background-image: none; background-color: rgb(50, 210, 255); color: rgb(1, 44, 81); font-size: 19px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.primary-button:hover { background-color: rgb(75, 222, 255); }
+.primary-button:active { background-color: rgb(27, 181, 240); }
+.primary-button:disabled { opacity: 0.55; }
+.offline-row { margin-top: 26px; flex-direction: row; align-items: center; color: rgb(179, 206, 228); font-size: 13px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 10px; }
+.good-dot { background-color: rgb(99, 224, 174); }
+.offline-detail { margin-left: auto; color: rgb(140, 181, 213); }
+.prototype-login-footer { position: absolute; left: 120px; right: 120px; bottom: 46px; flex-direction: row; justify-content: space-between; color: rgb(128, 181, 213); font-size: 13px; letter-spacing: 2px; }
+
+.home-page { display: none; }
+
+/* TeacherHome / Display1 — same 1920 x 1080 visual system as StudentHome, with
+   the low-fidelity prototype intentionally reduced to its two truthful core entries. */
+.teacher-home-page { padding: 0; background-color: rgb(8, 48, 98); color: rgb(244, 250, 255); }
+.teacher-home-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-image: url('../StudentSide/Display1UI/StudentHomeSkin_v1.png'); -unity-background-scale-mode: scale-and-crop; }
+.teacher-home-tone { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(4, 41, 92, 0.30); }
+.teacher-home-vignette { position: absolute; background-color: rgba(1, 21, 58, 0.16); }
+.teacher-home-vignette-left { left: -520px; top: -120px; width: 1160px; height: 1320px; border-radius: 580px; }
+.teacher-home-vignette-bottom { left: 0; right: 0; bottom: 0; height: 220px; background-color: rgba(1, 20, 53, 0.20); }
+
+.teacher-topbar { position: absolute; left: 52px; right: 52px; top: 48px; height: 60px; }
+.teacher-badge-glow { position: absolute; border-color: rgba(69, 192, 255, 0.10); background-color: rgba(69, 192, 255, 0.035); }
+.teacher-badge-glow-outer { left: -10px; top: -8px; width: 152px; height: 72px; border-width: 8px; border-radius: 36px; border-color: rgba(69, 192, 255, 0.055); }
+.teacher-badge-glow-inner { left: -5px; top: -3px; width: 142px; height: 62px; border-width: 4px; border-radius: 31px; border-color: rgba(96, 210, 255, 0.10); }
+.teacher-badge { position: absolute; left: 0; top: 2px; width: 132px; height: 52px; align-items: center; justify-content: center; border-width: 1px; border-color: rgba(203, 244, 255, 0.75); border-radius: 26px; background-color: rgba(49, 168, 239, 0.82); color: rgb(247, 252, 255); font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-navigation-glass { position: absolute; left: 156px; top: 4px; width: 1456px; height: 52px; padding: 0 26px; flex-direction: row; align-items: center; justify-content: space-between; border-width: 1px; border-color: rgba(195, 226, 249, 0.24); border-top-color: rgba(226, 245, 255, 0.40); border-radius: 26px; background-color: rgba(13, 58, 112, 0.54); }
+.teacher-breadcrumb { flex-direction: row; align-items: center; }
+.teacher-crumb-identity, .teacher-crumb-role { color: rgba(231, 244, 255, 0.72); font-size: 16px; }
+.teacher-crumb-dot { margin: 0 16px; color: rgba(195, 222, 243, 0.48); font-size: 16px; }
+.teacher-crumb-current { color: rgb(111, 230, 245); font-size: 16px; }
+.teacher-top-label { color: rgba(210, 234, 250, 0.52); font-size: 12px; letter-spacing: 4px; }
+.teacher-top-actions { position: absolute; right: 12px; top: 0; flex-direction: row; align-items: center; }
+.teacher-icon-button { width: 58px; height: 58px; margin-left: 28px; padding: 0 0 3px 0; border-width: 1px; border-color: rgba(209, 236, 255, 0.38); border-top-color: rgba(241, 251, 255, 0.64); border-radius: 29px; background-color: rgba(28, 87, 145, 0.52); color: rgb(243, 250, 255); font-size: 34px; -unity-text-align: middle-center; }
+.teacher-back-button { padding-bottom: 4px; font-size: 30px; }
+.teacher-icon-button:hover { background-color: rgba(54, 144, 211, 0.76); border-color: rgba(169, 237, 255, 0.82); }
+.teacher-icon-button:active { background-color: rgba(25, 99, 170, 0.88); }
+
+.teacher-title-block { position: absolute; left: 0; right: 0; top: 158px; align-items: center; }
+.teacher-overline { height: 18px; color: rgb(111, 230, 245); font-size: 14px; letter-spacing: 5px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-heading { height: 78px; margin-top: 18px; color: rgb(247, 251, 255); font-size: 64px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.teacher-subheading { height: 30px; margin-top: 8px; color: rgba(225, 239, 252, 0.68); font-size: 22px; -unity-text-align: middle-center; }
+
+.teacher-management-grid { position: absolute; left: 574px; top: 368px; width: 772px; height: 468px; flex-direction: row; justify-content: space-between; }
+.teacher-core-card { position: relative; width: 360px; height: 468px; margin: 0; padding: 0; overflow: visible; border-width: 1.5px; border-color: rgba(191, 225, 249, 0.44); border-top-color: rgba(232, 248, 255, 0.68); border-radius: 28px; background-color: rgba(20, 70, 127, 0.66); color: rgb(246, 251, 255); }
+.teacher-core-card:hover { border-width: 2px; border-color: rgba(143, 234, 255, 0.90); border-top-color: rgb(226, 250, 255); background-color: rgba(36, 132, 210, 0.80); }
+.teacher-core-card:active { background-color: rgba(29, 108, 184, 0.90); }
+.teacher-core-card.selected { border-width: 2px; border-color: rgba(143, 234, 255, 0.94); background-color: rgba(37, 142, 222, 0.84); }
+.teacher-card-glow { position: absolute; opacity: 0; background-color: rgba(60, 194, 255, 0.025); }
+.teacher-card-glow-outer { left: -14px; right: -14px; top: -14px; bottom: -14px; border-width: 9px; border-radius: 42px; border-color: rgba(60, 194, 255, 0.055); }
+.teacher-card-glow-inner { left: -7px; right: -7px; top: -7px; bottom: -7px; border-width: 5px; border-radius: 35px; border-color: rgba(99, 215, 255, 0.115); }
+.teacher-core-card:hover .teacher-card-glow, .teacher-core-card.selected .teacher-card-glow { opacity: 1; }
+.teacher-card-index { position: absolute; left: 40px; top: 30px; height: 39px; color: rgb(114, 217, 242); font-size: 32px; }
+.teacher-card-eyebrow { position: absolute; left: 40px; top: 70px; height: 18px; color: rgba(204, 228, 245, 0.68); font-size: 12px; letter-spacing: 3.5px; }
+.teacher-card-art { position: absolute; left: 85px; top: 96px; width: 190px; height: 154px; }
+.teacher-card-rule { position: absolute; left: 40px; top: 278px; width: 54px; height: 2px; background-color: rgba(210, 239, 252, 0.72); }
+.teacher-card-title { position: absolute; left: 40px; right: 40px; top: 302px; height: 48px; color: rgb(247, 251, 255); font-size: 34px; -unity-font-style: bold; }
+.teacher-card-description { position: absolute; left: 40px; right: 40px; top: 356px; height: 28px; color: rgba(224, 239, 250, 0.72); font-size: 18px; white-space: normal; }
+.teacher-card-availability { position: absolute; left: 40px; bottom: 33px; min-width: 126px; height: 32px; padding: 6px 12px; border-width: 1px; border-color: rgba(158, 220, 246, 0.24); border-radius: 16px; background-color: rgba(14, 50, 95, 0.34); color: rgba(210, 235, 250, 0.66); font-size: 12px; -unity-text-align: middle-center; }
+.teacher-card-arrow { position: absolute; right: 28px; bottom: 26px; width: 66px; height: 66px; padding-bottom: 3px; border-width: 1px; border-color: rgba(212, 240, 255, 0.48); border-radius: 33px; background-color: rgba(213, 241, 255, 0.10); color: rgb(246, 252, 255); font-size: 34px; -unity-text-align: middle-center; }
+.teacher-card-arrow-glow { position: absolute; right: 20px; bottom: 18px; width: 82px; height: 82px; opacity: 0; border-width: 7px; border-color: rgba(92, 220, 255, 0.09); border-radius: 41px; background-color: rgba(92, 220, 255, 0.035); }
+.teacher-core-card:hover .teacher-card-arrow-glow, .teacher-core-card.selected .teacher-card-arrow-glow { opacity: 1; }
+.teacher-core-card:hover .teacher-card-arrow, .teacher-core-card.selected .teacher-card-arrow { border-color: rgba(223, 250, 255, 0.95); background-color: rgba(67, 202, 255, 0.42); }
+
+/* Code-native task and analytics illustrations keep the page crisp at every panel scale. */
+.teacher-task-sheet { position: absolute; left: 38px; top: 13px; width: 114px; height: 134px; padding: 38px 18px 13px 18px; border-width: 2px; border-color: rgba(204, 242, 255, 0.82); border-radius: 16px; background-color: rgba(94, 190, 245, 0.18); }
+.teacher-task-clip { position: absolute; left: 31px; top: -13px; width: 52px; height: 30px; border-width: 2px; border-color: rgba(210, 246, 255, 0.88); border-radius: 12px; background-color: rgba(119, 219, 255, 0.32); }
+.teacher-task-row { height: 20px; margin-bottom: 10px; flex-direction: row; align-items: center; }
+.teacher-task-check { width: 13px; height: 13px; margin-right: 11px; border-width: 2px; border-color: rgb(129, 235, 250); border-radius: 3px; background-color: rgba(91, 213, 246, 0.20); }
+.teacher-task-line { width: 52px; height: 2px; background-color: rgba(221, 247, 255, 0.72); }
+.teacher-task-line-short { width: 38px; }
+.teacher-chart-art { border-width: 1px; border-color: rgba(201, 239, 255, 0.16); border-radius: 24px; background-color: rgba(77, 173, 232, 0.08); }
+.teacher-chart-axis { position: absolute; background-color: rgba(211, 242, 255, 0.70); }
+.teacher-chart-axis-y { left: 35px; top: 23px; width: 2px; height: 108px; }
+.teacher-chart-axis-x { left: 35px; bottom: 22px; width: 138px; height: 2px; }
+.teacher-chart-bar { position: absolute; bottom: 24px; width: 24px; border-top-left-radius: 7px; border-top-right-radius: 7px; background-color: rgba(77, 205, 247, 0.46); border-width: 1px; border-color: rgba(181, 240, 255, 0.56); }
+.teacher-chart-bar-one { left: 54px; height: 42px; }
+.teacher-chart-bar-two { left: 91px; height: 70px; background-color: rgba(84, 187, 251, 0.58); }
+.teacher-chart-bar-three { left: 128px; height: 98px; background-color: rgba(100, 224, 248, 0.68); }
+.teacher-chart-trend { position: absolute; height: 2px; background-color: rgb(128, 239, 250); }
+.teacher-chart-trend-one { left: 59px; top: 88px; width: 48px; }
+.teacher-chart-trend-two { left: 106px; top: 60px; width: 47px; }
+.teacher-chart-dot { position: absolute; width: 10px; height: 10px; border-width: 2px; border-color: rgb(210, 251, 255); border-radius: 5px; background-color: rgb(64, 208, 244); }
+.teacher-chart-dot-one { left: 56px; top: 84px; }
+.teacher-chart-dot-two { left: 102px; top: 56px; }
+.teacher-chart-dot-three { left: 148px; top: 38px; }
+
+.teacher-module-status { position: absolute; left: 574px; top: 850px; width: 772px; min-height: 28px; color: rgba(226, 241, 252, 0.72); font-size: 14px; -unity-text-align: middle-center; }
+.teacher-module-status.notice { color: rgb(142, 231, 246); }
+.teacher-footer-strip { position: absolute; left: 52px; bottom: 32px; }
+.teacher-footer-rule { width: 126px; height: 2px; margin-bottom: 14px; background-color: rgba(207, 244, 255, 0.72); }
+.teacher-footer-caption { color: rgba(214, 232, 246, 0.48); font-size: 11px; letter-spacing: 3px; }
+.teacher-footer-right { position: absolute; right: 52px; bottom: 28px; align-items: flex-end; }
+.teacher-footer-right-copy { color: rgba(221, 238, 250, 0.62); font-size: 12px; letter-spacing: 2px; -unity-text-align: upper-right; }
+.teacher-footer-right-rule { width: 28px; height: 2px; margin-top: 12px; background-color: rgba(215, 242, 255, 0.60); }
+.good { color: rgb(99, 224, 174); }
+.muted { color: rgb(113, 141, 151); }
+.danger { color: rgb(255, 142, 142); }
+
+.shell.portrait .login-page { flex-direction: column; padding: 220px 72px 110px 72px; justify-content: flex-start; }
+.shell.portrait .brand-block { width: 100%; margin-top: 0; }
+.shell.portrait .hero-title { font-size: 48px; }
+.shell.portrait .login-card { width: 100%; margin-top: 96px; }
+.shell.portrait .crane-leg-left { left: 90px; }
+.shell.portrait .crane-leg-right { left: 690px; }
+.shell.portrait .crane-beam { left: 60px; width: 780px; }
+.shell.portrait .teacher-home-page { padding: 0; }
+.shell.portrait .teacher-topbar { left: 28px; right: 28px; top: 36px; }
+.shell.portrait .teacher-badge-glow, .shell.portrait .teacher-top-label { display: none; }
+.shell.portrait .teacher-badge { width: 120px; }
+.shell.portrait .teacher-navigation-glass { left: 136px; right: 154px; width: auto; }
+.shell.portrait .teacher-top-actions { right: 0; }
+.shell.portrait .teacher-icon-button { width: 52px; height: 52px; margin-left: 12px; border-radius: 26px; }
+.shell.portrait .teacher-back-button { display: none; }
+.shell.portrait .teacher-title-block { top: 190px; }
+.shell.portrait .teacher-heading { height: 60px; font-size: 42px; }
+.shell.portrait .teacher-management-grid { left: 58px; right: 58px; top: 370px; width: auto; height: 1030px; flex-direction: column; }
+.shell.portrait .teacher-core-card { width: 100%; height: 500px; margin-bottom: 30px; }
+.shell.portrait .teacher-card-art { left: 352px; }
+.shell.portrait .teacher-module-status { left: 58px; right: 58px; top: 1435px; width: auto; }

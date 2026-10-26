@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - WutiName
+  - g4a firstlight
+  - g4a sun
+  - g4a secondlight
+  - Can
+  - Align
   layers:
   - Default
   - TransparentFX
@@ -11,24 +17,24 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - load
+  - ContainerLockHole
+  -
+  -
+  -
+  -
+  -
+  - g4a Debug
+  - g4a Controller
+  - g4a Lamps
+  - g4a SensorMU
+  - g4a TransportMU
+  - g4a Sensor
+  - g4a Transport
+  - g4a MU
+  - g4a Postprocessing
+  - g4a Snapping
+  - g4a Selection
   - 
   - 
   - 

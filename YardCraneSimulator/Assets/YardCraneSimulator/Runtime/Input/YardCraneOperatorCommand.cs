@@ -1,13 +1,41 @@
 using System;
+using System.Collections.Generic;
 
 namespace PortTraining.YardCraneSimulator.Controls
 {
+    /// <summary>
+    /// Every discrete (press-once) operator intent a device can report in one frame. Continuous
+    /// values (the three motion axes, spreader rotation axis, horn-held) are not intents - they
+    /// are read every frame regardless of "press" semantics, so they stay as their own fields on
+    /// the command structs below rather than being folded into this set.
+    /// </summary>
+    public enum YardCraneOperatorIntent
+    {
+        ContainerLock = 0,
+        ContainerUnlock = 1,
+        Pause = 2,
+        WheelClampToggle = 3,
+        ControlPowerToggle = 4,
+        EmergencyStopToggle = 5,
+        FaultReset = 6,
+        TrolleyAnchorToggle = 7,
+        GantryAnchorToggle = 8,
+        SpreaderPumpToggle = 9,
+        SpreaderSizeFt20 = 10,
+        SpreaderSizeFt40 = 11,
+        SpreaderReturnToZero = 12
+    }
+
     /// <summary>
     /// Device-independent operator intent. Motion execution must only consume this
     /// command and must never read keyboard, gamepad or PLC APIs directly.
     /// </summary>
     public readonly struct YardCraneOperatorCommand
     {
+        private static readonly HashSet<YardCraneOperatorIntent> EmptyIntents = new();
+
+        private readonly HashSet<YardCraneOperatorIntent> intents;
+
         public YardCraneOperatorCommand(
             string sourceId,
             long sequence,
@@ -16,20 +44,8 @@ namespace PortTraining.YardCraneSimulator.Controls
             float trolleyAxis,
             float hoistAxis,
             bool hornHeld,
-            bool lockPressed,
-            bool unlockPressed,
-            bool pausePressed,
-            bool wheelClampTogglePressed = false,
-            bool controlPowerTogglePressed = false,
-            bool emergencyStopTogglePressed = false,
-            bool faultResetPressed = false,
-            bool trolleyAnchorTogglePressed = false,
-            bool gantryAnchorTogglePressed = false,
-            bool spreaderPumpTogglePressed = false,
-            bool spreaderSizeFt20Pressed = false,
-            bool spreaderSizeFt40Pressed = false,
             float spreaderRotationAxis = 0f,
-            bool spreaderReturnToZeroPressed = false)
+            IEnumerable<YardCraneOperatorIntent> intents = null)
         {
             SourceId = sourceId ?? string.Empty;
             Sequence = sequence;
@@ -37,21 +53,9 @@ namespace PortTraining.YardCraneSimulator.Controls
             GantryAxis = ClampNormalized(gantryAxis);
             TrolleyAxis = ClampNormalized(trolleyAxis);
             HoistAxis = ClampNormalized(hoistAxis);
-            HornHeld = hornHeld;
-            LockPressed = lockPressed;
-            UnlockPressed = unlockPressed;
-            PausePressed = pausePressed;
-            WheelClampTogglePressed = wheelClampTogglePressed;
-            ControlPowerTogglePressed = controlPowerTogglePressed;
-            EmergencyStopTogglePressed = emergencyStopTogglePressed;
-            FaultResetPressed = faultResetPressed;
-            TrolleyAnchorTogglePressed = trolleyAnchorTogglePressed;
-            GantryAnchorTogglePressed = gantryAnchorTogglePressed;
-            SpreaderPumpTogglePressed = spreaderPumpTogglePressed;
-            SpreaderSizeFt20Pressed = spreaderSizeFt20Pressed;
-            SpreaderSizeFt40Pressed = spreaderSizeFt40Pressed;
             SpreaderRotationAxis = ClampNormalized(spreaderRotationAxis);
-            SpreaderReturnToZeroPressed = spreaderReturnToZeroPressed;
+            HornHeld = hornHeld;
+            this.intents = intents == null ? EmptyIntents : new HashSet<YardCraneOperatorIntent>(intents);
         }
 
         public string SourceId { get; }
@@ -60,21 +64,12 @@ namespace PortTraining.YardCraneSimulator.Controls
         public float GantryAxis { get; }
         public float TrolleyAxis { get; }
         public float HoistAxis { get; }
-        public bool HornHeld { get; }
-        public bool LockPressed { get; }
-        public bool UnlockPressed { get; }
-        public bool PausePressed { get; }
-        public bool WheelClampTogglePressed { get; }
-        public bool ControlPowerTogglePressed { get; }
-        public bool EmergencyStopTogglePressed { get; }
-        public bool FaultResetPressed { get; }
-        public bool TrolleyAnchorTogglePressed { get; }
-        public bool GantryAnchorTogglePressed { get; }
-        public bool SpreaderPumpTogglePressed { get; }
-        public bool SpreaderSizeFt20Pressed { get; }
-        public bool SpreaderSizeFt40Pressed { get; }
         public float SpreaderRotationAxis { get; }
-        public bool SpreaderReturnToZeroPressed { get; }
+        public bool HornHeld { get; }
+
+        public bool Has(YardCraneOperatorIntent intent) => intents.Contains(intent);
+        public int IntentCount => intents.Count;
+        public IEnumerable<YardCraneOperatorIntent> ActiveIntents => intents;
 
         public bool HandlesCentered =>
             Math.Abs(GantryAxis) <= 0.0001f &&
@@ -82,16 +77,11 @@ namespace PortTraining.YardCraneSimulator.Controls
             Math.Abs(HoistAxis) <= 0.0001f &&
             Math.Abs(SpreaderRotationAxis) <= 0.0001f;
 
-        public bool HasIntent => !HandlesCentered || HornHeld || LockPressed || UnlockPressed ||
-                                 PausePressed || WheelClampTogglePressed || ControlPowerTogglePressed ||
-                                 EmergencyStopTogglePressed || FaultResetPressed ||
-                                 TrolleyAnchorTogglePressed || GantryAnchorTogglePressed ||
-                                 SpreaderPumpTogglePressed || SpreaderSizeFt20Pressed ||
-                                 SpreaderSizeFt40Pressed || SpreaderReturnToZeroPressed;
+        public bool HasIntent => !HandlesCentered || HornHeld || intents.Count > 0;
 
         public static YardCraneOperatorCommand Zero(long sequence, long capturedAtMs)
         {
-            return new YardCraneOperatorCommand("NONE", sequence, capturedAtMs, 0f, 0f, 0f, false, false, false, false);
+            return new YardCraneOperatorCommand("NONE", sequence, capturedAtMs, 0f, 0f, 0f, false);
         }
 
         private static float ClampNormalized(float value)
@@ -107,6 +97,10 @@ namespace PortTraining.YardCraneSimulator.Controls
 
     public readonly struct YardCraneInputSnapshot
     {
+        private static readonly HashSet<YardCraneOperatorIntent> EmptyIntents = new();
+
+        private readonly HashSet<YardCraneOperatorIntent> intents;
+
         public YardCraneInputSnapshot(
             string sourceId,
             bool isConnected,
@@ -114,41 +108,17 @@ namespace PortTraining.YardCraneSimulator.Controls
             float trolleyAxis,
             float hoistAxis,
             bool hornHeld,
-            bool lockPressed,
-            bool unlockPressed,
-            bool pausePressed,
-            bool wheelClampTogglePressed = false,
-            bool controlPowerTogglePressed = false,
-            bool emergencyStopTogglePressed = false,
-            bool faultResetPressed = false,
-            bool trolleyAnchorTogglePressed = false,
-            bool gantryAnchorTogglePressed = false,
-            bool spreaderPumpTogglePressed = false,
-            bool spreaderSizeFt20Pressed = false,
-            bool spreaderSizeFt40Pressed = false,
             float spreaderRotationAxis = 0f,
-            bool spreaderReturnToZeroPressed = false)
+            IEnumerable<YardCraneOperatorIntent> intents = null)
         {
             SourceId = sourceId ?? string.Empty;
             IsConnected = isConnected;
             GantryAxis = gantryAxis;
             TrolleyAxis = trolleyAxis;
             HoistAxis = hoistAxis;
-            HornHeld = hornHeld;
-            LockPressed = lockPressed;
-            UnlockPressed = unlockPressed;
-            PausePressed = pausePressed;
-            WheelClampTogglePressed = wheelClampTogglePressed;
-            ControlPowerTogglePressed = controlPowerTogglePressed;
-            EmergencyStopTogglePressed = emergencyStopTogglePressed;
-            FaultResetPressed = faultResetPressed;
-            TrolleyAnchorTogglePressed = trolleyAnchorTogglePressed;
-            GantryAnchorTogglePressed = gantryAnchorTogglePressed;
-            SpreaderPumpTogglePressed = spreaderPumpTogglePressed;
-            SpreaderSizeFt20Pressed = spreaderSizeFt20Pressed;
-            SpreaderSizeFt40Pressed = spreaderSizeFt40Pressed;
             SpreaderRotationAxis = spreaderRotationAxis;
-            SpreaderReturnToZeroPressed = spreaderReturnToZeroPressed;
+            HornHeld = hornHeld;
+            this.intents = intents == null ? EmptyIntents : new HashSet<YardCraneOperatorIntent>(intents);
         }
 
         public string SourceId { get; }
@@ -156,21 +126,12 @@ namespace PortTraining.YardCraneSimulator.Controls
         public float GantryAxis { get; }
         public float TrolleyAxis { get; }
         public float HoistAxis { get; }
-        public bool HornHeld { get; }
-        public bool LockPressed { get; }
-        public bool UnlockPressed { get; }
-        public bool PausePressed { get; }
-        public bool WheelClampTogglePressed { get; }
-        public bool ControlPowerTogglePressed { get; }
-        public bool EmergencyStopTogglePressed { get; }
-        public bool FaultResetPressed { get; }
-        public bool TrolleyAnchorTogglePressed { get; }
-        public bool GantryAnchorTogglePressed { get; }
-        public bool SpreaderPumpTogglePressed { get; }
-        public bool SpreaderSizeFt20Pressed { get; }
-        public bool SpreaderSizeFt40Pressed { get; }
         public float SpreaderRotationAxis { get; }
-        public bool SpreaderReturnToZeroPressed { get; }
+        public bool HornHeld { get; }
+
+        public bool Has(YardCraneOperatorIntent intent) => intents.Contains(intent);
+        public int IntentCount => intents.Count;
+        public IEnumerable<YardCraneOperatorIntent> ActiveIntents => intents;
 
         public bool HandlesCentered =>
             Math.Abs(GantryAxis) <= 0.0001f &&
@@ -178,12 +139,7 @@ namespace PortTraining.YardCraneSimulator.Controls
             Math.Abs(HoistAxis) <= 0.0001f &&
             Math.Abs(SpreaderRotationAxis) <= 0.0001f;
 
-        public bool HasIntent => !HandlesCentered || HornHeld || LockPressed || UnlockPressed ||
-                                 PausePressed || WheelClampTogglePressed || ControlPowerTogglePressed ||
-                                 EmergencyStopTogglePressed || FaultResetPressed ||
-                                 TrolleyAnchorTogglePressed || GantryAnchorTogglePressed ||
-                                 SpreaderPumpTogglePressed || SpreaderSizeFt20Pressed ||
-                                 SpreaderSizeFt40Pressed || SpreaderReturnToZeroPressed;
+        public bool HasIntent => !HandlesCentered || HornHeld || intents.Count > 0;
     }
 
     public readonly struct YardCraneInputRouteResult

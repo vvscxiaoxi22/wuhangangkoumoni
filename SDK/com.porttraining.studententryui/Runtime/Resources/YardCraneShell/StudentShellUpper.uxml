@@ -1,0 +1,155 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:VisualElement name="student-shell" class="shell">
+        <ui:VisualElement class="ambient ambient-one" />
+        <ui:VisualElement class="ambient ambient-two" />
+        <ui:VisualElement class="port-grid" />
+        <ui:VisualElement class="crane-mark crane-leg-left" />
+        <ui:VisualElement class="crane-mark crane-leg-right" />
+        <ui:VisualElement class="crane-mark crane-beam" />
+        <ui:VisualElement class="crane-mark crane-trolley" />
+        <ui:VisualElement class="crane-mark crane-rope" />
+        <ui:VisualElement class="crane-mark crane-spreader" />
+
+        <ui:VisualElement name="login-page" class="page login-page">
+            <ui:Image name="login-background" class="login-background" />
+            <ui:VisualElement class="login-blue-overlay" />
+            <ui:VisualElement class="prototype-login-brand">
+                <ui:Label text="P." class="brand-monogram" />
+                <ui:VisualElement class="prototype-brand-copy">
+                    <ui:Label text="PORT TRAINING" class="prototype-brand-title" />
+                    <ui:Label text="港口实训平台" class="prototype-brand-subtitle" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="brand-block">
+                <ui:Label text="QUAY CRANE / YARD CRANE" class="brand-code" />
+                <ui:Label text="港口实训，&#10;从这里开始。" class="hero-title" />
+                <ui:Label text="岸桥与场桥一体化训练空间" class="hero-caption" />
+                <ui:VisualElement class="machine-switch">
+                    <ui:VisualElement class="machine-option unavailable-machine"><ui:Label text="岸桥  QC" /></ui:VisualElement>
+                    <ui:VisualElement class="machine-option selected"><ui:Label text="场桥  YC" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="login-card glass-card">
+                <ui:Label name="login-context" text="WELCOME ABOARD" class="section-code" />
+                <ui:Label name="login-title" text="场桥学生登录" class="login-title" />
+                <ui:Label name="login-note" text="填写学号和姓名，开始港口实训。" class="login-note" />
+                <ui:VisualElement class="role-switch">
+                    <ui:Button name="role-student" text="学生端" class="role-button selected" />
+                    <ui:Button name="role-teacher" text="教师端" class="role-button" />
+                </ui:VisualElement>
+                <ui:VisualElement class="field-group">
+                    <ui:Label name="account-label" text="学号" class="field-label" />
+                    <ui:TextField name="student-number" max-length="32" class="shell-input" />
+                </ui:VisualElement>
+                <ui:VisualElement name="student-name-group" class="field-group">
+                    <ui:Label text="姓名" class="field-label" />
+                    <ui:TextField name="display-name" max-length="24" class="shell-input" />
+                </ui:VisualElement>
+                <ui:VisualElement name="teacher-password-group" class="field-group hidden-field">
+                    <ui:Label text="密码" class="field-label" />
+                    <ui:TextField name="teacher-password" is-password-field="true" max-length="64" class="shell-input" />
+                </ui:VisualElement>
+                <ui:Label name="login-error" text="" class="form-error" />
+                <ui:Button name="login-button" text="进入训练工作台  →" class="primary-button" />
+                <ui:VisualElement class="offline-row">
+                    <ui:VisualElement class="status-dot good-dot" />
+                    <ui:Label name="login-mode-note" text="本机学生登录 · 无需网络" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="prototype-login-footer">
+                <ui:Label text="PORT TRAINING SYSTEM" />
+                <ui:Label text="蓝色科技 · 统一实训体验" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="student-home-page" class="page home-page">
+            <ui:VisualElement class="home-sidebar glass-card">
+                <ui:VisualElement class="shell-brand-row">
+                    <ui:Label text="P." class="sidebar-monogram" />
+                    <ui:VisualElement><ui:Label text="港口实训平台" class="sidebar-brand-title" /><ui:Label text="PORT TRAINING" class="sidebar-brand-code" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label text="●  场桥 · 学生端" class="station-label good" />
+                <ui:VisualElement class="sidebar-nav">
+                    <ui:VisualElement class="nav-item active"><ui:Label text="▣" class="nav-icon" /><ui:Label text="工作台" /></ui:VisualElement>
+                    <ui:VisualElement class="nav-item"><ui:Label text="▤" class="nav-icon" /><ui:Label text="任务中心" /></ui:VisualElement>
+                    <ui:VisualElement class="nav-item"><ui:Label text="▥" class="nav-icon" /><ui:Label text="成绩档案" /></ui:VisualElement>
+                    <ui:VisualElement class="nav-item"><ui:Label text="◇" class="nav-icon" /><ui:Label text="数字孪生" /></ui:VisualElement>
+                    <ui:VisualElement class="nav-item disabled-module"><ui:Label text="▦" class="nav-icon" /><ui:Label text="考核中心" /><ui:Label text="后续" class="nav-tail" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="sidebar-spacer" />
+                <ui:VisualElement class="sidebar-nav sidebar-nav-bottom">
+                    <ui:VisualElement class="nav-item"><ui:Label text="⚙" class="nav-icon" /><ui:Label text="设备设置" /></ui:VisualElement>
+                    <ui:VisualElement class="nav-item"><ui:Label text="☷" class="nav-icon" /><ui:Label text="使用指南" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="profile-panel">
+                    <ui:Label text="YC" class="profile-avatar" />
+                    <ui:VisualElement class="profile-copy"><ui:Label name="identity" text="场桥司机 · 本地单机" class="profile-name" /><ui:Label text="本地身份 · 非平台认证" class="profile-caption" /></ui:VisualElement>
+                    <ui:Button name="logout-button" text="退出" class="sidebar-button" />
+                    <ui:Button name="quit-button" text="关闭" class="sidebar-button quiet-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="workspace-body">
+                <ui:VisualElement class="topbar workspace-topbar">
+                    <ui:VisualElement><ui:Label text="实训空间 / 我的训练" class="workspace-path" /><ui:Label text="工作台" class="home-title" /></ui:VisualElement>
+                    <ui:VisualElement class="top-actions"><ui:Label text="岸桥" class="machine-chip muted-chip" /><ui:Label text="场桥" class="machine-chip selected-chip" /><ui:Label text="本机原型" class="local-badge" /></ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="welcome-panel glass-card">
+                    <ui:VisualElement class="welcome-copy"><ui:Label text="MY TRAINING" class="section-code" /><ui:Label name="greeting" text="准备开始新一次作业？" class="welcome-title" /><ui:Label text="直接进入自由练习；教师工单与正式成绩接入后再开放。" class="welcome-caption" /><ui:Button name="launch-button" text="进入自由练习  →" class="primary-button launch-button" /><ui:Label name="launch-status" text="将启动独立全屏驾驶场景" class="launch-status" /></ui:VisualElement>
+                    <ui:VisualElement class="welcome-mark"><ui:Label text="YC" class="welcome-mark-title" /><ui:Label text="场桥司机训练" class="welcome-mark-caption" /></ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="stats-row">
+                    <ui:VisualElement class="metric-card glass-card"><ui:Label text="完成率" class="metric-label" /><ui:Label text="—" class="metric-value" /><ui:Label text="0 次完成 / 0 次已保存运行" class="metric-caption" /></ui:VisualElement>
+                    <ui:VisualElement class="metric-card glass-card"><ui:Label text="练习时长" class="metric-label" /><ui:Label text="0.0" class="metric-value" /><ui:Label text="分钟 · 本机演示记录" class="metric-caption" /></ui:VisualElement>
+                    <ui:VisualElement class="metric-card glass-card"><ui:Label text="可用任务" class="metric-label" /><ui:Label text="1" class="metric-value" /><ui:Label text="场桥 · 当前原型" class="metric-caption" /></ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="home-content">
+                    <ui:VisualElement class="main-column section-card glass-card">
+                        <ui:VisualElement class="section-heading"><ui:VisualElement><ui:Label text="我的工单" class="section-title" /><ui:Label text="本地可用项目与后续平台工单" class="section-caption" /></ui:VisualElement><ui:Label text="1 项可用" class="count-pill" /></ui:VisualElement>
+                        <ui:VisualElement name="task-free" class="task-card selected-task"><ui:VisualElement class="task-index"><ui:Label text="01" /></ui:VisualElement><ui:VisualElement class="task-copy"><ui:Label name="task-free-title" text="自由练习" class="task-title" /><ui:Label name="task-free-description" text="" class="task-description" /><ui:Label text="键盘 / Xbox · 本地驾驶室" class="task-tags" /></ui:VisualElement><ui:Label name="task-free-availability" text="当前可用" class="availability good" /></ui:VisualElement>
+                        <ui:VisualElement class="planned-row">
+                            <ui:VisualElement name="task-pickup" class="task-card compact-task"><ui:VisualElement class="task-index"><ui:Label text="02" /></ui:VisualElement><ui:VisualElement class="task-copy"><ui:Label name="task-pickup-title" text="标准提箱工单" class="task-title" /><ui:Label name="task-pickup-description" text="" class="task-description" /></ui:VisualElement><ui:Label name="task-pickup-availability" text="待接入" class="availability" /></ui:VisualElement>
+                            <ui:VisualElement name="task-dropoff" class="task-card compact-task second-compact"><ui:VisualElement class="task-index"><ui:Label text="03" /></ui:VisualElement><ui:VisualElement class="task-copy"><ui:Label name="task-dropoff-title" text="标准收箱工单" class="task-title" /><ui:Label name="task-dropoff-description" text="" class="task-description" /></ui:VisualElement><ui:Label name="task-dropoff-availability" text="待接入" class="availability" /></ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="side-column glass-card readiness-card">
+                        <ui:Label text="TRAINING FOCUS" class="section-code" /><ui:Label text="把基础动作练扎实" class="section-title focus-title" />
+                        <ui:VisualElement class="device-row"><ui:VisualElement class="device-symbol"><ui:Label text="KB" /></ui:VisualElement><ui:VisualElement class="device-copy"><ui:Label text="键盘" class="device-title" /><ui:Label text="本机操作输入" class="device-caption" /></ui:VisualElement><ui:Label name="keyboard-status" text="检测中" class="device-status" /></ui:VisualElement>
+                        <ui:VisualElement class="device-row"><ui:VisualElement class="device-symbol"><ui:Label text="XB" /></ui:VisualElement><ui:VisualElement class="device-copy"><ui:Label text="Xbox 手柄" class="device-title" /><ui:Label text="可选操作输入" class="device-caption" /></ui:VisualElement><ui:Label name="gamepad-status" text="检测中" class="device-status" /></ui:VisualElement>
+                        <ui:VisualElement class="device-row disabled-device"><ui:VisualElement class="device-symbol"><ui:Label text="S7" /></ui:VisualElement><ui:VisualElement class="device-copy"><ui:Label text="PLC / 模拟机" class="device-title" /><ui:Label text="由 PortGatewayService 接入" class="device-caption" /></ui:VisualElement><ui:Label text="未接入" class="device-status muted" /></ui:VisualElement>
+                        <ui:VisualElement class="mode-notice"><ui:Label text="本地兜底模式" class="mode-title" /><ui:Label text="不会读取教师任务、TOS或正式成绩。" class="mode-copy" /></ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="teacher-home-page" class="page home-page teacher-home-page">
+            <ui:VisualElement class="home-sidebar glass-card">
+                <ui:VisualElement class="shell-brand-row"><ui:Label text="P." class="sidebar-monogram" /><ui:VisualElement><ui:Label text="港口实训平台" class="sidebar-brand-title" /><ui:Label text="PORT TRAINING" class="sidebar-brand-code" /></ui:VisualElement></ui:VisualElement>
+                <ui:Label text="●  场桥 · 教师端" class="station-label good" />
+                <ui:VisualElement class="sidebar-nav"><ui:VisualElement class="nav-item active"><ui:Label text="▣" class="nav-icon" /><ui:Label text="教学工作台" /></ui:VisualElement><ui:VisualElement class="nav-item"><ui:Label text="▤" class="nav-icon" /><ui:Label text="任务发布" /></ui:VisualElement><ui:VisualElement class="nav-item"><ui:Label text="▥" class="nav-icon" /><ui:Label text="学员与工位" /></ui:VisualElement><ui:VisualElement class="nav-item"><ui:Label text="◇" class="nav-icon" /><ui:Label text="训练记录" /></ui:VisualElement><ui:VisualElement class="nav-item disabled-module"><ui:Label text="▦" class="nav-icon" /><ui:Label text="考核中心" /><ui:Label text="后续" class="nav-tail" /></ui:VisualElement></ui:VisualElement>
+                <ui:VisualElement class="sidebar-spacer" />
+                <ui:VisualElement class="profile-panel"><ui:Label text="TC" class="profile-avatar" /><ui:VisualElement class="profile-copy"><ui:Label name="teacher-identity" text="教师 · 本机轻量模式" class="profile-name" /><ui:Label text="本地身份 · 非平台认证" class="profile-caption" /></ui:VisualElement><ui:Button name="teacher-logout-button" text="退出" class="sidebar-button" /><ui:Button name="teacher-quit-button" text="关闭" class="sidebar-button quiet-button" /></ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="workspace-body">
+                <ui:VisualElement class="topbar workspace-topbar"><ui:VisualElement><ui:Label text="教学空间 / 本机概览" class="workspace-path" /><ui:Label name="teacher-greeting" text="教师工作台" class="home-title" /></ui:VisualElement><ui:VisualElement class="top-actions"><ui:Label text="场桥" class="machine-chip selected-chip" /><ui:Label text="一期本机壳层" class="local-badge" /></ui:VisualElement></ui:VisualElement>
+                <ui:VisualElement class="teacher-content">
+                    <ui:VisualElement class="section-heading teacher-heading"><ui:VisualElement><ui:Label text="教师端功能" class="section-title" /><ui:Label text="未接入的服务明确标记，不模拟成功。" class="section-caption" /></ui:VisualElement><ui:Label text="本机离线" class="count-pill" /></ui:VisualElement>
+                    <ui:VisualElement class="teacher-grid">
+                        <ui:VisualElement class="teacher-module glass-card"><ui:Label text="01  任务发布" class="teacher-module-title" /><ui:Label text="创建、编辑与下发工单需要 NodeService；本机壳层暂不提供伪下发。" class="teacher-module-copy" /><ui:Label text="服务未接入" class="availability caution" /></ui:VisualElement>
+                        <ui:VisualElement class="teacher-module glass-card"><ui:Label text="02  学员与工位" class="teacher-module-title" /><ui:Label text="用于查看岸桥、场桥工位和联合作业状态；当前没有实时节点数据。" class="teacher-module-copy" /><ui:Label text="实时数据未接入" class="availability caution" /></ui:VisualElement>
+                        <ui:VisualElement class="teacher-module glass-card"><ui:Label text="03  训练记录" class="teacher-module-title" /><ui:Label text="正式成绩、过程事件与回放由平台服务保存；当前不生成权威成绩。" class="teacher-module-copy" /><ui:Label text="正式结果未接入" class="availability caution" /></ui:VisualElement>
+                        <ui:VisualElement class="teacher-module glass-card disabled-module"><ui:Label text="04  考核中心" class="teacher-module-title" /><ui:Label text="一期暂缓，入口保持不可用，避免误认为已经具备考核闭环。" class="teacher-module-copy" /><ui:Label text="一期停用" class="availability" /></ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="mode-notice teacher-notice"><ui:Label text="边界说明" class="mode-title" /><ui:Label text="任务、TOS、成绩及多机协同仍由平台服务负责。" class="mode-copy" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

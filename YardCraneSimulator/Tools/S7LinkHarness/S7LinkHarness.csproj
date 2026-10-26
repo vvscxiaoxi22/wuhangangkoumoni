@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <OutputPath>../../Temp/S7LinkHarness/bin/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Deliberately does NOT compile YardCraneS7InputSource.cs/YardCraneDevice.cs anymore: the
+         moment that class's YardCraneDevice field requires loading Unity.InputSystem, the CLR
+         fails at JIT/type-load time in a way a try/catch around the offending call cannot
+         contain (confirmed 2026-09-16 - see the harness README). This project tests the
+         transport + wire protocol only, which have no Unity dependency at all. -->
+    <Compile Include="../../Assets/YardCraneSimulator/SharedNet/YardCraneMiniWebSocket.cs" Link="YardCraneMiniWebSocket.cs" />
+    <Compile Include="../../Assets/YardCraneSimulator/SharedNet/YardCraneS7LinkProtocol.cs" Link="YardCraneS7LinkProtocol.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,265 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84668ba8780bca24591768250809db45, type: 3}
+  m_Name: "\u5CB8\u6865\u4EFB\u52A1\u4FE1\u606F"
+  m_EditorClassIdentifier: 
+  "_\u4FE1\u606F":
+    _serializedList:
+    - Key: "\u5927\u8F66\u79FB\u52A8"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u5355\u9879\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u5927\u8F66\u79FB\u52A8\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u76EE\u6807\u4F4D\u7F6E(m):"
+            Value:
+            - -30
+            - -10
+            - 30
+            - 10
+    - Key: "\u5C0F\u8F66\u79FB\u52A8"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u5355\u9879\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u5C0F\u8F66\u79FB\u52A8\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u76EE\u6807\u4F4D\u7F6E(m):"
+            Value:
+            - 30
+            - 60
+            - 90
+    - Key: "\u540A\u5177\u8D77\u5347"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u5355\u9879\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u540A\u5177\u5347\u964D\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u76EE\u6807\u9AD8\u5EA6(m):"
+            Value:
+            - 30
+            - 20
+            - 10
+    - Key: "\u540A\u5177\u503E\u659C"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u5355\u9879\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u540A\u5177\u503E\u659C\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u76EE\u6807\u65B9\u5411:"
+            Value:
+            - "\u5DE6\u503E"
+            - "\u53F3\u503E"
+            - "\u524D\u503E"
+            - "\u540E\u503E"
+          - Key: "\u76EE\u6807\u89D2\u5EA6(\xB0):"
+            Value:
+            - -2
+            - 2
+            - -2
+            - 2
+    - Key: "\u5927\u8F66\u5C0F\u8F66\u8054\u52A8"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u8054\u52A8\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u5927\u8F66\u548C\u5C0F\u8F66\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u5927\u8F66\u76EE\u6807(m):"
+            Value:
+            - 10
+            - -10
+          - Key: "\u5C0F\u8F66\u76EE\u6807(m):"
+            Value:
+            - 30
+            - 60
+    - Key: "\u5927\u8F66\u8D77\u5347\u8054\u52A8"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u8054\u52A8\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u5927\u8F66\u548C\u540A\u5177\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u5927\u8F66\u76EE\u6807(m):"
+            Value:
+            - 10
+            - -10
+          - Key: "\u540A\u5177\u9AD8\u5EA6(m):"
+            Value:
+            - 20
+            - 10
+    - Key: "\u5C0F\u8F66\u8D77\u5347\u8054\u52A8"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u8054\u52A8\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u5C0F\u8F66\u548C\u540A\u5177\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u5C0F\u8F66\u76EE\u6807(m):"
+            Value:
+            - 50
+            - 30
+          - Key: "\u540A\u5177\u9AD8\u5EA6(m):"
+            Value:
+            - 10
+            - 20
+    - Key: "\u5927\u8F66\u5C0F\u8F66\u8D77\u5347\u8054\u52A8"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u8054\u52A8\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u64CD\u4F5C\u5CB8\u6865\u5927\u8F66\u5C0F\u8F66\u548C\u540A\u5177\u5230\u6307\u5B9A\u4F4D\u7F6E"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u884C\u8F66\u76EE\u6807(m):"
+            Value:
+            - "\u5927\u8F665,\u5C0F\u8F6630"
+            - "\u5927\u8F66-5,\u5C0F\u8F6620"
+          - Key: "\u540A\u5177\u9AD8\u5EA6(m):"
+            Value:
+            - 20
+            - 15
+    - Key: "\u88C5\u8239\u4F5C\u4E1A"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u4F5C\u4E1A\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u88C5\u8239\u4F5C\u4E1A"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u96C6\u5361\u8F66\u9053:"
+            Value:
+            - "1\u8F66\u9053"
+            - "2\u8F66\u9053"
+            - "3\u8F66\u9053"
+            - "4\u8F66\u9053"
+            - "5\u8F66\u9053"
+            - "6\u8F66\u9053"
+            - "7\u8F66\u9053"
+            - "7\u8F66\u9053"
+            - "7\u8F66\u9053"
+          - Key: "\u76EE\u6807\u7BB1\u4F4D:"
+            Value:
+            - 251286
+            - 271086
+            - 270486
+            - 301284
+            - 300686
+            - 300582
+            - 331286,351286
+            - 331086,351086
+            - 330686,350686
+          - Key: "\u96C6\u88C5\u7BB1\u7C7B\u578B:"
+            Value:
+            - "20\u5C3A"
+            - "20\u5C3A"
+            - "20\u5C3A"
+            - "40\u5C3A"
+            - "40\u5C3A"
+            - "40\u5C3A"
+            - "20\u5C3A\u53CC\u7BB1"
+            - "20\u5C3A\u53CC\u7BB1"
+            - "20\u5C3A\u53CC\u7BB1"
+    - Key: "\u5378\u8239\u4F5C\u4E1A"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u4F5C\u4E1A\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u5378\u8239\u4F5C\u4E1A"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u76EE\u6807\u7BB1\u4F4D:"
+            Value:
+            - 270386
+            - 270786
+            - 270986
+            - 300784
+            - 300086
+            - 300582
+            - 330886,350886
+            - 330486,350486
+            - 330186,350186
+          - Key: "\u96C6\u5361\u8F66\u9053:"
+            Value:
+            - "1\u8F66\u9053"
+            - "2\u8F66\u9053"
+            - "3\u8F66\u9053"
+            - "4\u8F66\u9053"
+            - "5\u8F66\u9053"
+            - "6\u8F66\u9053"
+            - "7\u8F66\u9053"
+            - "7\u8F66\u9053"
+            - "7\u8F66\u9053"
+          - Key: "\u96C6\u88C5\u7BB1\u7C7B\u578B:"
+            Value:
+            - "20\u5C3A"
+            - "20\u5C3A"
+            - "20\u5C3A"
+            - "40\u5C3A"
+            - "40\u5C3A"
+            - "40\u5C3A"
+            - "20\u5C3A\u53CC\u7BB1"
+            - "20\u5C3A\u53CC\u7BB1"
+            - "20\u5C3A\u53CC\u7BB1"
+    - Key: "\u8FC7\u6869\u64CD\u4F5C"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u80FD\u529B\u63D0\u5347"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u8FC7\u6869\u64CD\u4F5C\u7EC3\u4E60"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u4EFB\u52A1\u76EE\u6807:"
+            Value:
+            - "\u7EC8\u70B9"
+          - Key: "\u540A\u5177\u9AD8\u5EA6(m):"
+            Value:
+            - 8
+    - Key: "\u5B9A\u70B9\u64CD\u4F5C"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u80FD\u529B\u63D0\u5347"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u9876\u70B9\u64CD\u4F5C\u7EC3\u4E60"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u4EFB\u52A1\u76EE\u6807:"
+            Value:
+            - "\u7EC8\u70B9"
+          - Key: "\u76EE\u6807\u6570\u91CF:"
+            Value:
+            - 3
+    - Key: "\u969C\u788D\u7269\u5B9A\u70B9\u64CD\u4F5C"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u80FD\u529B\u63D0\u5347"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u969C\u788D\u7269\u5B9A\u70B9\u64CD\u4F5C\u7EC3\u4E60"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u4EFB\u52A1\u76EE\u6807:"
+            Value:
+            - "\u7EC8\u70B9"
+          - Key: "\u76EE\u6807\u6570\u91CF:"
+            Value:
+            - 1
+    - Key: "\u7EFC\u5408\u8FDE\u7EED\u64CD\u4F5C"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u80FD\u529B\u63D0\u5347"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u7EFC\u5408\u8FDE\u7EED\u64CD\u4F5C\u7EC3\u4E60"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u4EFB\u52A1\u76EE\u6807:"
+            Value:
+            - "\u7EC8\u70B9"
+          - Key: "\u76EE\u6807\u6570\u91CF:"
+            Value:
+            - 3
+    - Key: "\u5CB8\u6865\u4FEF\u4EF0\u64CD\u4F5C"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u5355\u9879\u64CD\u4F5C"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u4FEF\u4EF0\u64CD\u4F5C\u7EC3\u4E60"
+        "_\u76EE\u6807":
+          _serializedList:
+          - Key: "\u76EE\u6807\u89D2\u5EA6(\xB0):"
+            Value:
+            - 80
+    - Key: "\u81EA\u7531\u7EC3\u4E60"
+      Value:
+        "\u4EFB\u52A1\u7C7B\u578B": "\u81EA\u7531\u7EC3\u4E60"
+        "\u4EFB\u52A1\u63CF\u8FF0": "\u5CB8\u6865\u81EA\u7531\u7EC3\u4E60"
+        "_\u76EE\u6807":
+          _serializedList: []

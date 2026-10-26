@@ -12,47 +12,55 @@ namespace PortTraining.YardCraneSimulator.Editor
     [InitializeOnLoad]
     public static class ObiRopeTestSceneBuilder
     {
-        public const string TestScenePath = "Assets/test.unity";
+        public const string OperationalScenePath = "Assets/YardCraneSimulator/Scenes/YardCrane.unity";
+        [Obsolete("Use OperationalScenePath instead.")]
+        public const string TestScenePath = OperationalScenePath;
         public const string TestPlayerPath = "Builds/Tests/ObiRopePhysicsTest/ObiRopePhysicsTest.exe";
 
-        private const string AutoConfigureSessionKey = "YardCraneSimulator.ObiRopeTest.AutoConfigured.v2";
+        private const string AutoConfigureSessionKey = "YardCraneSimulator.ObiRope.OperationalScene.AutoRepaired.v1";
 
         static ObiRopeTestSceneBuilder()
         {
-            EditorApplication.delayCall += AutoConfigureOpenEmptyTestScene;
+            EditorApplication.delayCall += AutoRepairOpenOperationalScene;
         }
 
-        [MenuItem("Tools/Yard Crane/Obi Rope/Configure Test Scene")]
-        public static void ConfigureTestScene()
+        [MenuItem("Tools/Yard Crane/Obi Rope/Repair Operational Scene")]
+        public static void RepairOperationalScene()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
-                throw new InvalidOperationException("Exit Play mode before configuring the Obi Rope test scene.");
+                throw new InvalidOperationException("Exit Play mode before repairing the yard-crane operational scene.");
             }
 
-            var scene = EditorSceneManager.OpenScene(TestScenePath, OpenSceneMode.Single);
-            foreach (var root in scene.GetRootGameObjects())
-            {
-                UnityEngine.Object.DestroyImmediate(root);
-            }
+            var scene = EditorSceneManager.OpenScene(OperationalScenePath, OpenSceneMode.Single);
 
-            // YC_RuntimeRoot is both the stable model-placement skeleton and the
-            // runnable new eight-rope MAX greybox.
+            // Repair only the stable runtime hierarchy. Never clear the operational
+            // scene because it also owns cameras, UI and imported production models.
             YardCraneModelHierarchyBuilder.CreateOrRepairInActiveScene();
+            YardCraneModelHierarchyBuilder.ValidateInActiveScene();
 
-            if (!EditorSceneManager.SaveScene(scene, TestScenePath))
+            if (!EditorSceneManager.SaveScene(scene, OperationalScenePath))
             {
-                throw new InvalidOperationException($"Failed to save Obi Rope test scene: {TestScenePath}");
+                throw new InvalidOperationException(
+                    $"Failed to save the yard-crane operational scene: {OperationalScenePath}");
             }
 
             Selection.activeGameObject = GameObject.Find(YardCraneModelHierarchyBuilder.RootName);
-            Debug.Log("YC_RuntimeRoot new eight-rope MAX greybox configured. Press Play to run the automated sequence.");
+            Debug.Log(
+                "[YC_OPERATIONAL_SCENE_REPAIRED] YC_RuntimeRoot was repaired and validated without clearing other scene content.");
+        }
+
+        // Retained for existing automation callers while the scene tooling migrates.
+        [Obsolete("Use RepairOperationalScene instead.")]
+        public static void ConfigureTestScene()
+        {
+            RepairOperationalScene();
         }
 
         [MenuItem("Tools/Yard Crane/Obi Rope/Build Windows Smoke Test")]
         public static void BuildWindowsSmokeTest()
         {
-            ConfigureTestScene();
+            RepairOperationalScene();
 
             var outputDirectory = Path.GetDirectoryName(TestPlayerPath);
             if (!string.IsNullOrEmpty(outputDirectory))
@@ -62,7 +70,7 @@ namespace PortTraining.YardCraneSimulator.Editor
 
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
-                scenes = new[] { TestScenePath },
+                scenes = new[] { OperationalScenePath },
                 locationPathName = TestPlayerPath,
                 target = BuildTarget.StandaloneWindows64,
                 options = BuildOptions.Development
@@ -94,7 +102,7 @@ namespace PortTraining.YardCraneSimulator.Editor
             Debug.Log("Obi Rope 7.1 import validation passed.");
         }
 
-        private static void AutoConfigureOpenEmptyTestScene()
+        private static void AutoRepairOpenOperationalScene()
         {
             if (SessionState.GetBool(AutoConfigureSessionKey, false) || EditorApplication.isPlayingOrWillChangePlaymode)
             {
@@ -102,14 +110,14 @@ namespace PortTraining.YardCraneSimulator.Editor
             }
 
             var activeScene = SceneManager.GetActiveScene();
-            if (!string.Equals(activeScene.path, TestScenePath, StringComparison.Ordinal) ||
+            if (!string.Equals(activeScene.path, OperationalScenePath, StringComparison.Ordinal) ||
                 UnityEngine.Object.FindFirstObjectByType<YardCraneEightRopeMaxPrototypeRig>() != null)
             {
                 return;
             }
 
             SessionState.SetBool(AutoConfigureSessionKey, true);
-            ConfigureTestScene();
+            RepairOperationalScene();
             ValidateImportedVersion();
         }
     }

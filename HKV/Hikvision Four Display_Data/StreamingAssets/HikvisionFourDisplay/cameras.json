@@ -1,0 +1,113 @@
+{
+  "configVersion": 1,
+  "cameras": [
+    {
+      "id": "monitor-host",
+      "name": "视频监控主机",
+      "host": "192.168.199.200",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "server-room-1",
+      "name": "机房 1",
+      "host": "192.168.199.202",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "server-room-2",
+      "name": "机房 2",
+      "host": "192.168.199.203",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "training-center",
+      "name": "港口实训中心",
+      "host": "192.168.199.204",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "sand-table",
+      "name": "沙盘监控",
+      "host": "192.168.199.201",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "yard-crane-1-a",
+      "name": "场桥 1-1",
+      "host": "192.168.199.211",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "yard-crane-1-b",
+      "name": "场桥 1-2",
+      "host": "192.168.199.212",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "yard-crane-2-a",
+      "name": "场桥 2-1",
+      "host": "192.168.199.213",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "yard-crane-2-b",
+      "name": "场桥 2-2",
+      "host": "192.168.199.214",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "quay-crane-a",
+      "name": "岸桥 1",
+      "host": "192.168.199.215",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "quay-crane-b",
+      "name": "岸桥 2",
+      "host": "192.168.199.216",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    },
+    {
+      "id": "quay-monitor",
+      "name": "岸桥监控",
+      "host": "192.168.199.100",
+      "rtspPort": 554,
+      "channel": "1",
+      "streamType": "Main",
+      "credentialKey": "site-cameras-20261006"
+    }
+  ]
+}

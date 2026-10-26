@@ -1,0 +1,114 @@
+{
+    "_fileVersion": 3,
+    "_serializedScheduler": {
+        "version": 0,
+        "Guid": "",
+        "ClockSource": 0,
+        "TimeUnit": 1000,
+        "NodeGuidOrder": [
+            "70924e08-22c4-4813-94f0-fa0337099605",
+            "c8bb7702-0bbd-46a7-888b-1a1152d737e5",
+            "5be3c4b6-7337-4b26-b7ef-bad0927fa1a5"
+        ],
+        "ClockEvents": [
+            {
+                "version": 0,
+                "Guid": "",
+                "UseClockSourceFrequency": true,
+                "AllowGovernance": false,
+                "NodeGuid": "70924e08-22c4-4813-94f0-fa0337099605",
+                "TimeOffset": 0.0,
+                "Duration": 166.6666716337204,
+                "Frequency": 2.9999999105930357
+            },
+            {
+                "version": 0,
+                "Guid": "",
+                "UseClockSourceFrequency": false,
+                "AllowGovernance": false,
+                "NodeGuid": "c8bb7702-0bbd-46a7-888b-1a1152d737e5",
+                "TimeOffset": 0.0,
+                "Duration": 500.0,
+                "Frequency": 1.0
+            },
+            {
+                "version": 0,
+                "Guid": "",
+                "UseClockSourceFrequency": false,
+                "AllowGovernance": false,
+                "NodeGuid": "5be3c4b6-7337-4b26-b7ef-bad0927fa1a5",
+                "TimeOffset": 0.0,
+                "Duration": 500.0,
+                "Frequency": 1.0
+            }
+        ],
+        "GovernorLevel": 0,
+        "Prescaler": 1
+    },
+    "_serializedParameters": [
+        {
+            "version": 2,
+            "Guid": "73479b77-cb5a-4151-820e-c4feb8ec89dd",
+            "Type": "GameObject",
+            "Name": "Drive",
+            "Value": "",
+            "Direction": 2,
+            "FieldExtra": 4,
+            "isExposed": true
+        }
+    ],
+    "_serializedGroups": [],
+    "_serializedComments": [],
+    "_serializedNodes": [
+        {
+            "version": 1,
+            "NodeGuid": "fdd05c0f-625f-4941-91f3-91f3a144c9d9",
+            "BoundParameterGuid": "73479b77-cb5a-4151-820e-c4feb8ec89dd",
+            "NodeType": "GameObject",
+            "GroupGuid": "",
+            "JSON": "{\"_nodeGuid\":\"fdd05c0f-625f-4941-91f3-91f3a144c9d9\",\"_boundObject\":\"\",\"_boundParameterGuid\":\"73479b77-cb5a-4151-820e-c4feb8ec89dd\",\"_lstPortVisual\":[],\"_displayName\":\"Drive\",\"_position\":{\"x\":384.0,\"y\":537.0,\"z\":0.0},\"_expanded\":true,\"_mirrorPorts\":false,\"targetGroup\":{\"Position\":{\"x\":0.0,\"y\":0.0}}}",
+            "JSONRuntime": "{\"_portList\":[{\"PortType\":{\"data\":[1,117,77,101,99,104,97,116,114,111,110,105,99,115,46,83,121,115,116,101,109,71,114,97,112,104,46,80,111,114,116,84,121,112,101,96,49,44,32,85,110,105,116,121,46,83,121,115,116,101,109,71,114,97,112,104,46,82,117,110,116,105,109,101,44,32,86,101,114,115,105,111,110,61,48,46,48,46,48,46,48,44,32,67,117,108,116,117,114,101,61,110,101,117,116,114,97,108,44,32,80,117,98,108,105,99,75,101,121,84,111,107,101,110,61,110,117,108,108,0,101,85,110,105,116,121,69,110,103,105,110,101,46,71,97,109,101,79,98,106,101,99,116,44,32,85,110,105,116,121,69,110,103,105,110,101,46,67,111,114,101,77,111,100,117,108,101,44,32,86,101,114,115,105,111,110,61,48,46,48,46,48,46,48,44,32,67,117,108,116,117,114,101,61,110,101,117,116,114,97,108,44,32,80,117,98,108,105,99,75,101,121,84,111,107,101,110,61,110,117,108,108]},\"DisplayName\":\"Drive\",\"Tooltip\":\"\",\"Direction\":2,\"Extra\":4}]}"
+        },
+        {
+            "version": 1,
+            "NodeGuid": "70924e08-22c4-4813-94f0-fa0337099605",
+            "BoundParameterGuid": "",
+            "NodeType": "Test/PortValueGeneratorBool",
+            "GroupGuid": "",
+            "JSON": "{\"_nodeGuid\":\"70924e08-22c4-4813-94f0-fa0337099605\",\"_boundObject\":\"\",\"_boundParameterGuid\":\"\",\"_lstPortVisual\":[],\"_displayName\":\"Test/PortValueGeneratorBool\",\"_position\":{\"x\":236.0,\"y\":704.0,\"z\":0.0},\"_expanded\":true,\"_mirrorPorts\":false,\"targetGroup\":{\"Position\":{\"x\":0.0,\"y\":0.0}}}",
+            "JSONRuntime": "{\"_portList\":[],\"output\":{\"Data\":false}}"
+        },
+        {
+            "version": 1,
+            "NodeGuid": "c8bb7702-0bbd-46a7-888b-1a1152d737e5",
+            "BoundParameterGuid": "",
+            "NodeType": "Test/GenericPorts",
+            "GroupGuid": "",
+            "JSON": "{\"_nodeGuid\":\"c8bb7702-0bbd-46a7-888b-1a1152d737e5\",\"_boundObject\":\"\",\"_boundParameterGuid\":\"\",\"_lstPortVisual\":[],\"_displayName\":\"Test/GenericPorts\",\"_position\":{\"x\":674.0,\"y\":507.0,\"z\":0.0},\"_expanded\":true,\"_mirrorPorts\":false,\"targetGroup\":{\"Position\":{\"x\":0.0,\"y\":0.0}}}",
+            "JSONRuntime": "{\"_portList\":[],\"testIn\":{\"Data\":100},\"testOut\":{\"Data\":0}}"
+        },
+        {
+            "version": 1,
+            "NodeGuid": "5be3c4b6-7337-4b26-b7ef-bad0927fa1a5",
+            "BoundParameterGuid": "",
+            "NodeType": "Debug/PrintMessage",
+            "GroupGuid": "",
+            "JSON": "{\"_nodeGuid\":\"5be3c4b6-7337-4b26-b7ef-bad0927fa1a5\",\"_boundObject\":\"\",\"_boundParameterGuid\":\"\",\"_lstPortVisual\":[],\"_displayName\":\"Debug/PrintMessage\",\"_position\":{\"x\":765.0,\"y\":772.0,\"z\":0.0},\"_expanded\":true,\"_mirrorPorts\":false,\"targetGroup\":{\"Position\":{\"x\":0.0,\"y\":0.0}}}",
+            "JSONRuntime": "{\"_portList\":[],\"message\":{\"Data\":\"\"}}"
+        }
+    ],
+    "_serializedEdges": [
+        {
+            "version": 1,
+            "SourceNodeGuid": "70924e08-22c4-4813-94f0-fa0337099605",
+            "SourceMemberPortName": "Output",
+            "SourceMemberTypeName": "PortType<Boolean>",
+            "SourcePortGuid": "",
+            "TargetNodeGuid": "5be3c4b6-7337-4b26-b7ef-bad0927fa1a5",
+            "TargetMemberPortName": "Message",
+            "TargetMemberTypeName": "PortType<String>",
+            "TargetPortGuid": ""
+        }
+    ],
+    "_serializedMeta": []
+}
